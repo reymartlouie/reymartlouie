@@ -1,7 +1,26 @@
+'use client'
+
+import { useState, useEffect } from 'react'
+
 export default function Navbar() {
+  const [ready, setReady] = useState(false)
+
+  useEffect(() => {
+    setReady(true)
+  }, [])
+
   return (
     <header className="sticky top-4 z-50 flex justify-center">
-      <div className="nav-enter flex items-center gap-8 bg-[#1a1a1a]/90 backdrop-blur-2xl border border-white/[0.06] rounded-full px-5 py-3 shadow-lg shadow-black/30">
+      <div
+        className="flex items-center gap-8 bg-[#1a1a1a]/90 backdrop-blur-2xl border border-white/[0.06] rounded-full px-5 py-3 shadow-lg shadow-black/30"
+        style={{
+          opacity: ready ? 1 : 0,
+          transform: ready ? 'translateY(0)' : 'translateY(-12px)',
+          transition: ready
+            ? 'opacity 350ms cubic-bezier(0.2, 0, 0, 1), transform 350ms cubic-bezier(0.2, 0, 0, 1)'
+            : 'none',
+        }}
+      >
         <a href="/" className="font-display text-white text-sm tracking-tight">
           ReymartLouie
         </a>
