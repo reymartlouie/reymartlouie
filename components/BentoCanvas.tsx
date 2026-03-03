@@ -1,17 +1,17 @@
 'use client'
 
-import { createContext, useContext, useRef, useState, useCallback, useEffect, type ReactNode } from 'react'
+import {
+  createContext, useContext, useRef, useState, useCallback, useEffect, type ReactNode,
+} from 'react'
 
 export type Rect = { x: number; y: number; w: number; h: number }
 
 type CtxType = {
   floating: boolean
   containerRef: React.RefObject<HTMLDivElement>
-  containerWidth: number
+  positions: Record<string, Rect>
   registerCard: (id: string, rect: Rect) => void
-  updateRect: (id: string, rect: Rect) => void
-  getOtherRects: (excludeId: string) => Rect[]
-  resolveCollision: (id: string, proposed: Rect) => Rect
+  dropCard: (id: string, rect: Rect) => void
 }
 
 const BentoCtx = createContext<CtxType | null>(null)
@@ -22,8 +22,70 @@ export function useBentoCanvas() {
   return c
 }
 
-// Match the grid's gap-4 so touching cards feel the same as the original layout
-const COLLISION_GAP = 16
+const GAP = 16
+
+// ── Pure helpers ─────────────────────────────────────────────────────────────
+
+function computeHeight(rects: Record<string, Rect>): number {
+  let max = 0
+  Object.values(rects).forEach(r => { max = Math.max(max, r.y + r.h) })
+  return max + 32
+}
+
+function clampToContainer(rect: Rect, cw: number): Rect {
+  if (cw <= 0) return rect
+  const w = Math.min(rect.w, cw)
+  const x = Math.max(0, Math.min(rect.x, cw - w))
+  return { ...rect, x, w }
+}
+
+/** Multi-pass global solver — pushes overlapping cards apart on every pass
+ *  until none remain (or 30 passes hit). O(n² × passes), fine for ≤ 20 cards. */
+function resolveAll(
+  rects: Record<string, Rect>,
+  cw: number,
+  gap: number,
+): Record<string, Rect> {
+  const out: Record<string, Rect> = {}
+  for (const k in rects) out[k] = { ...rects[k] }
+  const ids = Object.keys(out)
+
+  for (let pass = 0; pass < 30; pass++) {
+    let changed = false
+    for (const id of ids) {
+      const r = out[id]
+      const others = ids.filter(o => o !== id).map(o => out[o])
+      const hit = others.find(o =>
+        r.x     < o.x + o.w + gap &&
+        r.x + r.w > o.x - gap     &&
+        r.y     < o.y + o.h + gap &&
+        r.y + r.h > o.y - gap
+      )
+      if (!hit) continue
+
+      const pushR = hit.x + hit.w + gap - r.x
+      const pushL = r.x + r.w + gap - hit.x
+      const pushD = hit.y + hit.h + gap - r.y
+      const pushU = r.y + r.h + gap - hit.y
+      const min = Math.min(pushR, pushL, pushD, pushU)
+
+      let { x, y, w, h } = r
+      if      (min === pushR) x += pushR
+      else if (min === pushL) x -= pushL
+      else if (min === pushD) y += pushD
+      else                    y -= pushU
+
+      if (cw > 0) x = Math.max(0, Math.min(x, cw - w))
+      y = Math.max(0, y)
+      out[id] = { x, y, w, h }
+      changed = true
+    }
+    if (!changed) break
+  }
+  return out
+}
+
+// ── Component ─────────────────────────────────────────────────────────────────
 
 export default function BentoCanvas({
   children,
@@ -33,96 +95,66 @@ export default function BentoCanvas({
   cardCount: number
 }) {
   const containerRef = useRef<HTMLDivElement>(null)
-  const rectsMap = useRef(new Map<string, Rect>())
+  const cwRef         = useRef(0)
   const registeredRef = useRef(0)
-  const [floating, setFloating] = useState(false)
-  const [containerH, setContainerH] = useState(0)
-  const [containerWidth, setContainerWidth] = useState(0)
+  // Accumulate grid positions during registration phase (never triggers re-renders)
+  const pendingRef    = useRef<Record<string, Rect>>({})
 
-  // Track container width via ResizeObserver so cards can re-clamp responsively
+  const [floating,    setFloating]    = useState(false)
+  const [containerH,  setContainerH]  = useState(0)
+  const [positions,   setPositions]   = useState<Record<string, Rect>>({})
+
+  // Track container width; re-clamp + re-resolve on every change
   useEffect(() => {
     const el = containerRef.current
     if (!el) return
-    setContainerWidth(el.offsetWidth)
+    cwRef.current = el.offsetWidth
+
     const ro = new ResizeObserver(([entry]) => {
-      setContainerWidth(entry.contentRect.width)
+      const cw = entry.contentRect.width
+      cwRef.current = cw
+      setPositions(prev => {
+        if (!Object.keys(prev).length) return prev
+        const clamped: Record<string, Rect> = {}
+        for (const id in prev) clamped[id] = clampToContainer(prev[id], cw)
+        const resolved = resolveAll(clamped, cw, GAP)
+        setContainerH(computeHeight(resolved))
+        return resolved
+      })
     })
     ro.observe(el)
     return () => ro.disconnect()
   }, [])
 
+  /** Each card calls this once at mount with its natural grid position. */
   const registerCard = useCallback((id: string, rect: Rect) => {
-    // Freeform layout is desktop-only
     if (typeof window !== 'undefined' && window.innerWidth < 1024) return
 
-    rectsMap.current.set(id, { ...rect })
+    pendingRef.current = { ...pendingRef.current, [id]: rect }
     registeredRef.current += 1
 
     if (registeredRef.current >= cardCount) {
-      let maxBottom = 0
-      rectsMap.current.forEach(r => {
-        maxBottom = Math.max(maxBottom, r.y + r.h)
-      })
-      setContainerH(maxBottom + 32)
+      const cw = cwRef.current
+      const resolved = resolveAll(pendingRef.current, cw, GAP)
+      setPositions(resolved)
+      setContainerH(computeHeight(resolved))
       setFloating(true)
     }
   }, [cardCount])
 
-  const updateRect = useCallback((id: string, rect: Rect) => {
-    rectsMap.current.set(id, { ...rect })
-    const bottom = rect.y + rect.h + 32
-    setContainerH(prev => Math.max(prev, bottom))
+  /** Called on drag-drop or resize-end. Resolves ALL collisions globally. */
+  const dropCard = useCallback((id: string, rect: Rect) => {
+    setPositions(prev => {
+      const cw = cwRef.current
+      const next = { ...prev, [id]: clampToContainer(rect, cw) }
+      const resolved = resolveAll(next, cw, GAP)
+      setContainerH(computeHeight(resolved))
+      return resolved
+    })
   }, [])
 
-  const getOtherRects = useCallback((excludeId: string): Rect[] =>
-    Array.from(rectsMap.current.entries())
-      .filter(([id]) => id !== excludeId)
-      .map(([, r]) => ({ ...r }))
-  , [])
-
-  const resolveCollision = useCallback((id: string, proposed: Rect): Rect => {
-    const others = getOtherRects(id)
-    let { x, y, w, h } = proposed
-
-    // Clamp to container bounds before resolving collisions
-    const cw = containerRef.current?.offsetWidth ?? 0
-    if (cw > 0) {
-      x = Math.max(0, Math.min(x, cw - w))
-    }
-    y = Math.max(0, y)
-
-    // Iteratively push out of any overlapping card
-    for (let i = 0; i < 30; i++) {
-      const hit = others.find(r =>
-        x < r.x + r.w + COLLISION_GAP &&
-        x + w > r.x - COLLISION_GAP &&
-        y < r.y + r.h + COLLISION_GAP &&
-        y + h > r.y - COLLISION_GAP
-      )
-      if (!hit) break
-
-      const pushR = hit.x + hit.w + COLLISION_GAP - x
-      const pushL = x + w + COLLISION_GAP - hit.x
-      const pushD = hit.y + hit.h + COLLISION_GAP - y
-      const pushU = y + h + COLLISION_GAP - hit.y
-
-      const min = Math.min(pushR, pushL, pushD, pushU)
-      if (min === pushR) x += pushR
-      else if (min === pushL) x -= pushL
-      else if (min === pushD) y += pushD
-      else y -= pushU
-
-      if (cw > 0) x = Math.max(0, Math.min(x, cw - w))
-      y = Math.max(0, y)
-    }
-
-    return { x, y, w, h }
-  }, [getOtherRects])
-
   return (
-    <BentoCtx.Provider value={{
-      floating, containerRef, containerWidth, registerCard, updateRect, getOtherRects, resolveCollision,
-    }}>
+    <BentoCtx.Provider value={{ floating, containerRef, positions, registerCard, dropCard }}>
       <div
         ref={containerRef}
         className={floating ? undefined : 'grid grid-cols-1 lg:grid-cols-12 gap-4'}
