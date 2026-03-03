@@ -26,8 +26,9 @@ export default function Hero() {
             <a href="#work" className="btn-spring inline-flex items-center gap-2 bg-[#f0f0f0] text-[#111111] font-sans font-semibold text-sm px-6 py-3 rounded-full hover:bg-white transition-colors">
               View Work
             </a>
-            <a href="#contact" className="inline-flex items-center gap-2 bg-white/8 text-white/70 font-sans text-sm px-6 py-3 rounded-full hover:bg-white/12 transition-colors border border-white/10">
+            <a href="#contact" className="btn-spring group inline-flex items-center gap-2 bg-white/8 text-white/70 font-sans text-sm px-6 py-3 rounded-full hover:bg-white/12 transition-colors border border-white/10">
               Get in Touch
+              <span className="inline-block transition-transform duration-200 group-hover:translate-x-1">→</span>
             </a>
           </div>
         </div>

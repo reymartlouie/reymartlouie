@@ -22,9 +22,10 @@ export default function Footer() {
             </h2>
             <a
               href="mailto:reymartlouie.capapas@gmail.com"
-              className="btn-spring inline-flex items-center gap-3 bg-[#6ee7b7]/12 text-[#6ee7b7] border border-[#6ee7b7]/20 font-sans text-sm font-semibold px-6 py-3 rounded-full hover:bg-[#6ee7b7]/20 transition-colors"
+              className="btn-spring group inline-flex items-center gap-3 bg-[#6ee7b7]/12 text-[#6ee7b7] border border-[#6ee7b7]/20 font-sans text-sm font-semibold px-6 py-3 rounded-full hover:bg-[#6ee7b7]/20 transition-colors"
             >
-              reymartlouie.capapas@gmail.com →
+              reymartlouie.capapas@gmail.com
+              <span className="inline-block transition-transform duration-200 group-hover:translate-x-1">→</span>
             </a>
           </div>
         </div>
