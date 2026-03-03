@@ -25,13 +25,57 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Scroll reveal */
+.reveal-item {
+  opacity: 0;
+  transform: translateY(20px);
+}
+.reveal-item.is-visible {
+  animation: revealUp 380ms cubic-bezier(0.2, 0, 0, 1) var(--reveal-delay, 0ms) both;
+}
+@keyframes revealUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Navbar entrance */
+.nav-enter {
+  animation: navDown 350ms cubic-bezier(0.2, 0, 0, 1) 60ms both;
+}
+@keyframes navDown {
+  from { opacity: 0; transform: translateY(-12px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Project card entrance */
 @keyframes cardSlideUp {
-  from {
-    opacity: 0;
-    transform: translateY(36px) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Bento hover — translateY only, no shadow */
+.bento-lift {
+  transition: transform 250ms cubic-bezier(0.2, 0, 0, 1);
+}
+.bento-lift:hover {
+  transform: translateY(-3px);
+}
+
+/* Button press */
+.btn-spring {
+  transition: transform 200ms cubic-bezier(0.2, 0, 0, 1);
+}
+.btn-spring:active {
+  transform: scale(0.95);
+  transition-duration: 80ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-item          { opacity: 1; transform: none; }
+  .reveal-item.is-visible { animation: none; }
+  .nav-enter            { animation: none; }
+  .bento-lift,
+  .bento-lift:hover     { transform: none; transition: none; }
+  .btn-spring,
+  .btn-spring:active    { transform: none; transition: none; }
 }

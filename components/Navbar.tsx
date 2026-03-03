@@ -1,7 +1,7 @@
 export default function Navbar() {
   return (
     <header className="sticky top-4 z-50 flex justify-center">
-      <div className="flex items-center gap-8 bg-[#1a1a1a]/90 backdrop-blur-2xl border border-white/[0.06] rounded-full px-5 py-3 shadow-lg shadow-black/30">
+      <div className="nav-enter flex items-center gap-8 bg-[#1a1a1a]/90 backdrop-blur-2xl border border-white/[0.06] rounded-full px-5 py-3 shadow-lg shadow-black/30">
         <a href="/" className="font-display text-white text-sm tracking-tight">
           ReymartLouie
         </a>
