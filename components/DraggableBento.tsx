@@ -17,7 +17,7 @@ export default function DraggableBento({
   delay?: number
 }) {
   const id = useId()
-  const { floating, containerRef, positions, registerCard, dropCard } = useBentoCanvas()
+  const { floating, jiggling, containerRef, positions, registerCard, dropCard } = useBentoCanvas()
 
   const wrapRef     = useRef<HTMLDivElement>(null)
   const cleanupRef  = useRef<(() => void) | null>(null)
@@ -204,6 +204,7 @@ export default function DraggableBento({
   // new slots. During drag/resize, transitions are off so the card is instant.
   const SPRING = 'cubic-bezier(0.34,1.2,0.64,1)'
   const SMOOTH = 'cubic-bezier(0.2,0,0,1)'
+  // Outer div transition: only position, size, opacity (transform lives on inner div)
   const transition = (() => {
     if (!revealed) return 'none'
     if (dragging || resizing) return 'none'
@@ -213,8 +214,6 @@ export default function DraggableBento({
       `top 500ms ${SPRING}`,
       `width 350ms ${SMOOTH}`,
       `height 350ms ${SMOOTH}`,
-      `transform 380ms ${SPRING}`,
-      `box-shadow 300ms ease`,
       `opacity 380ms ${SMOOTH}${rd}`,
     ].join(', ')
   })()
@@ -241,81 +240,101 @@ export default function DraggableBento({
   // Not yet positioned by the canvas
   if (!renderedRect) return null
 
+  // Wiggle: active when canvas jiggling, card revealed, and not being interacted with
+  const isWiggling = jiggling && revealDone && !dragging && !pressing && !resizing
+  // Stagger each card's wiggle phase using its delay prop so they're out-of-sync (iOS feel)
+  const wiggleDelay = `${(delay % 160)}ms`
+
   // ── Floating render ───────────────────────────────────────────────────────
+  // Outer div: owns position (left/top/width/height) + opacity + z-index.
+  // Inner div: owns visual transforms (scale/tilt), border-radius, shadow, wiggle.
+  // Splitting them means the position spring and the wiggle keyframe never fight.
   return (
     <div
       ref={wrapRef}
-      onPointerDown={onPointerDown}
-      onContextMenu={(e) => e.preventDefault()}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
       style={{
         position: 'absolute',
-        left:   renderedRect.x,
-        top:    renderedRect.y,
-        width:  renderedRect.w,
-        height: renderedRect.h,
-        borderRadius: CARD_RADIUS,
-        overflow: 'hidden',
-        opacity: revealed ? 1 : 0,
-        transform,
+        left:      renderedRect.x,
+        top:       renderedRect.y,
+        width:     renderedRect.w,
+        height:    renderedRect.h,
+        opacity:   revealed ? 1 : 0,
         transition,
-        boxShadow,
-        cursor: dragging ? 'grabbing' : 'grab',
-        userSelect: 'none',
-        touchAction: 'none',
         zIndex: dragging || pressing ? 100 : 1,
-        display: 'flex',
-        flexDirection: 'column',
-        willChange: dragging ? 'left, top, transform' : 'auto',
+        userSelect:  'none',
+        touchAction: 'none',
+        willChange: dragging ? 'left, top' : 'auto',
       }}
     >
-      {/* Drag hint: 6-dot grid */}
       <div
-        aria-hidden
+        onPointerDown={onPointerDown}
+        onContextMenu={(e) => e.preventDefault()}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+        className={isWiggling ? 'bento-wiggle' : undefined}
         style={{
-          position: 'absolute',
-          top: 14, right: 14,
-          opacity: (hovered || pressing) && revealDone && !dragging && !resizing ? 0.4 : 0,
-          transition: 'opacity 200ms ease',
-          pointerEvents: 'none',
-          zIndex: 20,
-          color: 'white',
-        }}
-      >
-        <svg width="12" height="16" viewBox="0 0 12 16" fill="currentColor">
-          <circle cx="3" cy="3"  r="1.5" /><circle cx="9" cy="3"  r="1.5" />
-          <circle cx="3" cy="8"  r="1.5" /><circle cx="9" cy="8"  r="1.5" />
-          <circle cx="3" cy="13" r="1.5" /><circle cx="9" cy="13" r="1.5" />
-        </svg>
-      </div>
-
-      {/* Resize handle: 3-dot L — bottom-right, clear of the rounded corner */}
-      <div
-        aria-hidden
-        onPointerDown={onResizeDown}
-        style={{
-          position: 'absolute',
-          bottom: 14, right: 14,
-          width: 20, height: 20,
-          cursor: 'se-resize',
-          zIndex: 30,
-          opacity: hovered && revealDone && !dragging && !pressing ? 0.5 : 0,
-          transition: 'opacity 200ms ease',
+          width: '100%',
+          height: '100%',
+          borderRadius: CARD_RADIUS,
+          overflow: 'hidden',
           display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          color: 'white',
+          flexDirection: 'column',
+          transform,
+          boxShadow,
+          cursor: dragging ? 'grabbing' : 'grab',
+          transition: dragging || resizing
+            ? 'transform 80ms ease, box-shadow 300ms ease'
+            : `transform 380ms ${SPRING}, box-shadow 300ms ease`,
+          animationDelay: isWiggling ? wiggleDelay : undefined,
         }}
       >
-        <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
-          <circle cx="10" cy="10" r="1.5" />
-          <circle cx="6"  cy="10" r="1.5" />
-          <circle cx="10" cy="6"  r="1.5" />
-        </svg>
-      </div>
+        {/* Drag hint: 6-dot grid */}
+        <div
+          aria-hidden
+          style={{
+            position: 'absolute',
+            top: 14, right: 14,
+            opacity: (hovered || pressing) && revealDone && !dragging && !resizing ? 0.4 : 0,
+            transition: 'opacity 200ms ease',
+            pointerEvents: 'none',
+            zIndex: 20,
+            color: 'white',
+          }}
+        >
+          <svg width="12" height="16" viewBox="0 0 12 16" fill="currentColor">
+            <circle cx="3" cy="3"  r="1.5" /><circle cx="9" cy="3"  r="1.5" />
+            <circle cx="3" cy="8"  r="1.5" /><circle cx="9" cy="8"  r="1.5" />
+            <circle cx="3" cy="13" r="1.5" /><circle cx="9" cy="13" r="1.5" />
+          </svg>
+        </div>
 
-      {children}
+        {/* Resize handle: 3-dot L — bottom-right, clear of the rounded corner */}
+        <div
+          aria-hidden
+          onPointerDown={onResizeDown}
+          style={{
+            position: 'absolute',
+            bottom: 14, right: 14,
+            width: 20, height: 20,
+            cursor: 'se-resize',
+            zIndex: 30,
+            opacity: hovered && revealDone && !dragging && !pressing ? 0.5 : 0,
+            transition: 'opacity 200ms ease',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: 'white',
+          }}
+        >
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
+            <circle cx="10" cy="10" r="1.5" />
+            <circle cx="6"  cy="10" r="1.5" />
+            <circle cx="10" cy="6"  r="1.5" />
+          </svg>
+        </div>
+
+        {children}
+      </div>
     </div>
   )
 }

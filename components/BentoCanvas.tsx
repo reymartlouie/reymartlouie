@@ -8,6 +8,7 @@ export type Rect = { x: number; y: number; w: number; h: number }
 
 type CtxType = {
   floating: boolean
+  jiggling: boolean
   containerRef: React.RefObject<HTMLDivElement>
   positions: Record<string, Rect>
   registerCard: (id: string, rect: Rect) => void
@@ -101,6 +102,7 @@ export default function BentoCanvas({
   const pendingRef    = useRef<Record<string, Rect>>({})
 
   const [floating,    setFloating]    = useState(false)
+  const [jiggling,    setJiggling]    = useState(false)
   const [containerH,  setContainerH]  = useState(0)
   const [positions,   setPositions]   = useState<Record<string, Rect>>({})
 
@@ -125,6 +127,19 @@ export default function BentoCanvas({
     ro.observe(el)
     return () => ro.disconnect()
   }, [])
+
+  // ── Auto-jiggle once after all cards have revealed ───────────────────────
+  useEffect(() => {
+    if (!floating) return
+    // Last card delay is 340ms + 420ms settle = ~760ms; add buffer → 1400ms
+    const startT = setTimeout(() => {
+      setJiggling(true)
+      // Wiggle animation is 1.6 s; clear state after it finishes
+      const endT = setTimeout(() => setJiggling(false), 1800)
+      return () => clearTimeout(endT)
+    }, 1400)
+    return () => clearTimeout(startT)
+  }, [floating])
 
   /** Each card calls this once at mount with its natural grid position. */
   const registerCard = useCallback((id: string, rect: Rect) => {
@@ -154,7 +169,7 @@ export default function BentoCanvas({
   }, [])
 
   return (
-    <BentoCtx.Provider value={{ floating, containerRef, positions, registerCard, dropCard }}>
+    <BentoCtx.Provider value={{ floating, jiggling, containerRef, positions, registerCard, dropCard }}>
       <div
         ref={containerRef}
         className={floating ? undefined : 'grid grid-cols-1 lg:grid-cols-12 gap-4'}
