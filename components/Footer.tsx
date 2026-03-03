@@ -2,8 +2,8 @@ import Reveal from './Reveal'
 
 const socialLinks = [
   { label: 'GitHub', href: 'https://github.com/reymartlouie' },
-  { label: 'LinkedIn', href: 'https://linkedin.com/in/reymartlouie' },
-  { label: 'Instagram', href: 'https://instagram.com/reymartlouie' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/reymart-louie-capapas-b0063718b' },
+  { label: 'Instagram', href: 'https://www.instagram.com/reymartlouie/' },
   { label: '+63 962 603 2929', href: 'tel:+639626032929' },
 ]
 
