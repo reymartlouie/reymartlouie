@@ -1,12 +1,13 @@
 'use client'
 
-import { createContext, useContext, useRef, useState, useCallback, type ReactNode } from 'react'
+import { createContext, useContext, useRef, useState, useCallback, useEffect, type ReactNode } from 'react'
 
 export type Rect = { x: number; y: number; w: number; h: number }
 
 type CtxType = {
   floating: boolean
   containerRef: React.RefObject<HTMLDivElement>
+  containerWidth: number
   registerCard: (id: string, rect: Rect) => void
   updateRect: (id: string, rect: Rect) => void
   getOtherRects: (excludeId: string) => Rect[]
@@ -21,7 +22,8 @@ export function useBentoCanvas() {
   return c
 }
 
-const COLLISION_GAP = 8
+// Match the grid's gap-4 so touching cards feel the same as the original layout
+const COLLISION_GAP = 16
 
 export default function BentoCanvas({
   children,
@@ -35,9 +37,22 @@ export default function BentoCanvas({
   const registeredRef = useRef(0)
   const [floating, setFloating] = useState(false)
   const [containerH, setContainerH] = useState(0)
+  const [containerWidth, setContainerWidth] = useState(0)
+
+  // Track container width via ResizeObserver so cards can re-clamp responsively
+  useEffect(() => {
+    const el = containerRef.current
+    if (!el) return
+    setContainerWidth(el.offsetWidth)
+    const ro = new ResizeObserver(([entry]) => {
+      setContainerWidth(entry.contentRect.width)
+    })
+    ro.observe(el)
+    return () => ro.disconnect()
+  }, [])
 
   const registerCard = useCallback((id: string, rect: Rect) => {
-    // Only activate freeform layout on desktop
+    // Freeform layout is desktop-only
     if (typeof window !== 'undefined' && window.innerWidth < 1024) return
 
     rectsMap.current.set(id, { ...rect })
@@ -69,7 +84,15 @@ export default function BentoCanvas({
     const others = getOtherRects(id)
     let { x, y, w, h } = proposed
 
-    for (let i = 0; i < 20; i++) {
+    // Clamp to container bounds before resolving collisions
+    const cw = containerRef.current?.offsetWidth ?? 0
+    if (cw > 0) {
+      x = Math.max(0, Math.min(x, cw - w))
+    }
+    y = Math.max(0, y)
+
+    // Iteratively push out of any overlapping card
+    for (let i = 0; i < 30; i++) {
       const hit = others.find(r =>
         x < r.x + r.w + COLLISION_GAP &&
         x + w > r.x - COLLISION_GAP &&
@@ -78,7 +101,6 @@ export default function BentoCanvas({
       )
       if (!hit) break
 
-      // Compute minimal push in each direction
       const pushR = hit.x + hit.w + COLLISION_GAP - x
       const pushL = x + w + COLLISION_GAP - hit.x
       const pushD = hit.y + hit.h + COLLISION_GAP - y
@@ -90,7 +112,7 @@ export default function BentoCanvas({
       else if (min === pushD) y += pushD
       else y -= pushU
 
-      x = Math.max(0, x)
+      if (cw > 0) x = Math.max(0, Math.min(x, cw - w))
       y = Math.max(0, y)
     }
 
@@ -99,7 +121,7 @@ export default function BentoCanvas({
 
   return (
     <BentoCtx.Provider value={{
-      floating, containerRef, registerCard, updateRect, getOtherRects, resolveCollision,
+      floating, containerRef, containerWidth, registerCard, updateRect, getOtherRects, resolveCollision,
     }}>
       <div
         ref={containerRef}

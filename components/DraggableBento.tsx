@@ -5,6 +5,8 @@ import { useBentoCanvas, type Rect } from './BentoCanvas'
 
 const MIN_W = 180
 const MIN_H = 100
+// Must match the border-radius on the inner card divs so overflow clips correctly
+const CARD_RADIUS = 32
 
 export default function DraggableBento({
   children,
@@ -16,7 +18,7 @@ export default function DraggableBento({
   delay?: number
 }) {
   const id = useId()
-  const { floating, containerRef, registerCard, updateRect, resolveCollision } = useBentoCanvas()
+  const { floating, containerRef, containerWidth, registerCard, updateRect, resolveCollision } = useBentoCanvas()
   const wrapRef = useRef<HTMLDivElement>(null)
   const dragCleanupRef = useRef<(() => void) | null>(null)
   const rectRef = useRef<Rect>({ x: 0, y: 0, w: 0, h: 0 })
@@ -28,10 +30,9 @@ export default function DraggableBento({
   const [resizing, setResizing] = useState(false)
   const [rect, setRect] = useState<Rect>({ x: 0, y: 0, w: 0, h: 0 })
 
-  // Keep rectRef in sync with state
   useEffect(() => { rectRef.current = rect }, [rect])
 
-  // Measure grid position and register with canvas (runs once on mount)
+  // Measure natural grid position once at mount, register with the canvas
   useEffect(() => {
     const el = wrapRef.current
     const container = containerRef.current
@@ -50,6 +51,26 @@ export default function DraggableBento({
     registerCard(id, r)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  // Re-clamp position (and width) whenever the container resizes so cards
+  // never overflow the right edge of the canvas
+  useEffect(() => {
+    if (!floating || containerWidth === 0) return
+    const { x, y, w, h } = rectRef.current
+    const maxX = containerWidth - w
+    // Also cap width if it somehow exceeds the container
+    const clampedW = Math.min(w, containerWidth)
+    const clampedX = Math.max(0, Math.min(x, containerWidth - clampedW))
+    if (clampedX !== x || clampedW !== w) {
+      const clamped: Rect = { x: clampedX, y, w: clampedW, h }
+      setRect(clamped)
+      rectRef.current = clamped
+      updateRect(id, clamped)
+    }
+  // maxX used only as a derived value; we intentionally omit rect from deps
+  // to avoid an infinite loop — rectRef.current always has the latest value
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [containerWidth, floating, id, updateRect])
 
   // Scroll reveal
   useEffect(() => {
@@ -87,7 +108,15 @@ export default function DraggableBento({
         setDragging(true)
       }
       if (active) {
-        const nr: Rect = { x: Math.max(0, ox + dx), y: Math.max(0, oy + dy), w, h }
+        // Clamp in real-time so the card never leaves the canvas
+        const cw = containerRef.current?.offsetWidth ?? 0
+        const maxX = cw > 0 ? cw - w : Infinity
+        const nr: Rect = {
+          x: Math.max(0, Math.min(ox + dx, maxX)),
+          y: Math.max(0, oy + dy),
+          w,
+          h,
+        }
         setRect(nr)
         rectRef.current = nr
       }
@@ -113,7 +142,7 @@ export default function DraggableBento({
     dragCleanupRef.current = cleanup
     document.addEventListener('pointermove', onMove)
     document.addEventListener('pointerup', onUp)
-  }, [id, resolveCollision, updateRect])
+  }, [id, resolveCollision, updateRect, containerRef])
 
   // ── Resize ────────────────────────────────────────────────────────────────
   const onResizeDown = useCallback((e: React.PointerEvent<HTMLDivElement>) => {
@@ -125,9 +154,12 @@ export default function DraggableBento({
     setResizing(true)
 
     const onMove = (ev: PointerEvent) => {
+      // Don't let the card grow beyond the right edge of the canvas
+      const cw = containerRef.current?.offsetWidth ?? 0
+      const maxW = cw > 0 ? cw - x : Infinity
       const nr: Rect = {
         x, y,
-        w: Math.max(MIN_W, sw + ev.clientX - startX),
+        w: Math.max(MIN_W, Math.min(maxW, sw + ev.clientX - startX)),
         h: Math.max(MIN_H, sh + ev.clientY - startY),
       }
       setRect(nr)
@@ -143,9 +175,9 @@ export default function DraggableBento({
 
     document.addEventListener('pointermove', onMove)
     document.addEventListener('pointerup', onUp)
-  }, [id, updateRect])
+  }, [id, updateRect, containerRef])
 
-  // ── Compute transform / transition ────────────────────────────────────────
+  // ── Transforms ────────────────────────────────────────────────────────────
   const transform = (() => {
     if (!revealed) return 'translateY(20px)'
     if (dragging) return 'scale(1.04)'
@@ -160,7 +192,7 @@ export default function DraggableBento({
     return 'transform 200ms cubic-bezier(0.2,0,0,1)'
   })()
 
-  // ── Non-floating (grid) render ─────────────────────────────────────────────
+  // ── Non-floating (mobile / grid) render ───────────────────────────────────
   if (!floating) {
     return (
       <div
@@ -192,6 +224,10 @@ export default function DraggableBento({
         top: rect.y,
         width: rect.w,
         height: rect.h,
+        // Match inner card radius so overflow clips cleanly at the rounded corners,
+        // preserving the visual padding inside each card
+        borderRadius: CARD_RADIUS,
+        overflow: 'hidden',
         opacity: revealed ? 1 : 0,
         transform,
         transition,
@@ -201,10 +237,9 @@ export default function DraggableBento({
         zIndex: dragging || resizing ? 100 : 1,
         display: 'flex',
         flexDirection: 'column',
-        overflow: 'hidden',
       }}
     >
-      {/* Drag-hint dots (top-right) */}
+      {/* Drag-hint: 6-dot grid (top-right, inside the rounded corner) */}
       <div
         aria-hidden
         style={{
@@ -228,16 +263,16 @@ export default function DraggableBento({
         </svg>
       </div>
 
-      {/* Resize handle (bottom-right) */}
+      {/* Resize handle: 3-dot L-shape (bottom-right, clear of the rounded corner) */}
       <div
         aria-hidden
         onPointerDown={onResizeDown}
         style={{
           position: 'absolute',
-          bottom: 8,
-          right: 8,
-          width: 24,
-          height: 24,
+          bottom: 14,
+          right: 14,
+          width: 20,
+          height: 20,
           cursor: 'se-resize',
           zIndex: 30,
           opacity: hovered && revealDone && !dragging ? 0.5 : 0,
@@ -248,7 +283,6 @@ export default function DraggableBento({
           color: 'white',
         }}
       >
-        {/* Three-dot resize icon */}
         <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
           <circle cx="10" cy="10" r="1.5" />
           <circle cx="6"  cy="10" r="1.5" />
