@@ -3,9 +3,8 @@
 import { useRef, useState, useEffect, useCallback, useId, type ReactNode } from 'react'
 import { useBentoCanvas, type Rect } from './BentoCanvas'
 
-const MIN_W = 180
-const MIN_H = 100
-// Must match the border-radius on the inner card divs so overflow clips correctly
+const MIN_W       = 180
+const MIN_H       = 100
 const CARD_RADIUS = 32
 
 export default function DraggableBento({
@@ -18,61 +17,51 @@ export default function DraggableBento({
   delay?: number
 }) {
   const id = useId()
-  const { floating, containerRef, containerWidth, registerCard, updateRect, resolveCollision } = useBentoCanvas()
-  const wrapRef = useRef<HTMLDivElement>(null)
-  const dragCleanupRef = useRef<(() => void) | null>(null)
-  const rectRef = useRef<Rect>({ x: 0, y: 0, w: 0, h: 0 })
+  const { floating, containerRef, positions, registerCard, dropCard } = useBentoCanvas()
 
-  const [revealed, setRevealed] = useState(false)
+  const wrapRef     = useRef<HTMLDivElement>(null)
+  const cleanupRef  = useRef<(() => void) | null>(null)
+
+  // ── Always-current position ─────────────────────────────────────────────
+  // Updated directly in the render body so pointer-event callbacks always
+  // read the latest value without needing it in their dependency arrays.
+  const ctxRect    = positions[id]
+  const ctxRectRef = useRef(ctxRect)
+  ctxRectRef.current = ctxRect
+
+  // ── Interaction states ───────────────────────────────────────────────────
+  const [revealed,   setRevealed]   = useState(false)
   const [revealDone, setRevealDone] = useState(false)
-  const [hovered, setHovered] = useState(false)
-  const [dragging, setDragging] = useState(false)
-  const [resizing, setResizing] = useState(false)
-  const [rect, setRect] = useState<Rect>({ x: 0, y: 0, w: 0, h: 0 })
+  const [hovered,    setHovered]    = useState(false)
+  const [pressing,   setPressing]   = useState(false)   // pointer down, not yet dragging
+  const [dragging,   setDragging]   = useState(false)
+  const [resizing,   setResizing]   = useState(false)
 
-  useEffect(() => { rectRef.current = rect }, [rect])
+  // Local copy used only during drag / resize for smooth per-frame updates
+  const [localRect,  setLocalRect]  = useState<Rect | null>(null)
+  const localRectRef = useRef<Rect | null>(null)
+  const dragDxRef    = useRef(0)   // horizontal offset from drag start (for tilt)
 
-  // Measure natural grid position once at mount, register with the canvas
+  // The position we actually render
+  const renderedRect = (dragging || resizing) && localRect ? localRect : ctxRect
+
+  // ── Register with canvas once at mount ───────────────────────────────────
   useEffect(() => {
-    const el = wrapRef.current
+    const el        = wrapRef.current
     const container = containerRef.current
     if (!el || !container) return
-
     const elR = el.getBoundingClientRect()
-    const cR = container.getBoundingClientRect()
-    const r: Rect = {
+    const cR  = container.getBoundingClientRect()
+    registerCard(id, {
       x: elR.left - cR.left,
-      y: elR.top - cR.top,
+      y: elR.top  - cR.top,
       w: elR.width,
       h: elR.height,
-    }
-    setRect(r)
-    rectRef.current = r
-    registerCard(id, r)
+    })
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  // Re-clamp position (and width) whenever the container resizes so cards
-  // never overflow the right edge of the canvas
-  useEffect(() => {
-    if (!floating || containerWidth === 0) return
-    const { x, y, w, h } = rectRef.current
-    const maxX = containerWidth - w
-    // Also cap width if it somehow exceeds the container
-    const clampedW = Math.min(w, containerWidth)
-    const clampedX = Math.max(0, Math.min(x, containerWidth - clampedW))
-    if (clampedX !== x || clampedW !== w) {
-      const clamped: Rect = { x: clampedX, y, w: clampedW, h }
-      setRect(clamped)
-      rectRef.current = clamped
-      updateRect(id, clamped)
-    }
-  // maxX used only as a derived value; we intentionally omit rect from deps
-  // to avoid an infinite loop — rectRef.current always has the latest value
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [containerWidth, floating, id, updateRect])
-
-  // Scroll reveal
+  // ── Scroll reveal ─────────────────────────────────────────────────────────
   useEffect(() => {
     const el = wrapRef.current
     if (!el) return
@@ -90,109 +79,147 @@ export default function DraggableBento({
     return () => clearTimeout(t)
   }, [revealed, delay])
 
-  useEffect(() => () => { dragCleanupRef.current?.() }, [])
+  useEffect(() => () => { cleanupRef.current?.() }, [])
 
-  // ── Drag ──────────────────────────────────────────────────────────────────
+  // ── Drag — press + move (8 px threshold) ─────────────────────────────────
   const onPointerDown = useCallback((e: React.PointerEvent<HTMLDivElement>) => {
     if (e.button !== 0) return
+    const startRect = ctxRectRef.current   // always fresh — no stale closure
+    if (!startRect) return
+
     const startX = e.clientX
     const startY = e.clientY
-    const { x: ox, y: oy, w, h } = rectRef.current
-    let active = false
+    let dragStarted = false
+
+    setPressing(true)
 
     const onMove = (ev: PointerEvent) => {
-      const dx = ev.clientX - startX
-      const dy = ev.clientY - startY
-      if (!active && Math.sqrt(dx * dx + dy * dy) > 8) {
-        active = true
+      const dx   = ev.clientX - startX
+      const dy   = ev.clientY - startY
+      const dist = Math.sqrt(dx * dx + dy * dy)
+
+      if (!dragStarted && dist > 8) {
+        dragStarted = true
+        setPressing(false)
         setDragging(true)
       }
-      if (active) {
-        // Clamp in real-time so the card never leaves the canvas
-        const cw = containerRef.current?.offsetWidth ?? 0
-        const maxX = cw > 0 ? cw - w : Infinity
-        const nr: Rect = {
-          x: Math.max(0, Math.min(ox + dx, maxX)),
-          y: Math.max(0, oy + dy),
-          w,
-          h,
+
+      if (dragStarted) {
+        const cw   = containerRef.current?.offsetWidth ?? 0
+        const maxX = cw > 0 ? cw - startRect.w : Infinity
+        dragDxRef.current = dx
+        const r: Rect = {
+          x: Math.max(0, Math.min(startRect.x + dx, maxX)),
+          y: Math.max(0, startRect.y + dy),
+          w: startRect.w,
+          h: startRect.h,
         }
-        setRect(nr)
-        rectRef.current = nr
+        localRectRef.current = r
+        setLocalRect(r)
       }
     }
 
     const onUp = () => {
       cleanup()
-      if (active) {
+      setPressing(false)
+      if (dragStarted) {
         setDragging(false)
-        const resolved = resolveCollision(id, rectRef.current)
-        setRect(resolved)
-        rectRef.current = resolved
-        updateRect(id, resolved)
+        dragDxRef.current = 0
+        dropCard(id, localRectRef.current ?? startRect)
+        setLocalRect(null)
+        localRectRef.current = null
       }
     }
 
     const cleanup = () => {
       document.removeEventListener('pointermove', onMove)
-      document.removeEventListener('pointerup', onUp)
-      dragCleanupRef.current = null
+      document.removeEventListener('pointerup',   onUp)
+      cleanupRef.current = null
     }
-
-    dragCleanupRef.current = cleanup
+    cleanupRef.current = cleanup
     document.addEventListener('pointermove', onMove)
-    document.addEventListener('pointerup', onUp)
-  }, [id, resolveCollision, updateRect, containerRef])
+    document.addEventListener('pointerup',   onUp)
+  }, [id, dropCard, containerRef])
 
-  // ── Resize ────────────────────────────────────────────────────────────────
+  // ── Resize — immediate drag on the corner handle ──────────────────────────
   const onResizeDown = useCallback((e: React.PointerEvent<HTMLDivElement>) => {
     e.stopPropagation()
     if (e.button !== 0) return
+    const startRect = ctxRectRef.current
+    if (!startRect) return
+
     const startX = e.clientX
     const startY = e.clientY
-    const { x, y, w: sw, h: sh } = rectRef.current
+    const { x, y, w: sw, h: sh } = startRect
     setResizing(true)
 
     const onMove = (ev: PointerEvent) => {
-      // Don't let the card grow beyond the right edge of the canvas
-      const cw = containerRef.current?.offsetWidth ?? 0
+      const cw   = containerRef.current?.offsetWidth ?? 0
       const maxW = cw > 0 ? cw - x : Infinity
-      const nr: Rect = {
+      const r: Rect = {
         x, y,
         w: Math.max(MIN_W, Math.min(maxW, sw + ev.clientX - startX)),
         h: Math.max(MIN_H, sh + ev.clientY - startY),
       }
-      setRect(nr)
-      rectRef.current = nr
+      localRectRef.current = r
+      setLocalRect(r)
     }
 
     const onUp = () => {
       document.removeEventListener('pointermove', onMove)
-      document.removeEventListener('pointerup', onUp)
+      document.removeEventListener('pointerup',   onUp)
       setResizing(false)
-      updateRect(id, rectRef.current)
+      // dropCard triggers global collision resolution, same as drag
+      dropCard(id, localRectRef.current ?? startRect)
+      setLocalRect(null)
+      localRectRef.current = null
     }
 
     document.addEventListener('pointermove', onMove)
-    document.addEventListener('pointerup', onUp)
-  }, [id, updateRect, containerRef])
+    document.addEventListener('pointerup',   onUp)
+  }, [id, dropCard, containerRef])
 
-  // ── Transforms ────────────────────────────────────────────────────────────
+  // ── Visual state ──────────────────────────────────────────────────────────
+  const tilt = dragging
+    ? Math.max(-6, Math.min(6, dragDxRef.current * 0.015))
+    : 0
+
   const transform = (() => {
     if (!revealed) return 'translateY(20px)'
-    if (dragging) return 'scale(1.04)'
-    if (hovered && revealDone && !resizing) return 'translateY(-3px)'
+    if (dragging)  return `scale(1.06) rotate(${tilt}deg)`
+    if (pressing)  return 'scale(1.02)'
+    return 'scale(1)'
+  })()
+
+  const boxShadow = (() => {
+    if (dragging)
+      return '0 28px 72px rgba(0,0,0,0.55), 0 8px 24px rgba(0,0,0,0.35)'
+    if (pressing)
+      return '0 12px 32px rgba(0,0,0,0.3)'
     return 'none'
   })()
 
+  // Spring-settle transitions give every card the iOS "bounce into place" feel.
+  // When BentoCanvas resolves collisions globally, pushed cards animate to their
+  // new slots. During drag/resize, transitions are off so the card is instant.
+  const SPRING = 'cubic-bezier(0.34,1.2,0.64,1)'
+  const SMOOTH = 'cubic-bezier(0.2,0,0,1)'
   const transition = (() => {
     if (!revealed) return 'none'
     if (dragging || resizing) return 'none'
-    if (!revealDone) return `opacity 380ms cubic-bezier(0.2,0,0,1) ${delay}ms, transform 380ms cubic-bezier(0.2,0,0,1) ${delay}ms`
-    return 'transform 200ms cubic-bezier(0.2,0,0,1)'
+    const rd = revealDone ? '' : ` ${delay}ms`
+    return [
+      `left 500ms ${SPRING}`,
+      `top 500ms ${SPRING}`,
+      `width 350ms ${SMOOTH}`,
+      `height 350ms ${SMOOTH}`,
+      `transform 380ms ${SPRING}`,
+      `box-shadow 300ms ease`,
+      `opacity 380ms ${SMOOTH}${rd}`,
+    ].join(', ')
   })()
 
-  // ── Non-floating (mobile / grid) render ───────────────────────────────────
+  // ── Non-floating render (mobile / SSR) ────────────────────────────────────
   if (!floating) {
     return (
       <div
@@ -202,7 +229,7 @@ export default function DraggableBento({
           opacity: revealed ? 1 : 0,
           transform: revealed ? 'none' : 'translateY(20px)',
           transition: revealed
-            ? `opacity 380ms cubic-bezier(0.2,0,0,1) ${delay}ms, transform 380ms cubic-bezier(0.2,0,0,1) ${delay}ms`
+            ? `opacity 380ms ${SMOOTH} ${delay}ms, transform 380ms ${SMOOTH} ${delay}ms`
             : 'none',
         }}
       >
@@ -211,42 +238,45 @@ export default function DraggableBento({
     )
   }
 
-  // ── Floating (absolute) render ─────────────────────────────────────────────
+  // Not yet positioned by the canvas
+  if (!renderedRect) return null
+
+  // ── Floating render ───────────────────────────────────────────────────────
   return (
     <div
       ref={wrapRef}
       onPointerDown={onPointerDown}
+      onContextMenu={(e) => e.preventDefault()}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
         position: 'absolute',
-        left: rect.x,
-        top: rect.y,
-        width: rect.w,
-        height: rect.h,
-        // Match inner card radius so overflow clips cleanly at the rounded corners,
-        // preserving the visual padding inside each card
+        left:   renderedRect.x,
+        top:    renderedRect.y,
+        width:  renderedRect.w,
+        height: renderedRect.h,
         borderRadius: CARD_RADIUS,
         overflow: 'hidden',
         opacity: revealed ? 1 : 0,
         transform,
         transition,
+        boxShadow,
         cursor: dragging ? 'grabbing' : 'grab',
         userSelect: 'none',
         touchAction: 'none',
-        zIndex: dragging || resizing ? 100 : 1,
+        zIndex: dragging || pressing ? 100 : 1,
         display: 'flex',
         flexDirection: 'column',
+        willChange: dragging ? 'left, top, transform' : 'auto',
       }}
     >
-      {/* Drag-hint: 6-dot grid (top-right, inside the rounded corner) */}
+      {/* Drag hint: 6-dot grid */}
       <div
         aria-hidden
         style={{
           position: 'absolute',
-          top: 14,
-          right: 14,
-          opacity: hovered && revealDone && !dragging && !resizing ? 0.35 : 0,
+          top: 14, right: 14,
+          opacity: (hovered || pressing) && revealDone && !dragging && !resizing ? 0.4 : 0,
           transition: 'opacity 200ms ease',
           pointerEvents: 'none',
           zIndex: 20,
@@ -254,28 +284,23 @@ export default function DraggableBento({
         }}
       >
         <svg width="12" height="16" viewBox="0 0 12 16" fill="currentColor">
-          <circle cx="3"  cy="3"  r="1.5" />
-          <circle cx="9"  cy="3"  r="1.5" />
-          <circle cx="3"  cy="8"  r="1.5" />
-          <circle cx="9"  cy="8"  r="1.5" />
-          <circle cx="3"  cy="13" r="1.5" />
-          <circle cx="9"  cy="13" r="1.5" />
+          <circle cx="3" cy="3"  r="1.5" /><circle cx="9" cy="3"  r="1.5" />
+          <circle cx="3" cy="8"  r="1.5" /><circle cx="9" cy="8"  r="1.5" />
+          <circle cx="3" cy="13" r="1.5" /><circle cx="9" cy="13" r="1.5" />
         </svg>
       </div>
 
-      {/* Resize handle: 3-dot L-shape (bottom-right, clear of the rounded corner) */}
+      {/* Resize handle: 3-dot L — bottom-right, clear of the rounded corner */}
       <div
         aria-hidden
         onPointerDown={onResizeDown}
         style={{
           position: 'absolute',
-          bottom: 14,
-          right: 14,
-          width: 20,
-          height: 20,
+          bottom: 14, right: 14,
+          width: 20, height: 20,
           cursor: 'se-resize',
           zIndex: 30,
-          opacity: hovered && revealDone && !dragging ? 0.5 : 0,
+          opacity: hovered && revealDone && !dragging && !pressing ? 0.5 : 0,
           transition: 'opacity 200ms ease',
           display: 'flex',
           alignItems: 'center',
