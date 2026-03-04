@@ -108,24 +108,24 @@ export default function Hero() {
         {/* ── Static cards ────────────────────────────────────────────────── */}
 
         <DraggableBento className="lg:col-span-8" delay={100}>
-          <div className="flex-1 bg-[#262626] rounded-[32px] p-8 lg:p-10 relative overflow-hidden min-h-[380px] flex flex-col justify-between">
+          <div className="flex-1 bg-[#262626] rounded-[32px] p-7 md:p-8 lg:p-10 relative overflow-hidden min-h-[320px] lg:min-h-[380px] flex flex-col justify-between">
             <div className="absolute -top-24 -right-24 w-80 h-80 bg-blue-500/8 rounded-full blur-[80px] pointer-events-none" />
             <div className="relative">
-              <span className="inline-flex items-center gap-2 bg-[#1e3320] text-[#86efac] text-xs font-sans px-3 py-1.5 rounded-full mb-8 w-fit">
+              <span className="inline-flex items-center gap-2 bg-[#1e3320] text-[#86efac] text-xs font-sans px-3 py-1.5 rounded-full mb-6 lg:mb-8 w-fit">
                 <span className="w-1.5 h-1.5 bg-[#4ade80] rounded-full animate-pulse" />
                 Available for work
               </span>
-              <h1 className="font-display text-[56px] lg:text-[72px] leading-[0.9] text-[#f0f0f0] mb-6">
+              <h1 className="font-display text-[44px] md:text-[56px] lg:text-[72px] leading-[0.9] text-[#f0f0f0] mb-4 lg:mb-6">
                 Computer<br />
                 Engineer<br />
                 <span className="text-[#888888]">&amp; Developer.</span>
               </h1>
-              <p className="font-sans text-white/40 text-base max-w-lg leading-relaxed">
+              <p className="font-sans text-white/40 text-sm md:text-base max-w-lg leading-relaxed">
                 Graduating CpE student at USLS – Bacolod. I use AI-assisted workflows to design,
                 build, and ship production-ready apps — from React Native mobile to deployed web interfaces.
               </p>
             </div>
-            <div className="flex items-center gap-3 mt-8 relative">
+            <div className="flex flex-wrap items-center gap-3 mt-6 lg:mt-8 relative">
               <a href="#work" className="btn-spring inline-flex items-center gap-2 bg-[#f0f0f0] text-[#111111] font-sans font-semibold text-sm px-6 py-3 rounded-full hover:bg-white transition-colors">
                 View Work
               </a>
@@ -138,18 +138,17 @@ export default function Hero() {
         </DraggableBento>
 
         <DraggableBento className="lg:col-span-4" delay={180}>
-          <div className="flex-1 rounded-[32px] relative overflow-hidden min-h-[280px] bg-[#1a2a3a]">
-            {/* Replace /photo.jpg with your actual photo path */}
+          <div className="flex-1 rounded-[32px] relative overflow-hidden min-h-[340px] lg:min-h-[380px] bg-[#1a2a3a]">
             <img
               src="/photo.jpg"
               alt="Reymart Louie"
               draggable={false}
               className="absolute inset-0 w-full h-full object-cover object-top pointer-events-none select-none"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
-            <div className="absolute bottom-0 left-0 right-0 p-8">
-              <p className="font-sans text-white/50 text-xs uppercase tracking-widest mb-1">Computer Engineer</p>
-              <p className="font-display text-white text-[36px] lg:text-[40px] leading-[0.95] drop-shadow-lg">
+            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent pointer-events-none" />
+            <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
+              <p className="font-sans text-white/50 text-[10px] uppercase tracking-widest mb-1.5">Computer Engineer</p>
+              <p className="font-display text-white text-[28px] md:text-[32px] lg:text-[36px] leading-[0.95] drop-shadow-lg">
                 Reymart Louie<br />L. Capapas
               </p>
               <p className="font-sans text-white/35 text-xs mt-2">USLS · Bacolod</p>
@@ -158,7 +157,7 @@ export default function Hero() {
         </DraggableBento>
 
         <DraggableBento className="lg:col-span-4" delay={240}>
-          <div className="flex-1 bg-[#0d1b2c] rounded-[32px] p-8 relative overflow-hidden">
+          <div className="flex-1 bg-[#0d1b2c] rounded-[32px] p-7 md:p-8 relative overflow-hidden min-h-[180px]">
             <div className="absolute -bottom-10 -right-10 w-44 h-44 bg-blue-500/15 rounded-full blur-3xl pointer-events-none" />
             <p className="font-sans text-[#60a5fa]/50 text-xs uppercase tracking-widest mb-5 relative">Tech Stack</p>
             <div className="flex flex-wrap gap-2 relative">
@@ -172,10 +171,10 @@ export default function Hero() {
         </DraggableBento>
 
         <DraggableBento className="lg:col-span-6" delay={290}>
-          <div className="flex-1 bg-[#222222] rounded-[32px] p-8 flex flex-col justify-between relative overflow-hidden">
+          <div className="flex-1 bg-[#222222] rounded-[32px] p-7 md:p-8 flex flex-col gap-4 relative overflow-hidden min-h-[180px]">
             <div className="absolute -top-10 -right-10 w-48 h-48 bg-blue-500/6 rounded-full blur-3xl pointer-events-none" />
-            <p className="font-sans text-white/30 text-xs uppercase tracking-widest mb-4 relative">About</p>
-            <p className="font-sans text-white/55 text-base leading-relaxed relative">
+            <p className="font-sans text-white/30 text-xs uppercase tracking-widest relative">About</p>
+            <p className="font-sans text-white/55 text-sm md:text-base leading-relaxed relative">
               Graduating Computer Engineering student at the University of St. La Salle – Bacolod.
               Full stack developer experienced in React Native, TypeScript, and Supabase — building
               production-ready apps through AI-assisted workflows and solid engineering fundamentals.
@@ -184,7 +183,7 @@ export default function Hero() {
         </DraggableBento>
 
         <DraggableBento className="lg:col-span-2" delay={340}>
-          <div className="w-full aspect-square bg-[#1a3d72] rounded-[32px] p-6 flex flex-col items-center justify-center text-center">
+          <div className="flex-1 bg-[#1a3d72] rounded-[32px] p-6 md:p-8 flex flex-col items-center justify-center text-center min-h-[180px]">
             <p className="font-sans text-[#93c5fd]/40 text-[10px] uppercase tracking-widest mb-3">Experience</p>
             <p className="font-display text-[#bfdbfe] text-6xl leading-none">4+</p>
             <p className="font-sans text-[#93c5fd]/60 text-xs mt-2 leading-snug">Years crafting<br />digital products</p>
