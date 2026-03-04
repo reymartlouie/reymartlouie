@@ -55,7 +55,7 @@ export default function Projects() {
   }, [])
 
   return (
-    <section id="work" className="flex flex-col gap-4">
+    <section className="flex flex-col gap-4">
       <div ref={ref} className="reveal-item flex flex-col gap-4">
 
         {/* UI/UX Portfolio link */}

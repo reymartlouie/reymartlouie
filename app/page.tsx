@@ -21,8 +21,10 @@ export default function Home() {
       <Navbar />
       <div className="max-w-[1280px] mx-auto px-4 pt-8 pb-32 md:px-6 md:pt-10 flex flex-col gap-4">
         <Hero />
-        <SectionBreak label="Selected Work" />
-        <Projects />
+        <div id="work" className="flex flex-col gap-4">
+          <SectionBreak label="Selected Work" />
+          <Projects />
+        </div>
         <SectionBreak label="Contact" />
         <Footer />
       </div>

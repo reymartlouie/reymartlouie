@@ -16,12 +16,12 @@ function IconWork() {
   )
 }
 
-function IconAbout() {
+function IconCanvas() {
   return (
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-      stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
-      <circle cx="10" cy="6" r="3.5" />
-      <path d="M2 18c0-4.42 3.58-8 8-8s8 3.58 8 8" />
+      stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="4" y="4" width="12" height="12" rx="1.5" />
+      <path d="M2 4h2M16 4h2M2 16h2M16 16h2M4 2v2M16 2v2M4 16v2M16 16v2" />
     </svg>
   )
 }
@@ -39,8 +39,8 @@ function IconContact() {
 // ── Nav items ──────────────────────────────────────────────────────────────────
 
 const NAV = [
+  { id: 'about',   label: 'Canvas',  href: '#about',   Icon: IconCanvas  },
   { id: 'work',    label: 'Work',    href: '#work',    Icon: IconWork    },
-  { id: 'about',   label: 'About',   href: '#about',   Icon: IconAbout   },
   { id: 'contact', label: 'Contact', href: '#contact', Icon: IconContact },
 ] as const
 
@@ -48,14 +48,14 @@ const NAV = [
 
 export default function Navbar() {
   const [ready,  setReady]  = useState(false)
-  const [active, setActive] = useState<string>('none')
+  const [active, setActive] = useState<string>('about')
 
   useEffect(() => setReady(true), [])
 
   // Highlight whichever section is most visible in the viewport
   const updateActive = useCallback(() => {
-    if (window.scrollY < 80) { setActive('none'); return }
-    const ids = ['work', 'about', 'contact']
+    if (window.scrollY < 80) { setActive('about'); return }
+    const ids = ['about', 'work', 'contact']
     let best = 'none', bestRatio = 0
     for (const id of ids) {
       const el = document.getElementById(id)
