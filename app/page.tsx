@@ -20,7 +20,7 @@ function SectionBreak({ label }: { label: string }) {
 export default function Home() {
   return (
     <LockGate>
-      <main className="min-h-screen bg-[#111111]">
+      <main className="min-h-screen">
         <StatusBar />
         <Navbar />
         <div className="max-w-[1280px] mx-auto px-4 pt-10 pb-32 md:px-6 md:pt-12 flex flex-col gap-4">

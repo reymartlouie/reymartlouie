@@ -27,7 +27,24 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${inter.variable} ${archivoBlack.variable}`}>
-      <body>{children}</body>
+      <body>
+        {/* Fixed wallpaper — blurred, toned down */}
+        <div
+          aria-hidden="true"
+          style={{
+            position:           'fixed',
+            inset:              0,
+            zIndex:             0,
+            backgroundImage:    'url(/wallpaper.jpg)',
+            backgroundSize:     'cover',
+            backgroundPosition: 'center',
+            filter:             'blur(32px) saturate(110%) brightness(0.22)',
+            transform:          'scale(1.06)',
+          }}
+        />
+        <div aria-hidden="true" style={{ position: 'fixed', inset: 0, zIndex: 0, background: 'rgba(0,0,0,0.55)' }} />
+        <div style={{ position: 'relative', zIndex: 1 }}>{children}</div>
+      </body>
     </html>
   )
 }
