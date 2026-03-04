@@ -173,12 +173,12 @@ export default function StatusBar() {
     >
 
       {/* ── Left ── */}
-      <div className="flex items-center gap-2.5 relative">
+      <div className="flex items-center gap-0.5 relative">
 
-        {/* RL — clickable user menu trigger */}
+        {/* RL — user menu trigger */}
         <button
           onClick={() => setUserMenuOpen(v => !v)}
-          className="font-display px-2 py-0.5 rounded-md transition-colors hover:bg-white/10"
+          className="font-display px-2.5 py-1 rounded-md transition-colors hover:bg-white/8"
           style={{ fontSize: 13, letterSpacing: '-0.02em', color: 'rgba(255,255,255,0.90)' }}
         >
           RL
@@ -186,26 +186,33 @@ export default function StatusBar() {
 
         {userMenuOpen && <UserMenu onClose={() => setUserMenuOpen(false)} />}
 
-        <Divider />
-
-        <div className="flex items-center gap-1.5">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#4ade80] animate-pulse flex-shrink-0" />
-          <span className="font-sans hidden sm:inline" style={{ fontSize: 11, color: 'rgba(255,255,255,0.38)' }}>Available</span>
-        </div>
-
-        <span className="font-sans" style={{ fontSize: 11, color: 'rgba(255,255,255,0.38)' }}>{section}</span>
-
-        <Divider />
-
-        <a
-          href="#contact"
-          className="font-sans font-semibold btn-spring bg-[#f0f0f0] text-[#111111] hover:bg-white transition-colors rounded-full"
-          style={{ fontSize: 10, padding: '2px 10px' }}
-        >
-          Hire Me
-        </a>
-
-        <span className="font-sans hidden md:inline" style={{ fontSize: 11, color: 'rgba(255,255,255,0.25)' }}>Help</span>
+        {[
+          { label: section,          href: '#about'   },
+          { label: 'Certifications', href: '#work'    },
+          { label: 'Resume',         href: '#work'    },
+          { label: 'Achievements',   href: '#work'    },
+          { label: 'Hire Me',        href: '#contact' },
+          { label: 'Help',           href: undefined  },
+        ].map(({ label, href }) =>
+          href ? (
+            <a
+              key={label}
+              href={href}
+              className="font-sans px-2.5 py-1 rounded-md transition-colors hover:bg-white/8"
+              style={{ fontSize: 12, color: 'rgba(255,255,255,0.42)' }}
+            >
+              {label}
+            </a>
+          ) : (
+            <span
+              key={label}
+              className="font-sans px-2.5 py-1 rounded-md transition-colors hover:bg-white/8 cursor-default"
+              style={{ fontSize: 12, color: 'rgba(255,255,255,0.42)' }}
+            >
+              {label}
+            </span>
+          )
+        )}
       </div>
 
       {/* ── Right ── */}
