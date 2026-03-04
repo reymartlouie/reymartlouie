@@ -75,15 +75,12 @@ export default function StatusBar() {
 
   return (
     <div
-      className="fixed top-0 inset-x-0 z-50 flex items-center justify-between select-none"
+      className="fixed top-0 inset-x-0 z-50 flex items-center justify-between select-none overflow-hidden"
       style={{
-        height:               28,
-        paddingLeft:          20,
-        paddingRight:         20,
-        background:           'rgba(24,24,26,0.60)',
-        backdropFilter:       'blur(56px) saturate(180%)',
-        WebkitBackdropFilter: 'blur(56px) saturate(180%)',
-        border:               '1px solid rgba(255,255,255,0.09)',
+        height:     28,
+        paddingLeft:  20,
+        paddingRight: 20,
+        borderBottom: '1px solid rgba(255,255,255,0.09)',
         boxShadow: [
           '0 1px 0 rgba(255,255,255,0.07) inset',
           '0 -1px 0 rgba(0,0,0,0.35) inset',
@@ -96,9 +93,22 @@ export default function StatusBar() {
           : 'none',
       }}
     >
+      {/* Blurred wallpaper layer */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage:    'url(/wallpaper.jpg)',
+          backgroundSize:     'cover',
+          backgroundPosition: 'center 30%',
+          filter:             'blur(18px) saturate(120%) brightness(0.35)',
+          transform:          'scale(1.08)',
+        }}
+      />
+      {/* Dark tint */}
+      <div className="absolute inset-0 pointer-events-none" style={{ background: 'rgba(0,0,0,0.45)' }} />
 
       {/* ── Left ── */}
-      <div className="flex items-center gap-2.5">
+      <div className="relative z-10 flex items-center gap-2.5">
         <span className="font-display" style={{ fontSize: 12, letterSpacing: '-0.02em', color: 'rgba(255,255,255,0.90)' }}>RL</span>
 
         <Divider />
@@ -123,7 +133,7 @@ export default function StatusBar() {
       </div>
 
       {/* ── Right ── */}
-      <div className="flex items-center gap-2.5">
+      <div className="relative z-10 flex items-center gap-2.5">
         <span style={{ color: 'rgba(255,255,255,0.38)', display: 'flex', alignItems: 'center' }}>
           <IconWifi />
         </span>
