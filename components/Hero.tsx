@@ -100,7 +100,7 @@ export default function Hero() {
               <a href="#work" className="btn-spring inline-flex items-center gap-2 bg-[#f0f0f0] text-[#111111] font-sans font-semibold text-sm px-6 py-3 rounded-full hover:bg-white transition-colors">
                 View Work
               </a>
-              <a href="#contact" className="btn-spring group inline-flex items-center gap-2 bg-white/8 text-white/70 font-sans text-sm px-6 py-3 rounded-full hover:bg-white/12 transition-colors border border-white/10">
+              <a href="#contact" className="btn-spring group inline-flex items-center gap-3 bg-white/10 text-white/70 border border-white/15 font-sans text-sm font-semibold px-6 py-3 rounded-full hover:bg-white/[0.14] transition-colors">
                 Get in Touch
                 <span className="inline-block transition-transform duration-200 group-hover:translate-x-1">→</span>
               </a>
@@ -109,18 +109,20 @@ export default function Hero() {
         </DraggableBento>
 
         <DraggableBento className="lg:col-span-4" delay={180}>
-          <div className="flex-1 bg-[#1e3050] rounded-[32px] p-8 flex flex-col justify-between relative overflow-hidden min-h-[280px]">
-            <div className="absolute -bottom-14 -right-14 w-52 h-52 bg-blue-400/10 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute -top-10 -left-10 w-36 h-36 bg-blue-300/8 rounded-full blur-2xl pointer-events-none" />
-            <div className="relative">
-              <p className="font-sans text-[#93c5fd]/50 text-xs uppercase tracking-widest mb-2">I am a</p>
-              <p className="font-display text-[#bfdbfe] text-[40px] lg:text-[44px] leading-[0.9]">
+          <div className="flex-1 rounded-[32px] relative overflow-hidden min-h-[280px] bg-[#1a2a3a]">
+            {/* Replace /photo.jpg with your actual photo path */}
+            <img
+              src="/photo.jpg"
+              alt="Reymart Louie"
+              className="absolute inset-0 w-full h-full object-cover object-top"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
+            <div className="absolute bottom-0 left-0 right-0 p-8">
+              <p className="font-sans text-white/50 text-xs uppercase tracking-widest mb-1">I am a</p>
+              <p className="font-display text-white text-[40px] lg:text-[44px] leading-[0.9] drop-shadow-lg">
                 Computer<br />Engineer
               </p>
             </div>
-            <p className="font-sans text-[#93c5fd]/60 text-sm leading-relaxed relative">
-              Bridging the gap between robust engineering and intuitive design.
-            </p>
           </div>
         </DraggableBento>
 
@@ -137,7 +139,7 @@ export default function Hero() {
           </div>
         </DraggableBento>
 
-        <DraggableBento className="lg:col-span-5" delay={290}>
+        <DraggableBento className="lg:col-span-6" delay={290}>
           <div className="flex-1 bg-[#222222] rounded-[32px] p-8 flex flex-col justify-between">
             <p className="font-sans text-white/30 text-xs uppercase tracking-widest mb-4">About</p>
             <p className="font-sans text-white/55 text-base leading-relaxed">
@@ -147,13 +149,11 @@ export default function Hero() {
           </div>
         </DraggableBento>
 
-        <DraggableBento className="lg:col-span-3" delay={340}>
-          <div className="flex-1 bg-[#1e3050] rounded-[32px] p-8 flex flex-col justify-between">
-            <p className="font-sans text-[#c4b5fd]/50 text-xs uppercase tracking-widest">Experience</p>
-            <div>
-              <p className="font-display text-[#ddd6fe] text-7xl leading-none">4+</p>
-              <p className="font-sans text-[#c4b5fd]/60 text-sm mt-2">Years crafting digital products</p>
-            </div>
+        <DraggableBento className="lg:col-span-2" delay={340}>
+          <div className="w-full aspect-square bg-[#1a3d72] rounded-[32px] p-6 flex flex-col items-center justify-center text-center">
+            <p className="font-sans text-[#93c5fd]/40 text-[10px] uppercase tracking-widest mb-3">Experience</p>
+            <p className="font-display text-[#bfdbfe] text-6xl leading-none">4+</p>
+            <p className="font-sans text-[#93c5fd]/60 text-xs mt-2 leading-snug">Years crafting<br />digital products</p>
           </div>
         </DraggableBento>
 
@@ -175,9 +175,9 @@ export default function Hero() {
       {/* Add card button */}
       <button
         onClick={openCreate}
-        className="btn-spring inline-flex items-center gap-2 bg-white/8 text-white/60
-                   border border-white/10 font-sans text-sm px-5 py-3 rounded-full
-                   hover:bg-white/12 transition-colors self-start"
+        className="btn-spring inline-flex items-center gap-3 bg-white/10 text-white/70
+                   border border-white/15 font-sans text-sm font-semibold px-5 py-3 rounded-full
+                   hover:bg-white/[0.14] transition-colors self-start"
       >
         + Add card
       </button>
