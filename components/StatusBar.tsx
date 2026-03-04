@@ -90,8 +90,8 @@ function UserMenu({ onClose }: { onClose: () => void }) {
           <span className="font-display text-white/90 text-sm">RL</span>
         </div>
         <div>
-          <p className="font-display text-white/90 text-sm leading-tight">Reymart Louie</p>
-          <p className="font-sans text-white/35 text-xs mt-0.5">Portfolio</p>
+          <p className="font-display text-white/90 text-sm leading-tight">Reymart Louie L. Capapas</p>
+          <p className="font-sans text-white/35 text-xs mt-0.5">CpE Student · USLS Bacolod</p>
         </div>
       </div>
 
@@ -189,7 +189,7 @@ export default function StatusBar() {
         {[
           { label: section,          href: '#about'   },
           { label: 'Certifications', href: '#work'    },
-          { label: 'Resume',         href: '#work'    },
+          { label: 'Resume',         href: '/resume.pdf' },
           { label: 'Achievements',   href: '#work'    },
           { label: 'Hire Me',        href: '#contact' },
           { label: 'Help',           href: undefined  },

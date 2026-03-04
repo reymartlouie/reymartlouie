@@ -116,13 +116,13 @@ export default function Hero() {
                 Available for work
               </span>
               <h1 className="font-display text-[56px] lg:text-[72px] leading-[0.9] text-[#f0f0f0] mb-6">
-                Crafting<br />
-                thoughtful<br />
-                <span className="text-[#888888]">digital</span> experiences.
+                Computer<br />
+                Engineer<br />
+                <span className="text-[#888888]">&amp; Developer.</span>
               </h1>
               <p className="font-sans text-white/40 text-base max-w-lg leading-relaxed">
-                I design and build products that are clean, purposeful, and built to last.
-                Currently open to full-time roles and freelance projects.
+                Graduating CpE student at USLS – Bacolod. I use AI-assisted workflows to design,
+                build, and ship production-ready apps — from React Native mobile to deployed web interfaces.
               </p>
             </div>
             <div className="flex items-center gap-3 mt-8 relative">
@@ -148,10 +148,11 @@ export default function Hero() {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
             <div className="absolute bottom-0 left-0 right-0 p-8">
-              <p className="font-sans text-white/50 text-xs uppercase tracking-widest mb-1">I am a</p>
-              <p className="font-display text-white text-[40px] lg:text-[44px] leading-[0.9] drop-shadow-lg">
-                Computer<br />Engineer
+              <p className="font-sans text-white/50 text-xs uppercase tracking-widest mb-1">Computer Engineer</p>
+              <p className="font-display text-white text-[36px] lg:text-[40px] leading-[0.95] drop-shadow-lg">
+                Reymart Louie<br />L. Capapas
               </p>
+              <p className="font-sans text-white/35 text-xs mt-2">USLS · Bacolod</p>
             </div>
           </div>
         </DraggableBento>
@@ -161,7 +162,7 @@ export default function Hero() {
             <div className="absolute -bottom-10 -right-10 w-44 h-44 bg-blue-500/15 rounded-full blur-3xl pointer-events-none" />
             <p className="font-sans text-[#60a5fa]/50 text-xs uppercase tracking-widest mb-5 relative">Tech Stack</p>
             <div className="flex flex-wrap gap-2 relative">
-              {['C++', 'Python', 'React', 'Next.js', 'TypeScript', 'Node.js', 'Figma'].map((skill) => (
+              {['React Native', 'TypeScript', 'Supabase', 'Next.js', 'React', 'Figma', 'Framer', 'EAS Build'].map((skill) => (
                 <span key={skill} className="font-sans text-xs text-[#93c5fd]/70 bg-blue-400/8 border border-[#93c5fd]/20 px-3 py-1.5 rounded-full">
                   {skill}
                 </span>
@@ -175,8 +176,9 @@ export default function Hero() {
             <div className="absolute -top-10 -right-10 w-48 h-48 bg-blue-500/6 rounded-full blur-3xl pointer-events-none" />
             <p className="font-sans text-white/30 text-xs uppercase tracking-widest mb-4 relative">About</p>
             <p className="font-sans text-white/55 text-base leading-relaxed relative">
-              A computer engineer who bridges hardware understanding with modern software development.
-              I build scalable systems, craft intuitive interfaces, and engineer solutions that matter.
+              Graduating Computer Engineering student at the University of St. La Salle – Bacolod.
+              Full stack developer experienced in React Native, TypeScript, and Supabase — building
+              production-ready apps through AI-assisted workflows and solid engineering fundamentals.
             </p>
           </div>
         </DraggableBento>
