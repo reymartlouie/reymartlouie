@@ -1,7 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import Reveal from './Reveal'
+import { useState, useEffect, useRef } from 'react'
 import DraggableBento from './DraggableBento'
 import BentoCanvas, { type Rect } from './BentoCanvas'
 import CustomCard from './CustomCard'
@@ -16,27 +15,30 @@ interface CustomCardData {
 }
 
 export default function Hero() {
-  const [customCards, setCustomCards] = useState<CustomCardData[]>(() => {
-    if (typeof window === 'undefined') return []
-    try { return JSON.parse(localStorage.getItem('bento-custom-cards') ?? '[]') }
-    catch { return [] }
-  })
-
-  const [savedPositions] = useState<Record<string, Rect>>(() => {
-    if (typeof window === 'undefined') return {}
-    try {
-      const all: Record<string, Rect> = JSON.parse(localStorage.getItem('bento-positions') ?? '{}')
-      // Only restore positions for custom cards — static cards always re-measure from grid
-      const custom: Record<string, Rect> = {}
-      for (const id in all) { if (id.startsWith('custom-')) custom[id] = all[id] }
-      return custom
-    } catch { return {} }
-  })
+  const [customCards, setCustomCards] = useState<CustomCardData[]>([])
+  const [savedPositions, setSavedPositions] = useState<Record<string, Rect>>({})
+  const didLoadCards = useRef(false)
 
   const [modalOpen,   setModalOpen]   = useState(false)
   const [editingCard, setEditingCard] = useState<CustomCardData | null>(null)
 
+  // Load from localStorage client-side only (avoids hydration mismatch)
   useEffect(() => {
+    try {
+      const all: Record<string, Rect> = JSON.parse(localStorage.getItem('bento-positions') ?? '{}')
+      const custom: Record<string, Rect> = {}
+      for (const id in all) { if (id.startsWith('custom-')) custom[id] = all[id] }
+      setSavedPositions(custom)
+    } catch {}
+    try {
+      const stored: CustomCardData[] = JSON.parse(localStorage.getItem('bento-custom-cards') ?? '[]')
+      didLoadCards.current = true
+      setCustomCards(stored)
+    } catch { didLoadCards.current = true }
+  }, [])
+
+  useEffect(() => {
+    if (!didLoadCards.current) return
     localStorage.setItem('bento-custom-cards', JSON.stringify(customCards))
   }, [customCards])
 
@@ -179,28 +181,6 @@ export default function Hero() {
       >
         + Add card
       </button>
-
-      {/* Portfolio link — not draggable */}
-      <Reveal delay={390}>
-        <a
-          href="https://reymartlouie.framer.website"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="bento-lift block flex-1 bg-[#3a1f2c] rounded-[32px] p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative overflow-hidden group"
-        >
-          <div className="absolute -right-20 -top-20 w-72 h-72 bg-rose-400/10 rounded-full blur-3xl pointer-events-none" />
-          <div className="relative">
-            <p className="font-sans text-[#f9a8d4]/50 text-xs uppercase tracking-widest mb-2">Portfolio</p>
-            <h3 className="font-display text-[#fbcfe8] text-4xl lg:text-5xl">UI/UX Portfolio</h3>
-            <p className="font-sans text-[#f9a8d4]/60 text-sm mt-2 max-w-md">
-              Explore my design work — case studies, wireframes, and high-fidelity prototypes.
-            </p>
-          </div>
-          <span className="btn-spring inline-flex items-center gap-2 bg-[#fbcfe8]/12 text-[#fbcfe8] border border-[#fbcfe8]/20 font-sans font-semibold text-sm px-6 py-3 rounded-full group-hover:bg-[#fbcfe8]/20 transition-colors whitespace-nowrap">
-            View Portfolio ↗
-          </span>
-        </a>
-      </Reveal>
 
       {/* Card editor modal */}
       {modalOpen && (
