@@ -11,8 +11,11 @@ type CtxType = {
   jiggling: boolean
   containerRef: React.RefObject<HTMLDivElement>
   positions: Record<string, Rect>
+  savedPositions: Record<string, Rect>
   registerCard: (id: string, rect: Rect) => void
   dropCard: (id: string, rect: Rect) => void
+  addCard: (id: string, rect?: Rect) => void
+  removeCard: (id: string) => void
 }
 
 const BentoCtx = createContext<CtxType | null>(null)
@@ -24,6 +27,7 @@ export function useBentoCanvas() {
 }
 
 const GAP = 16
+const POSITIONS_KEY = 'bento-positions'
 
 // ── Pure helpers ─────────────────────────────────────────────────────────────
 
@@ -86,25 +90,35 @@ function resolveAll(
   return out
 }
 
+function savePositions(positions: Record<string, Rect>) {
+  try {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(POSITIONS_KEY, JSON.stringify(positions))
+    }
+  } catch {}
+}
+
 // ── Component ─────────────────────────────────────────────────────────────────
 
 export default function BentoCanvas({
   children,
-  cardCount,
+  savedPositions = {},
 }: {
   children: ReactNode
-  cardCount: number
+  savedPositions?: Record<string, Rect>
 }) {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const cwRef         = useRef(0)
-  const registeredRef = useRef(0)
-  // Accumulate grid positions during registration phase (never triggers re-renders)
-  const pendingRef    = useRef<Record<string, Rect>>({})
+  const containerRef      = useRef<HTMLDivElement>(null)
+  const cwRef             = useRef(0)
+  const pendingRef        = useRef<Record<string, Rect>>({})
+  const activateTimerRef  = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const savedPositionsRef = useRef(savedPositions)
+  savedPositionsRef.current = savedPositions
 
-  const [floating,    setFloating]    = useState(false)
-  const [jiggling,    setJiggling]    = useState(false)
-  const [containerH,  setContainerH]  = useState(0)
-  const [positions,   setPositions]   = useState<Record<string, Rect>>({})
+  const [floating,   setFloating]   = useState(false)
+  const [jiggling,   setJiggling]   = useState(false)
+  const [containerH, setContainerH] = useState(0)
+  const [positions,  setPositions]  = useState<Record<string, Rect>>({})
+
 
   // Track container width; re-clamp + re-resolve on every change
   useEffect(() => {
@@ -141,21 +155,24 @@ export default function BentoCanvas({
     return () => clearTimeout(startT)
   }, [floating])
 
-  /** Each card calls this once at mount with its natural grid position. */
+  /** Each card calls this once at mount with its natural grid position.
+   *  Debounce: fires floating mode 80ms after the last registration call. */
   const registerCard = useCallback((id: string, rect: Rect) => {
     if (typeof window !== 'undefined' && window.innerWidth < 1024) return
 
-    pendingRef.current = { ...pendingRef.current, [id]: rect }
-    registeredRef.current += 1
+    // Use saved position if available, otherwise use measured grid rect
+    const effectiveRect = savedPositionsRef.current[id] ?? rect
+    pendingRef.current = { ...pendingRef.current, [id]: effectiveRect }
 
-    if (registeredRef.current >= cardCount) {
+    if (activateTimerRef.current) clearTimeout(activateTimerRef.current)
+    activateTimerRef.current = setTimeout(() => {
       const cw = cwRef.current
       const resolved = resolveAll(pendingRef.current, cw, GAP)
       setPositions(resolved)
       setContainerH(computeHeight(resolved))
       setFloating(true)
-    }
-  }, [cardCount])
+    }, 80)
+  }, [])
 
   /** Called on drag-drop or resize-end. Resolves ALL collisions globally. */
   const dropCard = useCallback((id: string, rect: Rect) => {
@@ -164,12 +181,45 @@ export default function BentoCanvas({
       const next = { ...prev, [id]: clampToContainer(rect, cw) }
       const resolved = resolveAll(next, cw, GAP)
       setContainerH(computeHeight(resolved))
+      savePositions(resolved)
       return resolved
     })
   }, [])
 
+  /** Add a card after floating mode is already active.
+   *  If rect provided → restore saved position. Otherwise → auto-place below all cards. */
+  const addCard = useCallback((id: string, rect?: Rect) => {
+    setPositions(prev => {
+      const cw = cwRef.current
+      let target = rect
+      if (!target) {
+        let bottomY = 0
+        Object.values(prev).forEach(r => { bottomY = Math.max(bottomY, r.y + r.h) })
+        target = { x: 0, y: bottomY + GAP, w: 280, h: 200 }
+      }
+      const next = { ...prev, [id]: clampToContainer(target, cw) }
+      const resolved = resolveAll(next, cw, GAP)
+      setContainerH(computeHeight(resolved))
+      return resolved
+    })
+  }, [])
+
+  /** Remove a card from the floating layout. */
+  const removeCard = useCallback((id: string) => {
+    setPositions(prev => {
+      const next = { ...prev }
+      delete next[id]
+      setContainerH(computeHeight(next))
+      savePositions(next)
+      return next
+    })
+  }, [])
+
   return (
-    <BentoCtx.Provider value={{ floating, jiggling, containerRef, positions, registerCard, dropCard }}>
+    <BentoCtx.Provider value={{
+      floating, jiggling, containerRef, positions, savedPositions,
+      registerCard, dropCard, addCard, removeCard,
+    }}>
       <div
         ref={containerRef}
         className={floating ? undefined : 'grid grid-cols-1 lg:grid-cols-12 gap-4'}

@@ -6,8 +6,8 @@ import Footer from '@/components/Footer'
 export default function Home() {
   return (
     <main className="min-h-screen bg-[#111111]">
-      <div className="max-w-[1280px] mx-auto px-4 py-4 md:px-6 md:py-6 flex flex-col gap-4">
-        <Navbar />
+      <Navbar />
+      <div className="max-w-[1280px] mx-auto px-4 pt-8 pb-32 md:px-6 md:pt-10 flex flex-col gap-4">
         <Hero />
         <Projects />
         <Footer />

@@ -11,13 +11,16 @@ export default function DraggableBento({
   children,
   className = '',
   delay = 0,
+  cardId,
 }: {
   children: ReactNode
   className?: string
   delay?: number
+  cardId?: string     // stable UUID for custom cards
 }) {
-  const id = useId()
-  const { floating, jiggling, containerRef, positions, registerCard, dropCard } = useBentoCanvas()
+  const generatedId = useId()
+  const id = cardId ?? generatedId
+  const { floating, jiggling, containerRef, positions, savedPositions, registerCard, dropCard, addCard } = useBentoCanvas()
 
   const wrapRef     = useRef<HTMLDivElement>(null)
   const cleanupRef  = useRef<(() => void) | null>(null)
@@ -47,6 +50,13 @@ export default function DraggableBento({
 
   // ── Register with canvas once at mount ───────────────────────────────────
   useEffect(() => {
+    if (floating) {
+      // Canvas already in floating mode (new card added after initial render)
+      // Use saved position if available, otherwise addCard places it below all cards
+      addCard(id, savedPositions[id])
+      return
+    }
+
     const el        = wrapRef.current
     const container = containerRef.current
     if (!el || !container) return

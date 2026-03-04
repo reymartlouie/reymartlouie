@@ -1,13 +1,80 @@
+'use client'
+
+import { useState, useEffect } from 'react'
 import Reveal from './Reveal'
 import DraggableBento from './DraggableBento'
-import BentoCanvas from './BentoCanvas'
+import BentoCanvas, { type Rect } from './BentoCanvas'
+import CustomCard from './CustomCard'
+import CardEditorModal from './CardEditorModal'
+
+interface CustomCardData {
+  id: string
+  title: string
+  body: string
+  color: string
+  delay: number
+}
 
 export default function Hero() {
+  const [customCards, setCustomCards] = useState<CustomCardData[]>(() => {
+    if (typeof window === 'undefined') return []
+    try { return JSON.parse(localStorage.getItem('bento-custom-cards') ?? '[]') }
+    catch { return [] }
+  })
+
+  const [savedPositions] = useState<Record<string, Rect>>(() => {
+    if (typeof window === 'undefined') return {}
+    try {
+      const all: Record<string, Rect> = JSON.parse(localStorage.getItem('bento-positions') ?? '{}')
+      // Only restore positions for custom cards — static cards always re-measure from grid
+      const custom: Record<string, Rect> = {}
+      for (const id in all) { if (id.startsWith('custom-')) custom[id] = all[id] }
+      return custom
+    } catch { return {} }
+  })
+
+  const [modalOpen,   setModalOpen]   = useState(false)
+  const [editingCard, setEditingCard] = useState<CustomCardData | null>(null)
+
+  useEffect(() => {
+    localStorage.setItem('bento-custom-cards', JSON.stringify(customCards))
+  }, [customCards])
+
+  const handleCreateCard = (data: { title: string; body: string; color: string }) => {
+    const newCard: CustomCardData = {
+      id:    `custom-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
+      title: data.title,
+      body:  data.body,
+      color: data.color,
+      delay: (5 + customCards.length) * 60,
+    }
+    setCustomCards(prev => [...prev, newCard])
+    setModalOpen(false)
+  }
+
+  const handleEditCard = (data: { title: string; body: string; color: string }) => {
+    if (!editingCard) return
+    setCustomCards(prev =>
+      prev.map(c => c.id === editingCard.id ? { ...c, ...data } : c)
+    )
+    setEditingCard(null)
+    setModalOpen(false)
+  }
+
+  const handleDeleteCard = (id: string) => {
+    setCustomCards(prev => prev.filter(c => c.id !== id))
+  }
+
+  const openCreate = () => { setEditingCard(null); setModalOpen(true) }
+  const openEdit   = (card: CustomCardData) => { setEditingCard(card); setModalOpen(true) }
+  const closeModal = () => { setModalOpen(false); setEditingCard(null) }
+
   return (
     <section id="about" className="flex flex-col gap-4">
 
-      {/* 5 draggable cards — BentoCanvas handles grid → freeform transition */}
-      <BentoCanvas cardCount={5}>
+      <BentoCanvas savedPositions={savedPositions}>
+
+        {/* ── Static cards ────────────────────────────────────────────────── */}
 
         <DraggableBento className="lg:col-span-8" delay={100}>
           <div className="flex-1 bg-[#262626] rounded-[32px] p-8 lg:p-10 relative overflow-hidden min-h-[380px] flex flex-col justify-between">
@@ -79,7 +146,7 @@ export default function Hero() {
         </DraggableBento>
 
         <DraggableBento className="lg:col-span-3" delay={340}>
-          <div className="flex-1 bg-[#2a1f42] rounded-[32px] p-8 flex flex-col justify-between">
+          <div className="flex-1 bg-[#1e3050] rounded-[32px] p-8 flex flex-col justify-between">
             <p className="font-sans text-[#c4b5fd]/50 text-xs uppercase tracking-widest">Experience</p>
             <div>
               <p className="font-display text-[#ddd6fe] text-7xl leading-none">4+</p>
@@ -88,7 +155,30 @@ export default function Hero() {
           </div>
         </DraggableBento>
 
+        {/* ── Custom cards ─────────────────────────────────────────────────── */}
+
+        {customCards.map(card => (
+          <DraggableBento key={card.id} cardId={card.id} delay={card.delay}>
+            <CustomCard
+              cardId={card.id}
+              card={card}
+              onEdit={() => openEdit(card)}
+              onDelete={() => handleDeleteCard(card.id)}
+            />
+          </DraggableBento>
+        ))}
+
       </BentoCanvas>
+
+      {/* Add card button */}
+      <button
+        onClick={openCreate}
+        className="btn-spring inline-flex items-center gap-2 bg-white/8 text-white/60
+                   border border-white/10 font-sans text-sm px-5 py-3 rounded-full
+                   hover:bg-white/12 transition-colors self-start"
+      >
+        + Add card
+      </button>
 
       {/* Portfolio link — not draggable */}
       <Reveal delay={390}>
@@ -111,6 +201,18 @@ export default function Hero() {
           </span>
         </a>
       </Reveal>
+
+      {/* Card editor modal */}
+      {modalOpen && (
+        <CardEditorModal
+          initial={editingCard
+            ? { title: editingCard.title, body: editingCard.body, color: editingCard.color }
+            : null
+          }
+          onConfirm={editingCard ? handleEditCard : handleCreateCard}
+          onClose={closeModal}
+        />
+      )}
 
     </section>
   )
