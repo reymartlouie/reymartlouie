@@ -100,19 +100,6 @@ export default function Navbar() {
           ].join(', '),
         }}
       >
-        {/* Brand mark */}
-        <a
-          href="/"
-          className="font-display text-white/90 text-sm px-3.5 py-2 rounded-full
-                     hover:bg-white/10 transition-colors"
-          style={{ letterSpacing: '-0.02em' }}
-        >
-          RL
-        </a>
-
-        {/* Divider */}
-        <div className="w-px h-5 mx-0.5 bg-white/10 rounded-full flex-shrink-0" />
-
         {/* Nav tabs */}
         {NAV.map(({ id, label, href, Icon }) => {
           const isActive = active === id
@@ -139,17 +126,6 @@ export default function Navbar() {
           )
         })}
 
-        {/* Divider */}
-        <div className="w-px h-5 mx-0.5 bg-white/10 rounded-full flex-shrink-0" />
-
-        {/* CTA */}
-        <a
-          href="#contact"
-          className="btn-spring font-sans text-xs font-semibold bg-[#f0f0f0] text-[#111]
-                     px-4 py-2.5 rounded-full hover:bg-white transition-colors"
-        >
-          Hire Me
-        </a>
       </nav>
     </div>
   )
