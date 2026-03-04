@@ -178,8 +178,8 @@ export default function StatusBar() {
         {/* RL — user menu trigger */}
         <button
           onClick={() => setUserMenuOpen(v => !v)}
-          className="font-display px-2.5 py-1 rounded-md transition-all duration-150 hover:bg-white/8 hover:text-white"
-          style={{ fontSize: 13, letterSpacing: '-0.02em', color: 'rgba(255,255,255,0.90)' }}
+          className="font-display px-2.5 py-1 text-white/60 hover:text-white transition-colors duration-150"
+          style={{ fontSize: 13, letterSpacing: '-0.02em' }}
         >
           RL
         </button>
@@ -198,16 +198,16 @@ export default function StatusBar() {
             <a
               key={label}
               href={href}
-              className="font-sans px-2.5 py-1 rounded-md transition-all duration-150 hover:bg-white/8 hover:text-white/90"
-              style={{ fontSize: 12, color: 'rgba(255,255,255,0.42)' }}
+              className="font-sans px-2.5 py-1 text-white/60 hover:text-white transition-colors duration-150"
+              style={{ fontSize: 12 }}
             >
               {label}
             </a>
           ) : (
             <span
               key={label}
-              className="font-sans px-2.5 py-1 rounded-md transition-all duration-150 hover:bg-white/8 hover:text-white/90 cursor-default"
-              style={{ fontSize: 12, color: 'rgba(255,255,255,0.42)' }}
+              className="font-sans px-2.5 py-1 text-white/60 hover:text-white transition-colors duration-150 cursor-default"
+              style={{ fontSize: 12 }}
             >
               {label}
             </span>
