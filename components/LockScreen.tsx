@@ -98,11 +98,24 @@ export default function LockScreen({ onUnlock }: { onUnlock: () => void }) {
       >
         <p
           className="font-display text-white leading-none tabular-nums"
-          style={{ fontSize: 'clamp(64px, 12vw, 108px)', letterSpacing: '-0.03em', textShadow: '0 4px 40px rgba(0,0,0,0.5)' }}
+          style={{
+            fontSize:   centered ? 'clamp(56px, 10vw, 96px)' : 'clamp(96px, 18vw, 160px)',
+            letterSpacing: '-0.03em',
+            textShadow: '0 4px 40px rgba(0,0,0,0.5)',
+            transition: 'font-size 500ms cubic-bezier(0.34,1.1,0.64,1)',
+          }}
         >
           {timeStr}
         </p>
-        <p className="font-sans text-white/50 text-base mt-2">{dateStr}</p>
+        <p
+          className="font-sans text-white/50 mt-2"
+          style={{
+            fontSize:   centered ? '0.875rem' : '1.125rem',
+            transition: 'font-size 500ms cubic-bezier(0.34,1.1,0.64,1)',
+          }}
+        >
+          {dateStr}
+        </p>
       </div>
 
       {/* Card — starts at bottom-7 (same area as navbar), springs to center when active */}
