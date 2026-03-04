@@ -74,10 +74,11 @@ export default function StatusBar() {
         height:               28,
         paddingLeft:          16,
         paddingRight:         16,
-        background:           'rgba(16,16,18,0.72)',
-        backdropFilter:       'blur(48px) saturate(180%)',
-        WebkitBackdropFilter: 'blur(48px) saturate(180%)',
-        borderBottom:         '1px solid rgba(255,255,255,0.07)',
+        background:           'rgba(24,24,26,0.60)',
+        backdropFilter:       'blur(56px) saturate(180%)',
+        WebkitBackdropFilter: 'blur(56px) saturate(180%)',
+        borderBottom:         '1px solid rgba(255,255,255,0.09)',
+        boxShadow:            '0 1px 0 rgba(255,255,255,0.07) inset, 0 8px 32px rgba(0,0,0,0.35)',
         opacity:    ready ? 1 : 0,
         transform:  ready ? 'translateY(0)' : 'translateY(-100%)',
         transition: ready ? 'opacity 400ms ease 200ms, transform 500ms cubic-bezier(0.34,1.2,0.64,1) 200ms' : 'none',
@@ -86,15 +87,15 @@ export default function StatusBar() {
       {/* Left — monogram + active section */}
       <div className="flex items-center gap-2.5">
         <span
-          className="font-display text-white/85"
+          className="font-display text-white/90"
           style={{ fontSize: 12, letterSpacing: '-0.02em' }}
         >
           RL
         </span>
-        <div className="w-px h-3 bg-white/15 rounded-full" />
+        <div className="w-px h-3 bg-white/10 rounded-full" />
         <span
-          className="font-sans text-white/45 transition-all duration-300"
-          style={{ fontSize: 12 }}
+          className="font-sans transition-all duration-300"
+          style={{ fontSize: 12, color: 'rgba(255,255,255,0.38)' }}
         >
           {section}
         </span>
@@ -106,25 +107,25 @@ export default function StatusBar() {
         {/* Available */}
         <div className="hidden sm:flex items-center gap-1.5">
           <span className="w-1.5 h-1.5 bg-[#4ade80] rounded-full animate-pulse" />
-          <span className="font-sans text-white/35" style={{ fontSize: 11 }}>Available</span>
+          <span className="font-sans" style={{ fontSize: 11, color: 'rgba(255,255,255,0.38)' }}>Available</span>
         </div>
 
-        <div className="hidden sm:block w-px h-3 bg-white/10 rounded-full" />
+        <div className="hidden sm:block w-px h-3 bg-white/10 rounded-full flex-shrink-0" />
 
         {/* Wifi */}
-        <span className="text-white/35">
+        <span style={{ color: 'rgba(255,255,255,0.38)' }}>
           <IconWifi />
         </span>
 
         {/* Battery */}
-        <span className="text-white/35 hidden sm:block">
+        <span style={{ color: 'rgba(255,255,255,0.38)' }} className="hidden sm:block">
           <IconBattery />
         </span>
 
         {/* Time */}
         <span
-          className="font-sans text-white/60 tabular-nums"
-          style={{ fontSize: 12 }}
+          className="font-sans tabular-nums"
+          style={{ fontSize: 12, color: 'rgba(255,255,255,0.92)' }}
         >
           {time}
         </span>
