@@ -14,13 +14,40 @@ interface CustomCardData {
   delay: number
 }
 
+const NOTE_LIMIT  = 3
+const NOTE_WINDOW = 24 * 60 * 60 * 1000 // 24 h
+
+function readRate(): { count: number; resetAt: number } {
+  try {
+    const raw = localStorage.getItem('bento-note-rate')
+    if (raw) return JSON.parse(raw)
+  } catch {}
+  return { count: 0, resetAt: Date.now() + NOTE_WINDOW }
+}
+
 export default function Hero() {
   const [customCards, setCustomCards] = useState<CustomCardData[]>([])
   const [savedPositions, setSavedPositions] = useState<Record<string, Rect>>({})
   const didLoadCards = useRef(false)
 
+  const [rateLimited, setRateLimited] = useState(false)
   const [modalOpen,   setModalOpen]   = useState(false)
   const [editingCard, setEditingCard] = useState<CustomCardData | null>(null)
+
+  const syncRateLimit = () => {
+    const { count, resetAt } = readRate()
+    setRateLimited(Date.now() < resetAt && count >= NOTE_LIMIT)
+  }
+
+  const bumpRate = () => {
+    const { count, resetAt } = readRate()
+    const now = Date.now()
+    const next = now > resetAt
+      ? { count: 1, resetAt: now + NOTE_WINDOW }
+      : { count: count + 1, resetAt }
+    localStorage.setItem('bento-note-rate', JSON.stringify(next))
+    setRateLimited(next.count >= NOTE_LIMIT)
+  }
 
   // Load from localStorage client-side only (avoids hydration mismatch)
   useEffect(() => {
@@ -35,6 +62,7 @@ export default function Hero() {
       didLoadCards.current = true
       setCustomCards(stored)
     } catch { didLoadCards.current = true }
+    syncRateLimit()
   }, [])
 
   useEffect(() => {
@@ -51,6 +79,7 @@ export default function Hero() {
       delay: (5 + customCards.length) * 60,
     }
     setCustomCards(prev => [...prev, newCard])
+    bumpRate()
     setModalOpen(false)
   }
 
@@ -175,11 +204,13 @@ export default function Hero() {
       {/* Add card button */}
       <button
         onClick={openCreate}
+        disabled={rateLimited}
         className="btn-spring inline-flex items-center gap-3 bg-white/10 text-white/70
                    border border-white/15 font-sans text-sm font-semibold px-5 py-3 rounded-full
-                   hover:bg-white/[0.14] transition-colors self-start"
+                   hover:bg-white/[0.14] transition-colors self-start
+                   disabled:opacity-40 disabled:cursor-not-allowed"
       >
-        + Add card
+        {rateLimited ? 'Note limit reached · come back tomorrow' : '+ Leave a note'}
       </button>
 
       {/* Card editor modal */}

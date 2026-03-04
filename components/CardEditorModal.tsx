@@ -48,7 +48,7 @@ export default function CardEditorModal({ initial, onConfirm, onClose }: CardEdi
         {/* Header */}
         <div className="flex items-center justify-between">
           <h2 className="font-display text-white/90 text-2xl">
-            {isEdit ? 'Edit Card' : 'New Card'}
+            {isEdit ? 'Edit Note' : 'Leave a Note'}
           </h2>
           <button
             onClick={onClose}
@@ -65,7 +65,7 @@ export default function CardEditorModal({ initial, onConfirm, onClose }: CardEdi
           className="rounded-2xl p-5 min-h-[88px] flex flex-col justify-between transition-colors duration-200"
           style={{ backgroundColor: color }}
         >
-          <span className="font-sans text-white/30 text-[10px] uppercase tracking-widest">Preview</span>
+          <span className="font-sans text-white/30 text-[10px] uppercase tracking-widest">Note preview</span>
           <div className="mt-2">
             <p className="font-display text-xl leading-tight">
               {title
@@ -88,7 +88,7 @@ export default function CardEditorModal({ initial, onConfirm, onClose }: CardEdi
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="Card title"
-            className="font-display bg-white/6 text-white/90 border border-white/10 rounded-2xl px-4 py-3 text-lg placeholder:text-white/20 outline-none focus:border-white/25 transition-colors"
+            className="font-display bg-[#111111] text-white/90 border border-white/10 rounded-2xl px-4 py-3 text-lg placeholder:text-white/20 outline-none focus:border-white/25 transition-colors"
           />
         </div>
 
@@ -100,7 +100,7 @@ export default function CardEditorModal({ initial, onConfirm, onClose }: CardEdi
             onChange={(e) => setBody(e.target.value)}
             placeholder="Card content"
             rows={3}
-            className="font-sans bg-white/6 text-white/90 border border-white/10 rounded-2xl px-4 py-3 text-sm placeholder:text-white/20 outline-none focus:border-white/25 transition-colors resize-none leading-relaxed"
+            className="font-sans bg-[#111111] text-white/90 border border-white/10 rounded-2xl px-4 py-3 text-sm placeholder:text-white/20 outline-none focus:border-white/25 transition-colors resize-none leading-relaxed"
           />
         </div>
 
@@ -142,7 +142,7 @@ export default function CardEditorModal({ initial, onConfirm, onClose }: CardEdi
         <div className="flex gap-3">
           <button
             onClick={onClose}
-            className="btn-spring flex-1 font-sans text-white/50 bg-white/6 border border-white/10 px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-white/10 transition-colors"
+            className="btn-spring flex-1 font-sans text-white/50 bg-[#111111] border border-white/10 px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-white/10 transition-colors"
           >
             Cancel
           </button>
@@ -151,7 +151,7 @@ export default function CardEditorModal({ initial, onConfirm, onClose }: CardEdi
             disabled={!canSubmit}
             className="btn-spring flex-1 font-sans text-[#111] bg-[#f0f0f0] font-semibold px-5 py-2.5 rounded-full text-sm hover:bg-white transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
           >
-            {isEdit ? 'Save Changes' : 'Add Card'}
+            {isEdit ? 'Save Changes' : 'Leave Note'}
           </button>
         </div>
 
