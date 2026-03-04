@@ -109,7 +109,7 @@ export default function Hero() {
 
         <DraggableBento className="lg:col-span-8" delay={100}>
           <div className="flex-1 bg-[#262626] rounded-[32px] p-8 lg:p-10 relative overflow-hidden min-h-[380px] flex flex-col justify-between">
-            <div className="absolute -top-24 -right-24 w-80 h-80 bg-white/5 rounded-full blur-[80px] pointer-events-none" />
+            <div className="absolute -top-24 -right-24 w-80 h-80 bg-blue-500/8 rounded-full blur-[80px] pointer-events-none" />
             <div className="relative">
               <span className="inline-flex items-center gap-2 bg-[#1e3320] text-[#86efac] text-xs font-sans px-3 py-1.5 rounded-full mb-8 w-fit">
                 <span className="w-1.5 h-1.5 bg-[#4ade80] rounded-full animate-pulse" />
@@ -156,11 +156,12 @@ export default function Hero() {
         </DraggableBento>
 
         <DraggableBento className="lg:col-span-4" delay={240}>
-          <div className="flex-1 bg-[#1a1a1a] rounded-[32px] p-8">
-            <p className="font-sans text-white/30 text-xs uppercase tracking-widest mb-5">Tech Stack</p>
-            <div className="flex flex-wrap gap-2">
+          <div className="flex-1 bg-[#0d1b2c] rounded-[32px] p-8 relative overflow-hidden">
+            <div className="absolute -bottom-10 -right-10 w-44 h-44 bg-blue-500/15 rounded-full blur-3xl pointer-events-none" />
+            <p className="font-sans text-[#60a5fa]/50 text-xs uppercase tracking-widest mb-5 relative">Tech Stack</p>
+            <div className="flex flex-wrap gap-2 relative">
               {['C++', 'Python', 'React', 'Next.js', 'TypeScript', 'Node.js', 'Figma'].map((skill) => (
-                <span key={skill} className="font-sans text-xs text-white/60 bg-white/8 border border-white/10 px-3 py-1.5 rounded-full">
+                <span key={skill} className="font-sans text-xs text-[#93c5fd]/70 bg-blue-400/8 border border-[#93c5fd]/20 px-3 py-1.5 rounded-full">
                   {skill}
                 </span>
               ))}
@@ -169,9 +170,10 @@ export default function Hero() {
         </DraggableBento>
 
         <DraggableBento className="lg:col-span-6" delay={290}>
-          <div className="flex-1 bg-[#222222] rounded-[32px] p-8 flex flex-col justify-between">
-            <p className="font-sans text-white/30 text-xs uppercase tracking-widest mb-4">About</p>
-            <p className="font-sans text-white/55 text-base leading-relaxed">
+          <div className="flex-1 bg-[#222222] rounded-[32px] p-8 flex flex-col justify-between relative overflow-hidden">
+            <div className="absolute -top-10 -right-10 w-48 h-48 bg-blue-500/6 rounded-full blur-3xl pointer-events-none" />
+            <p className="font-sans text-white/30 text-xs uppercase tracking-widest mb-4 relative">About</p>
+            <p className="font-sans text-white/55 text-base leading-relaxed relative">
               A computer engineer who bridges hardware understanding with modern software development.
               I build scalable systems, craft intuitive interfaces, and engineer solutions that matter.
             </p>

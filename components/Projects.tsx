@@ -11,7 +11,7 @@ const projects = [
     tags: ['Design System', 'Figma', 'React'],
     year: '2024',
     accent: '#93c5fd',
-    bg: '#1a1a1a',
+    bg: '#0d1825',
   },
   {
     id: 2,
@@ -79,9 +79,10 @@ export default function Projects() {
         </a>
 
         {/* Selected work */}
-        <div className="bg-[#1a1a1a] rounded-[32px] overflow-hidden">
+        <div className="bg-[#1a1a1a] rounded-[32px] overflow-hidden relative">
+          <div className="absolute -top-16 -left-16 w-56 h-56 bg-blue-500/5 rounded-full blur-3xl pointer-events-none" />
 
-          <div className="px-8 lg:px-10 py-8 flex items-center justify-between">
+          <div className="px-8 lg:px-10 py-8 flex items-center justify-between relative">
             <div>
               <p className="font-sans text-white/30 text-xs uppercase tracking-widest mb-2">Selected Work</p>
               <h2 className="font-display text-white text-5xl">Projects</h2>
