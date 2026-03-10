@@ -19,7 +19,7 @@ export default function LockScreen({ onUnlock }: { onUnlock: () => void }) {
   const inputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
-    const id = setTimeout(() => setVisible(true), 80)
+    const id = setTimeout(() => setVisible(true), 0)
     return () => clearTimeout(id)
   }, [])
 
@@ -63,7 +63,7 @@ export default function LockScreen({ onUnlock }: { onUnlock: () => void }) {
     if (!value.trim()) return
     if (value.trim().toLowerCase() === PASSWORD) {
       setExiting(true)
-      setTimeout(onUnlock, 650)
+      setTimeout(onUnlock, 400)
     } else {
       setShake(true)
       setWrong(true)
@@ -84,7 +84,7 @@ export default function LockScreen({ onUnlock }: { onUnlock: () => void }) {
       onClick={deactivate}
     >
       {/* Wallpaper */}
-      <img src="/wallpaper.jpg" alt="" className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none" />
+      <img src="/wallpaper.webp" alt="" className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none" />
       <div className="absolute inset-0 bg-black/20 pointer-events-none" />
 
       {/* Clock — upper center, fades up slightly when card moves */}
