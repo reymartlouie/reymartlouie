@@ -2,7 +2,6 @@ import Navbar from '@/components/Navbar'
 import Hero from '@/components/Hero'
 import Projects from '@/components/Projects'
 import Footer from '@/components/Footer'
-import LockGate from '@/components/LockGate'
 import StatusBar from '@/components/StatusBar'
 
 function SectionBreak({ label }: { label: string }) {
@@ -19,20 +18,18 @@ function SectionBreak({ label }: { label: string }) {
 
 export default function Home() {
   return (
-    <LockGate>
-      <main className="min-h-screen">
-        <StatusBar />
-        <Navbar />
-        <div className="max-w-[1280px] mx-auto px-4 pt-14 pb-32 md:px-6 md:pt-14 flex flex-col gap-4">
-          <Hero />
-          <div id="work" className="flex flex-col gap-4">
-            <SectionBreak label="Selected Work" />
-            <Projects />
-          </div>
-          <SectionBreak label="Contact" />
-          <Footer />
+    <main className="min-h-screen">
+      <StatusBar />
+      <Navbar />
+      <div className="max-w-[1280px] mx-auto px-4 pt-14 pb-32 md:px-6 md:pt-14 flex flex-col gap-4">
+        <Hero />
+        <div id="work" className="flex flex-col gap-4">
+          <SectionBreak label="Selected Work" />
+          <Projects />
         </div>
-      </main>
-    </LockGate>
+        <SectionBreak label="Contact" />
+        <Footer />
+      </div>
+    </main>
   )
 }
