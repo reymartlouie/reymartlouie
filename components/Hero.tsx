@@ -108,7 +108,7 @@ export default function Hero() {
         {/* ── Static cards ────────────────────────────────────────────────── */}
 
         <DraggableBento className="lg:col-span-8" delay={100}>
-          <div className="flex-1 bg-[#262626] rounded-[32px] p-7 md:p-8 lg:p-10 relative overflow-hidden min-h-[320px] lg:min-h-[380px] flex flex-col justify-between">
+          <div className="flex-1 bg-[#262626] rounded-[32px] p-6 md:p-8 lg:p-10 relative overflow-hidden min-h-[320px] lg:min-h-[380px] flex flex-col justify-between">
             <div className="absolute -top-24 -right-24 w-80 h-80 bg-blue-500/8 rounded-full blur-[80px] pointer-events-none" />
             <div className="relative">
               <span className="inline-flex items-center gap-2 bg-[#1e3320] text-[#86efac] text-xs font-sans px-3 py-1.5 rounded-full mb-6 lg:mb-8 w-fit">
@@ -157,7 +157,7 @@ export default function Hero() {
         </DraggableBento>
 
         <DraggableBento className="lg:col-span-4" delay={240}>
-          <div className="flex-1 bg-[#0d1b2c] rounded-[32px] p-7 md:p-8 relative overflow-hidden min-h-[180px]">
+          <div className="flex-1 bg-[#0d1b2c] rounded-[32px] p-6 md:p-8 relative overflow-hidden min-h-[180px]">
             <div className="absolute -bottom-10 -right-10 w-44 h-44 bg-blue-500/15 rounded-full blur-3xl pointer-events-none" />
             <p className="font-sans text-[#60a5fa]/50 text-xs uppercase tracking-widest mb-5 relative">Tech Stack</p>
             <div className="flex flex-wrap gap-2 relative">
@@ -171,7 +171,7 @@ export default function Hero() {
         </DraggableBento>
 
         <DraggableBento className="lg:col-span-6" delay={290}>
-          <div className="flex-1 bg-[#222222] rounded-[32px] p-7 md:p-8 flex flex-col gap-4 relative overflow-hidden min-h-[180px]">
+          <div className="flex-1 bg-[#222222] rounded-[32px] p-6 md:p-8 flex flex-col gap-4 relative overflow-hidden min-h-[180px]">
             <div className="absolute -top-10 -right-10 w-48 h-48 bg-blue-500/6 rounded-full blur-3xl pointer-events-none" />
             <p className="font-sans text-white/30 text-xs uppercase tracking-widest relative">About</p>
             <p className="font-sans text-white/55 text-sm md:text-base leading-relaxed relative">

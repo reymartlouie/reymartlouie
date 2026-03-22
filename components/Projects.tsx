@@ -34,7 +34,7 @@ export default function Projects() {
           href="https://reymartlouie.framer.website"
           target="_blank"
           rel="noopener noreferrer"
-          className="bento-lift block bg-[#3a1f2c] rounded-[32px] p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative overflow-hidden group"
+          className="bento-lift block bg-[#3a1f2c] rounded-[32px] p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative overflow-hidden group"
         >
           <div className="absolute -right-20 -top-20 w-72 h-72 bg-rose-400/10 rounded-full blur-3xl pointer-events-none" />
           <div className="relative">
@@ -53,7 +53,7 @@ export default function Projects() {
         <div className="bg-[#1a1a1a] rounded-[32px] overflow-hidden relative">
           <div className="absolute -top-16 -left-16 w-56 h-56 bg-orange-500/5 rounded-full blur-3xl pointer-events-none" />
 
-          <div className="px-8 lg:px-10 py-8 flex items-center justify-between relative">
+          <div className="px-6 md:px-8 lg:px-10 py-6 md:py-8 flex items-center justify-between relative">
             <div>
               <p className="font-sans text-white/30 text-xs uppercase tracking-widest mb-2">Selected Work</p>
               <h2 className="font-display text-white text-5xl">Projects</h2>
@@ -66,7 +66,7 @@ export default function Projects() {
           <div className="p-4 lg:p-5">
             {/* FireSafe featured card */}
             <div
-              className="rounded-[24px] p-8 md:p-10 flex flex-col justify-between min-h-[280px] relative overflow-hidden group cursor-pointer"
+              className="rounded-[24px] p-6 md:p-8 lg:p-10 flex flex-col justify-between min-h-[280px] relative overflow-hidden group cursor-pointer"
               style={{
                 backgroundColor: '#130f09',
                 animation: 'cardSlideUp 300ms cubic-bezier(0.2, 0, 0, 1) both',

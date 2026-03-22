@@ -189,7 +189,7 @@ export default function StatusBar() {
         {[
           { label: section,          href: '#about'   },
           { label: 'Certifications', href: '#work'    },
-          { label: 'Resume',         href: '/resume.pdf' },
+          { label: 'Resume',         href: 'https://drive.google.com/drive/folders/1GbhrbziR6UWoHedmOB52l_DMdWwvyPLT?usp=sharing' },
           { label: 'Achievements',   href: '#work'    },
           { label: 'Hire Me',        href: '#contact' },
           { label: 'Help',           href: undefined  },
@@ -198,6 +198,8 @@ export default function StatusBar() {
             <a
               key={label}
               href={href}
+              target={href.startsWith('http') ? '_blank' : undefined}
+              rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
               className="font-sans px-2.5 py-1 text-white/60 hover:text-white transition-colors duration-150"
               style={{ fontSize: 12 }}
             >

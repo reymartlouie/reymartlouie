@@ -12,7 +12,7 @@ export default function Footer() {
     <section id="contact" className="grid grid-cols-1 lg:grid-cols-12 gap-4 pb-6">
 
       <Reveal className="lg:col-span-8">
-        <div className="h-full bento-lift bg-[#1a2e26] rounded-[32px] p-8 lg:p-10 relative overflow-hidden">
+        <div className="h-full bento-lift bg-[#1a2e26] rounded-[32px] p-6 md:p-8 lg:p-10 relative overflow-hidden">
           <div className="absolute -bottom-20 -right-20 w-72 h-72 bg-emerald-400/10 rounded-full blur-3xl pointer-events-none" />
           <div className="absolute top-0 left-0 w-40 h-40 bg-green-400/8 rounded-full blur-2xl pointer-events-none" />
           <div className="relative">
@@ -45,7 +45,7 @@ export default function Footer() {
       </Reveal>
 
       <Reveal className="lg:col-span-4" delay={80}>
-        <div className="h-full bento-lift bg-[#1a1a1a] rounded-[32px] p-8 flex flex-col justify-between">
+        <div className="h-full bento-lift bg-[#1a1a1a] rounded-[32px] p-6 md:p-8 flex flex-col justify-between">
           <div>
             <p className="font-sans text-white/30 text-xs uppercase tracking-widest mb-6">Find me on</p>
             <div className="flex flex-col">
