@@ -6,29 +6,38 @@ interface Props {
   onClose: () => void
 }
 
-const techStack = [
-  { label: 'Raspberry Pi Zero 2 W', category: 'Hardware' },
-  { label: 'MLX90640', category: 'Thermal Sensor' },
-  { label: 'MQ2 + DHT11', category: 'Gas / Humidity' },
-  { label: 'TinyML', category: 'Edge ML' },
+const hardware = [
+  { label: 'Raspberry Pi Zero 2 W', category: 'Main Processor' },
+  { label: 'MLX90640', category: 'Thermal Camera' },
+  { label: 'MQ-2', category: 'Gas / Smoke' },
+  { label: 'ADS1115', category: 'ADC (I2C)' },
+  { label: 'DHT22', category: 'Temp / Humidity' },
+  { label: 'Digital Servo', category: 'Camera Pan' },
+  { label: 'Arduino Mega 2560', category: 'SMS Gateway' },
+  { label: 'SIM800L ×2', category: 'GSM Modules' },
+]
+
+const software = [
   { label: 'Python', category: 'Firmware' },
-  { label: 'Supabase', category: 'Backend' },
-  { label: 'React Native', category: 'Mobile' },
-  { label: 'Expo', category: 'Framework' },
+  { label: 'TinyML', category: 'Edge ML' },
+  { label: 'Supabase', category: 'Backend / Auth' },
+  { label: 'React Native', category: 'Mobile (Expo)' },
+  { label: 'TypeScript', category: 'Primary Language' },
+  { label: 'PLpgSQL', category: 'DB Migrations' },
 ]
 
 const roles = [
   {
     role: 'System Architecture',
-    desc: 'Connected sensors, Raspberry Pi, Supabase, and mobile app into one cohesive edge-computing system. TinyML reduces cloud dependency while keeping detection reliable.',
+    desc: 'Designed the end-to-end architecture connecting thermal sensors, Raspberry Pi edge processing, Supabase cloud backend, SMS gateway, and mobile app into one cohesive system.',
   },
   {
     role: 'UI/UX Design',
-    desc: 'Designed for residents and barangay officials — clarity and urgency as core principles. Explored Liquid Glass aesthetics: depth, soft transparency, clean futuristic feel.',
+    desc: 'Designed the mobile interface for residents and barangay officials — prioritizing clarity, urgency, and real-time awareness. Explored Liquid Glass aesthetics for a clean, modern feel.',
   },
   {
     role: 'Mobile Development',
-    desc: 'Built a cross-platform app with Expo, integrating Supabase auth and real-time data. Handled push and SMS notifications with smooth animations across screen sizes.',
+    desc: 'Built the cross-platform app with Expo + React Native. Integrated Supabase auth and real-time data, handled push and SMS notifications, and optimized for smooth performance across devices.',
   },
 ]
 
@@ -71,45 +80,92 @@ export default function ProjectModal({ onClose }: Props) {
 
         {/* Header */}
         <div className="mb-8">
-          <div className="flex items-center gap-3 mb-4">
-            <span className="font-sans text-[#fb923c]/60 text-xs uppercase tracking-widest">Case Study</span>
-            <span className="font-sans text-white/20 text-xs">· 2025</span>
+          <div className="flex flex-wrap items-center gap-3 mb-4">
+            <span className="font-sans text-[#fb923c]/60 text-xs uppercase tracking-widest">Thesis · BS Computer Engineering</span>
+            <span className="font-sans text-white/20 text-xs">· March 2026</span>
           </div>
-          <h2 className="font-display text-white text-5xl mb-4">FireSafe</h2>
+          <h2 className="font-display text-white text-5xl mb-3">FireSafe</h2>
+          <p className="font-sans text-white/40 text-xs leading-relaxed mb-3">
+            A Thermal Imaging-Based Approach for Fire Detection in a Controlled and Open Space Environment with Mobile Alerting System
+          </p>
           <p className="font-sans text-white/50 text-sm leading-relaxed">
-            A thermal imaging-based wildfire detection system built for resource-limited rural barangays,
-            with real-time mobile alerting via push notifications and SMS.
+            A community-level fire detection system using edge computing and thermal imaging,
+            built for rural barangays with limited infrastructure. Alerts residents via push
+            notifications and mass SMS — no constant cloud dependency required.
           </p>
         </div>
 
-        {/* Problem */}
+        {/* Context */}
         <div
           className="mb-8 p-6 rounded-[20px]"
           style={{ background: 'rgba(251,146,60,0.05)', border: '1px solid rgba(251,146,60,0.12)' }}
         >
           <p className="font-sans text-[#fb923c]/60 text-xs uppercase tracking-widest mb-3">The Problem</p>
           <p className="font-sans text-white/55 text-sm leading-relaxed">
-            Most wildfire detection systems depend on cloud processing and advanced hardware,
-            making them impractical for rural barangays with limited resources. FireSafe fills that gap —
-            a lightweight, community-level solution powered by edge computing.
+            The Philippines recorded 16,426 fire incidents in 2023 — a 24.5% increase year-over-year.
+            Rural barangays are especially vulnerable: fires start unnoticed in unguarded spaces,
+            and existing detection systems depend on cloud infrastructure impractical for
+            resource-limited communities. FireSafe processes data locally on a Raspberry Pi,
+            triggering alerts within seconds through both mobile push and mass SMS.
           </p>
         </div>
 
-        {/* Tech stack */}
-        <div className="mb-8">
-          <p className="font-sans text-white/30 text-xs uppercase tracking-widest mb-4">Tech Stack</p>
+        {/* Hardware */}
+        <div className="mb-6">
+          <p className="font-sans text-white/30 text-xs uppercase tracking-widest mb-4">Hardware</p>
           <div className="grid grid-cols-2 gap-2">
-            {techStack.map(({ label, category }) => (
+            {hardware.map(({ label, category }) => (
               <div
                 key={label}
                 className="flex items-center justify-between px-4 py-3 rounded-2xl"
                 style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.06)' }}
               >
                 <span className="font-sans text-white/70 text-sm">{label}</span>
-                <span className="font-sans text-white/25 text-xs">{category}</span>
+                <span className="font-sans text-white/25 text-xs text-right">{category}</span>
               </div>
             ))}
           </div>
+        </div>
+
+        {/* Software */}
+        <div className="mb-8">
+          <p className="font-sans text-white/30 text-xs uppercase tracking-widest mb-4">Software</p>
+          <div className="grid grid-cols-2 gap-2">
+            {software.map(({ label, category }) => (
+              <div
+                key={label}
+                className="flex items-center justify-between px-4 py-3 rounded-2xl"
+                style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.06)' }}
+              >
+                <span className="font-sans text-white/70 text-sm">{label}</span>
+                <span className="font-sans text-white/25 text-xs text-right">{category}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Testing */}
+        <div className="mb-8">
+          <p className="font-sans text-white/30 text-xs uppercase tracking-widest mb-4">Testing</p>
+          <div className="flex flex-col gap-2">
+            {[
+              { env: 'Controlled Environment', detail: '7 sessions · Kabankalan City indoor' },
+              { env: 'Open Space Outdoor', detail: '7 sessions · Rooftop & open field' },
+              { env: 'Actual Fire Scenario', detail: '7 burn sessions · CentralE open area, Bacolod' },
+            ].map(({ env, detail }) => (
+              <div
+                key={env}
+                className="flex items-center justify-between px-4 py-3 rounded-2xl"
+                style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)' }}
+              >
+                <span className="font-sans text-white/65 text-sm">{env}</span>
+                <span className="font-sans text-white/25 text-xs text-right">{detail}</span>
+              </div>
+            ))}
+          </div>
+          <p className="font-sans text-white/25 text-xs mt-3 leading-relaxed">
+            Risk thresholds — HIGH: ≥35°C / ≤40% RH / 100–200 PPM · CRITICAL: ≥38°C / ≤30% RH / &gt;200 PPM
+          </p>
         </div>
 
         {/* Roles */}
@@ -129,20 +185,42 @@ export default function ProjectModal({ onClose }: Props) {
           </div>
         </div>
 
-        {/* CTA */}
-        <a
-          href="https://reymartlouie.framer.website/work/firesafe"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn-spring inline-flex items-center gap-2 font-sans text-sm font-semibold px-6 py-3 rounded-full transition-colors duration-150"
-          style={{
-            background: 'rgba(251,146,60,0.12)',
-            color: '#fb923c',
-            border: '1px solid rgba(251,146,60,0.22)',
-          }}
-        >
-          View Full Case Study ↗
-        </a>
+        {/* Team + CTA */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <p className="font-sans text-white/20 text-xs leading-relaxed">
+            With Odsey Bandojo &amp; Vhieron Bareza<br />
+            University of St. La Salle · Bacolod City
+          </p>
+          <div className="flex gap-3">
+            <a
+              href="https://github.com/reymartlouie/Firesafe"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-spring inline-flex items-center gap-2 font-sans text-sm font-semibold px-5 py-3 rounded-full transition-colors duration-150"
+              style={{
+                background: 'rgba(255,255,255,0.06)',
+                color: 'rgba(255,255,255,0.55)',
+                border: '1px solid rgba(255,255,255,0.10)',
+              }}
+            >
+              GitHub ↗
+            </a>
+            <a
+              href="https://reymartlouie.framer.website/work/firesafe"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-spring inline-flex items-center gap-2 font-sans text-sm font-semibold px-5 py-3 rounded-full transition-colors duration-150"
+              style={{
+                background: 'rgba(251,146,60,0.12)',
+                color: '#fb923c',
+                border: '1px solid rgba(251,146,60,0.22)',
+              }}
+            >
+              Case Study ↗
+            </a>
+          </div>
+        </div>
+
       </div>
     </div>
   )

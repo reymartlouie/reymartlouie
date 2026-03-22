@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import ProjectModal from './ProjectModal'
 
-const tags = ['React Native', 'Raspberry Pi', 'Supabase', 'TinyML', 'Python']
+const tags = ['React Native', 'Raspberry Pi Zero 2 W', 'Supabase', 'TinyML', 'Python', 'Arduino']
 
 export default function Projects() {
   const [modalOpen, setModalOpen] = useState(false)
