@@ -61,7 +61,7 @@ export default function ProjectModal({ onClose }: Props) {
       <div
         className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-[32px] p-8 md:p-10"
         style={{
-          background: '#111',
+          background: 'var(--bg-card)',
           border: '1px solid rgba(255,255,255,0.08)',
           boxShadow: '0 40px 120px rgba(0,0,0,0.8), 0 1px 0 rgba(255,255,255,0.06) inset',
         }}
@@ -82,13 +82,13 @@ export default function ProjectModal({ onClose }: Props) {
         <div className="mb-8">
           <div className="flex flex-wrap items-center gap-3 mb-4">
             <span className="font-sans text-[#fb923c]/60 text-xs uppercase tracking-widest">Thesis · BS Computer Engineering</span>
-            <span className="font-sans text-white/20 text-xs">· March 2026</span>
+            <span className="font-sans text-xs" style={{ color: 'var(--fg-20)' }}>· March 2026</span>
           </div>
           <h2 className="font-display text-white text-5xl mb-3">FireSafe</h2>
-          <p className="font-sans text-white/40 text-xs leading-relaxed mb-3">
+          <p className="font-sans text-xs leading-relaxed mb-3" style={{ color: 'var(--fg-40)' }}>
             A Thermal Imaging-Based Approach for Fire Detection in a Controlled and Open Space Environment with Mobile Alerting System
           </p>
-          <p className="font-sans text-white/50 text-sm leading-relaxed">
+          <p className="font-sans text-sm leading-relaxed" style={{ color: 'var(--fg-50)' }}>
             A community-level fire detection system using edge computing and thermal imaging,
             built for rural barangays with limited infrastructure. Alerts residents via push
             notifications and mass SMS — no constant cloud dependency required.
@@ -101,7 +101,7 @@ export default function ProjectModal({ onClose }: Props) {
           style={{ background: 'rgba(251,146,60,0.05)', border: '1px solid rgba(251,146,60,0.12)' }}
         >
           <p className="font-sans text-[#fb923c]/60 text-xs uppercase tracking-widest mb-3">The Problem</p>
-          <p className="font-sans text-white/55 text-sm leading-relaxed">
+          <p className="font-sans text-sm leading-relaxed" style={{ color: 'var(--fg-55)' }}>
             The Philippines recorded 16,426 fire incidents in 2023 — a 24.5% increase year-over-year.
             Rural barangays are especially vulnerable: fires start unnoticed in unguarded spaces,
             and existing detection systems depend on cloud infrastructure impractical for
@@ -112,16 +112,16 @@ export default function ProjectModal({ onClose }: Props) {
 
         {/* Hardware */}
         <div className="mb-6">
-          <p className="font-sans text-white/30 text-xs uppercase tracking-widest mb-4">Hardware</p>
+          <p className="font-sans text-xs uppercase tracking-widest mb-4" style={{ color: 'var(--fg-30)' }}>Hardware</p>
           <div className="grid grid-cols-2 gap-2">
             {hardware.map(({ label, category }) => (
               <div
                 key={label}
                 className="flex items-center justify-between px-4 py-3 rounded-2xl"
-                style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.06)' }}
+                style={{ background: 'var(--border)', border: '1px solid var(--border)' }}
               >
-                <span className="font-sans text-white/70 text-sm">{label}</span>
-                <span className="font-sans text-white/25 text-xs text-right">{category}</span>
+                <span className="font-sans text-sm" style={{ color: 'var(--fg-60)' }}>{label}</span>
+                <span className="font-sans text-xs text-right" style={{ color: 'var(--fg-30)' }}>{category}</span>
               </div>
             ))}
           </div>
@@ -129,16 +129,16 @@ export default function ProjectModal({ onClose }: Props) {
 
         {/* Software */}
         <div className="mb-8">
-          <p className="font-sans text-white/30 text-xs uppercase tracking-widest mb-4">Software</p>
+          <p className="font-sans text-xs uppercase tracking-widest mb-4" style={{ color: 'var(--fg-30)' }}>Software</p>
           <div className="grid grid-cols-2 gap-2">
             {software.map(({ label, category }) => (
               <div
                 key={label}
                 className="flex items-center justify-between px-4 py-3 rounded-2xl"
-                style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.06)' }}
+                style={{ background: 'var(--border)', border: '1px solid var(--border)' }}
               >
-                <span className="font-sans text-white/70 text-sm">{label}</span>
-                <span className="font-sans text-white/25 text-xs text-right">{category}</span>
+                <span className="font-sans text-sm" style={{ color: 'var(--fg-60)' }}>{label}</span>
+                <span className="font-sans text-xs text-right" style={{ color: 'var(--fg-30)' }}>{category}</span>
               </div>
             ))}
           </div>
@@ -146,7 +146,7 @@ export default function ProjectModal({ onClose }: Props) {
 
         {/* Testing */}
         <div className="mb-8">
-          <p className="font-sans text-white/30 text-xs uppercase tracking-widest mb-4">Testing</p>
+          <p className="font-sans text-xs uppercase tracking-widest mb-4" style={{ color: 'var(--fg-30)' }}>Testing</p>
           <div className="flex flex-col gap-2">
             {[
               { env: 'Controlled Environment', detail: '7 sessions · Kabankalan City indoor' },
@@ -156,30 +156,30 @@ export default function ProjectModal({ onClose }: Props) {
               <div
                 key={env}
                 className="flex items-center justify-between px-4 py-3 rounded-2xl"
-                style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)' }}
+                style={{ background: 'var(--border)', border: '1px solid var(--border)' }}
               >
-                <span className="font-sans text-white/65 text-sm">{env}</span>
-                <span className="font-sans text-white/25 text-xs text-right">{detail}</span>
+                <span className="font-sans text-sm" style={{ color: 'var(--fg-60)' }}>{env}</span>
+                <span className="font-sans text-xs text-right" style={{ color: 'var(--fg-30)' }}>{detail}</span>
               </div>
             ))}
           </div>
-          <p className="font-sans text-white/25 text-xs mt-3 leading-relaxed">
+          <p className="font-sans text-xs mt-3 leading-relaxed" style={{ color: 'var(--fg-30)' }}>
             Risk thresholds — HIGH: ≥35°C / ≤40% RH / 100–200 PPM · CRITICAL: ≥38°C / ≤30% RH / &gt;200 PPM
           </p>
         </div>
 
         {/* Roles */}
         <div className="mb-8">
-          <p className="font-sans text-white/30 text-xs uppercase tracking-widest mb-4">My Roles</p>
+          <p className="font-sans text-xs uppercase tracking-widest mb-4" style={{ color: 'var(--fg-30)' }}>My Roles</p>
           <div className="flex flex-col gap-3">
             {roles.map(({ role, desc }) => (
               <div
                 key={role}
                 className="p-5 rounded-2xl"
-                style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)' }}
+                style={{ background: 'var(--border)', border: '1px solid var(--border)' }}
               >
-                <p className="font-sans text-white/80 text-sm font-medium mb-1.5">{role}</p>
-                <p className="font-sans text-white/40 text-sm leading-relaxed">{desc}</p>
+                <p className="font-sans text-sm font-medium mb-1.5" style={{ color: 'var(--fg-60)' }}>{role}</p>
+                <p className="font-sans text-sm leading-relaxed" style={{ color: 'var(--fg-40)' }}>{desc}</p>
               </div>
             ))}
           </div>
@@ -187,7 +187,7 @@ export default function ProjectModal({ onClose }: Props) {
 
         {/* Team + CTA */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <p className="font-sans text-white/20 text-xs leading-relaxed">
+          <p className="font-sans text-xs leading-relaxed" style={{ color: 'var(--fg-20)' }}>
             With Odsey Bandojo &amp; Vhieron Bareza<br />
             University of St. La Salle · Bacolod City
           </p>
@@ -198,9 +198,9 @@ export default function ProjectModal({ onClose }: Props) {
               rel="noopener noreferrer"
               className="btn-spring inline-flex items-center gap-2 font-sans text-sm font-semibold px-5 py-3 rounded-full transition-colors duration-150"
               style={{
-                background: 'rgba(255,255,255,0.06)',
-                color: 'rgba(255,255,255,0.55)',
-                border: '1px solid rgba(255,255,255,0.10)',
+                background: 'var(--contact-resume-bg)',
+                color: 'var(--fg-55)',
+                border: '1px solid var(--border-strong)',
               }}
             >
               GitHub ↗

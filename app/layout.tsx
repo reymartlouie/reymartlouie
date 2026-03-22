@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter, Archivo_Black } from 'next/font/google'
 import './globals.css'
+import { ThemeProvider } from '@/contexts/ThemeContext'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -20,30 +21,28 @@ export const metadata: Metadata = {
   description: 'Design engineer crafting thoughtful digital experiences.',
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${archivoBlack.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${inter.variable} ${archivoBlack.variable}`}>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: `try{const t=localStorage.getItem('theme');if(t==='light')document.documentElement.classList.add('light')}catch(e){}` }} />
+      </head>
       <body>
-        {/* Fixed wallpaper — blurred, toned down */}
         <div
           aria-hidden="true"
+          className="layout-wallpaper"
           style={{
-            position:           'fixed',
-            inset:              0,
-            zIndex:             0,
-            backgroundImage:    'url(/wallpaper.jpg)',
-            backgroundSize:     'cover',
+            position: 'fixed', inset: 0, zIndex: 0,
+            backgroundImage: 'url(/wallpaper.jpg)',
+            backgroundSize: 'cover',
             backgroundPosition: 'center',
-            filter:             'blur(32px) saturate(110%) brightness(0.22)',
-            transform:          'scale(1.06)',
+            transform: 'scale(1.06)',
           }}
         />
-        <div aria-hidden="true" style={{ position: 'fixed', inset: 0, zIndex: 0, background: 'rgba(0,0,0,0.55)' }} />
-        <div style={{ position: 'relative', zIndex: 1 }}>{children}</div>
+        <div aria-hidden="true" className="layout-overlay" style={{ position: 'fixed', inset: 0, zIndex: 0 }} />
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <ThemeProvider>{children}</ThemeProvider>
+        </div>
       </body>
     </html>
   )

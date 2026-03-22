@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useCallback, useRef } from 'react'
+import { useTheme } from '@/contexts/ThemeContext'
 
 function IconWifi() {
   return (
@@ -29,6 +30,23 @@ function IconLock() {
       strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
       <rect x="2" y="6" width="10" height="7" rx="2" />
       <path d="M4.5 6V4.5a2.5 2.5 0 0 1 5 0V6" />
+    </svg>
+  )
+}
+
+function IconSun() {
+  return (
+    <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
+      <circle cx="10" cy="10" r="3.5" />
+      <path d="M10 2v2M10 16v2M2 10h2M16 10h2M4.93 4.93l1.41 1.41M13.66 13.66l1.41 1.41M4.93 15.07l1.41-1.41M13.66 6.34l1.41-1.41" />
+    </svg>
+  )
+}
+
+function IconMoon() {
+  return (
+    <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
+      <path d="M17 12.5A7.5 7.5 0 0 1 7.5 3a7.5 7.5 0 1 0 9.5 9.5z" />
     </svg>
   )
 }
@@ -118,6 +136,7 @@ export default function StatusBar() {
   const [date,         setDate]         = useState('')
   const [section,      setSection]      = useState('Canvas')
   const [userMenuOpen, setUserMenuOpen] = useState(false)
+  const { theme, toggle } = useTheme()
 
   useEffect(() => {
     const tick = () => {
@@ -159,10 +178,10 @@ export default function StatusBar() {
         height:               36,
         paddingLeft:          20,
         paddingRight:         20,
-        background:           'rgba(10,10,12,0.45)',
+        background:           'var(--bar-bg)',
         backdropFilter:       'blur(40px) saturate(160%)',
         WebkitBackdropFilter: 'blur(40px) saturate(160%)',
-        borderBottom:         '1px solid rgba(255,255,255,0.07)',
+        borderBottom:         '1px solid var(--bar-border)',
         boxShadow:            '0 1px 0 rgba(255,255,255,0.05) inset, 0 4px 24px rgba(0,0,0,0.3)',
         opacity:    ready ? 1 : 0,
         transform:  ready ? 'translateY(0)' : 'translateY(-100%)',
@@ -178,8 +197,8 @@ export default function StatusBar() {
         {/* RL — user menu trigger */}
         <button
           onClick={() => setUserMenuOpen(v => !v)}
-          className="font-display px-2.5 py-1 text-white/60 hover:text-white transition-colors duration-150"
-          style={{ fontSize: 13, letterSpacing: '-0.02em' }}
+          className="font-display px-2.5 py-1 transition-colors duration-150"
+          style={{ fontSize: 13, letterSpacing: '-0.02em', color: 'var(--bar-text-active)' }}
         >
           RL
         </button>
@@ -200,16 +219,18 @@ export default function StatusBar() {
               href={href}
               target={href.startsWith('http') ? '_blank' : undefined}
               rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
-              className="font-sans px-2.5 py-1 text-white/60 hover:text-white transition-colors duration-150"
-              style={{ fontSize: 12 }}
+              className="font-sans px-2.5 py-1 transition-colors duration-150"
+              style={{ fontSize: 12, color: 'var(--bar-text)' }}
+              onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = 'var(--bar-text-active)'}
+              onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'var(--bar-text)'}
             >
               {label}
             </a>
           ) : (
             <span
               key={label}
-              className="font-sans px-2.5 py-1 text-white/60 hover:text-white transition-colors duration-150 cursor-default"
-              style={{ fontSize: 12 }}
+              className="font-sans px-2.5 py-1 transition-colors duration-150 cursor-default"
+              style={{ fontSize: 12, color: 'var(--bar-text)' }}
             >
               {label}
             </span>
@@ -219,21 +240,30 @@ export default function StatusBar() {
 
       {/* ── Right ── */}
       <div className="flex items-center gap-2.5">
-        <span style={{ color: 'rgba(255,255,255,0.38)', display: 'flex', alignItems: 'center' }}>
+        <span style={{ color: 'var(--bar-text)', display: 'flex', alignItems: 'center' }}>
           <IconWifi />
         </span>
 
         <div className="flex items-center gap-1.5">
-          <span style={{ color: 'rgba(255,255,255,0.38)', display: 'flex', alignItems: 'center' }}>
+          <span style={{ color: 'var(--bar-text)', display: 'flex', alignItems: 'center' }}>
             <IconBattery />
           </span>
-          <span className="font-sans hidden sm:inline" style={{ fontSize: 11, color: 'rgba(255,255,255,0.38)' }}>80%</span>
+          <span className="font-sans hidden sm:inline" style={{ fontSize: 11, color: 'var(--bar-text)' }}>80%</span>
         </div>
+
+        <button
+          onClick={toggle}
+          className="flex items-center justify-center w-6 h-5 rounded transition-colors duration-150"
+          style={{ color: 'var(--bar-text)' }}
+          title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+        >
+          {theme === 'dark' ? <IconSun /> : <IconMoon />}
+        </button>
 
         <Divider />
 
-        <span className="font-sans hidden sm:inline" style={{ fontSize: 11, color: 'rgba(255,255,255,0.38)' }}>{date}</span>
-        <span className="font-sans tabular-nums" style={{ fontSize: 11, color: 'rgba(255,255,255,0.90)' }}>{time}</span>
+        <span className="font-sans hidden sm:inline" style={{ fontSize: 11, color: 'var(--bar-text)' }}>{date}</span>
+        <span className="font-sans tabular-nums" style={{ fontSize: 11, color: 'var(--bar-text-active)' }}>{time}</span>
       </div>
 
     </div>

@@ -108,19 +108,19 @@ export default function Hero() {
         {/* ── Static cards ────────────────────────────────────────────────── */}
 
         <DraggableBento className="lg:col-span-8" delay={100}>
-          <div className="flex-1 bg-[#262626] rounded-[32px] p-6 md:p-8 lg:p-10 relative overflow-hidden min-h-[320px] lg:min-h-[380px] flex flex-col justify-between">
+          <div className="flex-1 rounded-[32px] p-6 md:p-8 lg:p-10 relative overflow-hidden min-h-[320px] lg:min-h-[380px] flex flex-col justify-between" style={{ backgroundColor: 'var(--bg-card-2)' }}>
             <div className="absolute -top-24 -right-24 w-80 h-80 bg-blue-500/8 rounded-full blur-[80px] pointer-events-none" />
             <div className="relative">
-              <span className="inline-flex items-center gap-2 bg-[#1e3320] text-[#86efac] text-xs font-sans px-3 py-1.5 rounded-full mb-6 lg:mb-8 w-fit">
-                <span className="w-1.5 h-1.5 bg-[#4ade80] rounded-full animate-pulse" />
+              <span className="inline-flex items-center gap-2 text-xs font-sans px-3 py-1.5 rounded-full mb-6 lg:mb-8 w-fit" style={{ background: 'var(--badge-bg)', color: 'var(--badge-text)' }}>
+                <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: 'var(--badge-dot)' }} />
                 Available for work
               </span>
-              <h1 className="font-display text-[44px] md:text-[56px] lg:text-[72px] leading-[0.9] text-[#f0f0f0] mb-4 lg:mb-6">
+              <h1 className="font-display text-[44px] md:text-[56px] lg:text-[72px] leading-[0.9] mb-4 lg:mb-6" style={{ color: 'var(--hero-heading)' }}>
                 Computer<br />
                 Engineer<br />
-                <span className="text-[#888888]">&amp; Developer.</span>
+                <span style={{ color: 'var(--hero-muted)' }}>&amp; Developer.</span>
               </h1>
-              <p className="font-sans text-white/40 text-sm md:text-base max-w-lg leading-relaxed">
+              <p className="font-sans text-sm md:text-base max-w-lg leading-relaxed" style={{ color: 'var(--fg-40)' }}>
                 Graduating CpE student at USLS – Bacolod. I use AI-assisted workflows to design,
                 build, and ship production-ready apps — from React Native mobile to deployed web interfaces.
               </p>
@@ -157,12 +157,12 @@ export default function Hero() {
         </DraggableBento>
 
         <DraggableBento className="lg:col-span-4" delay={240}>
-          <div className="flex-1 bg-[#0d1b2c] rounded-[32px] p-6 md:p-8 relative overflow-hidden min-h-[180px]">
+          <div className="flex-1 rounded-[32px] p-6 md:p-8 relative overflow-hidden min-h-[180px]" style={{ backgroundColor: 'var(--bg-tech)' }}>
             <div className="absolute -bottom-10 -right-10 w-44 h-44 bg-blue-500/15 rounded-full blur-3xl pointer-events-none" />
-            <p className="font-sans text-[#60a5fa]/50 text-xs uppercase tracking-widest mb-5 relative">Tech Stack</p>
+            <p className="font-sans text-xs uppercase tracking-widest mb-5 relative" style={{ color: 'var(--tech-label)' }}>Tech Stack</p>
             <div className="flex flex-wrap gap-2 relative">
               {['React Native', 'TypeScript', 'Supabase', 'Next.js', 'React', 'Figma', 'Framer', 'EAS Build'].map((skill) => (
-                <span key={skill} className="font-sans text-xs text-[#93c5fd]/70 bg-blue-400/8 border border-[#93c5fd]/20 px-3 py-1.5 rounded-full">
+                <span key={skill} className="font-sans text-xs px-3 py-1.5 rounded-full" style={{ color: 'var(--tech-tag-fg)', backgroundColor: 'var(--tech-tag-bg)', border: '1px solid var(--tech-tag-border)' }}>
                   {skill}
                 </span>
               ))}
@@ -171,10 +171,10 @@ export default function Hero() {
         </DraggableBento>
 
         <DraggableBento className="lg:col-span-6" delay={290}>
-          <div className="flex-1 bg-[#222222] rounded-[32px] p-6 md:p-8 flex flex-col gap-4 relative overflow-hidden min-h-[180px]">
+          <div className="flex-1 rounded-[32px] p-6 md:p-8 flex flex-col gap-4 relative overflow-hidden min-h-[180px]" style={{ backgroundColor: 'var(--bg-card-3)' }}>
             <div className="absolute -top-10 -right-10 w-48 h-48 bg-blue-500/6 rounded-full blur-3xl pointer-events-none" />
-            <p className="font-sans text-white/30 text-xs uppercase tracking-widest relative">About</p>
-            <p className="font-sans text-white/55 text-sm md:text-base leading-relaxed relative">
+            <p className="font-sans text-xs uppercase tracking-widest relative" style={{ color: 'var(--fg-30)' }}>About</p>
+            <p className="font-sans text-sm md:text-base leading-relaxed relative" style={{ color: 'var(--fg-55)' }}>
               Graduating Computer Engineering student at the University of St. La Salle – Bacolod.
               Full stack developer experienced in React Native, TypeScript, and Supabase — building
               production-ready apps through AI-assisted workflows and solid engineering fundamentals.
@@ -183,10 +183,10 @@ export default function Hero() {
         </DraggableBento>
 
         <DraggableBento className="lg:col-span-2" delay={340}>
-          <div className="flex-1 bg-[#1a3d72] rounded-[32px] p-6 md:p-8 flex flex-col items-center justify-center text-center min-h-[180px]">
-            <p className="font-sans text-[#93c5fd]/40 text-[10px] uppercase tracking-widest mb-3">Experience</p>
-            <p className="font-display text-[#bfdbfe] text-6xl leading-none">4+</p>
-            <p className="font-sans text-[#93c5fd]/60 text-xs mt-2 leading-snug">Years crafting<br />digital products</p>
+          <div className="flex-1 rounded-[32px] p-6 md:p-8 flex flex-col items-center justify-center text-center min-h-[180px]" style={{ backgroundColor: 'var(--bg-exp)' }}>
+            <p className="font-sans text-[10px] uppercase tracking-widest mb-3" style={{ color: 'var(--exp-label)' }}>Experience</p>
+            <p className="font-display text-6xl leading-none" style={{ color: 'var(--exp-num)' }}>4+</p>
+            <p className="font-sans text-xs mt-2 leading-snug" style={{ color: 'var(--exp-body)' }}>Years crafting<br />digital products</p>
           </div>
         </DraggableBento>
 

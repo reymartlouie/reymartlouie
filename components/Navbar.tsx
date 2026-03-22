@@ -171,10 +171,10 @@ export default function Navbar() {
       <nav
         className="pointer-events-auto flex items-center gap-2 px-6 py-3"
         style={{
-          background:          'rgba(18,18,20,0.55)',
+          background:          'var(--nav-bg)',
           backdropFilter:       'blur(60px) saturate(200%)',
           WebkitBackdropFilter: 'blur(60px) saturate(200%)',
-          border:               '1px solid rgba(255,255,255,0.11)',
+          border:               '1px solid var(--bar-border)',
           borderRadius:         44,
           boxShadow: [
             '0 16px 64px rgba(0,0,0,0.6)',

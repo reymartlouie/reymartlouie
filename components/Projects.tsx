@@ -40,41 +40,42 @@ export default function Projects() {
           href="https://reymartlouie.framer.website"
           target="_blank"
           rel="noopener noreferrer"
-          className="bento-lift block bg-[#3a1f2c] rounded-[32px] p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative overflow-hidden group"
+          className="bento-lift block rounded-[32px] p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative overflow-hidden group"
+          style={{ backgroundColor: 'var(--bg-portfolio)' }}
         >
           <div className="absolute -right-20 -top-20 w-72 h-72 bg-rose-400/10 rounded-full blur-3xl pointer-events-none" />
           <div className="relative">
-            <p className="font-sans text-[#f9a8d4]/50 text-xs uppercase tracking-widest mb-2">Portfolio</p>
-            <h3 className="font-display text-[#fbcfe8] text-4xl lg:text-5xl">UI/UX Portfolio</h3>
-            <p className="font-sans text-[#f9a8d4]/60 text-sm mt-2 max-w-md">
+            <p className="font-sans text-xs uppercase tracking-widest mb-2" style={{ color: 'var(--portfolio-label)' }}>Portfolio</p>
+            <h3 className="font-display text-4xl lg:text-5xl" style={{ color: 'var(--portfolio-title)' }}>UI/UX Portfolio</h3>
+            <p className="font-sans text-sm mt-2 max-w-md" style={{ color: 'var(--portfolio-body)' }}>
               Explore my design work — case studies, wireframes, and high-fidelity prototypes.
             </p>
           </div>
-          <span className="btn-spring inline-flex items-center gap-2 bg-[#fbcfe8]/12 text-[#fbcfe8] border border-[#fbcfe8]/20 font-sans font-semibold text-sm px-6 py-3 rounded-full group-hover:bg-[#fbcfe8]/20 transition-colors whitespace-nowrap">
+          <span className="btn-spring inline-flex items-center gap-2 font-sans font-semibold text-sm px-6 py-3 rounded-full transition-colors whitespace-nowrap" style={{ background: 'var(--portfolio-btn-bg)', color: 'var(--portfolio-btn-fg)', border: '1px solid var(--portfolio-btn-border)' }}>
             View Portfolio ↗
           </span>
         </a>
 
         {/* Selected work */}
-        <div className="bg-[#1a1a1a] rounded-[32px] overflow-hidden relative">
+        <div className="rounded-[32px] overflow-hidden relative" style={{ backgroundColor: 'var(--bg-card)' }}>
           <div className="absolute -top-16 -left-16 w-56 h-56 bg-orange-500/5 rounded-full blur-3xl pointer-events-none" />
 
           <div className="px-6 md:px-8 lg:px-10 py-6 md:py-8 flex items-center justify-between relative">
             <div>
-              <p className="font-sans text-white/30 text-xs uppercase tracking-widest mb-2">Selected Work</p>
-              <h2 className="font-display text-white text-5xl">Projects</h2>
+              <p className="font-sans text-xs uppercase tracking-widest mb-2" style={{ color: 'var(--fg-30)' }}>Selected Work</p>
+              <h2 className="font-display text-5xl" style={{ color: 'var(--fg)' }}>Projects</h2>
             </div>
-            <span className="font-sans text-white/20 text-sm hidden md:block">1 project</span>
+            <span className="font-sans text-sm hidden md:block" style={{ color: 'var(--fg-20)' }}>1 project</span>
           </div>
 
-          <div className="h-px bg-white/[0.05] mx-6" />
+          <div className="h-px mx-6" style={{ background: 'var(--border)' }} />
 
           <div className="p-4 lg:p-5">
             {/* FireSafe featured card */}
             <div
               className="rounded-[24px] p-6 md:p-8 lg:p-10 flex flex-col justify-between min-h-[280px] relative overflow-hidden group cursor-pointer"
               style={{
-                backgroundColor: '#130f09',
+                backgroundColor: 'var(--bg-firesafe)',
                 animation: 'cardSlideUp 300ms cubic-bezier(0.2, 0, 0, 1) both',
               }}
               onClick={() => setModalOpen(true)}
@@ -84,9 +85,9 @@ export default function Projects() {
                 style={{ backgroundColor: '#fb923c' }}
               />
               <div className="relative">
-                <span className="font-sans text-white/20 text-xs mb-5 block">01</span>
-                <h3 className="font-display text-4xl md:text-5xl text-white leading-tight mb-4">FireSafe</h3>
-                <p className="font-sans text-white/50 text-sm leading-relaxed max-w-xl">
+                <span className="font-sans text-xs mb-5 block" style={{ color: 'var(--fg-20)' }}>01</span>
+                <h3 className="font-display text-4xl md:text-5xl leading-tight mb-4" style={{ color: 'var(--fg)' }}>FireSafe</h3>
+                <p className="font-sans text-sm leading-relaxed max-w-xl" style={{ color: 'var(--fg-50)' }}>
                   A thermal imaging-based wildfire detection system built for resource-limited rural barangays,
                   with real-time mobile alerting via push notifications and SMS.
                 </p>
@@ -108,7 +109,7 @@ export default function Projects() {
                   ))}
                 </div>
                 <div className="flex items-center gap-4 shrink-0">
-                  <span className="font-sans text-white/20 text-xs">2025</span>
+                  <span className="font-sans text-xs" style={{ color: 'var(--fg-20)' }}>2025</span>
                   <span className="font-sans text-sm font-medium" style={{ color: '#fb923c' }}>
                     View Case Study →
                   </span>
