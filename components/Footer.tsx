@@ -20,13 +20,26 @@ export default function Footer() {
             <h2 className="font-display text-[#a7f3d0] text-[52px] lg:text-[64px] leading-[0.9] mb-8">
               Let&apos;s work<br />together.
             </h2>
-            <a
-              href="mailto:reymartlouie.capapas@gmail.com"
-              className="btn-spring group inline-flex items-center gap-3 bg-[#6ee7b7]/12 text-[#6ee7b7] border border-[#6ee7b7]/20 font-sans text-sm font-semibold px-6 py-3 rounded-full hover:bg-[#6ee7b7]/20 transition-colors"
-            >
-              reymartlouie.capapas@gmail.com
-              <span className="inline-block transition-transform duration-200 group-hover:translate-x-1">→</span>
-            </a>
+            <div className="flex flex-wrap gap-3">
+              <a
+                href="mailto:reymartlouie.capapas@gmail.com"
+                className="btn-spring group inline-flex items-center gap-3 bg-[#6ee7b7]/12 text-[#6ee7b7] border border-[#6ee7b7]/20 font-sans text-sm font-semibold px-6 py-3 rounded-full hover:bg-[#6ee7b7]/20 transition-colors"
+              >
+                reymartlouie.capapas@gmail.com
+                <span className="inline-block transition-transform duration-200 group-hover:translate-x-1">→</span>
+              </a>
+              <a
+                href="https://drive.google.com/drive/folders/1GbhrbziR6UWoHedmOB52l_DMdWwvyPLT?usp=sharing"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-spring inline-flex items-center gap-2 bg-white/[0.06] text-white/60 border border-white/[0.10] font-sans text-sm font-semibold px-6 py-3 rounded-full hover:bg-white/[0.10] hover:text-white/80 transition-colors"
+              >
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M7 1v8M4 6l3 3 3-3M2 10v1.5A1.5 1.5 0 003.5 13h7a1.5 1.5 0 001.5-1.5V10" />
+                </svg>
+                Resume
+              </a>
+            </div>
           </div>
         </div>
       </Reveal>

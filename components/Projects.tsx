@@ -1,41 +1,12 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import ProjectModal from './ProjectModal'
 
-const projects = [
-  {
-    id: 1,
-    number: '01',
-    title: 'Project Alpha',
-    description: 'A design system built for scale — consistent components, clear patterns, and a developer-friendly API.',
-    tags: ['Design System', 'Figma', 'React'],
-    year: '2024',
-    accent: '#93c5fd',
-    bg: '#0d1825',
-  },
-  {
-    id: 2,
-    number: '02',
-    title: 'Project Beta',
-    description: 'End-to-end product design for a SaaS analytics dashboard. From discovery to final handoff.',
-    tags: ['Product Design', 'UX Research', 'Prototyping'],
-    year: '2024',
-    accent: '#c4b5fd',
-    bg: '#1f1f1f',
-  },
-  {
-    id: 3,
-    number: '03',
-    title: 'Project Gamma',
-    description: 'A mobile-first e-commerce experience redesigned for performance and conversion.',
-    tags: ['Mobile', 'E-commerce', 'Next.js'],
-    year: '2023',
-    accent: '#6ee7b7',
-    bg: '#1a1a1a',
-  },
-]
+const tags = ['React Native', 'Raspberry Pi', 'Supabase', 'TinyML', 'Python']
 
 export default function Projects() {
+  const [modalOpen, setModalOpen] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -80,66 +51,70 @@ export default function Projects() {
 
         {/* Selected work */}
         <div className="bg-[#1a1a1a] rounded-[32px] overflow-hidden relative">
-          <div className="absolute -top-16 -left-16 w-56 h-56 bg-blue-500/5 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute -top-16 -left-16 w-56 h-56 bg-orange-500/5 rounded-full blur-3xl pointer-events-none" />
 
           <div className="px-8 lg:px-10 py-8 flex items-center justify-between relative">
             <div>
               <p className="font-sans text-white/30 text-xs uppercase tracking-widest mb-2">Selected Work</p>
               <h2 className="font-display text-white text-5xl">Projects</h2>
             </div>
-            <span className="font-sans text-white/20 text-sm hidden md:block">{projects.length} projects</span>
+            <span className="font-sans text-white/20 text-sm hidden md:block">1 project</span>
           </div>
 
           <div className="h-px bg-white/[0.05] mx-6" />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 p-4 lg:p-5">
-            {projects.map((project, i) => (
+          <div className="p-4 lg:p-5">
+            {/* FireSafe featured card */}
+            <div
+              className="rounded-[24px] p-8 md:p-10 flex flex-col justify-between min-h-[280px] relative overflow-hidden group cursor-pointer"
+              style={{
+                backgroundColor: '#130f09',
+                animation: 'cardSlideUp 300ms cubic-bezier(0.2, 0, 0, 1) both',
+              }}
+              onClick={() => setModalOpen(true)}
+            >
               <div
-                key={project.id}
-                className="rounded-[24px] p-8 flex flex-col justify-between min-h-[300px] relative overflow-hidden group cursor-pointer"
-                style={{
-                  backgroundColor: project.bg,
-                  animation: `cardSlideUp 300ms cubic-bezier(0.2, 0, 0, 1) ${i * 50}ms both`,
-                }}
-              >
-                <div
-                  className="absolute -top-12 -right-12 w-44 h-44 rounded-full blur-3xl opacity-20 group-hover:opacity-30 transition-opacity duration-300 pointer-events-none"
-                  style={{ backgroundColor: project.accent }}
-                />
-                <div className="relative">
-                  <span className="font-sans text-white/20 text-xs mb-5 block">{project.number}</span>
-                  <h3 className="font-display text-3xl text-white leading-tight mb-4">{project.title}</h3>
-                  <p className="font-sans text-white/50 text-sm leading-relaxed">{project.description}</p>
+                className="absolute -top-16 -right-16 w-64 h-64 rounded-full blur-3xl opacity-20 group-hover:opacity-35 transition-opacity duration-300 pointer-events-none"
+                style={{ backgroundColor: '#fb923c' }}
+              />
+              <div className="relative">
+                <span className="font-sans text-white/20 text-xs mb-5 block">01</span>
+                <h3 className="font-display text-4xl md:text-5xl text-white leading-tight mb-4">FireSafe</h3>
+                <p className="font-sans text-white/50 text-sm leading-relaxed max-w-xl">
+                  A thermal imaging-based wildfire detection system built for resource-limited rural barangays,
+                  with real-time mobile alerting via push notifications and SMS.
+                </p>
+              </div>
+              <div className="relative flex flex-col sm:flex-row sm:items-center justify-between gap-4 mt-8">
+                <div className="flex flex-wrap gap-2">
+                  {tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="font-sans text-xs px-3 py-1 rounded-full border"
+                      style={{
+                        color: '#fb923c',
+                        borderColor: 'rgba(251,146,60,0.28)',
+                        backgroundColor: 'rgba(251,146,60,0.10)',
+                      }}
+                    >
+                      {tag}
+                    </span>
+                  ))}
                 </div>
-                <div className="relative flex flex-col gap-4 mt-6">
-                  <div className="flex flex-wrap gap-2">
-                    {project.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="font-sans text-xs px-3 py-1 rounded-full border"
-                        style={{
-                          color: project.accent,
-                          borderColor: `${project.accent}30`,
-                          backgroundColor: `${project.accent}12`,
-                        }}
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                  <div className="flex items-center justify-between pt-2 border-t border-white/[0.06]">
-                    <span className="font-sans text-white/20 text-xs">{project.year}</span>
-                    <a href="#" className="font-sans text-sm font-medium" style={{ color: project.accent }}>
-                      View Project →
-                    </a>
-                  </div>
+                <div className="flex items-center gap-4 shrink-0">
+                  <span className="font-sans text-white/20 text-xs">2025</span>
+                  <span className="font-sans text-sm font-medium" style={{ color: '#fb923c' }}>
+                    View Case Study →
+                  </span>
                 </div>
               </div>
-            ))}
+            </div>
           </div>
 
         </div>
       </div>
+
+      {modalOpen && <ProjectModal onClose={() => setModalOpen(false)} />}
     </section>
   )
 }
