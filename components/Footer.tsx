@@ -53,23 +53,21 @@ export default function Footer() {
           <div className="absolute top-0 left-0 w-40 h-40 bg-green-400/8 rounded-full blur-2xl pointer-events-none" />
           <div className="relative">
             <p className="font-sans text-[#6ee7b7]/50 text-xs uppercase tracking-widest mb-4">Get in Touch</p>
-            <h2 className="font-display text-[#a7f3d0] text-[44px] lg:text-[56px] leading-[0.9] mb-8">
+            <h2 className="font-display text-[#a7f3d0] text-[36px] lg:text-[48px] leading-[0.9] mb-5">
               Let&apos;s work<br />together.
             </h2>
 
             {sent ? (
-              <div className="flex items-center gap-3 py-4">
-                <span className="w-2 h-2 bg-[#4ade80] rounded-full" />
-                <p className="font-sans text-[#6ee7b7]/80 text-sm">
-                  Your email client should be open — hit send!
-                </p>
+              <div className="flex items-center gap-2.5 py-2">
+                <span className="w-1.5 h-1.5 bg-[#4ade80] rounded-full" />
+                <p className="font-sans text-[#6ee7b7]/70 text-sm">Email client opened — hit send!</p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <form onSubmit={handleSubmit} className="flex flex-col gap-2">
+                <div className="grid grid-cols-2 gap-2">
                   <input
                     type="text"
-                    placeholder="Your name"
+                    placeholder="Name"
                     value={name}
                     onChange={e => setName(e.target.value)}
                     required
@@ -78,7 +76,7 @@ export default function Footer() {
                   />
                   <input
                     type="email"
-                    placeholder="your@email.com"
+                    placeholder="Email"
                     value={email}
                     onChange={e => setEmail(e.target.value)}
                     required
@@ -87,28 +85,28 @@ export default function Footer() {
                   />
                 </div>
                 <textarea
-                  placeholder="What's on your mind?"
+                  placeholder="Message"
                   value={message}
                   onChange={e => setMessage(e.target.value)}
                   required
-                  rows={4}
+                  rows={3}
                   style={{ ...inputStyle, resize: 'none' }}
                   className="placeholder:text-white/20 focus:border-[#6ee7b7]/40"
                 />
-                <div className="flex flex-wrap items-center gap-3 mt-1">
+                <div className="flex items-center gap-2 mt-0.5">
                   <button
                     type="submit"
-                    className="btn-spring inline-flex items-center gap-2 bg-[#6ee7b7]/14 text-[#6ee7b7] border border-[#6ee7b7]/22 font-sans text-sm font-semibold px-6 py-3 rounded-full hover:bg-[#6ee7b7]/22 transition-colors"
+                    className="btn-spring inline-flex items-center gap-2 bg-[#6ee7b7]/14 text-[#6ee7b7] border border-[#6ee7b7]/22 font-sans text-sm font-semibold px-5 py-2.5 rounded-full hover:bg-[#6ee7b7]/22 transition-colors"
                   >
-                    Send Message →
+                    Send →
                   </button>
                   <a
                     href="https://drive.google.com/drive/folders/1GbhrbziR6UWoHedmOB52l_DMdWwvyPLT?usp=sharing"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="btn-spring inline-flex items-center gap-2 bg-white/[0.06] text-white/50 border border-white/[0.10] font-sans text-sm font-semibold px-5 py-3 rounded-full hover:bg-white/[0.10] hover:text-white/70 transition-colors"
+                    className="btn-spring inline-flex items-center gap-1.5 bg-white/[0.06] text-white/50 border border-white/[0.10] font-sans text-sm font-semibold px-5 py-2.5 rounded-full hover:bg-white/[0.10] hover:text-white/70 transition-colors"
                   >
-                    <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+                    <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M7 1v8M4 6l3 3 3-3M2 10v1.5A1.5 1.5 0 003.5 13h7a1.5 1.5 0 001.5-1.5V10" />
                     </svg>
                     Resume
