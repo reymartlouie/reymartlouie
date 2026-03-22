@@ -189,7 +189,7 @@ export default function StatusBar() {
         {[
           { label: section,          href: '#about'   },
           { label: 'Certifications', href: '#work'    },
-          { label: 'Resume',         href: 'https://drive.google.com/drive/folders/1GbhrbziR6UWoHedmOB52l_DMdWwvyPLT?usp=sharing' },
+          { label: 'Resume',         href: '/Reymart_Louie_Capapas_resume.pdf' },
           { label: 'Achievements',   href: '#work'    },
           { label: 'Hire Me',        href: '#contact' },
           { label: 'Help',           href: undefined  },
