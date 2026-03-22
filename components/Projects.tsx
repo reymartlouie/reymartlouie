@@ -25,6 +25,12 @@ export default function Projects() {
     return () => observer.disconnect()
   }, [])
 
+  useEffect(() => {
+    const handler = () => setModalOpen(true)
+    window.addEventListener('open-firesafe', handler)
+    return () => window.removeEventListener('open-firesafe', handler)
+  }, [])
+
   return (
     <section className="flex flex-col gap-4">
       <div ref={ref} className="reveal-item flex flex-col gap-4">
