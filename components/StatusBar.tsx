@@ -52,7 +52,7 @@ function IconMoon() {
 }
 
 function Divider() {
-  return <div className="w-px h-3.5 bg-white/10 rounded-full mx-1 flex-shrink-0" />
+  return <div className="w-px h-3.5 rounded-full mx-1 flex-shrink-0" style={{ background: 'var(--bar-border)' }} />
 }
 
 const SECTIONS = [

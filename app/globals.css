@@ -9,10 +9,10 @@
 
 /* ── Theme tokens ─────────────────────────────────────────────────── */
 :root {
-  /* Neutral backgrounds */
+  /* Neutral backgrounds — slightly lighter/darker than #272727 page */
   --bg-card:   #1a1a1a;
-  --bg-card-2: #262626;
-  --bg-card-3: #222222;
+  --bg-card-2: #1a1a1a;
+  --bg-card-3: #1a1a1a;
 
   /* Themed card backgrounds */
   --bg-tech:           #0d1b2c;
@@ -22,13 +22,13 @@
   --bg-footer-contact: #1a2e26;
 
   /* Text */
-  --fg:    rgba(240,240,240,1);
-  --fg-60: rgba(255,255,255,0.60);
-  --fg-55: rgba(255,255,255,0.55);
-  --fg-50: rgba(255,255,255,0.50);
-  --fg-40: rgba(255,255,255,0.40);
-  --fg-30: rgba(255,255,255,0.30);
-  --fg-20: rgba(255,255,255,0.20);
+  --fg:    #f2f2f2;
+  --fg-60: rgba(242,242,242,0.60);
+  --fg-55: rgba(242,242,242,0.55);
+  --fg-50: rgba(242,242,242,0.50);
+  --fg-40: rgba(242,242,242,0.40);
+  --fg-30: rgba(242,242,242,0.30);
+  --fg-20: rgba(242,242,242,0.20);
 
   /* Borders */
   --border:        rgba(255,255,255,0.06);
@@ -38,8 +38,8 @@
   --badge-bg:   #1e3320;
   --badge-text: #86efac;
   --badge-dot:  #4ade80;
-  --hero-heading: #f0f0f0;
-  --hero-muted:   #888888;
+  --hero-heading: #f2f2f2;
+  --hero-muted:   rgba(242,242,242,0.40);
 
   /* Tech card */
   --tech-label:       rgba(96,165,250,0.50);
@@ -72,6 +72,13 @@
   --contact-resume-bg:     rgba(255,255,255,0.06);
   --contact-resume-border: rgba(255,255,255,0.10);
 
+  /* Hero buttons */
+  --hero-btn1-bg: #f0f0f0;
+  --hero-btn1-fg: #111111;
+  --hero-btn2-bg:     rgba(255,255,255,0.10);
+  --hero-btn2-fg:     rgba(255,255,255,0.70);
+  --hero-btn2-border: rgba(255,255,255,0.15);
+
   /* Bars */
   --bar-bg: rgba(10,10,12,0.45);
   --nav-bg: rgba(18,18,20,0.55);
@@ -81,81 +88,92 @@
 }
 
 html.light {
-  --bg-card:   #ffffff;
-  --bg-card-2: #f5f5f5;
-  --bg-card-3: #efefef;
+  /* Glassy white cards on #f5f5f7 page */
+  --bg-card:           rgba(255,255,255,0.72);
+  --bg-card-2:         rgba(255,255,255,0.72);
+  --bg-card-3:         rgba(255,255,255,0.72);
+  --bg-tech:           rgba(255,255,255,0.72);
+  --bg-exp:            rgba(255,255,255,0.72);
+  --bg-portfolio:      rgba(255,255,255,0.72);
+  --bg-firesafe:       rgba(255,255,255,0.72);
+  --bg-footer-contact: rgba(255,255,255,0.72);
 
-  --bg-tech:           #eff6ff;
-  --bg-exp:            #dbeafe;
-  --bg-portfolio:      #fdf2f8;
-  --bg-firesafe:       #fff7ed;
-  --bg-footer-contact: #ecfdf5;
+  /* Apple text scale */
+  --fg:    #1d1d1f;
+  --fg-60: #6e6e73;
+  --fg-55: #6e6e73;
+  --fg-50: #86868b;
+  --fg-40: #86868b;
+  --fg-30: #ababaf;
+  --fg-20: #c7c7cc;
 
-  --fg:    rgba(17,17,17,0.92);
-  --fg-60: rgba(0,0,0,0.60);
-  --fg-55: rgba(0,0,0,0.55);
-  --fg-50: rgba(0,0,0,0.50);
-  --fg-40: rgba(0,0,0,0.40);
-  --fg-30: rgba(0,0,0,0.30);
-  --fg-20: rgba(0,0,0,0.20);
+  /* Hairline borders */
+  --border:        rgba(0,0,0,0.08);
+  --border-strong: rgba(0,0,0,0.14);
 
-  --border:        rgba(0,0,0,0.07);
-  --border-strong: rgba(0,0,0,0.12);
+  /* Hero badge — Apple green */
+  --badge-bg:     #e3f2e6;
+  --badge-text:   #1a6635;
+  --badge-dot:    #34c759;
+  --hero-heading: #1d1d1f;
+  --hero-muted:   #6e6e73;
 
-  --badge-bg:   #dcfce7;
-  --badge-text: #166534;
-  --badge-dot:  #16a34a;
-  --hero-heading: #111111;
-  --hero-muted:   #555555;
+  /* Tech card — neutral gray pill tags */
+  --tech-label:      #86868b;
+  --tech-tag-fg:     #1d1d1f;
+  --tech-tag-bg:     rgba(0,0,0,0.05);
+  --tech-tag-border: rgba(0,0,0,0.10);
 
-  --tech-label:      rgba(30,58,138,0.55);
-  --tech-tag-fg:     rgba(29,78,216,0.85);
-  --tech-tag-bg:     rgba(59,130,246,0.10);
-  --tech-tag-border: rgba(59,130,246,0.25);
+  /* Exp card — large black number */
+  --exp-label: #86868b;
+  --exp-num:   #1d1d1f;
+  --exp-body:  #6e6e73;
 
-  --exp-label: rgba(30,58,138,0.45);
-  --exp-num:   #1e3a8a;
-  --exp-body:  rgba(30,64,175,0.65);
+  /* Portfolio card — clean neutral */
+  --portfolio-label:      #86868b;
+  --portfolio-title:      #1d1d1f;
+  --portfolio-body:       #6e6e73;
+  --portfolio-btn-fg:     #1d1d1f;
+  --portfolio-btn-bg:     rgba(0,0,0,0.05);
+  --portfolio-btn-border: rgba(0,0,0,0.10);
 
-  --portfolio-label:      rgba(157,23,77,0.55);
-  --portfolio-title:      #9d174d;
-  --portfolio-body:       rgba(157,23,77,0.65);
-  --portfolio-btn-fg:     #be185d;
-  --portfolio-btn-bg:     rgba(190,24,93,0.10);
-  --portfolio-btn-border: rgba(190,24,93,0.22);
-
-  --contact-label:         rgba(6,95,70,0.55);
-  --contact-title:         #065f46;
+  /* Contact card — minimal inputs, dark CTA */
+  --contact-label:         #86868b;
+  --contact-title:         #1d1d1f;
   --contact-input-bg:      rgba(0,0,0,0.04);
-  --contact-input-border:  rgba(5,150,105,0.22);
-  --contact-btn-fg:        #059669;
-  --contact-btn-bg:        rgba(5,150,105,0.12);
-  --contact-btn-border:    rgba(5,150,105,0.22);
-  --contact-resume-fg:     rgba(0,0,0,0.45);
+  --contact-input-border:  rgba(0,0,0,0.10);
+  --contact-btn-fg:        #ffffff;
+  --contact-btn-bg:        #1d1d1f;
+  --contact-btn-border:    #1d1d1f;
+  --contact-resume-fg:     #1d1d1f;
   --contact-resume-bg:     rgba(0,0,0,0.05);
-  --contact-resume-border: rgba(0,0,0,0.12);
+  --contact-resume-border: rgba(0,0,0,0.10);
 
-  --bar-bg: rgba(245,245,248,0.72);
-  --nav-bg: rgba(245,245,248,0.72);
-  --bar-border: rgba(0,0,0,0.08);
-  --bar-text: rgba(0,0,0,0.45);
-  --bar-text-active: rgba(0,0,0,0.85);
+  /* Hero buttons */
+  --hero-btn1-bg: #1d1d1f;
+  --hero-btn1-fg: #ffffff;
+  --hero-btn2-bg:     rgba(0,0,0,0.06);
+  --hero-btn2-fg:     #1d1d1f;
+  --hero-btn2-border: rgba(0,0,0,0.10);
+
+  /* Bars — Apple frosted glass */
+  --bar-bg:          rgba(255,255,255,0.72);
+  --nav-bg:          rgba(255,255,255,0.72);
+  --bar-border:      rgba(0,0,0,0.08);
+  --bar-text:        #86868b;
+  --bar-text-active: #1d1d1f;
 }
 
 /* Layout wallpaper layers */
 .layout-wallpaper {
-  filter: blur(32px) saturate(110%) brightness(0.22);
-  transition: filter 400ms ease;
-}
-html.light .layout-wallpaper {
-  filter: blur(32px) saturate(80%) brightness(0.90);
+  opacity: 0;
 }
 .layout-overlay {
-  background: rgba(0,0,0,0.55);
+  background: #111111;
   transition: background 400ms ease;
 }
 html.light .layout-overlay {
-  background: rgba(255,255,255,0.78);
+  background: radial-gradient(ellipse 80% 60% at 20% 10%, #e8eaf0 0%, #f5f5f7 55%, #ededf0 100%);
 }
 
 * {
@@ -201,6 +219,18 @@ body {
 }
 .bento-lift:hover {
   transform: translateY(-3px);
+}
+/* Light mode: glassy bento cards */
+html.light .rounded-\[32px\],
+html.light .rounded-\[24px\] {
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.85) !important;
+  box-shadow:
+    0 1px 0  rgba(255,255,255,1) inset,
+    0 2px 1px rgba(255,255,255,0.6) inset,
+    0 4px 24px rgba(0,0,0,0.08),
+    0 1px 4px  rgba(0,0,0,0.06);
 }
 
 /* Button press */
