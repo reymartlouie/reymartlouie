@@ -24,15 +24,6 @@ function IconBattery() {
   )
 }
 
-function IconLock() {
-  return (
-    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor"
-      strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
-      <rect x="2" y="6" width="10" height="7" rx="2" />
-      <path d="M4.5 6V4.5a2.5 2.5 0 0 1 5 0V6" />
-    </svg>
-  )
-}
 
 function IconSun() {
   return (
@@ -79,11 +70,6 @@ function UserMenu({ onClose }: { onClose: () => void }) {
     }
   }, [onClose])
 
-  const handleLock = () => {
-    sessionStorage.removeItem('portfolio-unlocked')
-    window.location.reload()
-  }
-
   return (
     <div
       ref={ref}
@@ -96,14 +82,10 @@ function UserMenu({ onClose }: { onClose: () => void }) {
         boxShadow:            '0 16px 48px rgba(0,0,0,0.6), 0 1px 0 rgba(255,255,255,0.07) inset',
       }}
     >
-      {/* Profile */}
       <div className="flex items-center gap-3 px-4 py-4">
         <div
           className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0"
-          style={{
-            background:           'rgba(255,255,255,0.10)',
-            border:               '1px solid rgba(255,255,255,0.15)',
-          }}
+          style={{ background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.15)' }}
         >
           <span className="font-display text-white/90 text-sm">RL</span>
         </div>
@@ -112,18 +94,6 @@ function UserMenu({ onClose }: { onClose: () => void }) {
           <p className="font-sans text-white/35 text-xs mt-0.5">CpE Student · USLS Bacolod</p>
         </div>
       </div>
-
-      <div className="h-px bg-white/[0.07] mx-3" />
-
-      {/* Lock screen */}
-      <button
-        onClick={handleLock}
-        className="w-full flex items-center gap-2.5 px-4 py-3 text-left transition-colors hover:bg-white/8"
-      >
-        <span style={{ color: 'rgba(255,255,255,0.45)' }}><IconLock /></span>
-        <span className="font-sans text-sm" style={{ color: 'rgba(255,255,255,0.70)' }}>Lock Screen</span>
-        <span className="font-sans text-xs ml-auto" style={{ color: 'rgba(255,255,255,0.22)' }}>⌘ L</span>
-      </button>
     </div>
   )
 }

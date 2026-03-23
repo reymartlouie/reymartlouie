@@ -121,8 +121,8 @@ export default function Hero() {
                 <span style={{ color: 'var(--hero-muted)' }}>&amp; Developer.</span>
               </h1>
               <p className="font-sans text-sm md:text-base max-w-lg leading-relaxed" style={{ color: 'var(--fg-40)' }}>
-                Graduating CpE student at USLS – Bacolod. I use AI-assisted workflows to design,
-                build, and ship production-ready apps — from React Native mobile to deployed web interfaces.
+                I design, build, and ship production-ready apps — from React Native mobile to
+                deployed web interfaces — using AI-assisted workflows and solid engineering fundamentals.
               </p>
             </div>
             <div className="flex flex-wrap items-center gap-3 mt-6 lg:mt-8 relative">
@@ -147,7 +147,7 @@ export default function Hero() {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent pointer-events-none" />
             <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
-              <p className="font-sans text-white/50 text-[10px] uppercase tracking-widest mb-1.5">Computer Engineer</p>
+              <p className="font-sans text-white/50 text-[10px] uppercase tracking-widest mb-1.5">Class of 2026 · USLS</p>
               <p className="font-display text-white text-[28px] md:text-[32px] lg:text-[36px] leading-[0.95] drop-shadow-lg">
                 Reymart Louie<br />L. Capapas
               </p>
@@ -175,9 +175,8 @@ export default function Hero() {
             <div className="absolute -top-10 -right-10 w-48 h-48 bg-blue-500/6 rounded-full blur-3xl pointer-events-none" />
             <p className="font-sans text-xs uppercase tracking-widest relative" style={{ color: 'var(--fg-30)' }}>About</p>
             <p className="font-sans text-sm md:text-base leading-relaxed relative" style={{ color: 'var(--fg-55)' }}>
-              Graduating Computer Engineering student at the University of St. La Salle – Bacolod.
-              Full stack developer experienced in React Native, TypeScript, and Supabase — building
-              production-ready apps through AI-assisted workflows and solid engineering fundamentals.
+              I care about the full picture — from circuit-level hardware to polished mobile UI.
+              Good engineering means the system works; good design means people trust it.
             </p>
           </div>
         </DraggableBento>

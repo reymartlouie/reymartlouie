@@ -28,17 +28,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script dangerouslySetInnerHTML={{ __html: `try{const t=localStorage.getItem('theme');if(t==='light')document.documentElement.classList.add('light')}catch(e){}` }} />
       </head>
       <body>
-        <div
-          aria-hidden="true"
-          className="layout-wallpaper"
-          style={{
-            position: 'fixed', inset: 0, zIndex: 0,
-            backgroundImage: 'url(/wallpaper.jpg)',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            transform: 'scale(1.06)',
-          }}
-        />
         <div aria-hidden="true" className="layout-overlay" style={{ position: 'fixed', inset: 0, zIndex: 0 }} />
         <div style={{ position: 'relative', zIndex: 1 }}>
           <ThemeProvider>{children}</ThemeProvider>
