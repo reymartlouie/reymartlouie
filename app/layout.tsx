@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 import { Inter, Archivo_Black } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/react'
 import './globals.css'
-import { ThemeProvider } from '@/contexts/ThemeContext'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -45,14 +44,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${inter.variable} ${archivoBlack.variable}`}>
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: `try{const t=localStorage.getItem('theme');if(t==='light')document.documentElement.classList.add('light')}catch(e){}` }} />
-      </head>
+    <html lang="en" className={`${inter.variable} ${archivoBlack.variable}`}>
       <body>
         <div aria-hidden="true" className="layout-overlay" style={{ position: 'fixed', inset: 0, zIndex: 0 }} />
         <div style={{ position: 'relative', zIndex: 1 }}>
-          <ThemeProvider>{children}</ThemeProvider>
+          {children}
         </div>
         <Analytics />
       </body>

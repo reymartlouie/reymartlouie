@@ -87,90 +87,9 @@
   --bar-text-active: rgba(255,255,255,0.90);
 }
 
-html.light {
-  /* Glassy white cards on #f5f5f7 page */
-  --bg-card:           rgba(255,255,255,0.72);
-  --bg-card-2:         rgba(255,255,255,0.72);
-  --bg-card-3:         rgba(255,255,255,0.72);
-  --bg-tech:           rgba(255,255,255,0.72);
-  --bg-exp:            rgba(255,255,255,0.72);
-  --bg-portfolio:      rgba(255,255,255,0.72);
-  --bg-firesafe:       rgba(255,255,255,0.72);
-  --bg-footer-contact: rgba(255,255,255,0.72);
-
-  /* Apple text scale */
-  --fg:    #1d1d1f;
-  --fg-60: #6e6e73;
-  --fg-55: #6e6e73;
-  --fg-50: #86868b;
-  --fg-40: #86868b;
-  --fg-30: #ababaf;
-  --fg-20: #c7c7cc;
-
-  /* Hairline borders */
-  --border:        rgba(0,0,0,0.08);
-  --border-strong: rgba(0,0,0,0.14);
-
-  /* Hero badge — Apple green */
-  --badge-bg:     #e3f2e6;
-  --badge-text:   #1a6635;
-  --badge-dot:    #34c759;
-  --hero-heading: #1d1d1f;
-  --hero-muted:   #6e6e73;
-
-  /* Tech card — neutral gray pill tags */
-  --tech-label:      #86868b;
-  --tech-tag-fg:     #1d1d1f;
-  --tech-tag-bg:     rgba(0,0,0,0.05);
-  --tech-tag-border: rgba(0,0,0,0.10);
-
-  /* Exp card — large black number */
-  --exp-label: #86868b;
-  --exp-num:   #1d1d1f;
-  --exp-body:  #6e6e73;
-
-  /* Portfolio card — clean neutral */
-  --portfolio-label:      #86868b;
-  --portfolio-title:      #1d1d1f;
-  --portfolio-body:       #6e6e73;
-  --portfolio-btn-fg:     #1d1d1f;
-  --portfolio-btn-bg:     rgba(0,0,0,0.05);
-  --portfolio-btn-border: rgba(0,0,0,0.10);
-
-  /* Contact card — minimal inputs, dark CTA */
-  --contact-label:         #86868b;
-  --contact-title:         #1d1d1f;
-  --contact-input-bg:      rgba(0,0,0,0.04);
-  --contact-input-border:  rgba(0,0,0,0.10);
-  --contact-btn-fg:        #ffffff;
-  --contact-btn-bg:        #1d1d1f;
-  --contact-btn-border:    #1d1d1f;
-  --contact-resume-fg:     #1d1d1f;
-  --contact-resume-bg:     rgba(0,0,0,0.05);
-  --contact-resume-border: rgba(0,0,0,0.10);
-
-  /* Hero buttons */
-  --hero-btn1-bg: #1d1d1f;
-  --hero-btn1-fg: #ffffff;
-  --hero-btn2-bg:     rgba(0,0,0,0.06);
-  --hero-btn2-fg:     #1d1d1f;
-  --hero-btn2-border: rgba(0,0,0,0.10);
-
-  /* Bars — Apple frosted glass */
-  --bar-bg:          rgba(255,255,255,0.72);
-  --nav-bg:          rgba(255,255,255,0.72);
-  --bar-border:      rgba(0,0,0,0.08);
-  --bar-text:        #86868b;
-  --bar-text-active: #1d1d1f;
-}
-
 /* Layout background */
 .layout-overlay {
   background: #111111;
-  transition: background 400ms ease;
-}
-html.light .layout-overlay {
-  background: radial-gradient(ellipse 80% 60% at 20% 10%, #e8eaf0 0%, #f5f5f7 55%, #ededf0 100%);
 }
 
 * {
@@ -216,18 +135,6 @@ body {
 }
 .bento-lift:hover {
   transform: translateY(-3px);
-}
-/* Light mode: glassy bento cards */
-html.light .rounded-\[32px\],
-html.light .rounded-\[24px\] {
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  border: 1px solid rgba(255,255,255,0.85) !important;
-  box-shadow:
-    0 1px 0  rgba(255,255,255,1) inset,
-    0 2px 1px rgba(255,255,255,0.6) inset,
-    0 4px 24px rgba(0,0,0,0.08),
-    0 1px 4px  rgba(0,0,0,0.06);
 }
 
 /* Button press */
