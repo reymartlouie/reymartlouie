@@ -12,9 +12,9 @@ const hardware = [
   { label: 'MQ-2', category: 'Gas / Smoke' },
   { label: 'ADS1115', category: 'ADC (I2C)' },
   { label: 'DHT22', category: 'Temp / Humidity' },
-  { label: 'Digital Servo', category: 'Camera Pan' },
-  { label: 'Arduino Mega 2560', category: 'SMS Gateway' },
-  { label: 'SIM800L ×2', category: 'GSM Modules' },
+  { label: 'ES3 Servo', category: 'Camera Pan' },
+  { label: 'Arduino Mega 2560 + R3 Wifi', category: 'SMS Gateway' },
+  { label: 'SIM800Lv2 ×2', category: 'GSM Modules' },
 ]
 
 const software = [
