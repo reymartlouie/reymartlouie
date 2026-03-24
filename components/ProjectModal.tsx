@@ -193,19 +193,6 @@ export default function ProjectModal({ onClose }: Props) {
           </p>
           <div className="flex flex-wrap gap-3">
             <a
-              href="https://github.com/reymartlouie/Firesafe"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-spring inline-flex items-center gap-2 font-sans text-sm font-semibold px-5 py-3 rounded-full transition-colors duration-150"
-              style={{
-                background: 'var(--contact-resume-bg)',
-                color: 'var(--fg-55)',
-                border: '1px solid var(--border-strong)',
-              }}
-            >
-              GitHub ↗
-            </a>
-            <a
               href="/thesis-for-final.pdf"
               target="_blank"
               rel="noopener noreferrer"
@@ -219,7 +206,20 @@ export default function ProjectModal({ onClose }: Props) {
               <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M7 1v8M4 6l3 3 3-3M2 10v1.5A1.5 1.5 0 003.5 13h7a1.5 1.5 0 001.5-1.5V10" />
               </svg>
-              Paper
+              Thesis
+            </a>
+            <a
+              href="https://github.com/reymartlouie/Firesafe"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-spring inline-flex items-center gap-2 font-sans text-sm font-semibold px-5 py-3 rounded-full transition-colors duration-150"
+              style={{
+                background: 'var(--contact-resume-bg)',
+                color: 'var(--fg-55)',
+                border: '1px solid var(--border-strong)',
+              }}
+            >
+              GitHub ↗
             </a>
             <a
               href="https://reymartlouie.framer.website/work/firesafe"

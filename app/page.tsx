@@ -23,6 +23,7 @@ export default function Home() {
       <StatusBar />
       <Navbar />
       <div className="max-w-[1280px] mx-auto px-4 pt-14 pb-32 md:px-6 md:pt-14 flex flex-col gap-4">
+        <SectionBreak label="Canvas" />
         <Hero />
         <div id="work" className="flex flex-col gap-4">
           <SectionBreak label="Selected Work" />

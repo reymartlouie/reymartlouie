@@ -5,6 +5,7 @@ import DraggableBento from './DraggableBento'
 import BentoCanvas, { type Rect } from './BentoCanvas'
 import CustomCard from './CustomCard'
 import CardEditorModal from './CardEditorModal'
+import GitHubCard from './GitHubCard'
 
 interface CustomCardData {
   id: string
@@ -106,7 +107,6 @@ export default function Hero() {
       <BentoCanvas savedPositions={savedPositions}>
 
         {/* ── Static cards ────────────────────────────────────────────────── */}
-
         <DraggableBento className="lg:col-span-8" delay={100}>
           <div className="flex-1 rounded-[32px] p-6 md:p-8 lg:p-10 relative overflow-hidden min-h-[320px] lg:min-h-[380px] flex flex-col justify-between" style={{ backgroundColor: 'var(--bg-card-2)' }}>
             <div className="absolute -top-24 -right-24 w-80 h-80 bg-blue-500/8 rounded-full blur-[80px] pointer-events-none" />
@@ -156,12 +156,12 @@ export default function Hero() {
           </div>
         </DraggableBento>
 
-        <DraggableBento className="lg:col-span-4" delay={240}>
+        <DraggableBento className="lg:col-span-3" delay={240}>
           <div className="flex-1 rounded-[32px] p-6 md:p-8 relative overflow-hidden min-h-[180px]" style={{ backgroundColor: 'var(--bg-tech)' }}>
             <div className="absolute -bottom-10 -right-10 w-44 h-44 bg-blue-500/15 rounded-full blur-3xl pointer-events-none" />
             <p className="font-sans text-xs uppercase tracking-widest mb-5 relative" style={{ color: 'var(--tech-label)' }}>Tech Stack</p>
             <div className="flex flex-wrap gap-2 relative">
-              {['React Native', 'TypeScript', 'Supabase', 'Next.js', 'React', 'Figma', 'Framer', 'EAS Build'].map((skill) => (
+              {['TypeScript', 'React-native', 'Supabase', 'Next.js', 'React', 'Figma', 'Framer', 'Expo', 'Basic Java'].map((skill) => (
                 <span key={skill} className="font-sans text-xs px-3 py-1.5 rounded-full" style={{ color: 'var(--tech-tag-fg)', backgroundColor: 'var(--tech-tag-bg)', border: '1px solid var(--tech-tag-border)' }}>
                   {skill}
                 </span>
@@ -170,7 +170,7 @@ export default function Hero() {
           </div>
         </DraggableBento>
 
-        <DraggableBento className="lg:col-span-4" delay={290}>
+        <DraggableBento className="lg:col-span-3" delay={290}>
           <div className="flex-1 rounded-[32px] p-6 md:p-8 flex flex-col gap-4 relative overflow-hidden min-h-[180px]" style={{ backgroundColor: 'var(--bg-card-3)' }}>
             <div className="absolute -top-10 -right-10 w-48 h-48 bg-blue-500/6 rounded-full blur-3xl pointer-events-none" />
             <p className="font-sans text-xs uppercase tracking-widest relative" style={{ color: 'var(--fg-30)' }}>About</p>
@@ -181,12 +181,8 @@ export default function Hero() {
           </div>
         </DraggableBento>
 
-        <DraggableBento className="lg:col-span-2" delay={340}>
-          <div className="flex-1 rounded-[32px] p-6 md:p-8 flex flex-col items-center justify-center text-center min-h-[180px]" style={{ backgroundColor: 'var(--bg-exp)' }}>
-            <p className="font-sans text-[10px] uppercase tracking-widest mb-3" style={{ color: 'var(--exp-label)' }}>Experience</p>
-            <p className="font-display text-6xl leading-none" style={{ color: 'var(--exp-num)' }}>4+</p>
-            <p className="font-sans text-xs mt-2 leading-snug" style={{ color: 'var(--exp-body)' }}>Years crafting<br />digital products</p>
-          </div>
+        <DraggableBento className="lg:col-span-6" delay={380}>
+          <GitHubCard />
         </DraggableBento>
 
         {/* ── Custom cards ─────────────────────────────────────────────────── */}
