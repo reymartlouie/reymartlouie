@@ -121,8 +121,8 @@ export default function Hero() {
                 <span style={{ color: 'var(--hero-muted)' }}>&amp; Developer.</span>
               </h1>
               <p className="font-sans text-sm md:text-base max-w-lg leading-relaxed" style={{ color: 'var(--fg-40)' }}>
-                I design, build, and ship production-ready apps — from React Native mobile to
-                deployed web interfaces — using AI-assisted workflows and solid engineering fundamentals.
+                Frontend and UI/UX engineer — designing and shipping production-ready apps across
+                React Native and web, backed by real hardware and networking experience.
               </p>
             </div>
             <div className="flex flex-wrap items-center gap-3 mt-6 lg:mt-8 relative">
@@ -175,8 +175,8 @@ export default function Hero() {
             <div className="absolute -top-10 -right-10 w-48 h-48 bg-blue-500/6 rounded-full blur-3xl pointer-events-none" />
             <p className="font-sans text-xs uppercase tracking-widest relative" style={{ color: 'var(--fg-30)' }}>About</p>
             <p className="font-sans text-sm md:text-base leading-relaxed relative" style={{ color: 'var(--fg-55)' }}>
-              I care about the full picture — from circuit-level hardware to polished mobile UI.
-              Good engineering means the system works; good design means people trust it.
+              Computer Engineer focused on frontend and UI/UX development — building polished,
+              production-ready interfaces with a foundation in hardware and networking.
             </p>
           </div>
         </DraggableBento>
