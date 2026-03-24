@@ -111,7 +111,7 @@ export default function Projects() {
                 <div className="flex items-center gap-4 shrink-0">
                   <span className="font-sans text-xs" style={{ color: 'var(--fg-20)' }}>2025</span>
                   <span className="font-sans text-sm font-medium" style={{ color: '#fb923c' }}>
-                    View Case Study →
+                    View Details →
                   </span>
                 </div>
               </div>
