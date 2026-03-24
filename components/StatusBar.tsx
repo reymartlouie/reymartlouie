@@ -177,7 +177,7 @@ export default function StatusBar() {
 
         {[
           { label: section,          href: '#about'   },
-          { label: 'Certifications', href: '#work'    },
+          { label: 'Certifications', href: '#certifications' },
           { label: 'Resume',         href: '/Reymart_Louie_Capapas_resume.pdf' },
           { label: 'Achievements',   href: '#work'    },
           { label: 'Hire Me',        href: '#contact' },

@@ -1,6 +1,7 @@
 import Navbar from '@/components/Navbar'
 import Hero from '@/components/Hero'
 import Projects from '@/components/Projects'
+import Certifications from '@/components/Certifications'
 import Footer from '@/components/Footer'
 import StatusBar from '@/components/StatusBar'
 
@@ -27,6 +28,8 @@ export default function Home() {
           <SectionBreak label="Selected Work" />
           <Projects />
         </div>
+        <SectionBreak label="Certifications" />
+        <Certifications />
         <SectionBreak label="Contact" />
         <Footer />
       </div>

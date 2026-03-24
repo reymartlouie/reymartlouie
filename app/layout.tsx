@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter, Archivo_Black } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/react'
 import './globals.css'
 import { ThemeProvider } from '@/contexts/ThemeContext'
 
@@ -16,9 +17,30 @@ const archivoBlack = Archivo_Black({
   display: 'swap',
 })
 
+const SITE_URL = 'https://reymartlouie.vercel.app'
+
 export const metadata: Metadata = {
-  title: 'Reymart Louie — Portfolio',
-  description: 'Design engineer crafting thoughtful digital experiences.',
+  metadataBase: new URL(SITE_URL),
+  title: 'Reymart Louie — Computer Engineer & Developer',
+  description:
+    'Computer Engineering student at USLS – Bacolod. I design, build, and ship production-ready apps — React Native, TypeScript, Supabase, and Next.js.',
+  keywords: ['Computer Engineer', 'React Native', 'TypeScript', 'Supabase', 'Next.js', 'USLS', 'Bacolod', 'Portfolio'],
+  authors: [{ name: 'Reymart Louie L. Capapas' }],
+  openGraph: {
+    type: 'website',
+    url: SITE_URL,
+    title: 'Reymart Louie — Computer Engineer & Developer',
+    description:
+      'Computer Engineering student at USLS – Bacolod. I design, build, and ship production-ready apps — React Native, TypeScript, Supabase, and Next.js.',
+    siteName: 'Reymart Louie Portfolio',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Reymart Louie — Computer Engineer & Developer',
+    description:
+      'Computer Engineering student at USLS – Bacolod. React Native · TypeScript · Supabase · Next.js',
+  },
+  robots: { index: true, follow: true },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -32,6 +54,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <div style={{ position: 'relative', zIndex: 1 }}>
           <ThemeProvider>{children}</ThemeProvider>
         </div>
+        <Analytics />
       </body>
     </html>
   )
