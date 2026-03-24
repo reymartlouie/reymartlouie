@@ -133,6 +133,8 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   className="flex items-center justify-between group py-3 last:border-0"
                   style={{ borderBottom: '1px solid var(--border)' }}
+                  onMouseEnter={e => { (e.currentTarget.children[0] as HTMLElement).style.color = 'rgba(255,255,255,0.90)'; (e.currentTarget.children[1] as HTMLElement).style.color = 'rgba(255,255,255,0.70)' }}
+                  onMouseLeave={e => { (e.currentTarget.children[0] as HTMLElement).style.color = 'var(--fg-60)'; (e.currentTarget.children[1] as HTMLElement).style.color = 'var(--fg-20)' }}
                 >
                   <span className="font-sans text-sm transition-colors duration-150" style={{ color: 'var(--fg-60)' }}>
                     {link.label}

@@ -162,7 +162,10 @@ export default function Hero() {
             <p className="font-sans text-xs uppercase tracking-widest mb-5 relative" style={{ color: 'var(--tech-label)' }}>Tech Stack</p>
             <div className="flex flex-wrap gap-2 relative">
               {['TypeScript', 'React-native', 'Supabase', 'Next.js', 'React', 'Figma', 'Framer', 'Expo', 'Basic Java'].map((skill) => (
-                <span key={skill} className="font-sans text-xs px-3 py-1.5 rounded-full" style={{ color: 'var(--tech-tag-fg)', backgroundColor: 'var(--tech-tag-bg)', border: '1px solid var(--tech-tag-border)' }}>
+                <span key={skill} className="font-sans text-xs px-3 py-1.5 rounded-full transition-colors duration-150 cursor-default" style={{ color: 'var(--tech-tag-fg)', backgroundColor: 'var(--tech-tag-bg)', border: '1px solid var(--tech-tag-border)' }}
+                  onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.90)'}
+                  onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'var(--tech-tag-fg)'}
+                >
                   {skill}
                 </span>
               ))}

@@ -37,13 +37,13 @@ export default function Certifications() {
                   style={{ background: 'var(--bg-card-2)', border: '1px solid var(--border)' }}
                 >
                   <div className="flex flex-col gap-1">
-                    <span className="font-sans text-sm font-medium" style={{ color: 'var(--fg-60)' }}>{title}</span>
-                    <span className="font-sans text-xs" style={{ color: 'var(--fg-30)' }}>{issuer}</span>
+                    <span className="font-sans text-sm font-medium transition-colors duration-150 group-hover:text-white/90" style={{ color: 'var(--fg-60)' }}>{title}</span>
+                    <span className="font-sans text-xs transition-colors duration-150 group-hover:text-white/50" style={{ color: 'var(--fg-30)' }}>{issuer}</span>
                   </div>
                   <div className="flex items-center gap-4 shrink-0">
-                    <span className="font-sans text-xs" style={{ color: 'var(--fg-20)' }}>{date}</span>
+                    <span className="font-sans text-xs transition-colors duration-150 group-hover:text-white/40" style={{ color: 'var(--fg-20)' }}>{date}</span>
                     {url && (
-                      <span className="font-sans text-xs font-medium" style={{ color: 'var(--fg-40)' }}>
+                      <span className="font-sans text-xs font-medium transition-colors duration-150 group-hover:text-white/70" style={{ color: 'var(--fg-40)' }}>
                         View ↗
                       </span>
                     )}

@@ -97,7 +97,9 @@ export default function Projects() {
                   {tags.map((tag) => (
                     <span
                       key={tag}
-                      className="font-sans text-xs px-3 py-1 rounded-full border"
+                      className="font-sans text-xs px-3 py-1 rounded-full border transition-colors duration-150"
+                      onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = 'rgba(251,146,60,1)'}
+                      onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = '#fb923c'}
                       style={{
                         color: '#fb923c',
                         borderColor: 'rgba(251,146,60,0.28)',
