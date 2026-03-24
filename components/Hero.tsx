@@ -170,7 +170,7 @@ export default function Hero() {
           </div>
         </DraggableBento>
 
-        <DraggableBento className="lg:col-span-6" delay={290}>
+        <DraggableBento className="lg:col-span-4" delay={290}>
           <div className="flex-1 rounded-[32px] p-6 md:p-8 flex flex-col gap-4 relative overflow-hidden min-h-[180px]" style={{ backgroundColor: 'var(--bg-card-3)' }}>
             <div className="absolute -top-10 -right-10 w-48 h-48 bg-blue-500/6 rounded-full blur-3xl pointer-events-none" />
             <p className="font-sans text-xs uppercase tracking-widest relative" style={{ color: 'var(--fg-30)' }}>About</p>
