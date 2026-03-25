@@ -31,6 +31,7 @@ export default function Hero() {
   const [savedPositions, setSavedPositions] = useState<Record<string, Rect>>({})
   const didLoadCards = useRef(false)
 
+  const [editMode,    setEditMode]    = useState(false)
   const [rateLimited, setRateLimited] = useState(false)
   const [modalOpen,   setModalOpen]   = useState(false)
   const [editingCard, setEditingCard] = useState<CustomCardData | null>(null)
@@ -53,16 +54,17 @@ export default function Hero() {
   // Load from localStorage client-side only (avoids hydration mismatch)
   useEffect(() => {
     try {
-      const all: Record<string, Rect> = JSON.parse(localStorage.getItem('bento-positions') ?? '{}')
-      const custom: Record<string, Rect> = {}
-      for (const id in all) { if (id.startsWith('custom-')) custom[id] = all[id] }
-      setSavedPositions(custom)
+      const all: Record<string, Rect> = JSON.parse(localStorage.getItem('bento-positions-v3') ?? '{}')
+      setSavedPositions(all)
     } catch {}
     try {
       const stored: CustomCardData[] = JSON.parse(localStorage.getItem('bento-custom-cards') ?? '[]')
       didLoadCards.current = true
       setCustomCards(stored)
     } catch { didLoadCards.current = true }
+    try {
+      if (localStorage.getItem('bento-edit-mode') === 'true') setEditMode(true)
+    } catch {}
     syncRateLimit()
   }, [])
 
@@ -70,6 +72,10 @@ export default function Hero() {
     if (!didLoadCards.current) return
     localStorage.setItem('bento-custom-cards', JSON.stringify(customCards))
   }, [customCards])
+
+  useEffect(() => {
+    try { localStorage.setItem('bento-edit-mode', String(editMode)) } catch {}
+  }, [editMode])
 
   const handleCreateCard = (data: { title: string; body: string; color: string }) => {
     const newCard: CustomCardData = {
@@ -104,28 +110,34 @@ export default function Hero() {
   return (
     <section id="about" className="flex flex-col gap-4">
 
-      <BentoCanvas savedPositions={savedPositions}>
+      <BentoCanvas savedPositions={savedPositions} editMode={editMode}>
 
         {/* ── Static cards ────────────────────────────────────────────────── */}
-        <DraggableBento className="lg:col-span-8" delay={100}>
-          <div className="flex-1 rounded-[32px] p-6 md:p-8 lg:p-10 relative overflow-hidden min-h-[320px] lg:min-h-[380px] flex flex-col justify-between" style={{ backgroundColor: 'var(--bg-card-2)' }}>
+        <DraggableBento className="lg:col-span-8" delay={100} minW={320} minH={240}
+          sizes={[
+            { label: 'I',   w: 420, h: 300 },
+            { label: 'II',  w: 580, h: 380 },
+            { label: 'III', w: 780, h: 460 },
+          ]}
+        >
+          <div className="@container flex-1 rounded-[32px] p-5 @md:p-7 @xl:p-9 relative overflow-hidden flex flex-col justify-between" style={{ backgroundColor: 'var(--bg-card-2)' }}>
             <div className="absolute -top-24 -right-24 w-80 h-80 bg-blue-500/8 rounded-full blur-[80px] pointer-events-none" />
             <div className="relative">
-              <span className="inline-flex items-center gap-2 text-xs font-sans px-3 py-1.5 rounded-full mb-6 lg:mb-8 w-fit" style={{ background: 'var(--badge-bg)', color: 'var(--badge-text)' }}>
+              <span className="inline-flex items-center gap-2 text-xs font-sans px-3 py-1 rounded-full mb-4 @xl:mb-5 w-fit" style={{ background: 'var(--badge-bg)', color: 'var(--badge-text)' }}>
                 <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: 'var(--badge-dot)' }} />
                 Available for work
               </span>
-              <h1 className="font-display text-[44px] md:text-[56px] lg:text-[72px] leading-[0.9] mb-4 lg:mb-6" style={{ color: 'var(--hero-heading)' }}>
+              <h1 className="font-display text-[44px] @md:text-[58px] @xl:text-[72px] leading-[0.9] mb-3 @xl:mb-4" style={{ color: 'var(--hero-heading)' }}>
                 Computer<br />
                 Engineer<br />
                 <span style={{ color: 'var(--hero-muted)' }}>&amp; Developer.</span>
               </h1>
-              <p className="font-sans text-sm md:text-base max-w-lg leading-relaxed" style={{ color: 'var(--fg-40)' }}>
+              <p className="font-sans text-sm @md:text-base max-w-lg leading-relaxed" style={{ color: 'var(--fg-40)' }}>
                 Frontend and UI/UX engineer — designing and shipping production-ready apps across
                 React Native and web, backed by real hardware and networking experience.
               </p>
             </div>
-            <div className="flex flex-wrap items-center gap-3 mt-6 lg:mt-8 relative">
+            <div className="flex flex-wrap items-center gap-2 mt-4 @xl:mt-6 relative">
               <a href="#work" className="btn-spring inline-flex items-center gap-2 bg-[#f0f0f0] text-[#111111] font-sans font-semibold text-sm px-6 py-3 rounded-full hover:bg-white transition-colors">
                 View Work
               </a>
@@ -137,8 +149,14 @@ export default function Hero() {
           </div>
         </DraggableBento>
 
-        <DraggableBento className="lg:col-span-4" delay={180}>
-          <div className="flex-1 rounded-[32px] relative overflow-hidden min-h-[340px] lg:min-h-[380px] bg-[#1a2a3a]">
+        <DraggableBento className="lg:col-span-4" delay={180} minW={200} minH={280}
+          sizes={[
+            { label: 'I',   w: 220, h: 320 },
+            { label: 'II',  w: 300, h: 420 },
+            { label: 'III', w: 400, h: 520 },
+          ]}
+        >
+          <div className="@container flex-1 rounded-[32px] relative overflow-hidden min-h-[340px] @md:min-h-[380px] bg-[#1a2a3a]">
             <img
               src="/photo.jpg"
               alt="Reymart Louie"
@@ -146,9 +164,9 @@ export default function Hero() {
               className="absolute inset-0 w-full h-full object-cover object-top pointer-events-none select-none"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent pointer-events-none" />
-            <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
+            <div className="absolute bottom-0 left-0 right-0 p-6 @md:p-8">
               <p className="font-sans text-white/50 text-[10px] uppercase tracking-widest mb-1.5">Class of 2026 · USLS</p>
-              <p className="font-display text-white text-[28px] md:text-[32px] lg:text-[36px] leading-[0.95] drop-shadow-lg">
+              <p className="font-display text-white text-[28px] @sm:text-[32px] @md:text-[36px] leading-[0.95] drop-shadow-lg">
                 Reymart Louie<br />L. Capapas
               </p>
               <p className="font-sans text-white/35 text-xs mt-2">USLS · Bacolod</p>
@@ -156,8 +174,14 @@ export default function Hero() {
           </div>
         </DraggableBento>
 
-        <DraggableBento className="lg:col-span-3" delay={240}>
-          <div className="flex-1 rounded-[32px] p-6 md:p-8 relative overflow-hidden min-h-[180px]" style={{ backgroundColor: 'var(--bg-tech)' }}>
+        <DraggableBento className="lg:col-span-3" delay={240} minW={260} minH={260}
+          sizes={[
+            { label: 'I',   w: 260, h: 260 },
+            { label: 'II',  w: 360, h: 300 },
+            { label: 'III', w: 460, h: 360 },
+          ]}
+        >
+          <div className="@container flex-1 rounded-[32px] p-6 @md:p-8 relative overflow-hidden min-h-[180px]" style={{ backgroundColor: 'var(--bg-tech)' }}>
             <div className="absolute -bottom-10 -right-10 w-44 h-44 bg-blue-500/15 rounded-full blur-3xl pointer-events-none" />
             <p className="font-sans text-xs uppercase tracking-widest mb-5 relative" style={{ color: 'var(--tech-label)' }}>Tech Stack</p>
             <div className="flex flex-wrap gap-2 relative">
@@ -173,18 +197,30 @@ export default function Hero() {
           </div>
         </DraggableBento>
 
-        <DraggableBento className="lg:col-span-3" delay={290}>
-          <div className="flex-1 rounded-[32px] p-6 md:p-8 flex flex-col gap-4 relative overflow-hidden min-h-[180px]" style={{ backgroundColor: 'var(--bg-card-3)' }}>
+        <DraggableBento className="lg:col-span-3" delay={290} minW={240} minH={240}
+          sizes={[
+            { label: 'I',   w: 240, h: 240 },
+            { label: 'II',  w: 340, h: 280 },
+            { label: 'III', w: 440, h: 340 },
+          ]}
+        >
+          <div className="@container flex-1 rounded-[32px] p-6 @md:p-8 flex flex-col gap-4 relative overflow-hidden min-h-[180px]" style={{ backgroundColor: 'var(--bg-card-3)' }}>
             <div className="absolute -top-10 -right-10 w-48 h-48 bg-blue-500/6 rounded-full blur-3xl pointer-events-none" />
             <p className="font-sans text-xs uppercase tracking-widest relative" style={{ color: 'var(--fg-30)' }}>About</p>
-            <p className="font-sans text-sm md:text-base leading-relaxed relative" style={{ color: 'var(--fg-55)' }}>
+            <p className="font-sans text-sm @md:text-base leading-relaxed relative" style={{ color: 'var(--fg-55)' }}>
               Computer Engineer focused on frontend and UI/UX development — building polished,
               production-ready interfaces with a foundation in hardware and networking.
             </p>
           </div>
         </DraggableBento>
 
-        <DraggableBento className="lg:col-span-6" delay={380}>
+        <DraggableBento className="lg:col-span-6" delay={380} minW={300} minH={220}
+          sizes={[
+            { label: 'I',   w: 300, h: 220 },
+            { label: 'II',  w: 460, h: 260 },
+            { label: 'III', w: 620, h: 320 },
+          ]}
+        >
           <GitHubCard />
         </DraggableBento>
 
@@ -203,17 +239,31 @@ export default function Hero() {
 
       </BentoCanvas>
 
-      {/* Add card button */}
-      <button
-        onClick={openCreate}
-        disabled={rateLimited}
-        className="btn-spring inline-flex items-center gap-3 bg-white/10 text-white/70
-                   border border-white/15 font-sans text-sm font-semibold px-5 py-3 rounded-full
-                   hover:bg-white/[0.14] transition-colors self-start
-                   disabled:opacity-40 disabled:cursor-not-allowed"
-      >
-        {rateLimited ? 'Note limit reached · come back tomorrow' : '+ Leave a note'}
-      </button>
+      {/* Action row */}
+      <div className="flex items-center gap-3 flex-wrap">
+        <button
+          onClick={openCreate}
+          disabled={rateLimited}
+          className="btn-spring inline-flex items-center gap-3 bg-white/10 text-white/70
+                     border border-white/15 font-sans text-sm font-semibold px-5 py-3 rounded-full
+                     hover:bg-white/[0.14] transition-colors
+                     disabled:opacity-40 disabled:cursor-not-allowed"
+        >
+          {rateLimited ? 'Note limit reached · come back tomorrow' : '+ Leave a note'}
+        </button>
+
+        <button
+          onClick={() => setEditMode(prev => !prev)}
+          className={`btn-spring inline-flex items-center gap-2 font-sans text-sm font-semibold
+                      px-5 py-3 rounded-full border transition-colors
+                      ${editMode
+                        ? 'bg-white/[0.14] text-white/90 border-white/25 hover:bg-white/20'
+                        : 'bg-white/10 text-white/70 border-white/15 hover:bg-white/[0.14]'
+                      }`}
+        >
+          {editMode ? '✓ Done' : '⊹ Edit layout'}
+        </button>
+      </div>
 
       {/* Card editor modal */}
       {modalOpen && (

@@ -14,9 +14,9 @@ export default function CustomCard({
   onEdit: () => void
   onDelete: () => void
 }) {
-  const { removeCard, jiggling } = useBentoCanvas()
+  const { removeCard, editMode } = useBentoCanvas()
   const [hovered, setHovered] = useState(false)
-  const visible = hovered || jiggling
+  const visible = hovered || editMode
 
   // Sync canvas positions when this card unmounts (user deleted it)
   // eslint-disable-next-line react-hooks/exhaustive-deps

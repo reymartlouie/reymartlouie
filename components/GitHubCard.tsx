@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 type Contribution = { date: string; count: number; level: 0 | 1 | 2 | 3 | 4 }
 
@@ -17,13 +17,29 @@ const DOT_GLOW: Partial<Record<number, string>> = {
   4: '0 0 8px rgba(34,197,94,0.70)',
 }
 
-const WEEKS_TO_SHOW = 24
+// Each week column: 14px dot + 4px gap between columns
+const DOT_W   = 14
+const COL_GAP = 4
+const WEEK_W  = DOT_W + COL_GAP   // 18px per week
+const PADDING = 48                  // p-6 (24px) × 2 sides
+const MAX_WEEKS = 52
 
 export default function GitHubCard() {
-  const [weeks,   setWeeks]   = useState<Contribution[][]>([])
-  const [total,   setTotal]   = useState(0)
-  const [streak,  setStreak]  = useState(0)
-  const [loading, setLoading] = useState(true)
+  const [allWeeks, setAllWeeks] = useState<Contribution[][]>([])
+  const [total,    setTotal]    = useState(0)
+  const [streak,   setStreak]   = useState(0)
+  const [loading,  setLoading]  = useState(true)
+  const [cardW,    setCardW]    = useState(0)
+  const cardRef = useRef<HTMLDivElement>(null)
+
+  // Track card width so we can show exactly as many weeks as fit
+  useEffect(() => {
+    const el = cardRef.current
+    if (!el) return
+    const ro = new ResizeObserver(([entry]) => setCardW(entry.contentRect.width))
+    ro.observe(el)
+    return () => ro.disconnect()
+  }, [])
 
   useEffect(() => {
     fetch('https://github-contributions-api.jogruber.de/v4/reymartlouie?y=last')
@@ -42,19 +58,26 @@ export default function GitHubCard() {
         while (i >= 0 && all[i].count > 0) { s++; i-- }
         setStreak(s)
 
-        // Slice last N weeks, chunked by 7
-        const slice = all.slice(-(WEEKS_TO_SHOW * 7))
+        // Load up to MAX_WEEKS worth of data
+        const slice = all.slice(-(MAX_WEEKS * 7))
         const w: Contribution[][] = []
         for (let j = 0; j < slice.length; j += 7) w.push(slice.slice(j, j + 7))
-        setWeeks(w)
+        setAllWeeks(w)
         setLoading(false)
       })
       .catch(() => setLoading(false))
   }, [])
 
+  // How many week-columns fit in the current card width (most recent weeks shown)
+  const weeksToShow = cardW > 0
+    ? Math.min(allWeeks.length, Math.max(2, Math.floor((cardW - PADDING) / WEEK_W)))
+    : 24
+  const weeks = allWeeks.slice(-weeksToShow)
+
   return (
     <div
-      className="flex-1 rounded-[32px] p-6 relative overflow-hidden min-h-[180px] flex flex-col justify-between"
+      ref={cardRef}
+      className="@container flex-1 rounded-[32px] p-6 relative overflow-hidden min-h-[180px] flex flex-col justify-between"
       style={{ backgroundColor: '#0a1a0b' }}
     >
       {/* ambient glow */}
@@ -69,7 +92,7 @@ export default function GitHubCard() {
         GitHub
       </p>
 
-      {/* grid */}
+      {/* contribution grid — always shows the most recent weeks that fit */}
       <div className="flex-1 flex items-start relative overflow-hidden">
         {loading ? (
           <div className="flex items-center h-[94px]">
@@ -84,26 +107,11 @@ export default function GitHubCard() {
                     key={di}
                     title={`${day.date} · ${day.count}`}
                     style={{
-                      width:           14,
-                      height:          14,
+                      width:           DOT_W,
+                      height:          DOT_W,
                       borderRadius:    3,
                       backgroundColor: DOT_COLORS[day.level],
                       boxShadow:       DOT_GLOW[day.level],
-                    }}
-                  />
-                ))}
-              </div>
-            ))}
-            {Array.from({ length: 10 }).map((_, wi) => (
-              <div key={`filler-${wi}`} className="flex flex-col gap-[4px]">
-                {Array.from({ length: 7 }).map((_, di) => (
-                  <div
-                    key={di}
-                    style={{
-                      width:           14,
-                      height:          14,
-                      borderRadius:    3,
-                      backgroundColor: DOT_COLORS[0],
                     }}
                   />
                 ))}
@@ -113,7 +121,7 @@ export default function GitHubCard() {
         )}
       </div>
 
-      {/* footer stats */}
+      {/* footer stats — always visible at the bottom */}
       <div className="flex items-baseline gap-2 mt-4 relative">
         <span className="font-display text-2xl leading-none" style={{ color: '#4ade80' }}>
           {total.toLocaleString()}

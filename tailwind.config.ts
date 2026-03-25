@@ -19,9 +19,18 @@ const config: Config = {
       maxWidth: {
         '8xl': '1440px',
       },
+      containers: {
+        xs:  '240px',
+        sm:  '340px',
+        md:  '460px',
+        lg:  '600px',
+        xl:  '760px',
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/container-queries'),
+  ],
 }
 
 export default config

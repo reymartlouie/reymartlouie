@@ -146,25 +146,6 @@ body {
   transition-duration: 80ms;
 }
 
-/* iOS-style wiggle — damped amplitude over 1.6 s */
-@keyframes bento-wiggle {
-  0%,100% { transform: rotate(0deg); }
-  10%     { transform: rotate(-1.8deg); }
-  20%     { transform: rotate( 1.8deg); }
-  30%     { transform: rotate(-1.8deg); }
-  40%     { transform: rotate( 1.8deg); }
-  50%     { transform: rotate(-1.4deg); }
-  60%     { transform: rotate( 1.4deg); }
-  70%     { transform: rotate(-0.9deg); }
-  80%     { transform: rotate( 0.6deg); }
-  90%     { transform: rotate(-0.2deg); }
-}
-.bento-wiggle {
-  animation: bento-wiggle 1.6s ease-in-out both;
-  transform-origin: center center;
-}
-
-
 @media (prefers-reduced-motion: reduce) {
   .reveal-item          { opacity: 1; transform: none; }
   .reveal-item.is-visible { animation: none; }
@@ -172,5 +153,4 @@ body {
   .bento-lift:hover     { transform: none; transition: none; }
   .btn-spring,
   .btn-spring:active    { transform: none; transition: none; }
-  .bento-wiggle         { animation: none; }
 }

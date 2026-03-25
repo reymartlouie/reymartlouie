@@ -8,8 +8,9 @@ export type Rect = { x: number; y: number; w: number; h: number }
 
 type CtxType = {
   floating: boolean
-  jiggling: boolean
+  editMode: boolean
   containerRef: React.RefObject<HTMLDivElement>
+  positionsRef: React.MutableRefObject<Record<string, Rect>>
   positions: Record<string, Rect>
   savedPositions: Record<string, Rect>
   registerCard: (id: string, rect: Rect) => void
@@ -26,8 +27,8 @@ export function useBentoCanvas() {
   return c
 }
 
-const GAP = 16
-const POSITIONS_KEY = 'bento-positions'
+export const GAP = 16
+const POSITIONS_KEY = 'bento-positions-v3'
 
 // ── Pure helpers ─────────────────────────────────────────────────────────────
 
@@ -46,7 +47,7 @@ function clampToContainer(rect: Rect, cw: number): Rect {
 
 /** Multi-pass global solver — pushes overlapping cards apart on every pass
  *  until none remain (or 30 passes hit). O(n² × passes), fine for ≤ 20 cards. */
-function resolveAll(
+export function resolveAll(
   rects: Record<string, Rect>,
   cw: number,
   gap: number,
@@ -90,6 +91,51 @@ function resolveAll(
   return out
 }
 
+/** Single-card solver — moves only `id`, all other cards are fixed obstacles.
+ *  Used during live drag to prevent overlap without displacing other cards. */
+export function resolveOne(
+  id: string,
+  rects: Record<string, Rect>,
+  cw: number,
+  gap: number,
+): Rect {
+  let r = { ...rects[id] }
+  const obstacles = Object.entries(rects)
+    .filter(([k]) => k !== id)
+    .map(([, v]) => v)
+
+  for (let pass = 0; pass < 15; pass++) {
+    let changed = false
+    for (const o of obstacles) {
+      if (
+        r.x     >= o.x + o.w + gap ||
+        r.x + r.w <= o.x - gap     ||
+        r.y     >= o.y + o.h + gap ||
+        r.y + r.h <= o.y - gap
+      ) continue
+
+      const pushR = o.x + o.w + gap - r.x
+      const pushL = r.x + r.w + gap - o.x
+      const pushD = o.y + o.h + gap - r.y
+      const pushU = r.y + r.h + gap - o.y
+      const min = Math.min(pushR, pushL, pushD, pushU)
+
+      let { x, y } = r
+      if      (min === pushR) x += pushR
+      else if (min === pushL) x -= pushL
+      else if (min === pushD) y += pushD
+      else                    y -= pushU
+
+      if (cw > 0) x = Math.max(0, Math.min(x, cw - r.w))
+      y = Math.max(0, y)
+      r = { x, y, w: r.w, h: r.h }
+      changed = true
+    }
+    if (!changed) break
+  }
+  return r
+}
+
 function savePositions(positions: Record<string, Rect>) {
   try {
     if (typeof window !== 'undefined') {
@@ -103,9 +149,11 @@ function savePositions(positions: Record<string, Rect>) {
 export default function BentoCanvas({
   children,
   savedPositions = {},
+  editMode = false,
 }: {
   children: ReactNode
   savedPositions?: Record<string, Rect>
+  editMode?: boolean
 }) {
   const containerRef      = useRef<HTMLDivElement>(null)
   const cwRef             = useRef(0)
@@ -115,10 +163,13 @@ export default function BentoCanvas({
   savedPositionsRef.current = savedPositions
 
   const [floating,   setFloating]   = useState(false)
-  const [jiggling,   setJiggling]   = useState(false)
   const [containerH, setContainerH] = useState(0)
   const [positions,  setPositions]  = useState<Record<string, Rect>>({})
 
+  // Kept in sync with `positions` state so pointer-event callbacks can read
+  // current positions synchronously without stale closures.
+  const positionsRef = useRef<Record<string, Rect>>({})
+  positionsRef.current = positions
 
   // Track container width; re-clamp + re-resolve on every change
   useEffect(() => {
@@ -142,26 +193,17 @@ export default function BentoCanvas({
     return () => ro.disconnect()
   }, [])
 
-  // ── Auto-jiggle once after all cards have revealed ───────────────────────
-  useEffect(() => {
-    if (!floating) return
-    // Last card delay is 340ms + 420ms settle = ~760ms; add buffer → 1400ms
-    const startT = setTimeout(() => {
-      setJiggling(true)
-      // Wiggle animation is 1.6 s; clear state after it finishes
-      const endT = setTimeout(() => setJiggling(false), 1800)
-      return () => clearTimeout(endT)
-    }, 1400)
-    return () => clearTimeout(startT)
-  }, [floating])
-
   /** Each card calls this once at mount with its natural grid position.
    *  Debounce: fires floating mode 80ms after the last registration call. */
   const registerCard = useCallback((id: string, rect: Rect) => {
-    if (typeof window !== 'undefined' && window.innerWidth < 1024) return
 
-    // Use saved position if available, otherwise use measured grid rect
-    const effectiveRect = savedPositionsRef.current[id] ?? rect
+    // Use saved position if available, but always enforce the natural content
+    // height as a floor — saved heights may be stale (e.g. from a previous
+    // resize that was too aggressive) and would clip content on reload.
+    const saved = savedPositionsRef.current[id]
+    const effectiveRect: Rect = saved
+      ? { ...saved, h: Math.max(saved.h, rect.h) }
+      : rect
     pendingRef.current = { ...pendingRef.current, [id]: effectiveRect }
 
     if (activateTimerRef.current) clearTimeout(activateTimerRef.current)
@@ -174,7 +216,7 @@ export default function BentoCanvas({
     }, 80)
   }, [])
 
-  /** Called on drag-drop or resize-end. Resolves ALL collisions globally. */
+  /** Called on drag-drop. Resolves ALL collisions globally and persists. */
   const dropCard = useCallback((id: string, rect: Rect) => {
     setPositions(prev => {
       const cw = cwRef.current
@@ -217,7 +259,7 @@ export default function BentoCanvas({
 
   return (
     <BentoCtx.Provider value={{
-      floating, jiggling, containerRef, positions, savedPositions,
+      floating, editMode, containerRef, positionsRef, positions, savedPositions,
       registerCard, dropCard, addCard, removeCard,
     }}>
       <div

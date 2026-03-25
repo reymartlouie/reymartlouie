@@ -1,29 +1,45 @@
 'use client'
 
 import { useRef, useState, useEffect, useCallback, useId, type ReactNode } from 'react'
-import { useBentoCanvas, type Rect } from './BentoCanvas'
+import { useBentoCanvas, resolveOne, GAP, type Rect } from './BentoCanvas'
 
-const MIN_W       = 180
-const MIN_H       = 100
-const CARD_RADIUS = 32
+const DEFAULT_MIN_W = 180
+const DEFAULT_MIN_H = 100
+const CARD_RADIUS   = 32
 
 export default function DraggableBento({
   children,
   className = '',
   delay = 0,
   cardId,
+  minW = DEFAULT_MIN_W,
+  minH = DEFAULT_MIN_H,
+  sizes,
 }: {
   children: ReactNode
   className?: string
   delay?: number
-  cardId?: string     // stable UUID for custom cards
+  cardId?: string
+  minW?: number
+  minH?: number
+  sizes?: Array<{ w: number; h: number; label: string }>
 }) {
   const generatedId = useId()
   const id = cardId ?? generatedId
-  const { floating, jiggling, containerRef, positions, savedPositions, registerCard, dropCard, addCard } = useBentoCanvas()
+  const { floating, editMode, containerRef, positionsRef, positions, savedPositions, registerCard, dropCard, addCard } = useBentoCanvas()
 
   const wrapRef     = useRef<HTMLDivElement>(null)
   const cleanupRef  = useRef<(() => void) | null>(null)
+
+  // ── Content-measured minimums ────────────────────────────────────────────
+  // measuredMinH is captured from the natural grid height before floating
+  // activates — this is the true content-driven floor and is always ≥ the
+  // prop minH. Both are fused into a ref so resize handlers read fresh values.
+  const [measuredMinH, setMeasuredMinH] = useState(0)
+  const minWRef = useRef(minW)
+  const minHRef = useRef(minH)
+  minWRef.current = minW
+  minHRef.current = Math.max(minH, measuredMinH)
 
   // ── Always-current position ─────────────────────────────────────────────
   // Updated directly in the render body so pointer-event callbacks always
@@ -62,6 +78,11 @@ export default function DraggableBento({
     if (!el || !container) return
     const elR = el.getBoundingClientRect()
     const cR  = container.getBoundingClientRect()
+
+    // Natural height from the CSS grid is the true content-driven minimum.
+    // A card must never be resized shorter than it naturally needs to be.
+    setMeasuredMinH(elR.height)
+
     registerCard(id, {
       x: elR.left - cR.left,
       y: elR.top  - cR.top,
@@ -118,14 +139,17 @@ export default function DraggableBento({
         const cw   = containerRef.current?.offsetWidth ?? 0
         const maxX = cw > 0 ? cw - startRect.w : Infinity
         dragDxRef.current = dx
-        const r: Rect = {
+        const raw: Rect = {
           x: Math.max(0, Math.min(startRect.x + dx, maxX)),
           y: Math.max(0, startRect.y + dy),
           w: startRect.w,
           h: startRect.h,
         }
-        localRectRef.current = r
-        setLocalRect(r)
+        // Resolve the dragged card against all other fixed cards so it
+        // can never visually overlap a neighbour during drag.
+        const resolved = resolveOne(id, { ...positionsRef.current, [id]: raw }, cw, GAP)
+        localRectRef.current = resolved
+        setLocalRect(resolved)
       }
     }
 
@@ -168,8 +192,8 @@ export default function DraggableBento({
       const maxW = cw > 0 ? cw - x : Infinity
       const r: Rect = {
         x, y,
-        w: Math.max(MIN_W, Math.min(maxW, sw + ev.clientX - startX)),
-        h: Math.max(MIN_H, sh + ev.clientY - startY),
+        w: Math.max(minWRef.current, Math.min(maxW, sw + ev.clientX - startX)),
+        h: Math.max(minHRef.current, sh + ev.clientY - startY),
       }
       localRectRef.current = r
       setLocalRect(r)
@@ -233,7 +257,7 @@ export default function DraggableBento({
     return (
       <div
         ref={wrapRef}
-        className={`flex flex-col ${className}`}
+        className={className}
         style={{
           opacity: revealed ? 1 : 0,
           transform: revealed ? 'none' : 'translateY(20px)',
@@ -249,11 +273,6 @@ export default function DraggableBento({
 
   // Not yet positioned by the canvas
   if (!renderedRect) return null
-
-  // Wiggle: active when canvas jiggling, card revealed, and not being interacted with
-  const isWiggling = jiggling && revealDone && !dragging && !pressing && !resizing
-  // Stagger each card's wiggle phase using its delay prop so they're out-of-sync (iOS feel)
-  const wiggleDelay = `${(delay % 160)}ms`
 
   // ── Floating render ───────────────────────────────────────────────────────
   // Outer div: owns position (left/top/width/height) + opacity + z-index.
@@ -272,7 +291,7 @@ export default function DraggableBento({
         transition,
         zIndex: dragging || pressing ? 100 : 1,
         userSelect:  'none',
-        touchAction: 'none',
+        touchAction: editMode ? 'none' : 'auto',
         willChange: dragging ? 'left, top' : 'auto',
       }}
     >
@@ -281,7 +300,6 @@ export default function DraggableBento({
         onContextMenu={(e) => e.preventDefault()}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
-        className={isWiggling ? 'bento-wiggle' : undefined}
         style={{
           width: '100%',
           height: '100%',
@@ -295,7 +313,6 @@ export default function DraggableBento({
           transition: dragging || resizing
             ? 'transform 80ms ease, box-shadow 300ms ease'
             : `transform 380ms ${SPRING}, box-shadow 300ms ease`,
-          animationDelay: isWiggling ? wiggleDelay : undefined,
         }}
       >
         {/* Drag hint: 6-dot grid */}
@@ -304,7 +321,7 @@ export default function DraggableBento({
           style={{
             position: 'absolute',
             top: 14, right: 14,
-            opacity: (hovered || pressing) && revealDone && !dragging && !resizing ? 0.4 : 0,
+            opacity: (editMode || hovered || pressing) && revealDone && !dragging && !resizing ? 0.4 : 0,
             transition: 'opacity 200ms ease',
             pointerEvents: 'none',
             zIndex: 20,
@@ -318,30 +335,57 @@ export default function DraggableBento({
           </svg>
         </div>
 
-        {/* Resize handle: 3-dot L — bottom-right, clear of the rounded corner */}
-        <div
-          aria-hidden
-          onPointerDown={onResizeDown}
-          style={{
-            position: 'absolute',
-            bottom: 14, right: 14,
-            width: 20, height: 20,
-            cursor: 'se-resize',
-            zIndex: 30,
-            opacity: hovered && revealDone && !dragging && !pressing ? 0.5 : 0,
-            transition: 'opacity 200ms ease',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: 'white',
-          }}
-        >
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
-            <circle cx="10" cy="10" r="1.5" />
-            <circle cx="6"  cy="10" r="1.5" />
-            <circle cx="10" cy="6"  r="1.5" />
-          </svg>
-        </div>
+        {/* Resize: S/M/L preset buttons (when sizes provided) or drag handle */}
+        {sizes ? (
+          <div
+            style={{
+              position: 'absolute',
+              bottom: 10, right: 10,
+              display: 'flex',
+              gap: 4,
+              zIndex: 30,
+              opacity: editMode && revealDone && !dragging && !pressing ? 1 : 0,
+              transition: 'opacity 200ms ease',
+              pointerEvents: editMode && revealDone && !dragging && !pressing ? 'auto' : 'none',
+            }}
+          >
+            {sizes.map((sz) => {
+              const cr = ctxRect
+              const isActive = !!cr && Math.abs(cr.w - sz.w) <= 40 && Math.abs(cr.h - sz.h) <= 40
+              return (
+                <button
+                  key={sz.label}
+                  onPointerDown={e => e.stopPropagation()}
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    const cur = ctxRectRef.current
+                    if (!cur) return
+                    dropCard(id, { x: cur.x, y: cur.y, w: sz.w, h: Math.max(sz.h, minHRef.current) })
+                  }}
+                  style={{
+                    width: 26, height: 22,
+                    borderRadius: 6,
+                    border: `1px solid ${isActive ? 'rgba(255,255,255,0.5)' : 'rgba(255,255,255,0.2)'}`,
+                    background: isActive ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.4)',
+                    color: isActive ? 'rgba(255,255,255,0.95)' : 'rgba(255,255,255,0.55)',
+                    fontSize: 9,
+                    fontWeight: 700,
+                    fontFamily: 'system-ui, sans-serif',
+                    letterSpacing: '0.05em',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    backdropFilter: 'blur(4px)',
+                    transition: 'background 150ms ease, border-color 150ms ease, color 150ms ease',
+                  }}
+                >
+                  {sz.label}
+                </button>
+              )
+            })}
+          </div>
+        ) : null}
 
         {children}
       </div>
