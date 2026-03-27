@@ -115,7 +115,7 @@ export default function Hero() {
         {/* ── Static cards ────────────────────────────────────────────────── */}
         <DraggableBento className="lg:col-span-8" delay={100} minW={320} minH={240}
           sizes={[
-            { label: 'I',   w: 420, h: 300 },
+            { label: 'I',   w: 420, h: 240 },
             { label: 'II',  w: 580, h: 380 },
             { label: 'III', w: 780, h: 460 },
           ]}
@@ -127,17 +127,17 @@ export default function Hero() {
                 <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: 'var(--badge-dot)' }} />
                 Available for work
               </span>
-              <h1 className="font-display text-[44px] @md:text-[58px] @xl:text-[72px] leading-[0.9] mb-3 @xl:mb-4" style={{ color: 'var(--hero-heading)' }}>
+              <h1 className="font-display text-[44px] @md:text-[58px] @xl:text-[72px] leading-[1.05] mb-3 @xl:mb-4" style={{ color: 'var(--hero-heading)' }}>
                 Computer<br />
                 Engineer<br />
                 <span style={{ color: 'var(--hero-muted)' }}>&amp; Developer.</span>
               </h1>
               <p className="font-sans text-sm @md:text-base max-w-lg leading-relaxed" style={{ color: 'var(--fg-40)' }}>
-                Frontend and UI/UX engineer — designing and shipping production-ready apps across
+                Full-Stack and UI/UX engineer — designing and shipping production-ready apps across
                 React Native and web, backed by real hardware and networking experience.
               </p>
             </div>
-            <div className="flex flex-wrap items-center gap-2 mt-4 @xl:mt-6 relative">
+            <div className="flex flex-wrap items-center gap-2 mt-2 @md:mt-4 @xl:mt-6 relative">
               <a href="#work" className="btn-spring inline-flex items-center gap-2 bg-[#f0f0f0] text-[#111111] font-sans font-semibold text-sm px-6 py-3 rounded-full hover:bg-white transition-colors">
                 View Work
               </a>
@@ -208,7 +208,7 @@ export default function Hero() {
             <div className="absolute -top-10 -right-10 w-48 h-48 bg-blue-500/6 rounded-full blur-3xl pointer-events-none" />
             <p className="font-sans text-xs uppercase tracking-widest relative" style={{ color: 'var(--fg-30)' }}>About</p>
             <p className="font-sans text-sm @md:text-base leading-relaxed relative" style={{ color: 'var(--fg-55)' }}>
-              Computer Engineer focused on frontend and UI/UX development — building polished,
+              Computer Engineer focused on UI/UX development and Full-Stack Development — building polished, utilizing AI,
               production-ready interfaces with a foundation in hardware and networking.
             </p>
           </div>
