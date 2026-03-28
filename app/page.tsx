@@ -22,7 +22,10 @@ export default function Home() {
     <main className="min-h-screen">
       <StatusBar />
       <Navbar />
-      <div className="max-w-[1280px] mx-auto px-4 pt-14 pb-32 md:px-6 md:pt-14 flex flex-col gap-4">
+      <div
+        className="max-w-[1280px] mx-auto px-4 pt-14 md:px-6 md:pt-14 flex flex-col gap-4"
+        style={{ paddingBottom: 'calc(env(safe-area-inset-bottom, 0px) + 9rem)' }}
+      >
         <SectionBreak label="Canvas" />
         <Hero />
         <div id="work" className="flex flex-col gap-4">
