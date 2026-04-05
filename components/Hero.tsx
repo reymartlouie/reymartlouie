@@ -241,17 +241,6 @@ export default function Hero() {
           {submitted ? 'Note submitted · pending approval' : rateLimited ? 'Note limit reached · come back tomorrow' : '+ Leave a note'}
         </button>
 
-        <button
-          onClick={() => setEditMode(prev => !prev)}
-          className={`btn-spring inline-flex items-center gap-2 font-sans text-sm font-semibold
-                      px-5 py-3 rounded-full border transition-colors
-                      ${editMode
-                        ? 'bg-white/[0.14] text-white/90 border-white/25 hover:bg-white/20'
-                        : 'bg-white/10 text-white/70 border-white/15 hover:bg-white/[0.14]'
-                      }`}
-        >
-          {editMode ? '✓ Done' : '⊹ Edit layout'}
-        </button>
       </div>
 
       {/* Card editor modal */}

@@ -89,7 +89,7 @@
 
 /* Layout background */
 .layout-overlay {
-  background: #111111;
+  background: transparent;
 }
 
 * {

@@ -296,10 +296,6 @@ export default function DraggableBento({
       }}
     >
       <div
-        onPointerDown={onPointerDown}
-        onContextMenu={(e) => e.preventDefault()}
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
         style={{
           width: '100%',
           height: '100%',
@@ -307,86 +303,9 @@ export default function DraggableBento({
           overflow: 'hidden',
           display: 'flex',
           flexDirection: 'column',
-          transform,
-          boxShadow,
-          cursor: dragging ? 'grabbing' : 'grab',
-          transition: dragging || resizing
-            ? 'transform 80ms ease, box-shadow 300ms ease'
-            : `transform 380ms ${SPRING}, box-shadow 300ms ease`,
+          transition: `transform 380ms ${SPRING}`,
         }}
       >
-        {/* Drag hint: 6-dot grid */}
-        <div
-          aria-hidden
-          style={{
-            position: 'absolute',
-            top: 14, right: 14,
-            opacity: (editMode || hovered || pressing) && revealDone && !dragging && !resizing ? 0.4 : 0,
-            transition: 'opacity 200ms ease',
-            pointerEvents: 'none',
-            zIndex: 20,
-            color: 'white',
-          }}
-        >
-          <svg width="12" height="16" viewBox="0 0 12 16" fill="currentColor">
-            <circle cx="3" cy="3"  r="1.5" /><circle cx="9" cy="3"  r="1.5" />
-            <circle cx="3" cy="8"  r="1.5" /><circle cx="9" cy="8"  r="1.5" />
-            <circle cx="3" cy="13" r="1.5" /><circle cx="9" cy="13" r="1.5" />
-          </svg>
-        </div>
-
-        {/* Resize: S/M/L preset buttons (when sizes provided) or drag handle */}
-        {sizes ? (
-          <div
-            style={{
-              position: 'absolute',
-              bottom: 10, right: 10,
-              display: 'flex',
-              gap: 4,
-              zIndex: 30,
-              opacity: editMode && revealDone && !dragging && !pressing ? 1 : 0,
-              transition: 'opacity 200ms ease',
-              pointerEvents: editMode && revealDone && !dragging && !pressing ? 'auto' : 'none',
-            }}
-          >
-            {sizes.map((sz) => {
-              const cr = ctxRect
-              const isActive = !!cr && Math.abs(cr.w - sz.w) <= 40 && Math.abs(cr.h - sz.h) <= 40
-              return (
-                <button
-                  key={sz.label}
-                  onPointerDown={e => e.stopPropagation()}
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    const cur = ctxRectRef.current
-                    if (!cur) return
-                    dropCard(id, { x: cur.x, y: cur.y, w: sz.w, h: Math.max(sz.h, minHRef.current) })
-                  }}
-                  style={{
-                    width: 26, height: 22,
-                    borderRadius: 6,
-                    border: `1px solid ${isActive ? 'rgba(255,255,255,0.5)' : 'rgba(255,255,255,0.2)'}`,
-                    background: isActive ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.4)',
-                    color: isActive ? 'rgba(255,255,255,0.95)' : 'rgba(255,255,255,0.55)',
-                    fontSize: 9,
-                    fontWeight: 700,
-                    fontFamily: 'system-ui, sans-serif',
-                    letterSpacing: '0.05em',
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    backdropFilter: 'blur(4px)',
-                    transition: 'background 150ms ease, border-color 150ms ease, color 150ms ease',
-                  }}
-                >
-                  {sz.label}
-                </button>
-              )
-            })}
-          </div>
-        ) : null}
-
         {children}
       </div>
     </div>
