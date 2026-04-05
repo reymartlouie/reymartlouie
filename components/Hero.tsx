@@ -1,19 +1,12 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import DraggableBento from './DraggableBento'
 import BentoCanvas, { type Rect } from './BentoCanvas'
 import CustomCard from './CustomCard'
 import CardEditorModal from './CardEditorModal'
 import GitHubCard from './GitHubCard'
-
-interface CustomCardData {
-  id: string
-  title: string
-  body: string
-  color: string
-  delay: number
-}
+import { supabase, type Testimonial } from '@/lib/supabase'
 
 const NOTE_LIMIT  = 3
 const NOTE_WINDOW = 24 * 60 * 60 * 1000 // 24 h
@@ -27,14 +20,25 @@ function readRate(): { count: number; resetAt: number } {
 }
 
 export default function Hero() {
-  const [customCards, setCustomCards] = useState<CustomCardData[]>([])
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([])
   const [savedPositions, setSavedPositions] = useState<Record<string, Rect>>({})
-  const didLoadCards = useRef(false)
 
   const [editMode,    setEditMode]    = useState(false)
   const [rateLimited, setRateLimited] = useState(false)
   const [modalOpen,   setModalOpen]   = useState(false)
-  const [editingCard, setEditingCard] = useState<CustomCardData | null>(null)
+  const [submitted,   setSubmitted]   = useState(false)
+
+  const fetchTestimonials = () =>
+    supabase
+      .from('testimonials')
+      .select('id, title, body, color, approved, created_at')
+      .eq('approved', true)
+      .order('created_at', { ascending: true })
+      .then(({ data, error }) => {
+        if (error) { console.error('[testimonials] fetch error:', error); return }
+        console.log('[testimonials] fetched:', data)
+        if (data) setTestimonials(data)
+      })
 
   const syncRateLimit = () => {
     const { count, resetAt } = readRate()
@@ -51,61 +55,46 @@ export default function Hero() {
     setRateLimited(next.count >= NOTE_LIMIT)
   }
 
-  // Load from localStorage client-side only (avoids hydration mismatch)
   useEffect(() => {
     try {
       const all: Record<string, Rect> = JSON.parse(localStorage.getItem('bento-positions-v3') ?? '{}')
       setSavedPositions(all)
     } catch {}
     try {
-      const stored: CustomCardData[] = JSON.parse(localStorage.getItem('bento-custom-cards') ?? '[]')
-      didLoadCards.current = true
-      setCustomCards(stored)
-    } catch { didLoadCards.current = true }
-    try {
       if (localStorage.getItem('bento-edit-mode') === 'true') setEditMode(true)
     } catch {}
     syncRateLimit()
-  }, [])
 
-  useEffect(() => {
-    if (!didLoadCards.current) return
-    localStorage.setItem('bento-custom-cards', JSON.stringify(customCards))
-  }, [customCards])
+    fetchTestimonials()
+
+    // Poll every 10s so approvals show up without any realtime config
+    const interval = setInterval(fetchTestimonials, 10_000)
+
+    return () => { clearInterval(interval) }
+  }, [])
 
   useEffect(() => {
     try { localStorage.setItem('bento-edit-mode', String(editMode)) } catch {}
   }, [editMode])
 
-  const handleCreateCard = (data: { title: string; body: string; color: string }) => {
-    const newCard: CustomCardData = {
-      id:    `custom-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
+  const handleCreateCard = async (data: { title: string; body: string; color: string }) => {
+    await supabase.from('testimonials').insert({
       title: data.title,
       body:  data.body,
       color: data.color,
-      delay: (5 + customCards.length) * 60,
-    }
-    setCustomCards(prev => [...prev, newCard])
+    })
     bumpRate()
     setModalOpen(false)
-  }
-
-  const handleEditCard = (data: { title: string; body: string; color: string }) => {
-    if (!editingCard) return
-    setCustomCards(prev =>
-      prev.map(c => c.id === editingCard.id ? { ...c, ...data } : c)
-    )
-    setEditingCard(null)
-    setModalOpen(false)
+    setSubmitted(true)
+    setTimeout(() => setSubmitted(false), 4000)
   }
 
   const handleDeleteCard = (id: string) => {
-    setCustomCards(prev => prev.filter(c => c.id !== id))
+    setTestimonials(prev => prev.filter(c => c.id !== id))
   }
 
-  const openCreate = () => { setEditingCard(null); setModalOpen(true) }
-  const openEdit   = (card: CustomCardData) => { setEditingCard(card); setModalOpen(true) }
-  const closeModal = () => { setModalOpen(false); setEditingCard(null) }
+  const openCreate = () => { setModalOpen(true) }
+  const closeModal = () => { setModalOpen(false) }
 
   return (
     <section id="about" className="flex flex-col gap-4">
@@ -224,14 +213,14 @@ export default function Hero() {
           <GitHubCard />
         </DraggableBento>
 
-        {/* ── Custom cards ─────────────────────────────────────────────────── */}
+        {/* ── Testimonial cards ────────────────────────────────────────────── */}
 
-        {customCards.map(card => (
-          <DraggableBento key={card.id} cardId={card.id} delay={card.delay}>
+        {testimonials.map((card, i) => (
+          <DraggableBento key={card.id} cardId={card.id} delay={(5 + i) * 60}>
             <CustomCard
               cardId={card.id}
               card={card}
-              onEdit={() => openEdit(card)}
+              onEdit={() => {}}
               onDelete={() => handleDeleteCard(card.id)}
             />
           </DraggableBento>
@@ -243,13 +232,13 @@ export default function Hero() {
       <div className="flex items-center gap-3 flex-wrap">
         <button
           onClick={openCreate}
-          disabled={rateLimited}
+          disabled={rateLimited || submitted}
           className="btn-spring inline-flex items-center gap-3 bg-white/10 text-white/70
                      border border-white/15 font-sans text-sm font-semibold px-5 py-3 rounded-full
                      hover:bg-white/[0.14] transition-colors
                      disabled:opacity-40 disabled:cursor-not-allowed"
         >
-          {rateLimited ? 'Note limit reached · come back tomorrow' : '+ Leave a note'}
+          {submitted ? 'Note submitted · pending approval' : rateLimited ? 'Note limit reached · come back tomorrow' : '+ Leave a note'}
         </button>
 
         <button
@@ -268,11 +257,8 @@ export default function Hero() {
       {/* Card editor modal */}
       {modalOpen && (
         <CardEditorModal
-          initial={editingCard
-            ? { title: editingCard.title, body: editingCard.body, color: editingCard.color }
-            : null
-          }
-          onConfirm={editingCard ? handleEditCard : handleCreateCard}
+          initial={null}
+          onConfirm={handleCreateCard}
           onClose={closeModal}
         />
       )}

@@ -23,7 +23,7 @@ export default function CardEditorModal({ initial, onConfirm, onClose }: CardEdi
   const [body,  setBody]  = useState(initial?.body  ?? '')
   const [color, setColor] = useState(initial?.color ?? COLORS[0].value)
   const inputRef = useRef<HTMLInputElement>(null)
-  const isEdit = initial !== null
+  const isEdit = false
 
   useEffect(() => { inputRef.current?.focus() }, [])
 
@@ -70,7 +70,7 @@ export default function CardEditorModal({ initial, onConfirm, onClose }: CardEdi
             <p className="font-display text-xl leading-tight">
               {title
                 ? <span className="text-white">{title}</span>
-                : <span className="text-white/25">Card title</span>
+                : <span className="text-white/25">Your name</span>
               }
             </p>
             {body && (
@@ -79,15 +79,15 @@ export default function CardEditorModal({ initial, onConfirm, onClose }: CardEdi
           </div>
         </div>
 
-        {/* Title */}
+        {/* Name */}
         <div className="flex flex-col gap-1.5">
-          <label className="font-sans text-white/40 text-[10px] uppercase tracking-widest">Title</label>
+          <label className="font-sans text-white/40 text-[10px] uppercase tracking-widest">Name</label>
           <input
             ref={inputRef}
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            placeholder="Card title"
+            placeholder="Your name"
             className="font-display bg-[#111111] text-white/90 border border-white/10 rounded-2xl px-4 py-3 text-lg placeholder:text-white/20 outline-none focus:border-white/25 transition-colors"
           />
         </div>
