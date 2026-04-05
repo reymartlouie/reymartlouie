@@ -161,7 +161,7 @@ export default function Navbar() {
     <div
       className="fixed inset-x-0 flex justify-center z-50 pointer-events-none"
       style={{
-        bottom: 'calc(env(safe-area-inset-bottom, 0px) + 28px)',
+        bottom: 'calc(env(safe-area-inset-bottom, 0px) + 10px)',
         opacity:   ready ? 1 : 0,
         transform: ready ? 'translateY(0)' : 'translateY(20px)',
         transition: ready
