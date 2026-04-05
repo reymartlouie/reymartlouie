@@ -185,7 +185,7 @@ export default function Hero() {
             <div className="absolute -bottom-10 -right-10 w-44 h-44 bg-blue-500/15 rounded-full blur-3xl pointer-events-none" />
             <p className="font-sans text-xs uppercase tracking-widest mb-5 relative" style={{ color: 'var(--tech-label)' }}>Tech Stack</p>
             <div className="flex flex-wrap gap-2 relative">
-              {['TypeScript', 'React-native', 'Supabase', 'Next.js', 'React', 'Figma', 'Framer', 'Expo', 'Basic Java'].map((skill) => (
+              {['TypeScript', 'React-native', 'Supabase', 'Next.js', 'React', 'Figma', 'Framer', 'Expo'].map((skill) => (
                 <span key={skill} className="font-sans text-xs px-3 py-1.5 rounded-full transition-colors duration-150 cursor-default" style={{ color: 'var(--tech-tag-fg)', backgroundColor: 'var(--tech-tag-bg)', border: '1px solid var(--tech-tag-border)' }}
                   onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.90)'}
                   onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'var(--tech-tag-fg)'}
@@ -208,8 +208,8 @@ export default function Hero() {
             <div className="absolute -top-10 -right-10 w-48 h-48 bg-blue-500/6 rounded-full blur-3xl pointer-events-none" />
             <p className="font-sans text-xs uppercase tracking-widest relative" style={{ color: 'var(--fg-30)' }}>About</p>
             <p className="font-sans text-sm @md:text-base leading-relaxed relative" style={{ color: 'var(--fg-55)' }}>
-              Computer Engineer focused on UI/UX development and Full-Stack Development — building polished, utilizing AI,
-              production-ready interfaces with a foundation in hardware and networking.
+              Computer Engineer focused on UI/UX and Full-Stack Development — building polished, production-ready interfaces
+              with a foundation in hardware and networking.
             </p>
           </div>
         </DraggableBento>
