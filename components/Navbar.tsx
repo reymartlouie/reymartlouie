@@ -126,8 +126,17 @@ const PROJECTS = [
 // ── Component ────────────────────────────────────────────────────────────────
 
 export default function Navbar() {
-  const [ready,  setReady]  = useState(false)
-  const [active, setActive] = useState<string>('about')
+  const [ready,    setReady]    = useState(false)
+  const [active,   setActive]   = useState<string>('about')
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 1023px)')
+    setIsMobile(mq.matches)
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches)
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
+  }, [])
 
   useEffect(() => setReady(true), [])
 
@@ -159,9 +168,11 @@ export default function Navbar() {
 
   return (
     <div
-      className="fixed inset-x-0 flex justify-center z-[9999] pointer-events-none"
+      className={`fixed inset-x-0 flex justify-center pointer-events-none ${isMobile ? 'z-[9999]' : 'z-50'}`}
       style={{
-        bottom: 'env(safe-area-inset-bottom, 10px)',
+        bottom: isMobile
+          ? 'env(safe-area-inset-bottom, 10px)'
+          : 'calc(env(safe-area-inset-bottom, 0px) + 28px)',
         opacity:   ready ? 1 : 0,
         transform: ready ? 'translateY(0)' : 'translateY(20px)',
         transition: ready
