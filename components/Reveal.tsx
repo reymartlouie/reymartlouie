@@ -20,7 +20,7 @@ export default function Reveal({
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          el.classList.add('is-visible')
+          el.classList.add('is-visible')  // triggers revealUp (550ms spring in globals.css)
           observer.unobserve(el)
         }
       },

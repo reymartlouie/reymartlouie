@@ -231,14 +231,6 @@ export default function DraggableBento({
     return 'scale(1)'
   })()
 
-  const boxShadow = (() => {
-    if (dragging)
-      return '0 28px 72px rgba(0,0,0,0.55), 0 8px 24px rgba(0,0,0,0.35)'
-    if (pressing)
-      return '0 12px 32px rgba(0,0,0,0.3)'
-    return 'none'
-  })()
-
   // Spring-settle transitions give every card the iOS "bounce into place" feel.
   // When BentoCanvas resolves collisions globally, pushed cards animate to their
   // new slots. During drag/resize, transitions are off so the card is instant.
@@ -307,6 +299,7 @@ export default function DraggableBento({
         onContextMenu={(e) => e.preventDefault()}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
+        className={editMode && !dragging && !pressing && revealDone ? 'bento-wiggle' : undefined}
         style={{
           width: '100%',
           height: '100%',
@@ -315,7 +308,13 @@ export default function DraggableBento({
           display: 'flex',
           flexDirection: 'column',
           transform,
-          boxShadow,
+          boxShadow: dragging
+            ? '0 28px 72px rgba(0,0,0,0.55), 0 8px 24px rgba(0,0,0,0.35)'
+            : pressing
+            ? '0 12px 32px rgba(0,0,0,0.3)'
+            : hovered && !editMode
+            ? '0 8px 32px rgba(0,0,0,0.35), 0 2px 8px rgba(0,0,0,0.2)'
+            : 'none',
           cursor: dragging ? 'grabbing' : 'grab',
           transition: dragging || resizing
             ? 'transform 80ms ease, box-shadow 300ms ease'
