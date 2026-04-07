@@ -100,7 +100,12 @@
 
 html {
   scroll-behavior: smooth;
-  background: #000000;
+  background-color: #000000;
+  background-image: url('/bg.jpg');
+  background-size: cover;
+  background-position: center top;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
 }
 
 body {
