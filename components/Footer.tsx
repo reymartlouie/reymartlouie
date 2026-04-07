@@ -199,34 +199,86 @@ export default function Footer() {
         </div>
       </Reveal>
 
-      {/* ── Social links ─────────────────────────────────────────────────── */}
+      {/* ── Calling card ─────────────────────────────────────────────────── */}
       <Reveal className="lg:col-span-4" delay={80}>
-        <div className="h-full bento-lift rounded-[32px] p-6 md:p-8 flex flex-col justify-between" style={{ background: 'var(--bg-card)' }}>
+        <div
+          className="h-full bento-lift rounded-[32px] flex flex-col justify-between"
+          style={{
+            background: '#f4ede0',
+            padding: '2rem 2rem',
+          }}
+        >
+          {/* Monogram */}
           <div>
-            <p className="font-sans text-xs uppercase tracking-widest mb-6" style={{ color: 'var(--fg-30)' }}>Find me on</p>
-            <div className="flex flex-col">
+            <p
+              className="font-display"
+              style={{
+                fontSize: 64,
+                lineHeight: 1,
+                color: '#1a1714',
+                letterSpacing: '-0.02em',
+                marginBottom: '1.5rem',
+              }}
+            >
+              RL
+            </p>
+
+            {/* Rule */}
+            <div style={{ height: '0.5px', background: 'rgba(26,23,20,0.15)', marginBottom: '1.25rem' }} />
+
+            {/* Name + title */}
+            <p
+              className="font-sans uppercase"
+              style={{ fontSize: 10, letterSpacing: '0.20em', color: '#1a1714', marginBottom: '0.3rem' }}
+            >
+              Reymart Louie L. Capapas
+            </p>
+            <p
+              className="font-sans"
+              style={{ fontSize: 10, letterSpacing: '0.06em', color: '#7a6f64' }}
+            >
+              Computer Engineer &amp; Developer
+            </p>
+          </div>
+
+          {/* Links */}
+          <div>
+            {/* Rule */}
+            <div style={{ height: '0.5px', background: 'rgba(26,23,20,0.12)', marginBottom: '1.25rem' }} />
+
+            <div className="flex flex-col" style={{ gap: '0.6rem' }}>
               {socialLinks.map((link) => (
                 <a
                   key={link.label}
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between group py-3 last:border-0"
-                  style={{ borderBottom: '1px solid var(--border)' }}
-                  onMouseEnter={e => { (e.currentTarget.children[0] as HTMLElement).style.color = 'rgba(255,255,255,0.90)'; (e.currentTarget.children[1] as HTMLElement).style.color = 'rgba(255,255,255,0.70)' }}
-                  onMouseLeave={e => { (e.currentTarget.children[0] as HTMLElement).style.color = 'var(--fg-60)'; (e.currentTarget.children[1] as HTMLElement).style.color = 'var(--fg-20)' }}
+                  className="font-sans"
+                  style={{
+                    fontSize: 11,
+                    letterSpacing: '0.04em',
+                    color: '#5a5049',
+                    transition: 'color 200ms ease',
+                    textDecoration: 'none',
+                  }}
+                  onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = '#1a1714'}
+                  onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = '#5a5049'}
                 >
-                  <span className="font-sans text-sm transition-colors duration-150" style={{ color: 'var(--fg-60)' }}>
-                    {link.label}
-                  </span>
-                  <span className="transition-colors duration-150 text-sm" style={{ color: 'var(--fg-20)' }}>↗</span>
+                  {link.label}
                 </a>
               ))}
             </div>
+
+            {/* Rule */}
+            <div style={{ height: '0.5px', background: 'rgba(26,23,20,0.12)', margin: '1.25rem 0 0.75rem' }} />
+
+            <p
+              className="font-sans"
+              style={{ fontSize: 9, letterSpacing: '0.16em', color: '#9d9088', textTransform: 'uppercase' }}
+            >
+              USLS · Bacolod City · {new Date().getFullYear()}
+            </p>
           </div>
-          <p className="font-sans text-xs mt-6" style={{ color: 'var(--fg-20)' }}>
-            © {new Date().getFullYear()} Reymart Louie. All rights reserved.
-          </p>
         </div>
       </Reveal>
 
