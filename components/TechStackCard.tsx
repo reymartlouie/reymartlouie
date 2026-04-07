@@ -1,33 +1,70 @@
 'use client'
 
-const SKILLS = ['TypeScript', 'React-native', 'Supabase', 'Next.js', 'React', 'Figma', 'Framer', 'Expo']
+const SKILLS = ['TypeScript', 'React Native', 'Supabase', 'Next.js', 'React', 'Figma', 'Framer', 'Expo']
+
+// Pulled from the teal-grid facade image
+const MINT       = 'rgba(167,220,195,0.80)'
+const MINT_DIM   = 'rgba(167,220,195,0.45)'
+const MINT_GLOW  = 'rgba(167,220,195,0.18)'
+const TAG_BG     = 'rgba(10,30,22,0.55)'
+const TAG_BORDER = 'rgba(167,220,195,0.22)'
 
 export default function TechStackCard() {
   return (
     <div
-      className="@container flex-1 rounded-[32px] p-6 @md:p-8 relative overflow-hidden min-h-[180px]"
-      style={{ background: 'var(--bg-tech)' }}
+      className="@container flex-1 rounded-[32px] relative overflow-hidden min-h-[180px] flex flex-col justify-between"
+      style={{
+        backgroundImage: `
+          linear-gradient(160deg, rgba(8,20,16,0.72) 0%, rgba(8,20,16,0.52) 60%, rgba(8,20,16,0.70) 100%),
+          url('/tech-bg.jpg')
+        `,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
     >
-      <div className="absolute -bottom-10 -right-10 w-44 h-44 bg-blue-500/28 rounded-full blur-3xl pointer-events-none" />
-      <p className="font-sans text-xs uppercase tracking-widest mb-5 relative" style={{ color: 'var(--tech-label)' }}>
-        Tech Stack
-      </p>
-      <div className="flex flex-wrap gap-2 relative">
-        {SKILLS.map((skill) => (
-          <span
-            key={skill}
-            className="font-sans text-xs px-3 py-1.5 rounded-full transition-colors duration-150 cursor-default"
-            style={{
-              color: 'var(--tech-tag-fg)',
-              backgroundColor: 'var(--tech-tag-bg)',
-              border: '1px solid var(--tech-tag-border)',
-            }}
-            onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.90)'}
-            onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'var(--tech-tag-fg)'}
-          >
-            {skill}
-          </span>
-        ))}
+      {/* subtle corner glow — complements the teal tiles */}
+      <div
+        className="absolute -top-8 -right-8 w-36 h-36 rounded-full blur-3xl pointer-events-none"
+        style={{ background: MINT_GLOW }}
+      />
+
+      <div className="relative p-6 @md:p-8 flex flex-col gap-5">
+        {/* Label */}
+        <div className="flex items-center gap-2">
+          <div className="w-px h-3.5" style={{ background: MINT_DIM }} />
+          <p className="font-sans text-xs uppercase tracking-widest" style={{ color: MINT_DIM }}>
+            Tech Stack
+          </p>
+        </div>
+
+        {/* Tags */}
+        <div className="flex flex-wrap gap-2">
+          {SKILLS.map((skill) => (
+            <span
+              key={skill}
+              className="font-sans text-xs px-3 py-1.5 rounded-full backdrop-blur-sm transition-all duration-200 cursor-default"
+              style={{
+                color: MINT,
+                background: TAG_BG,
+                border: `1px solid ${TAG_BORDER}`,
+              }}
+              onMouseEnter={e => {
+                const el = e.currentTarget as HTMLElement
+                el.style.color = 'rgba(255,255,255,0.92)'
+                el.style.background = 'rgba(167,220,195,0.18)'
+                el.style.borderColor = 'rgba(167,220,195,0.50)'
+              }}
+              onMouseLeave={e => {
+                const el = e.currentTarget as HTMLElement
+                el.style.color = MINT
+                el.style.background = TAG_BG
+                el.style.borderColor = TAG_BORDER
+              }}
+            >
+              {skill}
+            </span>
+          ))}
+        </div>
       </div>
     </div>
   )
