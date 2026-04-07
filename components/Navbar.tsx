@@ -67,7 +67,7 @@ function GlassIcon({ Icon, tint, glow, active }: {
 }) {
   return (
     <div
-      className="relative flex items-center justify-center overflow-hidden transition-all duration-200 group-hover:scale-110 group-active:scale-95"
+      className="relative flex items-center justify-center overflow-hidden group-hover:scale-110 group-active:scale-95"
       style={{
         width: 38, height: 38,
         borderRadius: 11,
@@ -138,7 +138,10 @@ export default function Navbar() {
     return () => mq.removeEventListener('change', handler)
   }, [])
 
-  useEffect(() => setReady(true), [])
+  useEffect(() => {
+    const t = setTimeout(() => setReady(true), 850)
+    return () => clearTimeout(t)
+  }, [])
 
   const updateActive = useCallback(() => {
     if (window.scrollY < 80) { setActive('about'); return }
@@ -174,9 +177,9 @@ export default function Navbar() {
           ? 'env(safe-area-inset-bottom, 10px)'
           : 'calc(env(safe-area-inset-bottom, 0px) + 28px)',
         opacity:   ready ? 1 : 0,
-        transform: ready ? 'translateY(0)' : 'translateY(20px)',
+        transform: ready ? 'translateY(0)' : 'translateY(120px)',
         transition: ready
-          ? 'opacity 400ms cubic-bezier(0.2,0,0,1) 180ms, transform 500ms cubic-bezier(0.34,1.2,0.64,1) 180ms'
+          ? 'opacity 400ms cubic-bezier(0.2,0,0,1), transform 600ms cubic-bezier(0.34,1.2,0.64,1)'
           : 'none',
       }}
     >

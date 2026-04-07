@@ -120,7 +120,10 @@ export default function StatusBar() {
     return () => window.removeEventListener('scroll', updateSection)
   }, [updateSection])
 
-  useEffect(() => { setReady(true) }, [])
+  useEffect(() => {
+    const t = setTimeout(() => setReady(true), 700)
+    return () => clearTimeout(t)
+  }, [])
 
   return (
     <div
