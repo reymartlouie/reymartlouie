@@ -12,7 +12,7 @@ export default function HeroIntroCard() {
           className="inline-flex items-center gap-2 text-xs font-sans px-3 py-1 rounded-full mb-4 @xl:mb-5 w-fit"
           style={{ background: 'var(--badge-bg)', color: 'var(--badge-text)' }}
         >
-          <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: 'var(--badge-dot)' }} />
+          <span className="w-1.5 h-1.5 rounded-full" style={{ background: 'var(--badge-dot)' }} />
           Available for work
         </span>
         <h1 className="font-display text-[44px] @md:text-[58px] @xl:text-[72px] leading-[1.05] mb-3 @xl:mb-4" style={{ color: 'var(--hero-heading)' }}>
