@@ -101,9 +101,9 @@ function GlassIcon({ Icon, tint, glow, active }: {
 // ── Nav items ────────────────────────────────────────────────────────────────
 
 const NAV = [
-  { id: 'about',   label: 'Canvas',  href: '#about',   Icon: IconCanvas,  tint: 'rgba(255,255,255,0.10)', glow: 'rgba(255,255,255,0.08)'  },
-  { id: 'work',    label: 'Work',    href: '#work',    Icon: IconWork,    tint: 'rgba(255,255,255,0.10)', glow: 'rgba(255,255,255,0.08)'  },
-  { id: 'contact', label: 'Contact', href: '#contact', Icon: IconContact, tint: 'rgba(255,255,255,0.10)', glow: 'rgba(255,255,255,0.08)'  },
+  { id: 'about',   label: 'Canvas',  href: '#about',   Icon: IconCanvas,  tint: 'rgba(96,165,250,0.18)',  glow: 'rgba(96,165,250,0.30)'   },
+  { id: 'work',    label: 'Work',    href: '#work',    Icon: IconWork,    tint: 'rgba(192,132,252,0.18)', glow: 'rgba(192,132,252,0.30)'  },
+  { id: 'contact', label: 'Contact', href: '#contact', Icon: IconContact, tint: 'rgba(52,211,153,0.18)',  glow: 'rgba(52,211,153,0.30)'   },
 ] as const
 
 const PROJECTS = [
