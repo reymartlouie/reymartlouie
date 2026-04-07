@@ -28,8 +28,11 @@ export default function DraggableBento({
   const id = cardId ?? generatedId
   const { floating, editMode, containerRef, positionsRef, positions, savedPositions, registerCard, dropCard, addCard } = useBentoCanvas()
 
-  const wrapRef     = useRef<HTMLDivElement>(null)
-  const cleanupRef  = useRef<(() => void) | null>(null)
+  const wrapRef      = useRef<HTMLDivElement>(null)
+  const cleanupRef   = useRef<(() => void) | null>(null)
+  // True when card mounts into an already-floating canvas (e.g. new Supabase row).
+  // These cards should not use the page-load stagger delay.
+  const isDynamicRef = useRef(false)
 
   // ── Content-measured minimums ────────────────────────────────────────────
   // measuredMinH is captured from the natural grid height before floating
@@ -69,6 +72,7 @@ export default function DraggableBento({
     if (floating) {
       // Canvas already in floating mode (new card added after initial render)
       // Use saved position if available, otherwise addCard places it below all cards
+      isDynamicRef.current = true
       addCard(id, savedPositions[id])
       return
     }
@@ -104,11 +108,13 @@ export default function DraggableBento({
     return () => obs.disconnect()
   }, [])
 
+  const effectiveDelay = isDynamicRef.current ? 0 : delay
+
   useEffect(() => {
     if (!revealed) return
-    const t = setTimeout(() => setRevealDone(true), delay + 420)
+    const t = setTimeout(() => setRevealDone(true), effectiveDelay + 420)
     return () => clearTimeout(t)
-  }, [revealed, delay])
+  }, [revealed, effectiveDelay])
 
   useEffect(() => () => { cleanupRef.current?.() }, [])
 
@@ -242,7 +248,7 @@ export default function DraggableBento({
   const transition = (() => {
     if (!revealed) return 'none'
     if (dragging || resizing) return 'none'
-    const rd = revealDone ? '' : ` ${delay}ms`
+    const rd = revealDone ? '' : ` ${effectiveDelay}ms`
     return [
       `left 500ms ${SPRING}`,
       `top 500ms ${SPRING}`,
@@ -262,7 +268,7 @@ export default function DraggableBento({
           opacity: revealed ? 1 : 0,
           transform: revealed ? 'none' : 'translateY(20px)',
           transition: revealed
-            ? `opacity 380ms ${SMOOTH} ${delay}ms, transform 380ms ${SMOOTH} ${delay}ms`
+            ? `opacity 380ms ${SMOOTH} ${effectiveDelay}ms, transform 380ms ${SMOOTH} ${effectiveDelay}ms`
             : 'none',
         }}
       >
