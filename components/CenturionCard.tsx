@@ -37,7 +37,7 @@ function CenturionFigure() {
       <path d="M18 60 C18 38, 30 30, 45 28 C60 30, 72 38, 72 60Z" fill={GOLD} />
       <path d="M18 60 L14 78 C14 78, 20 80, 25 76 L28 62Z" fill={GOLD} />
       <path d="M72 60 L76 78 C76 78, 70 80, 65 76 L62 62Z" fill={GOLD} />
-      <path d="M28 52 C28 44, 35 40, 45 40 C55 40, 62 44, 62 52 L60 65 C60 70, 54 74, 45 74 C36 74, 30 70, 30 65Z" fill="#1c1a18" />
+      <path d="M28 52 C28 44, 35 40, 45 40 C55 40, 62 44, 62 52 L60 65 C60 70, 54 74, 45 74 C36 74, 30 70, 30 65Z" fill="#080808" />
       <rect x="22" y="74" width="46" height="12" rx="4" fill={GOLD} />
       <path d="M10 86 C10 82, 14 80, 22 80 L22 86 C22 92, 18 96, 10 96Z" fill={GOLD} />
       <path d="M80 86 C80 82, 76 80, 68 80 L68 86 C68 92, 72 96, 80 96Z" fill={GOLD} />
@@ -68,7 +68,7 @@ export default function CenturionCard() {
           ),
           radial-gradient(ellipse 65% 55% at 85% 15%, ${GOLD_HINT} 0%, transparent 65%),
           radial-gradient(ellipse 40% 35% at 10% 85%, rgba(201,168,76,0.05) 0%, transparent 60%),
-          #1e1c1a
+          #080808
         `,
         boxShadow: `
           inset 0  1px 0 rgba(255,255,255,0.32),
@@ -188,7 +188,7 @@ export default function CenturionCard() {
               fontSize: 12,
               padding: '8px 18px',
               background: GOLD,
-              color: '#1c1a18',
+              color: '#080808',
             }}
           >
             Get in Touch →
