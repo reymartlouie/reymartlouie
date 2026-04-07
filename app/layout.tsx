@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter, Archivo_Black } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/react'
+import StartupScreen from '@/components/StartupScreen'
 import './globals.css'
 
 const inter = Inter({
@@ -50,6 +51,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${inter.variable} ${archivoBlack.variable}`}>
       <body>
+        <StartupScreen />
         <div aria-hidden="true" className="layout-overlay" style={{ position: 'fixed', inset: 0, zIndex: 0 }} />
         <div style={{ position: 'relative', zIndex: 1 }}>
           {children}

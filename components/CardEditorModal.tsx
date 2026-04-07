@@ -37,11 +37,13 @@ export default function CardEditorModal({ initial, onConfirm, onClose }: CardEdi
 
   return (
     <div
-      className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-end sm:items-center justify-center z-[200] p-4"
+      className="modal-backdrop fixed inset-0 bg-black/60 backdrop-blur-sm flex items-end sm:items-center justify-center z-[200] p-4"
+      style={{ animation: 'modalBackdropIn 200ms ease both' }}
       onClick={onClose}
     >
       <div
-        className="bg-[#1c1c1c] border border-white/[0.08] rounded-[28px] p-6 w-full sm:w-[440px] flex flex-col gap-5"
+        className="modal-card bg-[#1c1c1c] border border-white/[0.08] rounded-[28px] p-6 w-full sm:w-[440px] flex flex-col gap-5"
+        style={{ animation: 'modalCardIn 350ms cubic-bezier(0.34,1.2,0.64,1) both' }}
         onClick={(e) => e.stopPropagation()}
       >
 

@@ -74,10 +74,7 @@ export default function Projects() {
             {/* FireSafe featured card */}
             <div
               className="rounded-[24px] p-6 md:p-8 lg:p-10 flex flex-col justify-between min-h-[280px] relative overflow-hidden group cursor-pointer"
-              style={{
-                backgroundColor: 'var(--bg-firesafe)',
-                animation: 'cardSlideUp 300ms cubic-bezier(0.2, 0, 0, 1) both',
-              }}
+              style={{ backgroundColor: 'var(--bg-firesafe)' }}
               onClick={() => setModalOpen(true)}
             >
               <div

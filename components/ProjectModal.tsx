@@ -54,16 +54,22 @@ export default function ProjectModal({ onClose }: Props) {
 
   return (
     <div
-      className="fixed inset-0 z-[9000] flex items-end md:items-center justify-center p-4 md:p-8"
-      style={{ background: 'rgba(0,0,0,0.75)', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)' }}
+      className="modal-backdrop fixed inset-0 z-[9000] flex items-end md:items-center justify-center p-4 md:p-8"
+      style={{
+        background: 'rgba(0,0,0,0.75)',
+        backdropFilter: 'blur(12px)',
+        WebkitBackdropFilter: 'blur(12px)',
+        animation: 'modalBackdropIn 200ms ease both',
+      }}
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-[32px] p-8 md:p-10"
+        className="modal-card relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-[32px] p-8 md:p-10"
         style={{
           background: 'var(--bg-card)',
           border: '1px solid rgba(255,255,255,0.08)',
           boxShadow: '0 40px 120px rgba(0,0,0,0.8), 0 1px 0 rgba(255,255,255,0.06) inset',
+          animation: 'modalCardIn 350ms cubic-bezier(0.34,1.2,0.64,1) both',
         }}
         onClick={(e) => e.stopPropagation()}
       >

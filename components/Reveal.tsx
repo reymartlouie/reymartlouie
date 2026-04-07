@@ -24,7 +24,7 @@ export default function Reveal({
           observer.unobserve(el)
         }
       },
-      { threshold: 0.05 }
+      { threshold: 0.1 }
     )
     observer.observe(el)
     return () => observer.disconnect()
