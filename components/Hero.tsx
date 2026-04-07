@@ -6,6 +6,10 @@ import BentoCanvas, { type Rect } from './BentoCanvas'
 import CustomCard from './CustomCard'
 import CardEditorModal from './CardEditorModal'
 import GitHubCard from './GitHubCard'
+import HeroIntroCard from './HeroIntroCard'
+import PhotoCard from './PhotoCard'
+import TechStackCard from './TechStackCard'
+import AboutCard from './AboutCard'
 import { supabase, type Testimonial } from '@/lib/supabase'
 
 const NOTE_LIMIT  = 3
@@ -109,33 +113,7 @@ export default function Hero() {
             { label: 'III', w: 780, h: 460 },
           ]}
         >
-          <div className="@container flex-1 rounded-[32px] p-5 @md:p-7 @xl:p-9 relative overflow-hidden flex flex-col justify-between" style={{ background: 'var(--bg-card-2)' }}>
-            <div className="absolute -top-24 -right-24 w-80 h-80 bg-blue-500/20 rounded-full blur-[80px] pointer-events-none" />
-            <div className="relative">
-              <span className="inline-flex items-center gap-2 text-xs font-sans px-3 py-1 rounded-full mb-4 @xl:mb-5 w-fit" style={{ background: 'var(--badge-bg)', color: 'var(--badge-text)' }}>
-                <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: 'var(--badge-dot)' }} />
-                Available for work
-              </span>
-              <h1 className="font-display text-[44px] @md:text-[58px] @xl:text-[72px] leading-[1.05] mb-3 @xl:mb-4" style={{ color: 'var(--hero-heading)' }}>
-                Computer<br />
-                Engineer<br />
-                <span style={{ color: 'var(--hero-muted)' }}>&amp; Developer.</span>
-              </h1>
-              <p className="font-sans text-sm @md:text-base max-w-lg leading-relaxed" style={{ color: 'var(--fg-40)' }}>
-                Full-Stack and UI/UX engineer — designing and shipping production-ready apps across
-                React Native and web, backed by real hardware and networking experience.
-              </p>
-            </div>
-            <div className="flex flex-wrap items-center gap-2 mt-2 @md:mt-4 @xl:mt-6 relative">
-              <a href="#work" className="btn-spring inline-flex items-center gap-2 bg-[#f0f0f0] text-[#111111] font-sans font-semibold text-sm px-6 py-3 rounded-full hover:bg-white transition-colors">
-                View Work
-              </a>
-              <a href="#contact" className="btn-spring group inline-flex items-center gap-3 bg-white/10 text-white/70 border border-white/15 font-sans text-sm font-semibold px-6 py-3 rounded-full hover:bg-white/[0.14] transition-colors">
-                Get in Touch
-                <span className="inline-block transition-transform duration-200 group-hover:translate-x-1">→</span>
-              </a>
-            </div>
-          </div>
+          <HeroIntroCard />
         </DraggableBento>
 
         <DraggableBento className="lg:col-span-4" delay={180} minW={200} minH={280}
@@ -145,22 +123,7 @@ export default function Hero() {
             { label: 'III', w: 400, h: 520 },
           ]}
         >
-          <div className="@container flex-1 rounded-[32px] relative overflow-hidden min-h-[340px] @md:min-h-[380px]" style={{ background: 'linear-gradient(160deg, #0d2952 0%, #081a36 50%, #040e1c 100%)' }}>
-            <img
-              src="/photo.jpg"
-              alt="Reymart Louie"
-              draggable={false}
-              className="absolute inset-0 w-full h-full object-cover object-top pointer-events-none select-none"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent pointer-events-none" />
-            <div className="absolute bottom-0 left-0 right-0 p-6 @md:p-8">
-              <p className="font-sans text-white/50 text-[10px] uppercase tracking-widest mb-1.5">Class of 2026 · USLS</p>
-              <p className="font-display text-white text-[28px] @sm:text-[32px] @md:text-[36px] leading-[0.95] drop-shadow-lg">
-                Reymart Louie<br />L. Capapas
-              </p>
-              <p className="font-sans text-white/35 text-xs mt-2">USLS · Bacolod</p>
-            </div>
-          </div>
+          <PhotoCard />
         </DraggableBento>
 
         <DraggableBento className="lg:col-span-3" delay={240} minW={260} minH={260}
@@ -170,20 +133,7 @@ export default function Hero() {
             { label: 'III', w: 460, h: 360 },
           ]}
         >
-          <div className="@container flex-1 rounded-[32px] p-6 @md:p-8 relative overflow-hidden min-h-[180px]" style={{ background: 'var(--bg-tech)' }}>
-            <div className="absolute -bottom-10 -right-10 w-44 h-44 bg-blue-500/28 rounded-full blur-3xl pointer-events-none" />
-            <p className="font-sans text-xs uppercase tracking-widest mb-5 relative" style={{ color: 'var(--tech-label)' }}>Tech Stack</p>
-            <div className="flex flex-wrap gap-2 relative">
-              {['TypeScript', 'React-native', 'Supabase', 'Next.js', 'React', 'Figma', 'Framer', 'Expo'].map((skill) => (
-                <span key={skill} className="font-sans text-xs px-3 py-1.5 rounded-full transition-colors duration-150 cursor-default" style={{ color: 'var(--tech-tag-fg)', backgroundColor: 'var(--tech-tag-bg)', border: '1px solid var(--tech-tag-border)' }}
-                  onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.90)'}
-                  onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'var(--tech-tag-fg)'}
-                >
-                  {skill}
-                </span>
-              ))}
-            </div>
-          </div>
+          <TechStackCard />
         </DraggableBento>
 
         <DraggableBento className="lg:col-span-3" delay={290} minW={240} minH={240}
@@ -193,14 +143,7 @@ export default function Hero() {
             { label: 'III', w: 440, h: 340 },
           ]}
         >
-          <div className="@container flex-1 rounded-[32px] p-6 @md:p-8 flex flex-col gap-4 relative overflow-hidden min-h-[180px]" style={{ background: 'var(--bg-card-3)' }}>
-            <div className="absolute -top-10 -right-10 w-48 h-48 bg-blue-500/18 rounded-full blur-3xl pointer-events-none" />
-            <p className="font-sans text-xs uppercase tracking-widest relative" style={{ color: 'var(--fg-30)' }}>About</p>
-            <p className="font-sans text-sm @md:text-base leading-relaxed relative" style={{ color: 'var(--fg-55)' }}>
-              Computer Engineer focused on UI/UX and Full-Stack Development — building polished, production-ready interfaces
-              with a foundation in hardware and networking.
-            </p>
-          </div>
+          <AboutCard />
         </DraggableBento>
 
         <DraggableBento className="lg:col-span-6" delay={380} minW={300} minH={220}
