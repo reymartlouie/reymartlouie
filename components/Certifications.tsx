@@ -16,7 +16,7 @@ export default function Certifications() {
   return (
     <section id="certifications" className="flex flex-col gap-4">
       <Reveal>
-        <div className="rounded-[32px] overflow-hidden relative" style={{ backgroundColor: 'var(--bg-card)' }}>
+        <div className="rounded-[32px] overflow-hidden relative" style={{ background: 'var(--bg-card)' }}>
           <div className="px-6 md:px-8 lg:px-10 py-6 md:py-8 flex items-center justify-between">
             <div>
               <p className="font-sans text-xs uppercase tracking-widest mb-2" style={{ color: 'var(--fg-30)' }}>Credentials</p>

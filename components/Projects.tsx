@@ -41,9 +41,9 @@ export default function Projects() {
           target="_blank"
           rel="noopener noreferrer"
           className="bento-lift block rounded-[32px] p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative overflow-hidden group"
-          style={{ backgroundColor: 'var(--bg-portfolio)' }}
+          style={{ background: 'var(--bg-portfolio)' }}
         >
-          <div className="absolute -right-20 -top-20 w-72 h-72 bg-rose-400/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute -right-20 -top-20 w-72 h-72 bg-rose-400/22 rounded-full blur-3xl pointer-events-none" />
           <div className="relative">
             <p className="font-sans text-xs uppercase tracking-widest mb-2" style={{ color: 'var(--portfolio-label)' }}>Portfolio</p>
             <h3 className="font-display text-4xl lg:text-5xl" style={{ color: 'var(--portfolio-title)' }}>UI/UX Portfolio</h3>
@@ -57,8 +57,8 @@ export default function Projects() {
         </a>
 
         {/* Selected work */}
-        <div className="rounded-[32px] overflow-hidden relative" style={{ backgroundColor: 'var(--bg-card)' }}>
-          <div className="absolute -top-16 -left-16 w-56 h-56 bg-orange-500/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="rounded-[32px] overflow-hidden relative" style={{ background: 'var(--bg-card)' }}>
+          <div className="absolute -top-16 -left-16 w-56 h-56 bg-orange-500/14 rounded-full blur-3xl pointer-events-none" />
 
           <div className="px-6 md:px-8 lg:px-10 py-6 md:py-8 flex items-center justify-between relative">
             <div>
@@ -74,11 +74,11 @@ export default function Projects() {
             {/* FireSafe featured card */}
             <div
               className="rounded-[24px] p-6 md:p-8 lg:p-10 flex flex-col justify-between min-h-[280px] relative overflow-hidden group cursor-pointer"
-              style={{ backgroundColor: 'var(--bg-firesafe)' }}
+              style={{ background: 'var(--bg-firesafe)' }}
               onClick={() => setModalOpen(true)}
             >
               <div
-                className="absolute -top-16 -right-16 w-64 h-64 rounded-full blur-3xl opacity-20 group-hover:opacity-35 transition-opacity duration-300 pointer-events-none"
+                className="absolute -top-16 -right-16 w-64 h-64 rounded-full blur-3xl opacity-30 group-hover:opacity-55 transition-opacity duration-300 pointer-events-none"
                 style={{ backgroundColor: '#fb923c' }}
               />
               <div className="relative">

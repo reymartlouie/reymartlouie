@@ -9,17 +9,17 @@
 
 /* ── Theme tokens ─────────────────────────────────────────────────── */
 :root {
-  /* Neutral backgrounds — slightly lighter/darker than #272727 page */
-  --bg-card:   #1a1a1a;
-  --bg-card-2: #1a1a1a;
-  --bg-card-3: #1a1a1a;
+  /* Card backgrounds — jewel tones: clearly colored, not primary-bright */
+  --bg-card:           linear-gradient(145deg, #1c1c1e 0%, #161618 100%);              /* Apple system grouped — structural */
+  --bg-card-2:         linear-gradient(160deg, #0d2952 0%, #091d3e 55%, #06111f 100%); /* sapphire — hero */
+  --bg-card-3:         linear-gradient(145deg, #1e0b40 0%, #130628 100%);              /* amethyst — about */
 
   /* Themed card backgrounds */
-  --bg-tech:           #0d1b2c;
-  --bg-exp:            #1a3d72;
-  --bg-portfolio:      #3a1f2c;
-  --bg-firesafe:       #130f09;
-  --bg-footer-contact: #1a2e26;
+  --bg-tech:           linear-gradient(145deg, #0e1660 0%, #080e3a 100%);              /* deep indigo — tech stack */
+  --bg-exp:            linear-gradient(145deg, #0a1f5c 0%, #060f30 100%);              /* navy */
+  --bg-portfolio:      linear-gradient(145deg, #4a0a28 0%, #280514 100%);              /* ruby — UI/UX */
+  --bg-firesafe:       linear-gradient(145deg, #4a1800 0%, #280c00 100%);              /* deep ember — FireSafe */
+  --bg-footer-contact: linear-gradient(145deg, #0a3828 0%, #041c14 100%);              /* deep emerald — contact */
 
   /* Text */
   --fg:    #f2f2f2;
@@ -31,46 +31,46 @@
   --fg-20: rgba(242,242,242,0.20);
 
   /* Borders */
-  --border:        rgba(255,255,255,0.06);
-  --border-strong: rgba(255,255,255,0.10);
+  --border:        rgba(255,255,255,0.08);
+  --border-strong: rgba(255,255,255,0.13);
 
   /* Hero badge */
   --badge-bg:   #1e3320;
   --badge-text: #86efac;
   --badge-dot:  #4ade80;
   --hero-heading: #f2f2f2;
-  --hero-muted:   rgba(242,242,242,0.40);
+  --hero-muted:   rgba(242,242,242,0.55);
 
   /* Tech card */
-  --tech-label:       rgba(96,165,250,0.50);
-  --tech-tag-fg:      rgba(147,197,253,0.70);
-  --tech-tag-bg:      rgba(96,164,250,0.08);
-  --tech-tag-border:  rgba(147,197,253,0.20);
+  --tech-label:       rgba(147,197,253,0.70);
+  --tech-tag-fg:      rgba(255,255,255,0.85);
+  --tech-tag-bg:      rgba(255,255,255,0.12);
+  --tech-tag-border:  rgba(255,255,255,0.20);
 
   /* Exp card */
-  --exp-label: rgba(147,197,253,0.40);
+  --exp-label: rgba(147,197,253,0.50);
   --exp-num:   #bfdbfe;
-  --exp-body:  rgba(147,197,253,0.60);
+  --exp-body:  rgba(147,197,253,0.70);
 
   /* Portfolio card */
-  --portfolio-label:  rgba(249,168,212,0.50);
-  --portfolio-title:  #fbcfe8;
-  --portfolio-body:   rgba(249,168,212,0.60);
-  --portfolio-btn-fg: #fbcfe8;
-  --portfolio-btn-bg: rgba(251,207,232,0.12);
-  --portfolio-btn-border: rgba(251,207,232,0.20);
+  --portfolio-label:  rgba(255,255,255,0.60);
+  --portfolio-title:  #ffffff;
+  --portfolio-body:   rgba(255,255,255,0.72);
+  --portfolio-btn-fg: #ffffff;
+  --portfolio-btn-bg: rgba(255,255,255,0.18);
+  --portfolio-btn-border: rgba(255,255,255,0.30);
 
   /* Contact card */
-  --contact-label:         rgba(110,231,183,0.50);
-  --contact-title:         #a7f3d0;
-  --contact-input-bg:      rgba(255,255,255,0.06);
-  --contact-input-border:  rgba(110,231,183,0.15);
-  --contact-btn-fg:        #6ee7b7;
-  --contact-btn-bg:        rgba(110,231,183,0.14);
-  --contact-btn-border:    rgba(110,231,183,0.22);
-  --contact-resume-fg:     rgba(255,255,255,0.50);
-  --contact-resume-bg:     rgba(255,255,255,0.06);
-  --contact-resume-border: rgba(255,255,255,0.10);
+  --contact-label:         rgba(255,255,255,0.60);
+  --contact-title:         #ffffff;
+  --contact-input-bg:      rgba(255,255,255,0.10);
+  --contact-input-border:  rgba(255,255,255,0.20);
+  --contact-btn-fg:        #ffffff;
+  --contact-btn-bg:        rgba(255,255,255,0.18);
+  --contact-btn-border:    rgba(255,255,255,0.28);
+  --contact-resume-fg:     rgba(255,255,255,0.60);
+  --contact-resume-bg:     rgba(255,255,255,0.10);
+  --contact-resume-border: rgba(255,255,255,0.18);
 
   /* Hero buttons */
   --hero-btn1-bg: #f0f0f0;
@@ -100,7 +100,7 @@
 
 html {
   scroll-behavior: smooth;
-  background: #111111;
+  background: #000000;
 }
 
 body {
@@ -117,16 +117,17 @@ body {
   to   { opacity: 1; transform: none; }
 }
 
-/* Scroll reveal */
+/* Scroll reveal — spring overshoot for personality */
 .reveal-item {
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateY(24px);
 }
 .reveal-item.is-visible {
-  animation: revealUp 380ms cubic-bezier(0.2, 0, 0, 1) var(--reveal-delay, 0ms) both;
+  animation: revealUp 550ms ease-out var(--reveal-delay, 0ms) both;
 }
 @keyframes revealUp {
-  from { opacity: 0; transform: translateY(20px); }
+  from { opacity: 0; transform: translateY(24px); }
+  65%  { opacity: 1; transform: translateY(-5px); }
   to   { opacity: 1; transform: none; }
 }
 
@@ -140,12 +141,26 @@ body {
   to   { opacity: 1; transform: none; }
 }
 
-/* Bento hover — translateY only, no shadow */
+/* Bento hover lift — more presence */
 .bento-lift {
-  transition: transform 250ms cubic-bezier(0.2, 0, 0, 1);
+  transition: transform 300ms cubic-bezier(0.2, 0, 0, 1),
+              box-shadow 300ms cubic-bezier(0.2, 0, 0, 1);
 }
 .bento-lift:hover {
-  transform: translateY(-3px);
+  transform: translateY(-6px);
+  box-shadow: 0 24px 56px rgba(0,0,0,0.45);
+}
+
+/* Edit-mode jiggle */
+@keyframes bento-wiggle {
+  0%,  100% { transform: rotate(0deg);    }
+  20%        { transform: rotate(-1.2deg); }
+  60%        { transform: rotate(1.2deg);  }
+  80%        { transform: rotate(-0.6deg); }
+}
+.bento-wiggle {
+  animation: bento-wiggle 0.45s ease-in-out infinite;
+  transform-origin: center;
 }
 
 /* Button press */
@@ -156,7 +171,7 @@ body {
               border-color 150ms ease;
 }
 .btn-spring:active {
-  transform: scale(0.95);
+  transform: scale(0.93);
   transition-duration: 80ms;
 }
 
@@ -164,7 +179,8 @@ body {
   .reveal-item          { opacity: 1; transform: none; }
   .reveal-item.is-visible { animation: none; }
   .bento-lift,
-  .bento-lift:hover     { transform: none; transition: none; }
+  .bento-lift:hover     { transform: none; box-shadow: none; transition: none; }
+  .bento-wiggle         { animation: none; }
   .btn-spring,
   .btn-spring:active    { transform: none; }
   .modal-backdrop       { animation: none !important; }

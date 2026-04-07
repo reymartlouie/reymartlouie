@@ -109,8 +109,8 @@ export default function Hero() {
             { label: 'III', w: 780, h: 460 },
           ]}
         >
-          <div className="@container flex-1 rounded-[32px] p-5 @md:p-7 @xl:p-9 relative overflow-hidden flex flex-col justify-between" style={{ backgroundColor: 'var(--bg-card-2)' }}>
-            <div className="absolute -top-24 -right-24 w-80 h-80 bg-blue-500/8 rounded-full blur-[80px] pointer-events-none" />
+          <div className="@container flex-1 rounded-[32px] p-5 @md:p-7 @xl:p-9 relative overflow-hidden flex flex-col justify-between" style={{ background: 'var(--bg-card-2)' }}>
+            <div className="absolute -top-24 -right-24 w-80 h-80 bg-blue-500/20 rounded-full blur-[80px] pointer-events-none" />
             <div className="relative">
               <span className="inline-flex items-center gap-2 text-xs font-sans px-3 py-1 rounded-full mb-4 @xl:mb-5 w-fit" style={{ background: 'var(--badge-bg)', color: 'var(--badge-text)' }}>
                 <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: 'var(--badge-dot)' }} />
@@ -145,7 +145,7 @@ export default function Hero() {
             { label: 'III', w: 400, h: 520 },
           ]}
         >
-          <div className="@container flex-1 rounded-[32px] relative overflow-hidden min-h-[340px] @md:min-h-[380px] bg-[#1a2a3a]">
+          <div className="@container flex-1 rounded-[32px] relative overflow-hidden min-h-[340px] @md:min-h-[380px]" style={{ background: 'linear-gradient(160deg, #0d2952 0%, #081a36 50%, #040e1c 100%)' }}>
             <img
               src="/photo.jpg"
               alt="Reymart Louie"
@@ -170,8 +170,8 @@ export default function Hero() {
             { label: 'III', w: 460, h: 360 },
           ]}
         >
-          <div className="@container flex-1 rounded-[32px] p-6 @md:p-8 relative overflow-hidden min-h-[180px]" style={{ backgroundColor: 'var(--bg-tech)' }}>
-            <div className="absolute -bottom-10 -right-10 w-44 h-44 bg-blue-500/15 rounded-full blur-3xl pointer-events-none" />
+          <div className="@container flex-1 rounded-[32px] p-6 @md:p-8 relative overflow-hidden min-h-[180px]" style={{ background: 'var(--bg-tech)' }}>
+            <div className="absolute -bottom-10 -right-10 w-44 h-44 bg-blue-500/28 rounded-full blur-3xl pointer-events-none" />
             <p className="font-sans text-xs uppercase tracking-widest mb-5 relative" style={{ color: 'var(--tech-label)' }}>Tech Stack</p>
             <div className="flex flex-wrap gap-2 relative">
               {['TypeScript', 'React-native', 'Supabase', 'Next.js', 'React', 'Figma', 'Framer', 'Expo'].map((skill) => (
@@ -193,8 +193,8 @@ export default function Hero() {
             { label: 'III', w: 440, h: 340 },
           ]}
         >
-          <div className="@container flex-1 rounded-[32px] p-6 @md:p-8 flex flex-col gap-4 relative overflow-hidden min-h-[180px]" style={{ backgroundColor: 'var(--bg-card-3)' }}>
-            <div className="absolute -top-10 -right-10 w-48 h-48 bg-blue-500/6 rounded-full blur-3xl pointer-events-none" />
+          <div className="@container flex-1 rounded-[32px] p-6 @md:p-8 flex flex-col gap-4 relative overflow-hidden min-h-[180px]" style={{ background: 'var(--bg-card-3)' }}>
+            <div className="absolute -top-10 -right-10 w-48 h-48 bg-blue-500/18 rounded-full blur-3xl pointer-events-none" />
             <p className="font-sans text-xs uppercase tracking-widest relative" style={{ color: 'var(--fg-30)' }}>About</p>
             <p className="font-sans text-sm @md:text-base leading-relaxed relative" style={{ color: 'var(--fg-55)' }}>
               Computer Engineer focused on UI/UX and Full-Stack Development — building polished, production-ready interfaces
