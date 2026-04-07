@@ -22,7 +22,7 @@ export default function StartupScreen() {
         position:       'fixed',
         inset:          0,
         zIndex:         99999,
-        background:     '#111111',
+        background:     '#000000',
         display:        'flex',
         alignItems:     'center',
         justifyContent: 'center',
