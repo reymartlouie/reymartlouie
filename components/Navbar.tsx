@@ -223,10 +223,7 @@ export default function Navbar() {
               href={href}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex flex-col items-center gap-1.5 px-2 py-1 group"
-              style={{ color: 'rgba(255,255,255,0.60)', transition: 'color 200ms ease' }}
-              onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.95)'}
-              onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.60)'}
+              className="flex flex-col items-center gap-1.5 px-2 py-1 group text-white/60 hover:text-white/95 transition-colors duration-200"
             >
               <GlassIcon Icon={Icon} tint={tint} glow={glow} />
               <span className="font-sans leading-none" style={{ fontSize: 10, letterSpacing: '0.01em' }}>{label}</span>
@@ -235,10 +232,7 @@ export default function Navbar() {
             <button
               key={label}
               onClick={openFireSafe}
-              className="flex flex-col items-center gap-1.5 px-2 py-1 group"
-              style={{ color: 'rgba(255,255,255,0.60)', transition: 'color 200ms ease', background: 'transparent' }}
-              onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.95)'}
-              onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.60)'}
+              className="flex flex-col items-center gap-1.5 px-2 py-1 group text-white/60 hover:text-white/95 transition-colors duration-200 bg-transparent"
             >
               <GlassIcon Icon={Icon} tint={tint} glow={glow} />
               <span className="font-sans leading-none" style={{ fontSize: 10, letterSpacing: '0.01em' }}>{label}</span>

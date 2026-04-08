@@ -87,9 +87,13 @@
   --bar-text-active: rgba(255,255,255,0.90);
 }
 
-/* Layout background */
+/* Layout background — position:fixed makes this a compositor layer, avoiding scroll repaints */
 .layout-overlay {
-  background: transparent;
+  background-color: #000000;
+  background-image: url('/bg.webp');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
 }
 
 * {
@@ -101,11 +105,6 @@
 html {
   scroll-behavior: smooth;
   background-color: #000000;
-  background-image: url('/bg.jpg');
-  background-size: cover;
-  background-position: center top;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
 }
 
 body {
@@ -132,7 +131,6 @@ body {
 }
 @keyframes revealUp {
   from { opacity: 0; transform: translateY(24px); }
-  65%  { opacity: 1; transform: translateY(-5px); }
   to   { opacity: 1; transform: none; }
 }
 
@@ -166,6 +164,13 @@ body {
 .bento-wiggle {
   animation: bento-wiggle 0.45s ease-in-out infinite;
   transform-origin: center;
+}
+
+/* Tech stack tag hover */
+.tech-tag:hover {
+  color: rgba(255,255,255,0.92) !important;
+  background: rgba(167,220,195,0.18) !important;
+  border-color: rgba(167,220,195,0.50) !important;
 }
 
 /* Button press */

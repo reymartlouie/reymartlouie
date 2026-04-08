@@ -42,23 +42,11 @@ export default function TechStackCard() {
           {SKILLS.map((skill) => (
             <span
               key={skill}
-              className="font-sans text-xs px-3 py-1.5 rounded-full backdrop-blur-sm transition-all duration-200 cursor-default"
+              className="tech-tag font-sans text-xs px-3 py-1.5 rounded-full backdrop-blur-sm transition-all duration-200 cursor-default"
               style={{
                 color: MINT,
                 background: TAG_BG,
                 border: `1px solid ${TAG_BORDER}`,
-              }}
-              onMouseEnter={e => {
-                const el = e.currentTarget as HTMLElement
-                el.style.color = 'rgba(255,255,255,0.92)'
-                el.style.background = 'rgba(167,220,195,0.18)'
-                el.style.borderColor = 'rgba(167,220,195,0.50)'
-              }}
-              onMouseLeave={e => {
-                const el = e.currentTarget as HTMLElement
-                el.style.color = MINT
-                el.style.background = TAG_BG
-                el.style.borderColor = TAG_BORDER
               }}
             >
               {skill}
