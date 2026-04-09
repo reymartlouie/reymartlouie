@@ -16,7 +16,7 @@ export default function TechStackCard() {
       style={{
         backgroundImage: `
           linear-gradient(160deg, rgba(8,20,16,0.72) 0%, rgba(8,20,16,0.52) 60%, rgba(8,20,16,0.70) 100%),
-          url('/tech-bg.jpg')
+          url('/tech-bg.webp')
         `,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
