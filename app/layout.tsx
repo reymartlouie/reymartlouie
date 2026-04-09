@@ -21,7 +21,7 @@ const SITE_URL = 'https://reymartlouie.vercel.app'
 
 export const viewport: Viewport = {
   viewportFit: 'cover',
-  themeColor: '#000000',
+  themeColor: 'transparent',
 }
 
 export const metadata: Metadata = {
