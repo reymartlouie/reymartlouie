@@ -2,9 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ───────────────────────────────────────── */
+/* ROOT TOKENS */
+/* ───────────────────────────────────────── */
 :root {
   --font-inter: 'Inter', system-ui, sans-serif;
   --font-archivo-black: 'Archivo Black', sans-serif;
+
+  /* fallback-safe gradients */
+  --bg-card: #161618;
+  --bg-card: linear-gradient(145deg, #1c1c1e 0%, #161618 100%);
+
+  --bg-card-2: #091d3e;
+  --bg-card-2: linear-gradient(160deg, #0d2952 0%, #091d3e 55%, #06111f 100%);
+
+  --bg-card-3: #130628;
+  --bg-card-3: linear-gradient(145deg, #1e0b40 0%, #130628 100%);
+
+  --fg: #f2f2f2;
 }
 
 /* ── Theme tokens ─────────────────────────────────────────────────── */
@@ -87,21 +102,26 @@
   --bar-text-active: rgba(255,255,255,0.90);
 }
 
-/* Layout background */
+/* Layout background — transparent since html carries the bg */
 .layout-overlay {
   background: transparent;
 }
 
+/* ───────────────────────────────────────── */
+/* GLOBAL RESET */
+/* ───────────────────────────────────────── */
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
 }
 
+/* IMPORTANT: bg on html prevents white flash on iOS overscroll */
 html {
+  height: 100%;
   scroll-behavior: smooth;
   background-color: #000000;
-  background-image: url('/bg.jpg');
+  background-image: url('/bg.webp');
   background-size: cover;
   background-position: center top;
   background-attachment: fixed;
@@ -109,48 +129,45 @@ html {
 }
 
 body {
-  background: transparent;
+  height: 100%;
+  background: transparent !important;
   color: var(--fg);
   font-family: var(--font-inter);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Startup screen */
-@keyframes startupIn {
-  from { opacity: 0; transform: translateY(6px); }
-  to   { opacity: 1; transform: none; }
+/* Next.js root fix */
+#__next {
+  height: 100%;
 }
 
-/* Scroll reveal — spring overshoot for personality */
-.reveal-item {
-  opacity: 0;
-  transform: translateY(24px);
-}
-.reveal-item.is-visible {
-  animation: revealUp 550ms ease-out var(--reveal-delay, 0ms) both;
-}
+/* ───────────────────────────────────────── */
+/* ANIMATIONS */
+/* ───────────────────────────────────────── */
 @keyframes revealUp {
   from { opacity: 0; transform: translateY(24px); }
   65%  { opacity: 1; transform: translateY(-5px); }
   to   { opacity: 1; transform: none; }
 }
 
-/* Modal entrance */
-@keyframes modalBackdropIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-@keyframes modalCardIn {
-  from { opacity: 0; transform: translateY(20px) scale(0.97); }
-  to   { opacity: 1; transform: none; }
+.reveal-item {
+  opacity: 0;
+  transform: translateY(24px);
 }
 
-/* Bento hover lift — more presence */
+.reveal-item.is-visible {
+  animation: revealUp 550ms ease-out var(--reveal-delay, 0ms) both;
+}
+
+/* ───────────────────────────────────────── */
+/* INTERACTIONS */
+/* ───────────────────────────────────────── */
 .bento-lift {
   transition: transform 300ms cubic-bezier(0.2, 0, 0, 1),
               box-shadow 300ms cubic-bezier(0.2, 0, 0, 1);
 }
+
 .bento-lift:hover {
   transform: translateY(-6px);
   box-shadow: 0 24px 56px rgba(0,0,0,0.45);
@@ -170,25 +187,29 @@ body {
 
 /* Button press */
 .btn-spring {
-  transition: transform 200ms cubic-bezier(0.2, 0, 0, 1),
-              color 150ms ease,
-              background-color 150ms ease,
-              border-color 150ms ease;
-}
-.btn-spring:active {
-  transform: scale(0.93);
-  transition-duration: 80ms;
+  transition: transform 200ms cubic-bezier(0.2, 0, 0, 1);
 }
 
+.btn-spring:active {
+  transform: scale(0.93);
+}
+
+/* ───────────────────────────────────────── */
+/* REDUCED MOTION */
+/* ───────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
-  .reveal-item          { opacity: 1; transform: none; }
-  .reveal-item.is-visible { animation: none; }
+  .reveal-item,
+  .reveal-item.is-visible {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+
   .bento-lift,
-  .bento-lift:hover     { transform: none; box-shadow: none; transition: none; }
-  .bento-wiggle         { animation: none; }
+  .bento-lift:hover,
   .btn-spring,
-  .btn-spring:active    { transform: none; }
-  .modal-backdrop       { animation: none !important; }
-  .modal-card           { animation: none !important; }
-  .startup-logo         { animation: none !important; }
+  .btn-spring:active {
+    transform: none;
+    box-shadow: none;
+  }
 }
