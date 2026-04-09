@@ -7,7 +7,7 @@ export default function PhotoCard() {
       style={{ background: 'linear-gradient(160deg, #0d2952 0%, #081a36 50%, #040e1c 100%)' }}
     >
       <img
-        src="/photo.jpg"
+        src="/photo.webp"
         alt="Reymart Louie"
         draggable={false}
         className="absolute inset-0 w-full h-full object-cover object-top pointer-events-none select-none"
