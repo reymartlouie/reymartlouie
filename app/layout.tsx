@@ -56,7 +56,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`${inter.variable} ${archivoBlack.variable}`}>
       <body>
         <StartupScreen />
-        <div aria-hidden="true" className="layout-overlay" />
+        <div aria-hidden="true" className="layout-overlay">
+          <img src="/bg.webp" alt="" fetchPriority="high" />
+        </div>
         <div style={{ position: 'relative', zIndex: 1 }}>
           {children}
         </div>
