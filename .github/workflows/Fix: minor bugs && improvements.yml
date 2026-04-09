@@ -1,4 +1,4 @@
-name: Daily Activity Commit
+name: "Fix: minor bugs && improvements"
 
 on:
   schedule:
@@ -19,5 +19,5 @@ jobs:
           git config user.name "reymartlouie"
           git config user.email "reymartlouie@users.noreply.github.com"
           git add public/last-active.txt
-          git diff --cached --quiet || git commit -m "fix: minor bugs and improvements"
+          git diff --cached --quiet || git commit -m "fix: minor bugs && improvements"
           git push
