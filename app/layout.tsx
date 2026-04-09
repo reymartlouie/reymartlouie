@@ -21,6 +21,7 @@ const SITE_URL = 'https://reymartlouie.vercel.app'
 
 export const viewport: Viewport = {
   viewportFit: 'cover',
+  themeColor: '#000000',
 }
 
 export const metadata: Metadata = {
@@ -45,6 +46,9 @@ export const metadata: Metadata = {
       'Computer Engineering student at USLS – Bacolod. React Native · TypeScript · Supabase · Next.js',
   },
   robots: { index: true, follow: true },
+  other: {
+    'apple-mobile-web-app-status-bar-style': 'black-translucent',
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
