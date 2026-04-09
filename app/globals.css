@@ -102,9 +102,13 @@
   --bar-text-active: rgba(255,255,255,0.90);
 }
 
-/* Layout background — transparent since html carries the bg */
+/* Layout background — position:fixed works on all browsers including iOS */
 .layout-overlay {
-  background: transparent;
+  background-color: transparent;
+  background-image: url('/bg.webp');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
 }
 
 /* ───────────────────────────────────────── */
@@ -116,16 +120,11 @@
   margin: 0;
 }
 
-/* IMPORTANT: bg on html prevents white flash on iOS overscroll */
+/* Black fallback prevents white flash on iOS overscroll */
 html {
   height: 100%;
   scroll-behavior: smooth;
   background-color: #000000;
-  background-image: url('/bg.webp');
-  background-size: cover;
-  background-position: center top;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
 }
 
 body {
