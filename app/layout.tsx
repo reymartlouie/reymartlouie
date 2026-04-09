@@ -56,7 +56,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`${inter.variable} ${archivoBlack.variable}`}>
       <body>
         <StartupScreen />
-        <div aria-hidden="true" className="layout-overlay" style={{ position: 'fixed', inset: 0, zIndex: 0 }} />
+        <div aria-hidden="true" className="layout-overlay" />
         <div style={{ position: 'relative', zIndex: 1 }}>
           {children}
         </div>

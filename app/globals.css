@@ -104,11 +104,18 @@
 
 /* Layout background — position:fixed works on all browsers including iOS */
 .layout-overlay {
-  background-color: transparent;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  z-index: 0;
   background-image: url('/bg.webp');
   background-size: cover;
-  background-position: center top;
+  background-position: center center;
   background-repeat: no-repeat;
+  pointer-events: none;
 }
 
 /* ───────────────────────────────────────── */
