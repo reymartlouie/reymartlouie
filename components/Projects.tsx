@@ -57,7 +57,7 @@ export default function Projects() {
         </a>
 
         {/* Selected work */}
-        <div className="rounded-[32px] overflow-hidden relative" style={{ background: 'transparent' }}>
+        <div className="rounded-[32px] overflow-hidden relative" style={{ background: 'var(--bg-card)' }}>
           <div className="absolute -top-16 -left-16 w-56 h-56 bg-orange-500/14 rounded-full blur-3xl pointer-events-none" />
 
           <div className="px-6 md:px-8 lg:px-10 py-6 md:py-8 flex items-center justify-between relative">
