@@ -1,5 +1,3 @@
-<img align="right" src="./qoobee.gif" alt="Qoobee GIF" width="200">
-
 ```bash
 $ whoami
 reymartlouie
