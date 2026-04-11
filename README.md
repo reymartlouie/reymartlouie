@@ -1,4 +1,4 @@
-<img align="right" src="https://media.tenor.com/yO8H09VbF0YAAAAM/qoobee.gif" alt="Qoobee GIF" width="200">
+<img align="right" src="./qoobee.gif" alt="Qoobee GIF" width="200">
 
 ```bash
 $ whoami
