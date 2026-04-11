@@ -1,12 +1,51 @@
-# reymartlouie — Portfolio
+<img align="right" src="https://media.tenor.com/yO8H09VbF0YAAAAM/qoobee.gif" alt="Qoobee GIF" width="200">
 
-Personal portfolio built with **Next.js 14**, **TypeScript**, and **Tailwind CSS**.
+```bash
+$ whoami
+reymartlouie
+```
 
-## Stack
-- **Next.js 14** (App Router)
-- **TypeScript**
-- **Supabase** (testimonials)
-- **Vercel** (deployment)
+> UI/UX Designer · Computer Engineer · AI-Assisted Full Stack Dev · Freelancer  
+> Passionate about networking & the beauty of the terminal.
 
-## Live
-[reymartlouie.vercel.app](https://reymartlouie.vercel.app)
+---
+
+```zsh
+~ $ cat about.txt
+
+  Crafting interfaces people love to use,
+  engineering systems that actually work,
+  and shipping full-stack apps with a little help from AI.
+
+  When I'm not pushing pixels or writing code,
+  I'm deep in network configs or living in the terminal.
+```
+
+---
+
+### `./stack --list`
+
+| Layer | Tools |
+|---|---|
+| **Frontend** | Next.js 14 (App Router) · TypeScript · Tailwind CSS |
+| **Design** | Figma · UX Research · Component Systems |
+| **Backend** | Supabase · REST APIs · AI integrations |
+| **DevOps** | Vercel · Linux · Bash/Zsh · SSH |
+| **Network** | TCP/IP · DNS · Routing · Network Diagnostics |
+
+---
+
+### `./portfolio --open`
+
+```bash
+$ curl https://reymartlouie.vercel.app
+> 200 OK  ✓
+```
+
+**[reymartlouie.vercel.app](https://reymartlouie.vercel.app)**
+
+---
+
+<div align="center">
+  <sub>Built with Next.js · Designed with intention · Deployed with obsession</sub>
+</div>
