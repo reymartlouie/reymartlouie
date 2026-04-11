@@ -1,8 +1,8 @@
 'use client'
 
-import Reveal from './Reveal'
-import CenturionCard from './CenturionCard'
-import CallingCard from './CallingCard'
+import Reveal from '../ui/Reveal'
+import CenturionCard from '../cards/CenturionCard'
+import CallingCard from '../cards/CallingCard'
 
 export default function Footer() {
   return (

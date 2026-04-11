@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter, Archivo_Black } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/react'
-import StartupScreen from '@/components/StartupScreen'
+import StartupScreen from '@/components/ui/StartupScreen'
 import './globals.css'
 
 const inter = Inter({

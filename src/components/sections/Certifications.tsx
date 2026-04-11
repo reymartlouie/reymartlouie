@@ -1,6 +1,6 @@
 'use client'
 
-import Reveal from './Reveal'
+import Reveal from '../ui/Reveal'
 
 const certs = [
   {

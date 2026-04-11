@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import ProjectModal from './ProjectModal'
+import ProjectModal from '../ui/ProjectModal'
 
 const tags = ['React Native', 'Raspberry Pi Zero 2 W', 'Supabase', 'TinyML', 'Python', 'Arduino']
 
