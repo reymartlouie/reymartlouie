@@ -196,6 +196,20 @@ export default function Hero() {
           {editMode ? '✓ Done' : '⊹ Edit layout'}
         </button>
 
+        {editMode && (
+          <button
+            onClick={() => {
+              try { localStorage.removeItem('bento-positions-v3') } catch {}
+              window.location.reload()
+            }}
+            className="btn-spring inline-flex items-center gap-2 font-sans text-sm font-semibold
+                       px-5 py-3 rounded-full border border-red-500/25 bg-red-500/10
+                       text-red-400/70 hover:bg-red-500/[0.18] transition-colors"
+          >
+            ↺ Reset layout
+          </button>
+        )}
+
       </div>
 
       {/* Card editor modal */}
