@@ -77,22 +77,30 @@ export default function DraggableBento({
       return
     }
 
-    const el        = wrapRef.current
-    const container = containerRef.current
-    if (!el || !container) return
-    const elR = el.getBoundingClientRect()
-    const cR  = container.getBoundingClientRect()
+    // Wait for fonts before measuring — display:swap fonts (e.g. Archivo Black)
+    // can swap in after the first paint, making getBoundingClientRect() return
+    // a smaller height than the final layout. Measuring after fonts.ready ensures
+    // the card captures its true content height.
+    const measure = () => {
+      const el        = wrapRef.current
+      const container = containerRef.current
+      if (!el || !container) return
+      const elR = el.getBoundingClientRect()
+      const cR  = container.getBoundingClientRect()
 
-    // Natural height from the CSS grid is the true content-driven minimum.
-    // A card must never be resized shorter than it naturally needs to be.
-    setMeasuredMinH(elR.height)
+      // Natural height from the CSS grid is the true content-driven minimum.
+      // A card must never be resized shorter than it naturally needs to be.
+      setMeasuredMinH(elR.height)
 
-    registerCard(id, {
-      x: elR.left - cR.left,
-      y: elR.top  - cR.top,
-      w: elR.width,
-      h: elR.height,
-    })
+      registerCard(id, {
+        x: elR.left - cR.left,
+        y: elR.top  - cR.top,
+        w: elR.width,
+        h: elR.height,
+      })
+    }
+
+    document.fonts.ready.then(measure)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
