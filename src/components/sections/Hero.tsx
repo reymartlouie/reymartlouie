@@ -61,7 +61,7 @@ export default function Hero() {
 
   useEffect(() => {
     try {
-      const all: Record<string, Rect> = JSON.parse(localStorage.getItem('bento-positions-v3') ?? '{}')
+      const all: Record<string, Rect> = JSON.parse(localStorage.getItem('bento-positions-v4') ?? '{}')
       setSavedPositions(all)
     } catch {}
     try {
@@ -199,7 +199,7 @@ export default function Hero() {
         {editMode && (
           <button
             onClick={() => {
-              try { localStorage.removeItem('bento-positions-v3') } catch {}
+              try { localStorage.removeItem('bento-positions-v4') } catch {}
               window.location.reload()
             }}
             className="btn-spring inline-flex items-center gap-2 font-sans text-sm font-semibold

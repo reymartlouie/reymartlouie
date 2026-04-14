@@ -28,7 +28,7 @@ export function useBentoCanvas() {
 }
 
 export const GAP = 16
-const POSITIONS_KEY = 'bento-positions-v3'
+const POSITIONS_KEY = 'bento-positions-v4'
 
 // ── Pure helpers ─────────────────────────────────────────────────────────────
 
