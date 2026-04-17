@@ -96,17 +96,27 @@ export default function Projects() {
             {/* FireSafe featured card */}
             <div
               className="rounded-[24px] p-6 md:p-8 lg:p-10 flex flex-col justify-between min-h-[280px] relative overflow-hidden group cursor-pointer"
-              style={{ background: 'var(--bg-firesafe)' }}
+              style={{ background: 'linear-gradient(145deg, #16082a 0%, #0a0418 100%)' }}
               onClick={() => setModalOpen(true)}
             >
+              {/* orange fire glow — identity accent against the deep purple bg */}
               <div
-                className="absolute -top-16 -right-16 w-64 h-64 rounded-full blur-3xl opacity-30 group-hover:opacity-55 transition-opacity duration-300 pointer-events-none"
-                style={{ backgroundColor: '#fb923c' }}
+                className="absolute -top-16 -right-16 w-72 h-72 rounded-full blur-3xl opacity-25 group-hover:opacity-45 transition-opacity duration-300 pointer-events-none"
+                style={{ backgroundColor: '#f97316' }}
               />
+              {/* subtle purple echo from outer section */}
+              <div
+                className="absolute -bottom-12 -left-12 w-48 h-48 rounded-full blur-3xl opacity-20 pointer-events-none"
+                style={{ backgroundColor: '#8264d2' }}
+              />
+
               <div className="relative">
-                <span className="font-sans text-xs mb-5 block" style={{ color: 'var(--fg-20)' }}>01</span>
+                <div className="flex items-center gap-2 mb-5">
+                  <div className="w-px h-3" style={{ background: 'rgba(251,146,60,0.40)' }} />
+                  <span className="font-sans text-xs uppercase tracking-widest" style={{ color: 'rgba(251,146,60,0.45)' }}>01</span>
+                </div>
                 <h3 className="font-display text-4xl md:text-5xl leading-tight mb-4" style={{ color: 'var(--fg)' }}>FireSafe</h3>
-                <p className="font-sans text-sm leading-relaxed max-w-xl" style={{ color: 'var(--fg-50)' }}>
+                <p className="font-sans text-sm leading-relaxed max-w-xl" style={{ color: 'rgba(242,242,242,0.50)' }}>
                   A thermal imaging-based wildfire detection system built for resource-limited rural barangays,
                   with real-time mobile alerting via push notifications and SMS.
                 </p>
@@ -116,11 +126,12 @@ export default function Projects() {
                   {tags.map((tag) => (
                     <span
                       key={tag}
-                      className="font-sans text-xs px-3 py-1 rounded-full border"
+                      className="font-sans text-xs px-3 py-1.5 rounded-full backdrop-blur-sm"
                       style={{
-                        color: '#fb923c',
-                        borderColor: 'rgba(251,146,60,0.28)',
-                        backgroundColor: 'rgba(251,146,60,0.10)',
+                        color: 'rgba(251,146,60,0.85)',
+                        borderColor: 'rgba(251,146,60,0.22)',
+                        backgroundColor: 'rgba(251,146,60,0.08)',
+                        border: '1px solid rgba(251,146,60,0.22)',
                       }}
                     >
                       {tag}
@@ -128,8 +139,8 @@ export default function Projects() {
                   ))}
                 </div>
                 <div className="flex items-center gap-4 shrink-0">
-                  <span className="font-sans text-xs" style={{ color: 'var(--fg-20)' }}>2025</span>
-                  <span className="font-sans text-sm font-medium" style={{ color: '#fb923c' }}>
+                  <span className="font-sans text-xs" style={{ color: 'rgba(130,100,210,0.45)' }}>2025</span>
+                  <span className="font-sans text-sm font-medium" style={{ color: 'rgba(251,146,60,0.85)' }}>
                     View Details →
                   </span>
                 </div>
