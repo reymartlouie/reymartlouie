@@ -45,7 +45,10 @@ export default function Projects() {
         >
           <div className="absolute -right-20 -top-20 w-72 h-72 bg-rose-400/22 rounded-full blur-3xl pointer-events-none" />
           <div className="relative">
-            <p className="font-sans text-xs uppercase tracking-widest mb-2" style={{ color: 'var(--portfolio-label)' }}>Portfolio</p>
+            <div className="flex items-center gap-2 mb-2">
+              <div className="w-px h-3.5" style={{ background: 'var(--portfolio-label)' }} />
+              <p className="font-sans text-xs uppercase tracking-widest" style={{ color: 'var(--portfolio-label)' }}>Portfolio</p>
+            </div>
             <h3 className="font-display text-4xl lg:text-5xl" style={{ color: 'var(--portfolio-title)' }}>UI/UX Portfolio</h3>
             <p className="font-sans text-sm mt-2 max-w-md" style={{ color: 'var(--portfolio-body)' }}>
               Explore my design work — case studies, wireframes, and high-fidelity prototypes.
@@ -57,18 +60,29 @@ export default function Projects() {
         </a>
 
         {/* Selected work */}
-        <div className="rounded-[32px] overflow-hidden relative" style={{ background: 'var(--bg-card)' }}>
-          <div className="absolute -top-16 -left-16 w-56 h-56 bg-orange-500/14 rounded-full blur-3xl pointer-events-none" />
-
+        <div
+          className="rounded-[32px] overflow-hidden relative"
+          style={{
+            backgroundImage: `
+              linear-gradient(160deg, rgba(8,10,24,0.88) 0%, rgba(12,8,28,0.82) 60%, rgba(8,12,26,0.88) 100%),
+              url('/projects-bg.jpg')
+            `,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        >
           <div className="px-6 md:px-8 lg:px-10 py-6 md:py-8 flex items-center justify-between relative">
             <div>
-              <p className="font-sans text-xs uppercase tracking-widest mb-2" style={{ color: 'var(--fg-30)' }}>Selected Work</p>
+              <div className="flex items-center gap-2 mb-2">
+                <div className="w-px h-3.5" style={{ background: 'rgba(130,100,210,0.55)' }} />
+                <p className="font-sans text-xs uppercase tracking-widest" style={{ color: 'rgba(160,130,230,0.65)' }}>Selected Work</p>
+              </div>
               <h2 className="font-display text-5xl" style={{ color: 'var(--fg)' }}>Projects</h2>
             </div>
-            <span className="font-sans text-sm hidden md:block" style={{ color: 'var(--fg-20)' }}>1 project</span>
+            <span className="font-sans text-sm hidden md:block" style={{ color: 'rgba(130,100,210,0.45)' }}>1 project</span>
           </div>
 
-          <div className="h-px mx-6" style={{ background: 'var(--border)' }} />
+          <div className="h-px mx-6" style={{ background: 'rgba(130,100,210,0.18)' }} />
 
           <div className="p-4 lg:p-5">
             {/* FireSafe featured card */}
