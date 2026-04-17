@@ -35,7 +35,7 @@ const POSITIONS_KEY = 'bento-positions-v4'
 function computeHeight(rects: Record<string, Rect>): number {
   let max = 0
   Object.values(rects).forEach(r => { max = Math.max(max, r.y + r.h) })
-  return max + 32
+  return max + 8
 }
 
 function clampToContainer(rect: Rect, cw: number): Rect {
