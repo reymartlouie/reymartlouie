@@ -19,7 +19,10 @@ export default function Certifications() {
         <div className="rounded-[32px] overflow-hidden relative" style={{ background: 'var(--bg-card)' }}>
           <div className="px-6 md:px-8 lg:px-10 py-6 md:py-8 flex items-center justify-between">
             <div>
-              <p className="font-sans text-xs uppercase tracking-widest mb-2" style={{ color: 'var(--fg-30)' }}>Credentials</p>
+              <div className="flex items-center gap-2 mb-2">
+                <div className="w-px h-3.5" style={{ background: 'var(--fg-30)' }} />
+                <p className="font-sans text-xs uppercase tracking-widest" style={{ color: 'var(--fg-30)' }}>Credentials</p>
+              </div>
               <h2 className="font-display text-5xl" style={{ color: 'var(--fg)' }}>Certifications</h2>
             </div>
             <span className="font-sans text-sm hidden md:block" style={{ color: 'var(--fg-20)' }}>
