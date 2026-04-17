@@ -42,8 +42,9 @@ export default function Projects() {
           rel="noopener noreferrer"
           className="bento-lift block rounded-[32px] p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative overflow-hidden group"
           style={{
+            backgroundColor: '#06020c',
             backgroundImage: `
-              linear-gradient(to right, rgba(6,2,12,0.92) 0%, rgba(6,2,12,0.78) 45%, rgba(6,2,12,0.45) 100%),
+              linear-gradient(to right, rgba(6,2,12,0.94) 0%, rgba(6,2,12,0.82) 45%, rgba(6,2,12,0.68) 100%),
               url('/portfolio-bg.png')
             `,
             backgroundSize: 'cover',
