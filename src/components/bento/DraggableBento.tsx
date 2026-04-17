@@ -323,10 +323,10 @@ export default function DraggableBento({
             : hovered && !editMode
             ? '0 8px 32px rgba(0,0,0,0.35), 0 2px 8px rgba(0,0,0,0.2)'
             : 'none',
-          cursor: dragging ? 'grabbing' : 'grab',
+          cursor: dragging ? 'grabbing' : editMode ? 'grab' : 'default',
           transition: dragging || resizing
-            ? 'transform 80ms ease, box-shadow 300ms ease'
-            : `transform 380ms ${SPRING}, box-shadow 300ms ease`,
+            ? 'transform 80ms ease'
+            : `transform 380ms ${SPRING}`,
         }}
       >
         {/* Drag hint: 6-dot grid */}

@@ -71,8 +71,8 @@ export default function Hero() {
 
     fetchTestimonials()
 
-    // Poll every 10s so approvals show up without any realtime config
-    const interval = setInterval(fetchTestimonials, 10_000)
+    // Poll every 60s — testimonials change infrequently; 10s was unnecessary
+    const interval = setInterval(fetchTestimonials, 60_000)
 
     return () => { clearInterval(interval) }
   }, [])

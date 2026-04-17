@@ -57,7 +57,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <StartupScreen />
         <div aria-hidden="true" className="layout-overlay">
-          <img src="/bg.webp" alt="" fetchPriority="high" />
+          <img src="/bg.webp" alt="" fetchPriority="high" decoding="async" />
         </div>
         <div style={{ position: 'relative', zIndex: 1 }}>
           {children}
