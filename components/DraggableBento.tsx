@@ -70,9 +70,10 @@ export default function DraggableBento({
   // ── Register with canvas once at mount ───────────────────────────────────
   useEffect(() => {
     if (floating) {
-      // Canvas already in floating mode (new card added after initial render)
-      // Use saved position if available, otherwise addCard places it below all cards
+      // Canvas already in floating mode (new card added after initial render).
+      // Reveal immediately — IntersectionObserver won't fire for off-screen cards.
       isDynamicRef.current = true
+      setRevealed(true)
       addCard(id, savedPositions[id])
       return
     }
