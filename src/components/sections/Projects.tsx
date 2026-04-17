@@ -41,9 +41,16 @@ export default function Projects() {
           target="_blank"
           rel="noopener noreferrer"
           className="bento-lift block rounded-[32px] p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative overflow-hidden group"
-          style={{ background: 'var(--bg-portfolio)' }}
+          style={{
+            backgroundImage: `
+              linear-gradient(to right, rgba(6,2,12,0.92) 0%, rgba(6,2,12,0.78) 45%, rgba(6,2,12,0.45) 100%),
+              url('/portfolio-bg.png')
+            `,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center right',
+          }}
         >
-          <div className="absolute -right-20 -top-20 w-72 h-72 bg-rose-400/22 rounded-full blur-3xl pointer-events-none" />
+          {/* no glow — let the screenshot do the work */}
           <div className="relative">
             <div className="flex items-center gap-2 mb-2">
               <div className="w-px h-3.5" style={{ background: 'var(--portfolio-label)' }} />
