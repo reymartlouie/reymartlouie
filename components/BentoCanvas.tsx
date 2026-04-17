@@ -180,6 +180,10 @@ export default function BentoCanvas({
     const ro = new ResizeObserver(([entry]) => {
       const cw = entry.contentRect.width
       cwRef.current = cw
+      if (cw < 1024) {
+        setFloating(false)
+        return
+      }
       setPositions(prev => {
         if (!Object.keys(prev).length) return prev
         const clamped: Record<string, Rect> = {}
@@ -209,6 +213,7 @@ export default function BentoCanvas({
     if (activateTimerRef.current) clearTimeout(activateTimerRef.current)
     activateTimerRef.current = setTimeout(() => {
       const cw = cwRef.current
+      if (cw < 1024) return
       const resolved = resolveAll(pendingRef.current, cw, GAP)
       setPositions(resolved)
       setContainerH(computeHeight(resolved))

@@ -186,7 +186,7 @@ export default function Hero() {
 
         <button
           onClick={() => setEditMode(prev => !prev)}
-          className={`btn-spring inline-flex items-center gap-2 font-sans text-sm font-semibold
+          className={`btn-spring hidden lg:inline-flex items-center gap-2 font-sans text-sm font-semibold
                       px-5 py-3 rounded-full border transition-colors
                       ${editMode
                         ? 'bg-white/[0.14] text-white/90 border-white/25 hover:bg-white/20'
