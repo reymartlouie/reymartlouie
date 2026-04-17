@@ -87,10 +87,12 @@ export default function GitHubCard() {
         style={{ background: 'rgba(22,163,74,0.20)' }} />
 
       {/* header */}
-      <p className="font-sans text-xs uppercase tracking-widest mb-4 relative"
-        style={{ color: 'rgba(74,222,128,0.45)' }}>
-        GitHub
-      </p>
+      <div className="flex items-center gap-2 mb-4 relative">
+        <div className="w-px h-3.5" style={{ background: 'rgba(74,222,128,0.45)' }} />
+        <p className="font-sans text-xs uppercase tracking-widest" style={{ color: 'rgba(74,222,128,0.45)' }}>
+          GitHub
+        </p>
+      </div>
 
       {/* contribution grid — always shows the most recent weeks that fit */}
       <div className="flex-1 flex items-start relative overflow-hidden">
