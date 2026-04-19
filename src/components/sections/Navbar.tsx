@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef, memo } from 'react'
 
 // ── Nav icons ───────────────────────────────────────────────────────────────
 
@@ -125,7 +125,7 @@ const PROJECTS = [
 
 // ── Component ────────────────────────────────────────────────────────────────
 
-export default function Navbar() {
+function Navbar() {
   const [ready,    setReady]    = useState(false)
   const [active,   setActive]   = useState<string>('about')
   const [isMobile, setIsMobile] = useState(false)
@@ -143,6 +143,8 @@ export default function Navbar() {
     return () => clearTimeout(t)
   }, [])
 
+  const navRafRef = useRef<number | null>(null)
+
   const updateActive = useCallback(() => {
     if (window.scrollY < 80) { setActive('about'); return }
     const ids = ['about', 'work', 'contact']
@@ -159,9 +161,16 @@ export default function Navbar() {
   }, [])
 
   useEffect(() => {
-    window.addEventListener('scroll', updateActive, { passive: true })
+    const onScroll = () => {
+      if (navRafRef.current !== null) return
+      navRafRef.current = requestAnimationFrame(() => { navRafRef.current = null; updateActive() })
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
     updateActive()
-    return () => window.removeEventListener('scroll', updateActive)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      if (navRafRef.current !== null) cancelAnimationFrame(navRafRef.current)
+    }
   }, [updateActive])
 
   const openFireSafe = () => {
@@ -187,8 +196,8 @@ export default function Navbar() {
         className="pointer-events-auto flex items-center gap-2 px-6 py-3"
         style={{
           background:          'var(--nav-bg)',
-          backdropFilter:       'blur(60px) saturate(200%)',
-          WebkitBackdropFilter: 'blur(60px) saturate(200%)',
+          backdropFilter:       'blur(28px) saturate(160%)',
+          WebkitBackdropFilter: 'blur(28px) saturate(160%)',
           border:               '1px solid var(--bar-border)',
           borderRadius:         44,
           boxShadow: [
@@ -243,3 +252,5 @@ export default function Navbar() {
     </div>
   )
 }
+
+export default memo(Navbar)

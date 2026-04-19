@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter, Archivo_Black } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/react'
-import StartupScreen from '@/components/StartupScreen'
+import StartupScreen from '@/components/ui/StartupScreen'
 import './globals.css'
 
 const inter = Inter({
@@ -57,7 +57,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <StartupScreen />
         <div aria-hidden="true" className="layout-overlay">
-          <img src="/bg.webp" alt="" fetchPriority="high" />
+          <img src="/bg.webp" alt="" fetchPriority="high" decoding="async" />
         </div>
         <div style={{ position: 'relative', zIndex: 1 }}>
           {children}

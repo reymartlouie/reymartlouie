@@ -1,9 +1,9 @@
-import Navbar from '@/components/Navbar'
-import Hero from '@/components/Hero'
-import Projects from '@/components/Projects'
-import Certifications from '@/components/Certifications'
-import Footer from '@/components/Footer'
-import StatusBar from '@/components/StatusBar'
+import Navbar from '@/components/sections/Navbar'
+import Hero from '@/components/sections/Hero'
+import Projects from '@/components/sections/Projects'
+import Certifications from '@/components/sections/Certifications'
+import Footer from '@/components/sections/Footer'
+import StatusBar from '@/components/ui/StatusBar'
 
 function SectionBreak({ label }: { label: string }) {
   return (

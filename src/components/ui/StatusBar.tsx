@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback, useRef } from 'react'
+import { useState, useEffect, useCallback, useRef, memo } from 'react'
 
 function IconWifi() {
   return (
@@ -59,8 +59,8 @@ function UserMenu({ onClose }: { onClose: () => void }) {
       className="absolute top-full left-0 mt-1.5 w-56 rounded-[18px] overflow-hidden"
       style={{
         background:           'rgba(28,28,30,0.82)',
-        backdropFilter:       'blur(48px) saturate(180%)',
-        WebkitBackdropFilter: 'blur(48px) saturate(180%)',
+        backdropFilter:       'blur(24px) saturate(160%)',
+        WebkitBackdropFilter: 'blur(24px) saturate(160%)',
         border:               '1px solid rgba(255,255,255,0.10)',
         boxShadow:            '0 16px 48px rgba(0,0,0,0.6), 0 1px 0 rgba(255,255,255,0.07) inset',
       }}
@@ -83,7 +83,7 @@ function UserMenu({ onClose }: { onClose: () => void }) {
 
 // ── Main component ─────────────────────────────────────────────────────────────
 
-export default function StatusBar() {
+function StatusBar() {
   const [ready,        setReady]        = useState(false)
   const [time,         setTime]         = useState('')
   const [date,         setDate]         = useState('')
@@ -96,9 +96,16 @@ export default function StatusBar() {
       setDate(now.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }))
     }
     tick()
-    const id = setInterval(tick, 1000)
-    return () => clearInterval(id)
+    // Align to the next minute boundary so we only tick 1×/min instead of 60×/min
+    let id: ReturnType<typeof setTimeout>
+    const schedule = () => {
+      id = setTimeout(() => { tick(); schedule() }, (60 - new Date().getSeconds()) * 1000)
+    }
+    schedule()
+    return () => clearTimeout(id)
   }, [])
+
+  const rafRef = useRef<number | null>(null)
 
   const updateSection = useCallback(() => {
     if (window.scrollY < 80) { setSection('Canvas'); return }
@@ -115,9 +122,16 @@ export default function StatusBar() {
   }, [])
 
   useEffect(() => {
-    window.addEventListener('scroll', updateSection, { passive: true })
+    const onScroll = () => {
+      if (rafRef.current !== null) return
+      rafRef.current = requestAnimationFrame(() => { rafRef.current = null; updateSection() })
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
     updateSection()
-    return () => window.removeEventListener('scroll', updateSection)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      if (rafRef.current !== null) cancelAnimationFrame(rafRef.current)
+    }
   }, [updateSection])
 
   useEffect(() => {
@@ -133,8 +147,8 @@ export default function StatusBar() {
         paddingLeft:          20,
         paddingRight:         20,
         background:           'var(--bar-bg)',
-        backdropFilter:       'blur(40px) saturate(160%)',
-        WebkitBackdropFilter: 'blur(40px) saturate(160%)',
+        backdropFilter:       'blur(20px) saturate(140%)',
+        WebkitBackdropFilter: 'blur(20px) saturate(140%)',
         borderBottom:         '1px solid var(--bar-border)',
         boxShadow:            '0 1px 0 rgba(255,255,255,0.05) inset, 0 4px 24px rgba(0,0,0,0.3)',
         opacity:    ready ? 1 : 0,
@@ -214,3 +228,5 @@ export default function StatusBar() {
     </div>
   )
 }
+
+export default memo(StatusBar)

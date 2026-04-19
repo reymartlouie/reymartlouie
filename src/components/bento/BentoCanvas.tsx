@@ -28,14 +28,14 @@ export function useBentoCanvas() {
 }
 
 export const GAP = 16
-const POSITIONS_KEY = 'bento-positions-v3'
+const POSITIONS_KEY = 'bento-positions-v4'
 
 // ── Pure helpers ─────────────────────────────────────────────────────────────
 
 function computeHeight(rects: Record<string, Rect>): number {
   let max = 0
   Object.values(rects).forEach(r => { max = Math.max(max, r.y + r.h) })
-  return max + 32
+  return max + 8
 }
 
 function clampToContainer(rect: Rect, cw: number): Rect {
@@ -180,6 +180,10 @@ export default function BentoCanvas({
     const ro = new ResizeObserver(([entry]) => {
       const cw = entry.contentRect.width
       cwRef.current = cw
+      if (cw < 1024) {
+        setFloating(false)
+        return
+      }
       setPositions(prev => {
         if (!Object.keys(prev).length) return prev
         const clamped: Record<string, Rect> = {}
@@ -209,6 +213,7 @@ export default function BentoCanvas({
     if (activateTimerRef.current) clearTimeout(activateTimerRef.current)
     activateTimerRef.current = setTimeout(() => {
       const cw = cwRef.current
+      if (cw < 1024) return
       const resolved = resolveAll(pendingRef.current, cw, GAP)
       setPositions(resolved)
       setContainerH(computeHeight(resolved))

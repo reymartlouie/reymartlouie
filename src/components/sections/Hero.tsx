@@ -1,15 +1,15 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import DraggableBento from './DraggableBento'
-import BentoCanvas, { type Rect } from './BentoCanvas'
-import CustomCard from './CustomCard'
-import CardEditorModal from './CardEditorModal'
-import GitHubCard from './GitHubCard'
-import HeroIntroCard from './HeroIntroCard'
-import PhotoCard from './PhotoCard'
-import TechStackCard from './TechStackCard'
-import AboutCard from './AboutCard'
+import DraggableBento from '../bento/DraggableBento'
+import BentoCanvas, { type Rect } from '../bento/BentoCanvas'
+import CustomCard from '../bento/CustomCard'
+import CardEditorModal from '../bento/CardEditorModal'
+import GitHubCard from '../cards/GitHubCard'
+import HeroIntroCard from '../cards/HeroIntroCard'
+import PhotoCard from '../cards/PhotoCard'
+import TechStackCard from '../cards/TechStackCard'
+import AboutCard from '../cards/AboutCard'
 import { supabase, type Testimonial } from '@/lib/supabase'
 
 const NOTE_LIMIT  = 3
@@ -61,7 +61,7 @@ export default function Hero() {
 
   useEffect(() => {
     try {
-      const all: Record<string, Rect> = JSON.parse(localStorage.getItem('bento-positions-v3') ?? '{}')
+      const all: Record<string, Rect> = JSON.parse(localStorage.getItem('bento-positions-v4') ?? '{}')
       setSavedPositions(all)
     } catch {}
     try {
@@ -71,8 +71,8 @@ export default function Hero() {
 
     fetchTestimonials()
 
-    // Poll every 10s so approvals show up without any realtime config
-    const interval = setInterval(fetchTestimonials, 10_000)
+    // Poll every 60s — testimonials change infrequently; 10s was unnecessary
+    const interval = setInterval(fetchTestimonials, 60_000)
 
     return () => { clearInterval(interval) }
   }, [])
@@ -186,7 +186,7 @@ export default function Hero() {
 
         <button
           onClick={() => setEditMode(prev => !prev)}
-          className={`btn-spring inline-flex items-center gap-2 font-sans text-sm font-semibold
+          className={`btn-spring hidden lg:inline-flex items-center gap-2 font-sans text-sm font-semibold
                       px-5 py-3 rounded-full border transition-colors
                       ${editMode
                         ? 'bg-white/[0.14] text-white/90 border-white/25 hover:bg-white/20'
@@ -195,6 +195,20 @@ export default function Hero() {
         >
           {editMode ? '✓ Done' : '⊹ Edit layout'}
         </button>
+
+        {editMode && (
+          <button
+            onClick={() => {
+              try { localStorage.removeItem('bento-positions-v4') } catch {}
+              window.location.reload()
+            }}
+            className="btn-spring inline-flex items-center gap-2 font-sans text-sm font-semibold
+                       px-5 py-3 rounded-full border border-red-500/25 bg-red-500/10
+                       text-red-400/70 hover:bg-red-500/[0.18] transition-colors"
+          >
+            ↺ Reset layout
+          </button>
+        )}
 
       </div>
 
