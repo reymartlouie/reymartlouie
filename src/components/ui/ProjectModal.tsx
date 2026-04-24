@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
+import { createPortal } from 'react-dom'
 
 interface Props {
   onClose: () => void
@@ -52,9 +53,9 @@ export default function ProjectModal({ onClose }: Props) {
     }
   }, [onClose])
 
-  return (
+  return createPortal(
     <div
-      className="modal-backdrop fixed inset-0 z-[9000] flex items-end md:items-center justify-center p-4 md:p-8"
+      className="fixed inset-0 z-[9000] flex items-center justify-center p-4 md:p-8"
       style={{
         background: 'rgba(0,0,0,0.75)',
         backdropFilter: 'blur(12px)',
@@ -64,33 +65,49 @@ export default function ProjectModal({ onClose }: Props) {
       onClick={onClose}
     >
       <div
-        className="modal-card relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-[32px] p-8 md:p-10"
+        className="relative w-full max-w-2xl rounded-[32px] overflow-hidden flex flex-col"
         style={{
           background: 'var(--bg-card)',
           border: '1px solid rgba(255,255,255,0.08)',
           boxShadow: '0 40px 120px rgba(0,0,0,0.8), 0 1px 0 rgba(255,255,255,0.06) inset',
           animation: 'modalCardIn 350ms cubic-bezier(0.34,1.2,0.64,1) both',
+          maxHeight: '90vh',
         }}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Close */}
-        <button
-          onClick={onClose}
-          className="absolute top-6 right-6 w-9 h-9 rounded-full flex items-center justify-center transition-colors duration-150"
-          style={{ background: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.4)' }}
-        >
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-            <path d="M1 1l10 10M11 1L1 11" />
-          </svg>
-        </button>
-
         {/* Header */}
-        <div className="mb-8">
-          <div className="flex flex-wrap items-center gap-3 mb-4">
-            <span className="font-sans text-[#fb923c]/60 text-xs uppercase tracking-widest">Thesis · BS Computer Engineering</span>
-            <span className="font-sans text-xs" style={{ color: 'var(--fg-20)' }}>· March 2026</span>
+        <div className="flex items-center justify-between px-6 py-4 flex-shrink-0" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+          <div>
+            <p className="font-sans text-xs uppercase tracking-widest mb-0.5" style={{ color: 'rgba(251,146,60,0.50)' }}>Thesis · BS Computer Engineering</p>
+            <h2 className="font-display text-xl" style={{ color: 'var(--fg)' }}>FireSafe</h2>
           </div>
-          <h2 className="font-display text-white text-5xl mb-3">FireSafe</h2>
+          <div className="flex items-center gap-3">
+            <a
+              href="https://reymartlouie.framer.website/work/firesafe"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-sans text-xs px-4 py-2 rounded-full transition-colors duration-150"
+              style={{ background: 'rgba(255,255,255,0.08)', color: 'var(--fg-40)' }}
+            >
+              Case Study ↗
+            </a>
+            <button
+              onClick={onClose}
+              className="w-9 h-9 rounded-full flex items-center justify-center transition-colors duration-150"
+              style={{ background: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.4)' }}
+            >
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                <path d="M1 1l10 10M11 1L1 11" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        {/* Scrollable body */}
+        <div className="overflow-y-auto p-8 md:p-10">
+
+        {/* Intro */}
+        <div className="mb-8">
           <p className="font-sans text-xs leading-relaxed mb-3" style={{ color: 'var(--fg-40)' }}>
             A Thermal Imaging-Based Approach for Fire Detection in a Controlled and Open Space Environment with Mobile Alerting System
           </p>
@@ -243,7 +260,9 @@ export default function ProjectModal({ onClose }: Props) {
           </div>
         </div>
 
+        </div>{/* end scrollable body */}
       </div>
-    </div>
+    </div>,
+    document.body
   )
 }
