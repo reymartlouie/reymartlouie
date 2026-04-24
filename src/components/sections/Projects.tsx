@@ -73,7 +73,7 @@ export default function Projects() {
           style={{
             backgroundImage: `
               linear-gradient(160deg, rgba(8,10,24,0.88) 0%, rgba(12,8,28,0.82) 60%, rgba(8,12,26,0.88) 100%),
-              url('/projects-bg.jpg')
+              url('/projects-bg.webp')
             `,
             backgroundSize: 'cover',
             backgroundPosition: 'center',

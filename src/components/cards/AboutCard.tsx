@@ -12,7 +12,7 @@ export default function AboutCard() {
       style={{
         backgroundImage: `
           linear-gradient(160deg, rgba(4,10,22,0.72) 0%, rgba(4,10,22,0.52) 60%, rgba(4,10,22,0.70) 100%),
-          url('/about-bg.jpg')
+          url('/about-bg.webp')
         `,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
