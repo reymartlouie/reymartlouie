@@ -3,7 +3,8 @@
 import { useState, useEffect, useRef } from 'react'
 import ProjectModal from '../ui/ProjectModal'
 
-const tags = ['React Native', 'Raspberry Pi Zero 2 W', 'Supabase', 'TinyML', 'Python', 'Arduino']
+const firesafeTags = ['React Native', 'Raspberry Pi Zero 2 W', 'Supabase', 'TinyML', 'Python', 'Arduino']
+const graceyTags = ['Figma', 'Brand Identity', 'UI Design', 'Logo Design']
 
 export default function Projects() {
   const [modalOpen, setModalOpen] = useState(false)
@@ -45,13 +46,12 @@ export default function Projects() {
             backgroundColor: '#06020c',
             backgroundImage: `
               linear-gradient(to right, rgba(6,2,12,0.94) 0%, rgba(6,2,12,0.82) 45%, rgba(6,2,12,0.68) 100%),
-              url('/portfolio-bg.png')
+              url('/portfolio-bg.webp')
             `,
             backgroundSize: 'cover',
             backgroundPosition: 'center right',
           }}
         >
-          {/* no glow — let the screenshot do the work */}
           <div className="relative">
             <div className="flex items-center gap-2 mb-2">
               <div className="w-px h-3.5" style={{ background: 'var(--portfolio-label)' }} />
@@ -69,17 +69,10 @@ export default function Projects() {
 
         {/* Selected work */}
         <div
-          className="rounded-[32px] overflow-hidden relative"
-          style={{
-            backgroundImage: `
-              linear-gradient(160deg, rgba(8,10,24,0.88) 0%, rgba(12,8,28,0.82) 60%, rgba(8,12,26,0.88) 100%),
-              url('/projects-bg.webp')
-            `,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-          }}
+          className="rounded-[32px] overflow-hidden"
+          style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}
         >
-          <div className="px-6 md:px-8 lg:px-10 py-6 md:py-8 flex items-center justify-between relative">
+          <div className="px-6 md:px-8 lg:px-10 py-6 md:py-8 flex items-center justify-between">
             <div>
               <div className="flex items-center gap-2 mb-2">
                 <div className="w-px h-3.5" style={{ background: 'rgba(130,100,210,0.55)' }} />
@@ -87,67 +80,138 @@ export default function Projects() {
               </div>
               <h2 className="font-display text-5xl" style={{ color: 'var(--fg)' }}>Projects</h2>
             </div>
-            <span className="font-sans text-sm hidden md:block" style={{ color: 'rgba(130,100,210,0.45)' }}>1 project</span>
+            <span className="font-sans text-sm hidden md:block" style={{ color: 'rgba(130,100,210,0.45)' }}>2 projects</span>
           </div>
 
-          <div className="h-px mx-6" style={{ background: 'rgba(130,100,210,0.18)' }} />
+          <div className="h-px mx-6" style={{ background: 'var(--border)' }} />
 
-          <div className="p-4 lg:p-5">
-            {/* FireSafe featured card */}
+          {/* 2-column card grid */}
+          <div className="p-4 lg:p-5 grid grid-cols-1 lg:grid-cols-2 gap-4">
+
+            {/* FireSafe card */}
             <div
-              className="rounded-[24px] p-6 md:p-8 lg:p-10 flex flex-col justify-between min-h-[280px] relative overflow-hidden group cursor-pointer"
+              className="rounded-[24px] overflow-hidden flex flex-col cursor-pointer group"
               style={{ background: 'linear-gradient(145deg, #16082a 0%, #0a0418 100%)' }}
               onClick={() => setModalOpen(true)}
             >
-              {/* orange fire glow — identity accent against the deep purple bg */}
-              <div
-                className="absolute -top-16 -right-16 w-72 h-72 rounded-full blur-3xl opacity-25 group-hover:opacity-45 transition-opacity duration-300 pointer-events-none"
-                style={{ backgroundColor: '#f97316' }}
-              />
-              {/* subtle purple echo from outer section */}
-              <div
-                className="absolute -bottom-12 -left-12 w-48 h-48 rounded-full blur-3xl opacity-20 pointer-events-none"
-                style={{ backgroundColor: '#8264d2' }}
-              />
-
-              <div className="relative">
-                <div className="flex items-center gap-2 mb-5">
+              <div className="px-8 md:px-10 pt-8 md:pt-10 pb-7">
+                <div className="flex items-center gap-2 mb-4">
                   <div className="w-px h-3" style={{ background: 'rgba(251,146,60,0.40)' }} />
-                  <span className="font-sans text-xs uppercase tracking-widest" style={{ color: 'rgba(251,146,60,0.45)' }}>01</span>
+                  <span className="font-sans text-xs uppercase tracking-widest" style={{ color: 'rgba(251,146,60,0.45)' }}>01 · Thesis · 2025</span>
                 </div>
-                <h3 className="font-display text-4xl md:text-5xl leading-tight mb-4" style={{ color: 'var(--fg)' }}>FireSafe</h3>
-                <p className="font-sans text-sm leading-relaxed max-w-xl" style={{ color: 'rgba(242,242,242,0.50)' }}>
-                  A thermal imaging-based wildfire detection system built for resource-limited rural barangays,
-                  with real-time mobile alerting via push notifications and SMS.
+                <h3 className="font-display text-4xl leading-tight mb-3" style={{ color: 'var(--fg)' }}>FireSafe</h3>
+                <p className="font-sans text-sm leading-relaxed mb-5" style={{ color: 'rgba(242,242,242,0.50)' }}>
+                  Thermal imaging wildfire detection with real-time mobile alerting for rural barangays.
                 </p>
+                <span
+                  className="inline-flex items-center gap-1.5 font-sans text-sm font-medium"
+                  style={{ color: 'rgba(251,146,60,0.85)' }}
+                >
+                  View Details →
+                </span>
               </div>
-              <div className="relative flex flex-col sm:flex-row sm:items-center justify-between gap-4 mt-8">
-                <div className="flex flex-wrap gap-2">
-                  {tags.map((tag) => (
+
+              {/* Bottom: FireSafe logo centered on dark bg */}
+              <div className="relative h-52 md:h-60 overflow-hidden mt-auto">
+                <div
+                  className="absolute inset-0"
+                  style={{ background: 'linear-gradient(to bottom, #0a0418 0%, #130826 100%)' }}
+                />
+                {/* glow behind logo */}
+                <div
+                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 rounded-full blur-3xl opacity-20 group-hover:opacity-35 transition-opacity duration-300 pointer-events-none"
+                  style={{ backgroundColor: '#ef4444' }}
+                />
+                {/* logo */}
+                <div className="absolute inset-0 flex items-center justify-center pb-10">
+                  <img
+                    src="/firesafe-logo.webp"
+                    alt="FireSafe"
+                    className="w-36 h-auto drop-shadow-xl group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                <div className="absolute bottom-5 left-6 right-6 flex flex-wrap gap-1.5">
+                  {firesafeTags.map((tag) => (
                     <span
                       key={tag}
-                      className="font-sans text-xs px-3 py-1.5 rounded-full backdrop-blur-sm"
+                      className="font-sans text-xs px-2.5 py-1 rounded-full backdrop-blur-sm"
                       style={{
                         color: 'rgba(251,146,60,0.85)',
-                        borderColor: 'rgba(251,146,60,0.22)',
                         backgroundColor: 'rgba(251,146,60,0.08)',
-                        border: '1px solid rgba(251,146,60,0.22)',
+                        border: '1px solid rgba(251,146,60,0.20)',
                       }}
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
-                <div className="flex items-center gap-4 shrink-0">
-                  <span className="font-sans text-xs" style={{ color: 'rgba(130,100,210,0.45)' }}>2025</span>
-                  <span className="font-sans text-sm font-medium" style={{ color: 'rgba(251,146,60,0.85)' }}>
-                    View Details →
-                  </span>
+              </div>
+            </div>
+
+            {/* Gracey Logistics Services card */}
+            <div
+              className="rounded-[24px] overflow-hidden flex flex-col group"
+              style={{ background: 'linear-gradient(145deg, #0d1520 0%, #080e18 100%)' }}
+            >
+              <div className="px-8 md:px-10 pt-8 md:pt-10 pb-7">
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="w-px h-3" style={{ background: 'rgba(251,146,60,0.40)' }} />
+                  <span className="font-sans text-xs uppercase tracking-widest" style={{ color: 'rgba(251,146,60,0.45)' }}>02 · UI/UX Design · 2024</span>
+                </div>
+                <h3 className="font-display text-4xl leading-tight mb-3" style={{ color: 'var(--fg)' }}>Gracey Logistics</h3>
+                <p className="font-sans text-sm leading-relaxed mb-5" style={{ color: 'rgba(242,242,242,0.50)' }}>
+                  Brand identity and UI design for a local logistics and trucking services company.
+                </p>
+                <a
+                  href="/gracey-logistics.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 font-sans text-sm font-medium"
+                  style={{ color: 'rgba(251,146,60,0.85)' }}
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  View Case Study →
+                </a>
+              </div>
+
+              {/* Bottom: Gracey logo centered */}
+              <div className="relative h-52 md:h-60 overflow-hidden mt-auto">
+                <div
+                  className="absolute inset-0"
+                  style={{ background: 'linear-gradient(to bottom, #080e18 0%, #0f1c2e 100%)' }}
+                />
+                {/* warm amber glow behind logo */}
+                <div
+                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 rounded-full blur-3xl opacity-25 group-hover:opacity-40 transition-opacity duration-300 pointer-events-none"
+                  style={{ backgroundColor: '#f59e0b' }}
+                />
+                {/* logo */}
+                <div className="absolute inset-0 flex items-center justify-center pb-10">
+                  <img
+                    src="/gracey-logo.webp"
+                    alt="Gracey Logistics Services"
+                    className="w-40 h-auto drop-shadow-xl group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                <div className="absolute bottom-5 left-6 right-6 flex flex-wrap gap-1.5">
+                  {graceyTags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="font-sans text-xs px-2.5 py-1 rounded-full backdrop-blur-sm"
+                      style={{
+                        color: 'rgba(251,146,60,0.85)',
+                        backgroundColor: 'rgba(251,146,60,0.08)',
+                        border: '1px solid rgba(251,146,60,0.20)',
+                      }}
+                    >
+                      {tag}
+                    </span>
+                  ))}
                 </div>
               </div>
             </div>
-          </div>
 
+          </div>
         </div>
       </div>
 
