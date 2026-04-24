@@ -83,15 +83,6 @@ export default function ProjectModal({ onClose }: Props) {
           </div>
           <div className="flex items-center gap-3">
             <a
-              href="https://github.com/reymartlouie/Firesafe"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-sans text-xs px-4 py-2 rounded-full transition-colors duration-150"
-              style={{ background: 'rgba(251,146,60,0.12)', color: '#fb923c', border: '1px solid rgba(251,146,60,0.22)' }}
-            >
-              GitHub ↗
-            </a>
-            <a
               href="https://reymartlouie.framer.website/work/firesafe"
               target="_blank"
               rel="noopener noreferrer"
@@ -246,9 +237,9 @@ export default function ProjectModal({ onClose }: Props) {
               rel="noopener noreferrer"
               className="btn-spring inline-flex items-center gap-2 font-sans text-sm font-semibold px-5 py-3 rounded-full transition-colors duration-150"
               style={{
-                background: 'var(--contact-resume-bg)',
-                color: 'var(--fg-55)',
-                border: '1px solid var(--border-strong)',
+                background: 'rgba(37,99,235,0.12)',
+                color: '#60a5fa',
+                border: '1px solid rgba(37,99,235,0.30)',
               }}
             >
               GitHub ↗
