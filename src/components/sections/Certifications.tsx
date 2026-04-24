@@ -1,6 +1,8 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import Reveal from '../ui/Reveal'
+import CertModal from '../ui/CertModal'
 
 const certs = [
   {
@@ -14,15 +16,29 @@ const certs = [
   {
     title: 'Graduation Diploma',
     issuer: 'University of St. La Salle',
-    date: 'June 6April 25, 2056',
+    date: 'June 4, 2022 - April 25, 2026',
     url: '',
     badge: '',
-    color: '',
+    color: 'from-blue-700 to-blue-900',
   },
   // Add more certs here
 ]
 
 export default function Certifications() {
+  const [activeCert, setActiveCert] = useState<typeof certs[0] | null>(null)
+  const [activePhoto, setActivePhoto] = useState<{ src: string; title: string; issuer: string } | null>(null)
+
+  useEffect(() => {
+    if (!activePhoto) return
+    const handler = (e: KeyboardEvent) => { if (e.key === 'Escape') setActivePhoto(null) }
+    window.addEventListener('keydown', handler)
+    document.body.style.overflow = 'hidden'
+    return () => {
+      window.removeEventListener('keydown', handler)
+      document.body.style.overflow = ''
+    }
+  }, [activePhoto])
+
   return (
     <section id="certifications" className="flex flex-col gap-4">
       <Reveal>
@@ -57,7 +73,12 @@ export default function Certifications() {
                     style={{ aspectRatio: '4/3' }}
                   >
                     {badge ? (
-                      <img src={badge} alt={title} className="w-full h-full object-cover rounded-2xl" />
+                      <img
+                        src={badge}
+                        alt={title}
+                        className="w-full h-full object-cover rounded-2xl cursor-zoom-in"
+                        onClick={() => setActivePhoto({ src: badge, title, issuer })}
+                      />
                     ) : (
                       <div className="flex flex-col items-center gap-2 opacity-30">
                         <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -80,14 +101,12 @@ export default function Certifications() {
                   {/* Actions */}
                   <div className="flex items-center gap-3 mt-4">
                     {url ? (
-                      <a
-                        href={url}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                      <button
+                        onClick={() => setActiveCert({ title, issuer, date, url, badge, color })}
                         className="px-5 py-2 rounded-full bg-blue-600 text-white text-sm font-sans font-medium hover:bg-blue-700 transition-colors duration-150"
                       >
                         Learn more
-                      </a>
+                      </button>
                     ) : (
                       <span className="px-5 py-2 rounded-full bg-stone-200 text-stone-400 text-sm font-sans font-medium cursor-default select-none">
                         In progress
@@ -100,6 +119,76 @@ export default function Certifications() {
           </div>
         </div>
       </Reveal>
+
+      {activePhoto && (
+        <div
+          className="fixed inset-0 z-[9000] flex items-end md:items-center justify-center p-4 md:p-8"
+          style={{
+            background: 'rgba(0,0,0,0.75)',
+            backdropFilter: 'blur(12px)',
+            WebkitBackdropFilter: 'blur(12px)',
+            animation: 'modalBackdropIn 200ms ease both',
+          }}
+          onClick={() => setActivePhoto(null)}
+        >
+          <div
+            className="relative w-full max-w-3xl rounded-[32px] overflow-hidden flex flex-col"
+            style={{
+              background: 'var(--bg-card)',
+              border: '1px solid rgba(255,255,255,0.08)',
+              boxShadow: '0 40px 120px rgba(0,0,0,0.8), 0 1px 0 rgba(255,255,255,0.06) inset',
+              animation: 'modalCardIn 350ms cubic-bezier(0.34,1.2,0.64,1) both',
+              maxHeight: '90vh',
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Header */}
+            <div className="flex items-center justify-between px-6 py-4" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+              <div>
+                <p className="font-sans text-xs uppercase tracking-widest mb-0.5" style={{ color: 'var(--fg-30)' }}>{activePhoto.issuer}</p>
+                <h2 className="font-display text-xl" style={{ color: 'var(--fg)' }}>{activePhoto.title}</h2>
+              </div>
+              <div className="flex items-center gap-3">
+                <a
+                  href={activePhoto.src}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-sans text-xs px-4 py-2 rounded-full transition-colors duration-150"
+                  style={{ background: 'rgba(255,255,255,0.08)', color: 'var(--fg-40)' }}
+                >
+                  Open ↗
+                </a>
+                <button
+                  onClick={() => setActivePhoto(null)}
+                  className="w-9 h-9 rounded-full flex items-center justify-center transition-colors duration-150"
+                  style={{ background: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.4)' }}
+                >
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                    <path d="M1 1l10 10M11 1L1 11" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            {/* Photo */}
+            <img
+              src={activePhoto.src}
+              alt={activePhoto.title}
+              className="w-full object-contain"
+              style={{ maxHeight: '75vh' }}
+            />
+          </div>
+        </div>
+      )}
+
+      {activeCert && (
+        <CertModal
+          title={activeCert.title}
+          issuer={activeCert.issuer}
+          url={activeCert.url}
+          onClose={() => setActiveCert(null)}
+        />
+      )}
     </section>
   )
 }
