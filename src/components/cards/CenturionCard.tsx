@@ -1,5 +1,8 @@
 'use client'
 
+import { useState } from 'react'
+import ResumeModal from '../ui/ResumeModal'
+
 const GOLD      = '#c9a84c'
 const GOLD_DIM  = 'rgba(201,168,76,0.50)'
 const GOLD_HINT = 'rgba(201,168,76,0.12)'
@@ -47,7 +50,10 @@ function CenturionFigure() {
 }
 
 export default function CenturionCard() {
+  const [resumeOpen, setResumeOpen] = useState(false)
+
   return (
+    <>
     <div
       className="h-full bento-lift rounded-[32px] relative overflow-hidden flex flex-col justify-between"
       style={{
@@ -193,10 +199,8 @@ export default function CenturionCard() {
           >
             Get in Touch →
           </a>
-          <a
-            href="https://drive.google.com/drive/folders/1GbhrbziR6UWoHedmOB52l_DMdWwvyPLT?usp=sharing"
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            onClick={() => setResumeOpen(true)}
             className="btn-spring inline-flex items-center gap-1.5 font-sans font-semibold rounded-full"
             style={{
               fontSize: 12,
@@ -207,9 +211,12 @@ export default function CenturionCard() {
             }}
           >
             Resume ↓
-          </a>
+          </button>
         </div>
       </div>
     </div>
+
+    {resumeOpen && <ResumeModal onClose={() => setResumeOpen(false)} />}
+    </>
   )
 }

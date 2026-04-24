@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useCallback, useRef, memo } from 'react'
+import ResumeModal from './ResumeModal'
 
 function IconWifi() {
   return (
@@ -88,7 +89,8 @@ function StatusBar() {
   const [time,         setTime]         = useState('')
   const [date,         setDate]         = useState('')
   const [section,      setSection]      = useState('Canvas')
-  const [userMenuOpen, setUserMenuOpen] = useState(false)
+  const [userMenuOpen,  setUserMenuOpen]  = useState(false)
+  const [resumeOpen,    setResumeOpen]    = useState(false)
   useEffect(() => {
     const tick = () => {
       const now = new Date()
@@ -140,6 +142,7 @@ function StatusBar() {
   }, [])
 
   return (
+    <>
     <div
       className="fixed top-0 inset-x-0 z-50 flex items-center justify-between select-none"
       style={{
@@ -176,7 +179,6 @@ function StatusBar() {
         {[
           { label: section,          href: '#about'   },
           { label: 'Certifications', href: '#certifications' },
-          { label: 'Resume',         href: '/Reymart_Louie_Capapas_resume.pdf' },
           { label: 'Achievements',   href: '#work'    },
           { label: 'Hire Me',        href: '#contact' },
           { label: 'Help',           href: undefined  },
@@ -204,6 +206,16 @@ function StatusBar() {
             </span>
           )
         )}
+
+        <button
+          onClick={() => setResumeOpen(true)}
+          className="font-sans px-2.5 py-1 transition-colors duration-150"
+          style={{ fontSize: 12, color: 'var(--bar-text)' }}
+          onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = 'var(--bar-text-active)'}
+          onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'var(--bar-text)'}
+        >
+          Resume
+        </button>
       </div>
 
       {/* ── Right ── */}
@@ -226,6 +238,9 @@ function StatusBar() {
       </div>
 
     </div>
+
+    {resumeOpen && <ResumeModal onClose={() => setResumeOpen(false)} />}
+    </>
   )
 }
 
