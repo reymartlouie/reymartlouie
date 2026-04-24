@@ -6,11 +6,18 @@ const certs = [
   {
     title: 'Internship Certificate',
     issuer: 'Ubiquity Global Services',
-    date: 'October 2025',
+    date: 'June 17, 2024 - July 20, 2024',
     url: '/ubiquity-internship.pdf',
     badge: '/ubiquity-photo.webp',
     color: 'from-blue-700 to-blue-900',
-    dots: ['#1d4ed8', '#93c5fd', '#bfdbfe'],
+  },
+  {
+    title: 'Graduation Diploma',
+    issuer: 'University of St. La Salle',
+    date: 'June 6April 25, 2056',
+    url: '',
+    badge: '',
+    color: '',
   },
   // Add more certs here
 ]
@@ -39,7 +46,7 @@ export default function Certifications() {
           {/* Cards row */}
           <div className="overflow-x-auto pt-6 pb-10 px-8">
             <div className="flex gap-6 min-w-max">
-              {certs.map(({ title, issuer, date, url, badge, color, dots }) => (
+              {certs.map(({ title, issuer, date, url, badge, color }) => (
                 <div
                   key={title}
                   className="flex flex-col items-center w-64 md:w-72"
@@ -63,15 +70,8 @@ export default function Certifications() {
                     )}
                   </div>
 
-                  {/* Dot indicators */}
-                  <div className="flex gap-1.5 mt-4">
-                    {dots.map((c, i) => (
-                      <div key={i} className="w-2 h-2 rounded-full" style={{ background: c }} />
-                    ))}
-                  </div>
-
                   {/* Text content */}
-                  <div className="flex flex-col items-center text-center mt-3 gap-1 w-full">
+                  <div className="flex flex-col items-center text-center mt-4 gap-1 w-full">
                     <h3 className="font-display text-xl text-stone-900 leading-snug">{title}</h3>
                     <p className="font-sans text-sm text-stone-500 leading-relaxed">{issuer}</p>
                     <p className="font-sans text-sm font-semibold text-stone-700 mt-1">{date}</p>
@@ -80,24 +80,14 @@ export default function Certifications() {
                   {/* Actions */}
                   <div className="flex items-center gap-3 mt-4">
                     {url ? (
-                      <>
-                        <a
-                          href={url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="px-5 py-2 rounded-full bg-blue-600 text-white text-sm font-sans font-medium hover:bg-blue-700 transition-colors duration-150"
-                        >
-                          View cert
-                        </a>
-                        <a
-                          href={url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-sm font-sans text-blue-600 hover:underline"
-                        >
-                          Details &rsaquo;
-                        </a>
-                      </>
+                      <a
+                        href={url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-5 py-2 rounded-full bg-blue-600 text-white text-sm font-sans font-medium hover:bg-blue-700 transition-colors duration-150"
+                      >
+                        Learn more
+                      </a>
                     ) : (
                       <span className="px-5 py-2 rounded-full bg-stone-200 text-stone-400 text-sm font-sans font-medium cursor-default select-none">
                         In progress
