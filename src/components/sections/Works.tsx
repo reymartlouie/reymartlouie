@@ -6,7 +6,9 @@ import ProjectModal from '../ui/ProjectModal'
 const firesafeTags = ['React Native', 'Raspberry Pi Zero 2 W', 'Supabase', 'TinyML', 'Python', 'Arduino']
 const graceyTags = ['Figma', 'Brand Identity', 'UI Design', 'Logo Design']
 
-export default function Projects() {
+const workCount = 2
+
+export default function Works() {
   const [modalOpen, setModalOpen] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
 
@@ -78,9 +80,9 @@ export default function Projects() {
                 <div className="w-px h-3.5" style={{ background: 'rgba(130,100,210,0.55)' }} />
                 <p className="font-sans text-xs uppercase tracking-widest" style={{ color: 'rgba(160,130,230,0.65)' }}>Selected Work</p>
               </div>
-              <h2 className="font-display text-5xl" style={{ color: 'var(--fg)' }}>Projects</h2>
+              <h2 className="font-display text-5xl" style={{ color: 'var(--fg)' }}>{workCount === 1 ? 'Work' : 'Works'}</h2>
             </div>
-            <span className="font-sans text-sm hidden md:block" style={{ color: 'rgba(130,100,210,0.45)' }}>2 projects</span>
+            <span className="font-sans text-sm hidden md:block" style={{ color: 'rgba(130,100,210,0.45)' }}>{workCount} {workCount === 1 ? 'work' : 'works'}</span>
           </div>
 
           <div className="h-px mx-6" style={{ background: 'var(--border)' }} />
