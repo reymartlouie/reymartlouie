@@ -95,7 +95,7 @@ export default function Works() {
           />
           {/* Content */}
           <div className="relative">
-          <div className="px-6 md:px-8 lg:px-10 py-6 md:py-8 flex items-center justify-between">
+          <div className="p-6 md:p-8 flex items-center justify-between">
             <div>
               <div className="flex items-center gap-2 mb-2">
                 <div className="w-px h-3.5" style={{ background: 'var(--portfolio-label)' }} />
