@@ -105,7 +105,7 @@ export default function Certifications() {
                         onClick={() => setActiveCert({ title, issuer, date, url, badge, photo, color })}
                         className="px-5 py-2 rounded-full bg-blue-600 text-white text-sm font-sans font-medium hover:bg-blue-700 transition-colors duration-150"
                       >
-                        Learn more
+                        View Certificate
                       </button>
                     ) : photo ? (
                       <button
