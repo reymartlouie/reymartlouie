@@ -123,6 +123,14 @@
   object-position: center center;
 }
 
+@media (max-width: 1023px) {
+  .layout-overlay img {
+    /* Pin the top of the image on portrait phones so the blue-tinted sphere
+       stays anchored regardless of aspect ratio (SE → Pro Max → tall Android) */
+    object-position: center top;
+  }
+}
+
 /* ───────────────────────────────────────── */
 /* GLOBAL RESET */
 /* ───────────────────────────────────────── */
