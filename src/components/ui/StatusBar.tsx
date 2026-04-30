@@ -24,16 +24,29 @@ function IconBattery() {
   )
 }
 
-
-
 function Divider() {
   return <div className="w-px h-3.5 rounded-full mx-1 flex-shrink-0" style={{ background: 'var(--bar-border)' }} />
+}
+
+function HamburgerIcon() {
+  return (
+    <svg width="18" height="12" viewBox="0 0 18 12" fill="none">
+      <path d="M1 1.5h16M1 6h16M1 10.5h16" stroke="rgba(255,255,255,0.85)" strokeWidth="1.6" strokeLinecap="round" />
+    </svg>
+  )
 }
 
 const SECTIONS = [
   { id: 'about',   label: 'Canvas'  },
   { id: 'work',    label: 'Work'    },
   { id: 'contact', label: 'Contact' },
+]
+
+const MOBILE_NAV = [
+  { label: 'Canvas',       href: '#about',         toTop: true  },
+  { label: 'Achievements', href: '#certifications', toTop: false },
+  { label: 'Works',        href: '#work',           toTop: false },
+  { label: 'Hire Me',      href: '#contact',        toTop: false },
 ]
 
 // ── RL user menu ───────────────────────────────────────────────────────────────
@@ -82,15 +95,136 @@ function UserMenu({ onClose }: { onClose: () => void }) {
   )
 }
 
+// ── Mobile dropdown menu ───────────────────────────────────────────────────────
+
+function MobileMenu({
+  time,
+  date,
+  onClose,
+  onResumeOpen,
+}: {
+  time: string
+  date: string
+  onClose: () => void
+  onResumeOpen: () => void
+}) {
+  const ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const handler = (e: MouseEvent | TouchEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) onClose()
+    }
+    const keyHandler = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose() }
+    document.addEventListener('mousedown', handler)
+    document.addEventListener('touchstart', handler)
+    document.addEventListener('keydown', keyHandler)
+    return () => {
+      document.removeEventListener('mousedown', handler)
+      document.removeEventListener('touchstart', handler)
+      document.removeEventListener('keydown', keyHandler)
+    }
+  }, [onClose])
+
+  const scrollTo = (href: string, toTop?: boolean) => (e: React.MouseEvent) => {
+    e.preventDefault()
+    if (toTop) {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    } else {
+      const el = document.getElementById(href.slice(1))
+      el?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    }
+    onClose()
+  }
+
+  return (
+    <div
+      ref={ref}
+      className="fixed z-40 overflow-hidden"
+      style={{
+        top:                  'calc(env(safe-area-inset-top, 0px) + 62px)',
+        right:                16,
+        width:                264,
+        borderRadius:         18,
+        background:           'rgba(28,28,30,0.90)',
+        backdropFilter:       'blur(28px) saturate(160%)',
+        WebkitBackdropFilter: 'blur(28px) saturate(160%)',
+        border:               '1px solid rgba(255,255,255,0.10)',
+        boxShadow:            '0 16px 48px rgba(0,0,0,0.6), 0 1px 0 rgba(255,255,255,0.07) inset',
+      }}
+    >
+      {/* User card */}
+      <div
+        className="flex items-center gap-3 px-4 py-4"
+        style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}
+      >
+        <div
+          className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0"
+          style={{ background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.15)' }}
+        >
+          <span className="font-display text-white/90 text-sm">RL</span>
+        </div>
+        <div>
+          <p className="font-display text-white/90 text-sm leading-tight">Reymart Louie L. Capapas</p>
+          <p className="font-sans text-white/35 text-xs mt-0.5">Computer Engineer</p>
+        </div>
+      </div>
+
+      {/* Nav links */}
+      <div className="py-1">
+        {MOBILE_NAV.map(({ label, href, toTop }) => (
+          <a
+            key={label}
+            href={href}
+            onClick={scrollTo(href, toTop)}
+            className="flex items-center justify-between px-4 py-3 active:bg-white/[0.06] transition-colors duration-100"
+            style={{ fontSize: 14, color: 'var(--bar-text-active)', textDecoration: 'none' }}
+          >
+            <span className="font-sans">{label}</span>
+            <span style={{ color: 'rgba(255,255,255,0.25)', fontSize: 16, lineHeight: 1 }}>›</span>
+          </a>
+        ))}
+        <button
+          onClick={() => { onResumeOpen(); onClose() }}
+          className="w-full flex items-center justify-between px-4 py-3 active:bg-white/[0.06] transition-colors duration-100 bg-transparent"
+          style={{ fontSize: 14, color: 'var(--bar-text-active)' }}
+        >
+          <span className="font-sans">Resume</span>
+          <span style={{ color: 'rgba(255,255,255,0.25)', fontSize: 16, lineHeight: 1 }}>›</span>
+        </button>
+      </div>
+
+      {/* Status footer */}
+      <div
+        className="flex items-center justify-between px-4 py-3"
+        style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}
+      >
+        <div className="flex items-center gap-2.5" style={{ color: 'var(--bar-text)' }}>
+          <IconWifi />
+          <div className="flex items-center gap-1.5">
+            <IconBattery />
+            <span className="font-sans" style={{ fontSize: 11 }}>80%</span>
+          </div>
+        </div>
+        <div className="flex items-center gap-2">
+          <span className="font-sans" style={{ fontSize: 11, color: 'var(--bar-text)' }}>{date}</span>
+          <span className="font-sans tabular-nums" style={{ fontSize: 11, color: 'var(--bar-text-active)' }}>{time}</span>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 // ── Main component ─────────────────────────────────────────────────────────────
 
 function StatusBar() {
-  const [ready,        setReady]        = useState(false)
-  const [time,         setTime]         = useState('')
-  const [date,         setDate]         = useState('')
-  const [section,      setSection]      = useState('Canvas')
-  const [userMenuOpen,  setUserMenuOpen]  = useState(false)
-  const [resumeOpen,    setResumeOpen]    = useState(false)
+  const [ready,          setReady]          = useState(false)
+  const [time,           setTime]           = useState('')
+  const [date,           setDate]           = useState('')
+  const [section,        setSection]        = useState('Canvas')
+  const [userMenuOpen,   setUserMenuOpen]   = useState(false)
+  const [resumeOpen,     setResumeOpen]     = useState(false)
+  const [isMobile,       setIsMobile]       = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   const scrollToCenter = useCallback((href: string) => (e: React.MouseEvent) => {
     if (!href.startsWith('#')) return
@@ -98,6 +232,15 @@ function StatusBar() {
     const el = document.getElementById(href.slice(1))
     el?.scrollIntoView({ behavior: 'smooth', block: 'center' })
   }, [])
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 1023px)')
+    setIsMobile(mq.matches)
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches)
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
+  }, [])
+
   useEffect(() => {
     const tick = () => {
       const now = new Date()
@@ -105,7 +248,6 @@ function StatusBar() {
       setDate(now.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }))
     }
     tick()
-    // Align to the next minute boundary so we only tick 1×/min instead of 60×/min
     let id: ReturnType<typeof setTimeout>
     const schedule = () => {
       id = setTimeout(() => { tick(); schedule() }, (60 - new Date().getSeconds()) * 1000)
@@ -147,6 +289,51 @@ function StatusBar() {
     const t = setTimeout(() => setReady(true), 700)
     return () => clearTimeout(t)
   }, [])
+
+  // ── Mobile: floating button + dropdown ────────────────────────────────────────
+
+  if (isMobile) {
+    return (
+      <>
+        <button
+          onClick={() => setMobileMenuOpen(v => !v)}
+          className="fixed z-50 flex items-center justify-center"
+          style={{
+            top:                  'calc(env(safe-area-inset-top, 0px) + 12px)',
+            right:                16,
+            width:                40,
+            height:               40,
+            borderRadius:         12,
+            background:           'rgba(28,28,30,0.72)',
+            backdropFilter:       'blur(20px) saturate(160%)',
+            WebkitBackdropFilter: 'blur(20px) saturate(160%)',
+            border:               '1px solid rgba(255,255,255,0.12)',
+            boxShadow:            '0 4px 16px rgba(0,0,0,0.4), 0 1px 0 rgba(255,255,255,0.08) inset',
+            opacity:    ready ? 1 : 0,
+            transform:  ready ? 'scale(1)' : 'scale(0.8)',
+            transition: ready
+              ? 'opacity 400ms ease 200ms, transform 400ms cubic-bezier(0.34,1.2,0.64,1) 200ms'
+              : 'none',
+          }}
+        >
+          <HamburgerIcon />
+        </button>
+
+        {mobileMenuOpen && (
+          <MobileMenu
+            time={time}
+            date={date}
+            onClose={() => setMobileMenuOpen(false)}
+            onResumeOpen={() => setResumeOpen(true)}
+          />
+        )}
+
+        {resumeOpen && <ResumeModal onClose={() => setResumeOpen(false)} />}
+      </>
+    )
+  }
+
+  // ── Desktop: full status bar ──────────────────────────────────────────────────
 
   return (
     <>
