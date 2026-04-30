@@ -95,7 +95,7 @@ export default function Works() {
           />
           {/* Content */}
           <div className="relative">
-          <div className="px-6 md:px-8 lg:px-10 py-6 md:py-8 flex items-center justify-between">
+          <div className="px-6 md:px-8 pt-6 md:pt-8 pb-3 flex items-center justify-between">
             <div>
               <div className="flex items-center gap-2 mb-2">
                 <div className="w-px h-3.5" style={{ background: 'var(--portfolio-label)' }} />
@@ -115,13 +115,13 @@ export default function Works() {
               style={{ background: 'linear-gradient(145deg, #16082a 0%, #0a0418 100%)' }}
               onClick={() => setModalOpen(true)}
             >
-              <div className="px-8 md:px-10 pt-8 md:pt-10 pb-7">
+              <div className="px-6 md:px-8 pt-6 pb-5">
                 <div className="flex items-center gap-2 mb-2">
                   <div className="w-px h-3" style={{ background: 'rgba(251,146,60,0.40)' }} />
                   <span className="font-sans text-xs uppercase tracking-widest" style={{ color: 'rgba(251,146,60,0.45)' }}>01 · Thesis · 2025</span>
                 </div>
                 <h3 className="font-display text-4xl leading-tight" style={{ color: 'var(--fg)' }}>FireSafe</h3>
-                <p className="font-sans text-sm leading-relaxed mt-2 mb-5" style={{ color: 'rgba(242,242,242,0.50)' }}>
+                <p className="font-sans text-sm leading-relaxed mt-2 mb-4" style={{ color: 'rgba(242,242,242,0.50)' }}>
                   Thermal imaging wildfire detection with real-time mobile alerting for rural barangays.
                 </p>
                 <span
@@ -133,7 +133,7 @@ export default function Works() {
               </div>
 
               {/* Bottom: FireSafe logo centered on dark bg */}
-              <div className="relative h-52 md:h-60 overflow-hidden mt-auto">
+              <div className="relative h-40 md:h-48 overflow-hidden mt-auto">
                 <div
                   className="absolute inset-0"
                   style={{ background: 'linear-gradient(to bottom, #0a0418 0%, #130826 100%)' }}
@@ -174,13 +174,13 @@ export default function Works() {
               className="rounded-[24px] overflow-hidden flex flex-col group"
               style={{ background: 'linear-gradient(145deg, #0d1520 0%, #080e18 100%)' }}
             >
-              <div className="px-8 md:px-10 pt-8 md:pt-10 pb-7">
+              <div className="px-6 md:px-8 pt-6 pb-5">
                 <div className="flex items-center gap-2 mb-2">
                   <div className="w-px h-3" style={{ background: 'rgba(251,146,60,0.40)' }} />
                   <span className="font-sans text-xs uppercase tracking-widest" style={{ color: 'rgba(251,146,60,0.45)' }}>02 · UI/UX Design · 2024</span>
                 </div>
                 <h3 className="font-display text-4xl leading-tight" style={{ color: 'var(--fg)' }}>Gracey Logistics</h3>
-                <p className="font-sans text-sm leading-relaxed mt-2 mb-5" style={{ color: 'rgba(242,242,242,0.50)' }}>
+                <p className="font-sans text-sm leading-relaxed mt-2 mb-4" style={{ color: 'rgba(242,242,242,0.50)' }}>
                   Brand identity and UI design for a local logistics and trucking services company.
                 </p>
                 <a
@@ -196,7 +196,7 @@ export default function Works() {
               </div>
 
               {/* Bottom: Gracey logo centered */}
-              <div className="relative h-52 md:h-60 overflow-hidden mt-auto">
+              <div className="relative h-40 md:h-48 overflow-hidden mt-auto">
                 <div
                   className="absolute inset-0"
                   style={{ background: 'linear-gradient(to bottom, #080e18 0%, #0f1c2e 100%)' }}

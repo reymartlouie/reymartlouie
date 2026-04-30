@@ -46,7 +46,7 @@ export default function Certifications() {
       <Reveal>
         <div className="rounded-[32px] overflow-hidden" style={{ background: '#f5f5f7' }}>
           {/* Header */}
-          <div className="px-6 md:px-8 lg:px-10 py-6 md:py-8 flex items-center justify-between">
+          <div className="p-6 md:p-8 flex items-center justify-between">
             <div>
               <div className="flex items-center gap-2 mb-2">
                 <div className="w-px h-3.5 bg-amber-700/50" />
@@ -60,7 +60,7 @@ export default function Certifications() {
           </div>
 
           {/* Cards row */}
-          <div className="overflow-x-auto pt-6 pb-10 px-8">
+          <div className="overflow-x-auto px-6 md:px-8 pb-6 md:pb-8">
             <div className="flex gap-6 min-w-max">
               {certs.map(({ title, issuer, date, url, badge, photo, color }) => (
                 <div
