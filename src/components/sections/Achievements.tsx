@@ -11,15 +11,17 @@ const certs = [
     date: 'June 17, 2024 - July 20, 2024',
     url: '/ubiquity-internship.pdf',
     badge: '/ubiquity-photo.webp',
+    photo: '',
     color: 'from-blue-700 to-blue-900',
   },
   {
     title: 'Graduation Diploma',
     issuer: 'University of St. La Salle',
-    date: 'June 4, 2022 - April 25, 2026',
+    date: 'BS Computer Engineering · April 25, 2026',
     url: '',
-    badge: '',
-    color: 'from-blue-700 to-blue-900',
+    badge: '/graduation.webp',
+    photo: '/diploma.webp',
+    color: 'from-emerald-800 to-emerald-950',
   },
   // Add more certs here
 ]
@@ -50,19 +52,19 @@ export default function Certifications() {
                 <div className="w-px h-3.5 bg-amber-700/50" />
                 <p className="font-sans text-xs uppercase tracking-widest text-amber-700/70">Credentials</p>
               </div>
-              <h2 className="font-display text-5xl text-stone-800">Certifications</h2>
+              <h2 className="font-display text-5xl text-stone-800">Achievements</h2>
             </div>
             <span className="font-sans text-sm hidden md:block text-stone-500">
               {certs.length} credential{certs.length !== 1 ? 's' : ''}
             </span>
           </div>
 
-          <div className="h-px mx-6 bg-stone-300/60" />
+          <div className="mx-6 py-px" />
 
           {/* Cards row */}
           <div className="overflow-x-auto pt-6 pb-10 px-8">
             <div className="flex gap-6 min-w-max">
-              {certs.map(({ title, issuer, date, url, badge, color }) => (
+              {certs.map(({ title, issuer, date, url, badge, photo, color }) => (
                 <div
                   key={title}
                   className="flex flex-col items-center w-64 md:w-72"
@@ -102,10 +104,17 @@ export default function Certifications() {
                   <div className="flex items-center gap-3 mt-4">
                     {url ? (
                       <button
-                        onClick={() => setActiveCert({ title, issuer, date, url, badge, color })}
+                        onClick={() => setActiveCert({ title, issuer, date, url, badge, photo, color })}
                         className="px-5 py-2 rounded-full bg-blue-600 text-white text-sm font-sans font-medium hover:bg-blue-700 transition-colors duration-150"
                       >
                         Learn more
+                      </button>
+                    ) : photo ? (
+                      <button
+                        onClick={() => setActivePhoto({ src: photo, title, issuer })}
+                        className="px-5 py-2 rounded-full bg-emerald-700 text-white text-sm font-sans font-medium hover:bg-emerald-800 transition-colors duration-150"
+                      >
+                        View Diploma
                       </button>
                     ) : (
                       <span className="px-5 py-2 rounded-full bg-stone-200 text-stone-400 text-sm font-sans font-medium cursor-default select-none">

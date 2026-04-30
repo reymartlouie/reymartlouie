@@ -1,7 +1,7 @@
 import Navbar from '@/components/sections/Navbar'
 import Hero from '@/components/sections/Hero'
-import Projects from '@/components/sections/Projects'
-import Certifications from '@/components/sections/Certifications'
+import Works from '@/components/sections/Works'
+import Achievements from '@/components/sections/Achievements'
 import Footer from '@/components/sections/Footer'
 import StatusBar from '@/components/ui/StatusBar'
 
@@ -30,10 +30,10 @@ export default function Home() {
         <Hero />
         <div id="work" className="flex flex-col gap-4">
           <SectionBreak label="Selected Work" />
-          <Projects />
+          <Works />
         </div>
-        <SectionBreak label="Certifications" />
-        <Certifications />
+        <SectionBreak label="Achievements" />
+        <Achievements />
         <SectionBreak label="Contact" />
         <Footer />
       </div>

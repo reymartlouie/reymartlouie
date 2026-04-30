@@ -67,16 +67,16 @@ export default function ProjectModal({ onClose }: Props) {
       <div
         className="relative w-full max-w-2xl rounded-[32px] overflow-hidden flex flex-col"
         style={{
-          background: 'var(--bg-card)',
-          border: '1px solid rgba(255,255,255,0.08)',
-          boxShadow: '0 40px 120px rgba(0,0,0,0.8), 0 1px 0 rgba(255,255,255,0.06) inset',
+          background: 'linear-gradient(145deg, #16082a 0%, #0a0418 100%)',
+          border: '1px solid rgba(251,146,60,0.12)',
+          boxShadow: '0 40px 120px rgba(0,0,0,0.8), 0 0 80px rgba(249,115,22,0.08) inset',
           animation: 'modalCardIn 350ms cubic-bezier(0.34,1.2,0.64,1) both',
           maxHeight: '90vh',
         }}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 flex-shrink-0" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+        <div className="flex items-center justify-between px-6 py-4 flex-shrink-0" style={{ borderBottom: '1px solid rgba(251,146,60,0.12)' }}>
           <div>
             <p className="font-sans text-xs uppercase tracking-widest mb-0.5" style={{ color: 'rgba(251,146,60,0.50)' }}>Thesis · BS Computer Engineering</p>
             <h2 className="font-display text-xl" style={{ color: 'var(--fg)' }}>FireSafe</h2>
@@ -141,7 +141,7 @@ export default function ProjectModal({ onClose }: Props) {
               <div
                 key={label}
                 className="flex items-center justify-between px-4 py-3 rounded-2xl"
-                style={{ background: 'var(--border)', border: '1px solid var(--border)' }}
+                style={{ background: 'rgba(251,146,60,0.05)', border: '1px solid rgba(251,146,60,0.10)' }}
               >
                 <span className="font-sans text-sm" style={{ color: 'var(--fg-60)' }}>{label}</span>
                 <span className="font-sans text-xs text-right" style={{ color: 'var(--fg-30)' }}>{category}</span>
@@ -158,7 +158,7 @@ export default function ProjectModal({ onClose }: Props) {
               <div
                 key={label}
                 className="flex items-center justify-between px-4 py-3 rounded-2xl"
-                style={{ background: 'var(--border)', border: '1px solid var(--border)' }}
+                style={{ background: 'rgba(251,146,60,0.05)', border: '1px solid rgba(251,146,60,0.10)' }}
               >
                 <span className="font-sans text-sm" style={{ color: 'var(--fg-60)' }}>{label}</span>
                 <span className="font-sans text-xs text-right" style={{ color: 'var(--fg-30)' }}>{category}</span>
@@ -179,7 +179,7 @@ export default function ProjectModal({ onClose }: Props) {
               <div
                 key={env}
                 className="flex items-center justify-between px-4 py-3 rounded-2xl"
-                style={{ background: 'var(--border)', border: '1px solid var(--border)' }}
+                style={{ background: 'rgba(251,146,60,0.05)', border: '1px solid rgba(251,146,60,0.10)' }}
               >
                 <span className="font-sans text-sm" style={{ color: 'var(--fg-60)' }}>{env}</span>
                 <span className="font-sans text-xs text-right" style={{ color: 'var(--fg-30)' }}>{detail}</span>
@@ -199,7 +199,7 @@ export default function ProjectModal({ onClose }: Props) {
               <div
                 key={role}
                 className="p-5 rounded-2xl"
-                style={{ background: 'var(--border)', border: '1px solid var(--border)' }}
+                style={{ background: 'rgba(251,146,60,0.05)', border: '1px solid rgba(251,146,60,0.10)' }}
               >
                 <p className="font-sans text-sm font-medium mb-1.5" style={{ color: 'var(--fg-60)' }}>{role}</p>
                 <p className="font-sans text-sm leading-relaxed" style={{ color: 'var(--fg-40)' }}>{desc}</p>
