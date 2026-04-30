@@ -59,8 +59,6 @@ export default function Certifications() {
             </span>
           </div>
 
-          <div className="mx-6 py-px" />
-
           {/* Cards row */}
           <div className="overflow-x-auto pt-6 pb-10 px-8">
             <div className="flex gap-6 min-w-max">

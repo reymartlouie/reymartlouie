@@ -106,8 +106,6 @@ export default function Works() {
             <span className="font-sans text-sm hidden md:block" style={{ color: 'var(--portfolio-label)' }}>{workCount} {workCount === 1 ? 'work' : 'works'}</span>
           </div>
 
-          <div className="mx-6 py-px" />
-
           {/* 2-column card grid */}
           <div className="p-4 lg:p-5 grid grid-cols-1 lg:grid-cols-2 gap-4">
 
