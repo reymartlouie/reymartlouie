@@ -91,6 +91,13 @@ function StatusBar() {
   const [section,      setSection]      = useState('Canvas')
   const [userMenuOpen,  setUserMenuOpen]  = useState(false)
   const [resumeOpen,    setResumeOpen]    = useState(false)
+
+  const scrollToCenter = useCallback((href: string) => (e: React.MouseEvent) => {
+    if (!href.startsWith('#')) return
+    e.preventDefault()
+    const el = document.getElementById(href.slice(1))
+    el?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+  }, [])
   useEffect(() => {
     const tick = () => {
       const now = new Date()
@@ -190,6 +197,7 @@ function StatusBar() {
               href={href}
               target={href.startsWith('http') ? '_blank' : undefined}
               rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+              onClick={href.startsWith('#') ? scrollToCenter(href) : undefined}
               className="font-sans px-2.5 py-1 transition-colors duration-150"
               style={{ fontSize: 12, color: 'var(--bar-text)' }}
               onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = 'var(--bar-text-active)'}
