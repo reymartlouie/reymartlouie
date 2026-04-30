@@ -106,8 +106,6 @@ export default function Works() {
             <span className="font-sans text-sm hidden md:block" style={{ color: 'var(--portfolio-label)' }}>{workCount} {workCount === 1 ? 'work' : 'works'}</span>
           </div>
 
-          <div className="mx-6 py-px" />
-
           {/* 2-column card grid */}
           <div className="p-4 lg:p-5 grid grid-cols-1 lg:grid-cols-2 gap-4">
 
@@ -118,12 +116,12 @@ export default function Works() {
               onClick={() => setModalOpen(true)}
             >
               <div className="px-8 md:px-10 pt-8 md:pt-10 pb-7">
-                <div className="flex items-center gap-2 mb-4">
+                <div className="flex items-center gap-2 mb-2">
                   <div className="w-px h-3" style={{ background: 'rgba(251,146,60,0.40)' }} />
                   <span className="font-sans text-xs uppercase tracking-widest" style={{ color: 'rgba(251,146,60,0.45)' }}>01 · Thesis · 2025</span>
                 </div>
-                <h3 className="font-display text-4xl leading-tight mb-3" style={{ color: 'var(--fg)' }}>FireSafe</h3>
-                <p className="font-sans text-sm leading-relaxed mb-5" style={{ color: 'rgba(242,242,242,0.50)' }}>
+                <h3 className="font-display text-4xl leading-tight" style={{ color: 'var(--fg)' }}>FireSafe</h3>
+                <p className="font-sans text-sm leading-relaxed mt-2 mb-5" style={{ color: 'rgba(242,242,242,0.50)' }}>
                   Thermal imaging wildfire detection with real-time mobile alerting for rural barangays.
                 </p>
                 <span
@@ -177,12 +175,12 @@ export default function Works() {
               style={{ background: 'linear-gradient(145deg, #0d1520 0%, #080e18 100%)' }}
             >
               <div className="px-8 md:px-10 pt-8 md:pt-10 pb-7">
-                <div className="flex items-center gap-2 mb-4">
+                <div className="flex items-center gap-2 mb-2">
                   <div className="w-px h-3" style={{ background: 'rgba(251,146,60,0.40)' }} />
                   <span className="font-sans text-xs uppercase tracking-widest" style={{ color: 'rgba(251,146,60,0.45)' }}>02 · UI/UX Design · 2024</span>
                 </div>
-                <h3 className="font-display text-4xl leading-tight mb-3" style={{ color: 'var(--fg)' }}>Gracey Logistics</h3>
-                <p className="font-sans text-sm leading-relaxed mb-5" style={{ color: 'rgba(242,242,242,0.50)' }}>
+                <h3 className="font-display text-4xl leading-tight" style={{ color: 'var(--fg)' }}>Gracey Logistics</h3>
+                <p className="font-sans text-sm leading-relaxed mt-2 mb-5" style={{ color: 'rgba(242,242,242,0.50)' }}>
                   Brand identity and UI design for a local logistics and trucking services company.
                 </p>
                 <a

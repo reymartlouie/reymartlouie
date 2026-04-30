@@ -59,8 +59,6 @@ export default function Certifications() {
             </span>
           </div>
 
-          <div className="mx-6 py-px" />
-
           {/* Cards row */}
           <div className="overflow-x-auto pt-6 pb-10 px-8">
             <div className="flex gap-6 min-w-max">
@@ -107,7 +105,7 @@ export default function Certifications() {
                         onClick={() => setActiveCert({ title, issuer, date, url, badge, photo, color })}
                         className="px-5 py-2 rounded-full bg-blue-600 text-white text-sm font-sans font-medium hover:bg-blue-700 transition-colors duration-150"
                       >
-                        Learn more
+                        View Certificate
                       </button>
                     ) : photo ? (
                       <button
