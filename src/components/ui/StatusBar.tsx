@@ -176,12 +176,14 @@ function StatusBar() {
 
         {userMenuOpen && <UserMenu onClose={() => setUserMenuOpen(false)} />}
 
-        {[
-          { label: section,          href: '#about'   },
-          { label: 'Achievements',   href: '#certifications' },
-          { label: 'Hire Me',        href: '#contact' },
-          { label: 'Help',           href: undefined  },
-        ].map(({ label, href }) =>
+        {([
+          { label: section,        href: '#about',          onClick: undefined },
+          { label: 'Achievements', href: '#certifications', onClick: undefined },
+          { label: 'Works',        href: '#work',           onClick: undefined },
+          { label: 'Hire Me',      href: '#contact',        onClick: undefined },
+          { label: 'Resume',       href: undefined,         onClick: () => setResumeOpen(true) },
+          { label: 'Help',         href: undefined,         onClick: undefined },
+        ] as { label: string; href?: string; onClick?: () => void }[]).map(({ label, href, onClick }) =>
           href ? (
             <a
               key={label}
@@ -195,6 +197,17 @@ function StatusBar() {
             >
               {label}
             </a>
+          ) : onClick ? (
+            <button
+              key={label}
+              onClick={onClick}
+              className="font-sans px-2.5 py-1 transition-colors duration-150"
+              style={{ fontSize: 12, color: 'var(--bar-text)' }}
+              onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = 'var(--bar-text-active)'}
+              onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'var(--bar-text)'}
+            >
+              {label}
+            </button>
           ) : (
             <span
               key={label}
@@ -205,16 +218,6 @@ function StatusBar() {
             </span>
           )
         )}
-
-        <button
-          onClick={() => setResumeOpen(true)}
-          className="font-sans px-2.5 py-1 transition-colors duration-150"
-          style={{ fontSize: 12, color: 'var(--bar-text)' }}
-          onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = 'var(--bar-text-active)'}
-          onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'var(--bar-text)'}
-        >
-          Resume
-        </button>
       </div>
 
       {/* ── Right ── */}
