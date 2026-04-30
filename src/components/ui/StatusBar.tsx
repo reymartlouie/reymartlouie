@@ -75,7 +75,7 @@ function UserMenu({ onClose }: { onClose: () => void }) {
         </div>
         <div>
           <p className="font-display text-white/90 text-sm leading-tight">Reymart Louie L. Capapas</p>
-          <p className="font-sans text-white/35 text-xs mt-0.5">CpE Student · USLS Bacolod</p>
+          <p className="font-sans text-white/35 text-xs mt-0.5">Computer Engineer</p>
         </div>
       </div>
     </div>
@@ -178,8 +178,7 @@ function StatusBar() {
 
         {[
           { label: section,          href: '#about'   },
-          { label: 'Certifications', href: '#certifications' },
-          { label: 'Achievements',   href: '#work'    },
+          { label: 'Achievements',   href: '#certifications' },
           { label: 'Hire Me',        href: '#contact' },
           { label: 'Help',           href: undefined  },
         ].map(({ label, href }) =>

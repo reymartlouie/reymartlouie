@@ -32,7 +32,7 @@ export default function Home() {
           <SectionBreak label="Selected Work" />
           <Projects />
         </div>
-        <SectionBreak label="Certifications" />
+        <SectionBreak label="Achievements" />
         <Certifications />
         <SectionBreak label="Contact" />
         <Footer />
