@@ -6,7 +6,7 @@ import ProjectModal from '../ui/ProjectModal'
 const firesafeTags = ['React Native', 'Raspberry Pi Zero 2 W', 'Supabase', 'TinyML', 'Python', 'Arduino']
 const graceyTags = ['Figma', 'Brand Identity', 'UI Design', 'Logo Design']
 
-const workCount = 2
+const workCount: number = 2
 
 export default function Works() {
   const [modalOpen, setModalOpen] = useState(false)
@@ -43,49 +43,70 @@ export default function Works() {
           href="https://reymartlouie.framer.website"
           target="_blank"
           rel="noopener noreferrer"
-          className="bento-lift block rounded-[32px] p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative overflow-hidden group"
-          style={{
-            backgroundColor: '#06020c',
-            backgroundImage: `
-              linear-gradient(to right, rgba(6,2,12,0.94) 0%, rgba(6,2,12,0.82) 45%, rgba(6,2,12,0.68) 100%),
-              url('/portfolio-bg.webp')
-            `,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center right',
-          }}
+          className="bento-lift block rounded-[32px] relative overflow-hidden group"
         >
-          <div className="relative">
-            <div className="flex items-center gap-2 mb-2">
-              <div className="w-px h-3.5" style={{ background: 'var(--portfolio-label)' }} />
-              <p className="font-sans text-xs uppercase tracking-widest" style={{ color: 'var(--portfolio-label)' }}>Portfolio</p>
+          {/* Background image */}
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: `url('/portfolio-bg.webp')`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center right',
+            }}
+          />
+          {/* Frosted glass layer */}
+          <div
+            className="absolute inset-0 backdrop-blur-sm"
+            style={{ background: 'radial-gradient(ellipse at 30% 50%, rgba(6,2,12,0.38) 0%, rgba(6,2,12,0.58) 100%)' }}
+          />
+          {/* Content */}
+          <div className="relative p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <div>
+              <div className="flex items-center gap-2 mb-2">
+                <div className="w-px h-3.5" style={{ background: 'var(--portfolio-label)' }} />
+                <p className="font-sans text-xs uppercase tracking-widest" style={{ color: 'var(--portfolio-label)' }}>Portfolio</p>
+              </div>
+              <h3 className="font-display text-4xl lg:text-5xl" style={{ color: 'var(--portfolio-title)' }}>UI/UX Portfolio</h3>
+              <p className="font-sans text-sm mt-2 max-w-md" style={{ color: 'var(--portfolio-body)' }}>
+                Explore my design work — case studies, wireframes, and high-fidelity prototypes.
+              </p>
             </div>
-            <h3 className="font-display text-4xl lg:text-5xl" style={{ color: 'var(--portfolio-title)' }}>UI/UX Portfolio</h3>
-            <p className="font-sans text-sm mt-2 max-w-md" style={{ color: 'var(--portfolio-body)' }}>
-              Explore my design work — case studies, wireframes, and high-fidelity prototypes.
-            </p>
+            <span className="btn-spring inline-flex items-center gap-2 font-sans font-semibold text-sm px-6 py-3 rounded-full transition-colors whitespace-nowrap" style={{ background: 'var(--portfolio-btn-bg)', color: 'var(--portfolio-btn-fg)', border: '1px solid var(--portfolio-btn-border)' }}>
+              View Portfolio ↗
+            </span>
           </div>
-          <span className="btn-spring inline-flex items-center gap-2 font-sans font-semibold text-sm px-6 py-3 rounded-full transition-colors whitespace-nowrap" style={{ background: 'var(--portfolio-btn-bg)', color: 'var(--portfolio-btn-fg)', border: '1px solid var(--portfolio-btn-border)' }}>
-            View Portfolio ↗
-          </span>
         </a>
 
         {/* Selected work */}
-        <div
-          className="rounded-[32px] overflow-hidden"
-          style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}
-        >
+        <div className="rounded-[32px] overflow-hidden relative">
+          {/* Background photo */}
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: `url('/works-bg.webp')`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+            }}
+          />
+          {/* Frosted glass overlay — light, not overpowering */}
+          <div
+            className="absolute inset-0 backdrop-blur-[2px]"
+            style={{ background: 'rgba(0,0,0,0.28)' }}
+          />
+          {/* Content */}
+          <div className="relative">
           <div className="px-6 md:px-8 lg:px-10 py-6 md:py-8 flex items-center justify-between">
             <div>
               <div className="flex items-center gap-2 mb-2">
-                <div className="w-px h-3.5" style={{ background: 'rgba(130,100,210,0.55)' }} />
-                <p className="font-sans text-xs uppercase tracking-widest" style={{ color: 'rgba(160,130,230,0.65)' }}>Selected Work</p>
+                <div className="w-px h-3.5" style={{ background: 'var(--portfolio-label)' }} />
+                <p className="font-sans text-xs uppercase tracking-widest" style={{ color: 'var(--portfolio-label)' }}>Selected Work</p>
               </div>
-              <h2 className="font-display text-5xl" style={{ color: 'var(--fg)' }}>{workCount === 1 ? 'Work' : 'Works'}</h2>
+              <h2 className="font-display text-5xl" style={{ color: 'var(--portfolio-title)' }}>{workCount === 1 ? 'Work' : 'Works'}</h2>
             </div>
-            <span className="font-sans text-sm hidden md:block" style={{ color: 'rgba(130,100,210,0.45)' }}>{workCount} {workCount === 1 ? 'work' : 'works'}</span>
+            <span className="font-sans text-sm hidden md:block" style={{ color: 'var(--portfolio-label)' }}>{workCount} {workCount === 1 ? 'work' : 'works'}</span>
           </div>
 
-          <div className="h-px mx-6" style={{ background: 'var(--border)' }} />
+          <div className="mx-6 py-px" />
 
           {/* 2-column card grid */}
           <div className="p-4 lg:p-5 grid grid-cols-1 lg:grid-cols-2 gap-4">
@@ -214,6 +235,7 @@ export default function Works() {
             </div>
 
           </div>
+          </div>{/* end relative content */}
         </div>
       </div>
 
