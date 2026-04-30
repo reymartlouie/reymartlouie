@@ -178,6 +178,8 @@ function Navbar() {
     setTimeout(() => window.dispatchEvent(new CustomEvent('open-firesafe')), 350)
   }
 
+  if (isMobile) return null
+
   return (
     <div
       className={`fixed inset-x-0 flex justify-center pointer-events-none ${isMobile ? 'z-[9999]' : 'z-50'}`}
