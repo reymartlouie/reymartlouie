@@ -133,7 +133,7 @@ export default function Works() {
               </div>
 
               {/* Bottom: FireSafe logo centered on dark bg */}
-              <div className="relative h-40 md:h-48 overflow-hidden mt-auto">
+              <div className="relative overflow-hidden mt-auto" style={{ height: '192px' }}>
                 <div
                   className="absolute inset-0"
                   style={{ background: 'linear-gradient(to bottom, #0a0418 0%, #130826 100%)' }}
@@ -196,7 +196,7 @@ export default function Works() {
               </div>
 
               {/* Bottom: Gracey logo centered */}
-              <div className="relative h-40 md:h-48 overflow-hidden mt-auto">
+              <div className="relative overflow-hidden mt-auto" style={{ height: '192px' }}>
                 <div
                   className="absolute inset-0"
                   style={{ background: 'linear-gradient(to bottom, #080e18 0%, #0f1c2e 100%)' }}
