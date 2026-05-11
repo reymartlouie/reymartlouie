@@ -65,12 +65,13 @@ export default function Certifications() {
               {certs.map(({ title, issuer, date, url, badge, photo, color }) => (
                 <div
                   key={title}
-                  className="flex flex-col items-center w-64 md:w-72"
+                  className="flex flex-col items-center"
+                  style={{ width: '288px' }}
                 >
-                  {/* Card image area */}
+                  {/* Card image area — fixed to internship certificate baseline size */}
                   <div
-                    className={`w-full rounded-2xl bg-gradient-to-br ${color} flex items-center justify-center`}
-                    style={{ aspectRatio: '4/3' }}
+                    className={`rounded-2xl bg-gradient-to-br ${color} flex items-center justify-center flex-shrink-0`}
+                    style={{ width: '288px', height: '216px' }}
                   >
                     {badge ? (
                       <img
