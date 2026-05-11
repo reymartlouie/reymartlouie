@@ -5,18 +5,8 @@ import Reveal from '../ui/Reveal'
 import CertModal from '../ui/CertModal'
 
 const badges = [
-  {
-    id: 'aa88a6dc-5970-484d-9191-665e5657d3da',
-    title: 'Introduction to Cybersecurity',
-    issuer: 'Cisco',
-    color: 'from-indigo-700 to-indigo-900',
-  },
-  {
-    id: 'b60e4e5a-af99-4c92-a9de-8c6fc16ace20',
-    title: 'Computer Hardware Basics',
-    issuer: 'Cisco',
-    color: 'from-sky-700 to-sky-900',
-  },
+  { id: 'aa88a6dc-5970-484d-9191-665e5657d3da' },
+  { id: 'b60e4e5a-af99-4c92-a9de-8c6fc16ace20' },
 ]
 
 const certs = [
@@ -214,49 +204,23 @@ export default function Certifications() {
             {/* Badge cards */}
             <div className="overflow-x-auto px-6 py-6">
               <div className="flex gap-6 min-w-max">
-                {badges.map(({ id, title, issuer, color }) => (
-                  <div key={id} className="flex flex-col items-center" style={{ width: '288px' }}>
-                    {/* Image area — same 288×216 baseline; Credly embed (150×270) scaled to fit */}
+                {badges.map(({ id }) => (
+                  <div key={id} className="flex flex-col items-center gap-4">
                     <div
-                      className={`rounded-2xl bg-gradient-to-br ${color} flex-shrink-0 relative overflow-hidden`}
-                      style={{ width: '288px', height: '216px' }}
+                      data-iframe-width="150"
+                      data-iframe-height="270"
+                      data-share-badge-id={id}
+                      data-share-badge-host="https://www.credly.com"
+                    />
+                    <a
+                      href={`https://www.credly.com/badges/${id}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-5 py-2 rounded-full text-white text-sm font-sans font-medium transition-colors duration-150"
+                      style={{ background: 'rgba(255,255,255,0.12)' }}
                     >
-                      <div
-                        style={{
-                          position: 'absolute',
-                          top: '50%',
-                          left: '50%',
-                          transform: 'translate(-50%, -50%) scale(0.8)',
-                          transformOrigin: 'center center',
-                        }}
-                      >
-                        <div
-                          data-iframe-width="150"
-                          data-iframe-height="270"
-                          data-share-badge-id={id}
-                          data-share-badge-host="https://www.credly.com"
-                        />
-                      </div>
-                    </div>
-
-                    {/* Text content — fixed height so all badge cards are the same size */}
-                    <div className="flex flex-col items-center text-center mt-4 gap-1 w-full" style={{ minHeight: '56px' }}>
-                      <h3 className="font-display text-xl leading-snug line-clamp-2" style={{ color: 'var(--fg)' }}>{title}</h3>
-                      <p className="font-sans text-sm leading-relaxed" style={{ color: 'var(--fg-30)' }}>{issuer}</p>
-                    </div>
-
-                    {/* Action — same button style */}
-                    <div className="flex items-center gap-3 mt-4">
-                      <a
-                        href={`https://www.credly.com/badges/${id}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="px-5 py-2 rounded-full text-white text-sm font-sans font-medium transition-colors duration-150"
-                        style={{ background: 'rgba(255,255,255,0.12)' }}
-                      >
-                        Verify on Credly ↗
-                      </a>
-                    </div>
+                      Verify on Credly ↗
+                    </a>
                   </div>
                 ))}
               </div>
