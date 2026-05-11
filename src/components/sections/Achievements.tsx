@@ -4,6 +4,11 @@ import { useState, useEffect } from 'react'
 import Reveal from '../ui/Reveal'
 import CertModal from '../ui/CertModal'
 
+const badges = [
+  { id: 'aa88a6dc-5970-484d-9191-665e5657d3da' },
+  { id: 'b60e4e5a-af99-4c92-a9de-8c6fc16ace20' },
+]
+
 const certs = [
   {
     title: 'Internship Certificate',
@@ -31,6 +36,14 @@ export default function Certifications() {
   const [activePhoto, setActivePhoto] = useState<{ src: string; title: string; issuer: string } | null>(null)
 
   useEffect(() => {
+    const script = document.createElement('script')
+    script.src = '//cdn.credly.com/assets/utilities/embed.js'
+    script.async = true
+    document.body.appendChild(script)
+    return () => { if (document.body.contains(script)) document.body.removeChild(script) }
+  }, [])
+
+  useEffect(() => {
     if (!activePhoto) return
     const handler = (e: KeyboardEvent) => { if (e.key === 'Escape') setActivePhoto(null) }
     window.addEventListener('keydown', handler)
@@ -55,9 +68,31 @@ export default function Certifications() {
               <h2 className="font-display text-5xl text-stone-800">Achievements</h2>
             </div>
             <span className="font-sans text-sm hidden md:block text-stone-500">
-              {certs.length} credential{certs.length !== 1 ? 's' : ''}
+              {certs.length + badges.length} credential{(certs.length + badges.length) !== 1 ? 's' : ''}
             </span>
           </div>
+
+          {/* Badges row */}
+          <div className="px-6 md:px-8 pb-4">
+            <div className="flex items-center gap-2 mb-4">
+              <div className="w-px h-3.5 bg-amber-700/50" />
+              <p className="font-sans text-xs uppercase tracking-widest text-amber-700/70">Badges</p>
+            </div>
+            <div className="flex flex-wrap gap-4">
+              {badges.map(({ id }) => (
+                <div
+                  key={id}
+                  data-iframe-width="150"
+                  data-iframe-height="270"
+                  data-share-badge-id={id}
+                  data-share-badge-host="https://www.credly.com"
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* Divider */}
+          <div className="mx-6 md:mx-8 border-t border-stone-200 mb-6" />
 
           {/* Cards row */}
           <div className="overflow-x-auto px-6 md:px-8 pb-6 md:pb-8">
