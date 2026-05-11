@@ -46,6 +46,18 @@ export default function Certifications() {
   const [activePhoto, setActivePhoto] = useState<{ src: string; title: string; issuer: string } | null>(null)
   const [badgeModalOpen, setBadgeModalOpen] = useState(false)
 
+  // Re-inject Credly embed script each time the modal opens so it processes the freshly-mounted badge divs
+  useEffect(() => {
+    if (!badgeModalOpen) return
+    const existing = document.querySelector('script[src*="credly.com"]')
+    if (existing) existing.remove()
+    const script = document.createElement('script')
+    script.src = '//cdn.credly.com/assets/utilities/embed.js'
+    script.async = true
+    document.body.appendChild(script)
+    return () => { if (document.body.contains(script)) document.body.removeChild(script) }
+  }, [badgeModalOpen])
+
   useEffect(() => {
     if (!activePhoto && !badgeModalOpen) return
     const handler = (e: KeyboardEvent) => {
@@ -204,22 +216,32 @@ export default function Certifications() {
               <div className="flex gap-6 min-w-max">
                 {badges.map(({ id, title, issuer, color }) => (
                   <div key={id} className="flex flex-col items-center" style={{ width: '288px' }}>
-                    {/* Image area — same fixed size as cert cards */}
+                    {/* Image area — same 288×216 baseline; Credly embed (150×270) scaled to fit */}
                     <div
-                      className={`rounded-2xl bg-gradient-to-br ${color} flex items-center justify-center flex-shrink-0`}
+                      className={`rounded-2xl bg-gradient-to-br ${color} flex-shrink-0 relative overflow-hidden`}
                       style={{ width: '288px', height: '216px' }}
                     >
-                      <img
-                        src={`https://www.credly.com/badges/${id}/image`}
-                        alt={title}
-                        className="h-full w-full object-contain rounded-2xl p-6"
-                        onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none' }}
-                      />
+                      <div
+                        style={{
+                          position: 'absolute',
+                          top: '50%',
+                          left: '50%',
+                          transform: 'translate(-50%, -50%) scale(0.8)',
+                          transformOrigin: 'center center',
+                        }}
+                      >
+                        <div
+                          data-iframe-width="150"
+                          data-iframe-height="270"
+                          data-share-badge-id={id}
+                          data-share-badge-host="https://www.credly.com"
+                        />
+                      </div>
                     </div>
 
-                    {/* Text content — same structure as cert cards */}
-                    <div className="flex flex-col items-center text-center mt-4 gap-1 w-full">
-                      <h3 className="font-display text-xl leading-snug" style={{ color: 'var(--fg)' }}>{title}</h3>
+                    {/* Text content — fixed height so all badge cards are the same size */}
+                    <div className="flex flex-col items-center text-center mt-4 gap-1 w-full" style={{ minHeight: '56px' }}>
+                      <h3 className="font-display text-xl leading-snug line-clamp-2" style={{ color: 'var(--fg)' }}>{title}</h3>
                       <p className="font-sans text-sm leading-relaxed" style={{ color: 'var(--fg-30)' }}>{issuer}</p>
                     </div>
 
