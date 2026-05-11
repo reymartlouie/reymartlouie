@@ -5,8 +5,18 @@ import Reveal from '../ui/Reveal'
 import CertModal from '../ui/CertModal'
 
 const badges = [
-  { id: 'aa88a6dc-5970-484d-9191-665e5657d3da' },
-  { id: 'b60e4e5a-af99-4c92-a9de-8c6fc16ace20' },
+  {
+    id: 'aa88a6dc-5970-484d-9191-665e5657d3da',
+    title: 'Introduction to Cybersecurity',
+    issuer: 'Cisco',
+    color: 'from-indigo-700 to-indigo-900',
+  },
+  {
+    id: 'b60e4e5a-af99-4c92-a9de-8c6fc16ace20',
+    title: 'Computer Hardware Basics',
+    issuer: 'Cisco',
+    color: 'from-sky-700 to-sky-900',
+  },
 ]
 
 const certs = [
@@ -34,25 +44,23 @@ const certs = [
 export default function Certifications() {
   const [activeCert, setActiveCert] = useState<typeof certs[0] | null>(null)
   const [activePhoto, setActivePhoto] = useState<{ src: string; title: string; issuer: string } | null>(null)
+  const [badgeModalOpen, setBadgeModalOpen] = useState(false)
 
   useEffect(() => {
-    const script = document.createElement('script')
-    script.src = '//cdn.credly.com/assets/utilities/embed.js'
-    script.async = true
-    document.body.appendChild(script)
-    return () => { if (document.body.contains(script)) document.body.removeChild(script) }
-  }, [])
-
-  useEffect(() => {
-    if (!activePhoto) return
-    const handler = (e: KeyboardEvent) => { if (e.key === 'Escape') setActivePhoto(null) }
+    if (!activePhoto && !badgeModalOpen) return
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setActivePhoto(null)
+        setBadgeModalOpen(false)
+      }
+    }
     window.addEventListener('keydown', handler)
     document.body.style.overflow = 'hidden'
     return () => {
       window.removeEventListener('keydown', handler)
       document.body.style.overflow = ''
     }
-  }, [activePhoto])
+  }, [activePhoto, badgeModalOpen])
 
   return (
     <section id="certifications" className="flex flex-col gap-4">
@@ -67,32 +75,21 @@ export default function Certifications() {
               </div>
               <h2 className="font-display text-5xl text-stone-800">Achievements</h2>
             </div>
-            <span className="font-sans text-sm hidden md:block text-stone-500">
-              {certs.length + badges.length} credential{(certs.length + badges.length) !== 1 ? 's' : ''}
-            </span>
-          </div>
-
-          {/* Badges row */}
-          <div className="px-6 md:px-8 pb-4">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-px h-3.5 bg-amber-700/50" />
-              <p className="font-sans text-xs uppercase tracking-widest text-amber-700/70">Badges</p>
-            </div>
-            <div className="flex flex-wrap gap-4">
-              {badges.map(({ id }) => (
-                <div
-                  key={id}
-                  data-iframe-width="150"
-                  data-iframe-height="270"
-                  data-share-badge-id={id}
-                  data-share-badge-host="https://www.credly.com"
-                />
-              ))}
+            <div className="flex items-center gap-3">
+              <span className="font-sans text-sm hidden md:block text-stone-500">
+                {certs.length} credential{certs.length !== 1 ? 's' : ''}
+              </span>
+              <button
+                onClick={() => setBadgeModalOpen(true)}
+                className="w-9 h-9 rounded-full flex items-center justify-center bg-stone-200 hover:bg-stone-300 transition-colors duration-150"
+                title="View supplemental badges"
+              >
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-stone-600">
+                  <path d="M2.5 11.5L11.5 2.5M11.5 2.5H5.5M11.5 2.5V8.5" />
+                </svg>
+              </button>
             </div>
           </div>
-
-          {/* Divider */}
-          <div className="mx-6 md:mx-8 border-t border-stone-200 mb-6" />
 
           {/* Cards row */}
           <div className="overflow-x-auto px-6 md:px-8 pb-6 md:pb-8">
@@ -163,6 +160,90 @@ export default function Certifications() {
         </div>
       </Reveal>
 
+      {/* Badge modal */}
+      {badgeModalOpen && (
+        <div
+          className="fixed inset-0 z-[9000] flex items-end md:items-center justify-center p-4 md:p-8"
+          style={{
+            background: 'rgba(0,0,0,0.75)',
+            backdropFilter: 'blur(12px)',
+            WebkitBackdropFilter: 'blur(12px)',
+            animation: 'modalBackdropIn 200ms ease both',
+          }}
+          onClick={() => setBadgeModalOpen(false)}
+        >
+          <div
+            className="relative w-full max-w-2xl rounded-[32px] overflow-hidden flex flex-col"
+            style={{
+              background: 'var(--bg-card)',
+              border: '1px solid rgba(255,255,255,0.08)',
+              boxShadow: '0 40px 120px rgba(0,0,0,0.8), 0 1px 0 rgba(255,255,255,0.06) inset',
+              animation: 'modalCardIn 350ms cubic-bezier(0.34,1.2,0.64,1) both',
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Modal header */}
+            <div className="flex items-center justify-between px-6 py-4" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+              <div>
+                <p className="font-sans text-xs uppercase tracking-widest mb-0.5" style={{ color: 'var(--fg-30)' }}>Supplemental</p>
+                <h2 className="font-display text-xl" style={{ color: 'var(--fg)' }}>Badges</h2>
+              </div>
+              <button
+                onClick={() => setBadgeModalOpen(false)}
+                className="w-9 h-9 rounded-full flex items-center justify-center transition-colors duration-150"
+                style={{ background: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.4)' }}
+              >
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                  <path d="M1 1l10 10M11 1L1 11" />
+                </svg>
+              </button>
+            </div>
+
+            {/* Badge cards */}
+            <div className="overflow-x-auto px-6 py-6">
+              <div className="flex gap-6 min-w-max">
+                {badges.map(({ id, title, issuer, color }) => (
+                  <div key={id} className="flex flex-col items-center" style={{ width: '288px' }}>
+                    {/* Image area — same fixed size as cert cards */}
+                    <div
+                      className={`rounded-2xl bg-gradient-to-br ${color} flex items-center justify-center flex-shrink-0`}
+                      style={{ width: '288px', height: '216px' }}
+                    >
+                      <img
+                        src={`https://www.credly.com/badges/${id}/image`}
+                        alt={title}
+                        className="h-full w-full object-contain rounded-2xl p-6"
+                        onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none' }}
+                      />
+                    </div>
+
+                    {/* Text content — same structure as cert cards */}
+                    <div className="flex flex-col items-center text-center mt-4 gap-1 w-full">
+                      <h3 className="font-display text-xl leading-snug" style={{ color: 'var(--fg)' }}>{title}</h3>
+                      <p className="font-sans text-sm leading-relaxed" style={{ color: 'var(--fg-30)' }}>{issuer}</p>
+                    </div>
+
+                    {/* Action — same button style */}
+                    <div className="flex items-center gap-3 mt-4">
+                      <a
+                        href={`https://www.credly.com/badges/${id}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-5 py-2 rounded-full text-white text-sm font-sans font-medium transition-colors duration-150"
+                        style={{ background: 'rgba(255,255,255,0.12)' }}
+                      >
+                        Verify on Credly ↗
+                      </a>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Photo lightbox */}
       {activePhoto && (
         <div
           className="fixed inset-0 z-[9000] flex items-end md:items-center justify-center p-4 md:p-8"
