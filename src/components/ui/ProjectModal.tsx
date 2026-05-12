@@ -113,7 +113,7 @@ export default function ProjectModal({ onClose }: Props) {
         </div>
 
         {/* Scrollable body */}
-        <div className="overflow-y-auto px-4 pb-10 flex flex-col gap-5">
+        <div className="overflow-y-auto flex-1 min-h-0 px-4 pb-10 flex flex-col gap-5">
 
           {/* Intro */}
           <p className="font-sans text-sm leading-relaxed text-gray-500 px-1">
