@@ -77,20 +77,15 @@ export default function Certifications() {
               </div>
               <h2 className="font-display text-5xl text-stone-800">Achievements</h2>
             </div>
-            <div className="flex items-center gap-3">
-              <span className="font-sans text-sm hidden md:block text-stone-500">
-                {certs.length} credential{certs.length !== 1 ? 's' : ''}
-              </span>
-              <button
-                onClick={() => setBadgeModalOpen(true)}
-                className="w-9 h-9 rounded-full flex items-center justify-center bg-stone-200 hover:bg-stone-300 transition-colors duration-150"
-                title="View supplemental badges"
-              >
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-stone-600">
-                  <path d="M2.5 11.5L11.5 2.5M11.5 2.5H5.5M11.5 2.5V8.5" />
-                </svg>
-              </button>
-            </div>
+            <button
+              onClick={() => setBadgeModalOpen(true)}
+              className="flex items-center gap-2 px-4 py-2 rounded-full bg-stone-200 hover:bg-stone-300 transition-colors duration-150"
+            >
+              <span className="font-sans text-sm text-stone-600">{badges.length} credentials</span>
+              <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-stone-500">
+                <path d="M2.5 11.5L11.5 2.5M11.5 2.5H5.5M11.5 2.5V8.5" />
+              </svg>
+            </button>
           </div>
 
           {/* Cards row */}
