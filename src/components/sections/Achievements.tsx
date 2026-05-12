@@ -175,7 +175,7 @@ export default function Certifications() {
           onClick={() => setBadgeModalOpen(false)}
         >
           <div
-            className="relative w-auto rounded-[32px] overflow-hidden flex flex-col"
+            className="relative w-full max-w-2xl rounded-[32px] overflow-hidden flex flex-col"
             style={{
               background: '#ffffff',
               border: '1px solid rgba(0,0,0,0.08)',
@@ -201,8 +201,8 @@ export default function Certifications() {
             </div>
 
             {/* Badge cards */}
-            <div className="overflow-x-auto px-6 pt-5 pb-6">
-              <div className="flex gap-4 min-w-max">
+            <div className="overflow-x-auto px-6 py-6">
+              <div className="flex gap-6 min-w-max">
                 {badges.map(({ id }) => (
                   <div key={id} className="flex flex-col items-center gap-4">
                     <div
