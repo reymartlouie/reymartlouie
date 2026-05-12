@@ -42,6 +42,12 @@ const roles = [
   },
 ]
 
+const testing = [
+  { env: 'Controlled Environment', detail: '7 sessions · indoor' },
+  { env: 'Open Space Outdoor', detail: '7 sessions · rooftop' },
+  { env: 'Actual Fire Scenario', detail: '7 burn sessions · Bacolod' },
+]
+
 export default function ProjectModal({ onClose }: Props) {
   useEffect(() => {
     const handler = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose() }
@@ -55,48 +61,51 @@ export default function ProjectModal({ onClose }: Props) {
 
   return createPortal(
     <div
-      className="fixed inset-0 z-[9000] flex items-center justify-center p-4 md:p-8"
+      className="fixed inset-0 z-[9000] flex items-end md:items-center justify-center md:p-8"
       style={{
-        background: 'rgba(0,0,0,0.75)',
-        backdropFilter: 'blur(12px)',
-        WebkitBackdropFilter: 'blur(12px)',
+        background: 'rgba(0,0,0,0.45)',
+        backdropFilter: 'blur(8px)',
+        WebkitBackdropFilter: 'blur(8px)',
         animation: 'modalBackdropIn 200ms ease both',
       }}
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-2xl rounded-[32px] overflow-hidden flex flex-col"
+        className="relative w-full md:max-w-lg rounded-t-[32px] md:rounded-[32px] flex flex-col"
         style={{
-          background: 'linear-gradient(145deg, #16082a 0%, #0a0418 100%)',
-          border: '1px solid rgba(251,146,60,0.12)',
-          boxShadow: '0 40px 120px rgba(0,0,0,0.8), 0 0 80px rgba(249,115,22,0.08) inset',
+          background: '#f2f2f7',
           animation: 'modalCardIn 350ms cubic-bezier(0.34,1.2,0.64,1) both',
-          maxHeight: '90vh',
+          maxHeight: '92vh',
         }}
         onClick={(e) => e.stopPropagation()}
       >
+        {/* Drag handle */}
+        <div className="flex justify-center pt-2.5 pb-1 flex-shrink-0">
+          <div className="w-9 h-1 rounded-full bg-gray-300" />
+        </div>
+
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 flex-shrink-0" style={{ borderBottom: '1px solid rgba(251,146,60,0.12)' }}>
+        <div className="flex items-center justify-between px-5 pt-2 pb-4 flex-shrink-0">
           <div>
-            <p className="font-sans text-xs uppercase tracking-widest mb-0.5" style={{ color: 'rgba(251,146,60,0.50)' }}>Thesis · BS Computer Engineering</p>
-            <h2 className="font-display text-xl" style={{ color: 'var(--fg)' }}>FireSafe</h2>
+            <p className="font-sans text-xs text-gray-400 mb-0.5">Thesis · BS Computer Engineering</p>
+            <h2 className="font-display text-2xl text-gray-900">FireSafe</h2>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
             <a
               href="https://reymartlouie.framer.website/work/firesafe"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-sans text-xs px-4 py-2 rounded-full transition-colors duration-150"
-              style={{ background: 'rgba(251,146,60,0.12)', color: '#fb923c', border: '1px solid rgba(251,146,60,0.22)' }}
+              className="font-sans text-sm font-medium px-3.5 py-1.5 rounded-full"
+              style={{ background: 'rgba(249,115,22,0.10)', color: '#ea580c' }}
             >
               Case Study ↗
             </a>
             <button
               onClick={onClose}
-              className="w-9 h-9 rounded-full flex items-center justify-center transition-colors duration-150"
-              style={{ background: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.4)' }}
+              className="w-8 h-8 rounded-full flex items-center justify-center"
+              style={{ background: 'rgba(0,0,0,0.08)' }}
             >
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+              <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="#6c6c70" strokeWidth="2.5" strokeLinecap="round">
                 <path d="M1 1l10 10M11 1L1 11" />
               </svg>
             </button>
@@ -104,150 +113,117 @@ export default function ProjectModal({ onClose }: Props) {
         </div>
 
         {/* Scrollable body */}
-        <div className="overflow-y-auto p-8 md:p-10">
+        <div className="overflow-y-auto px-4 pb-10 flex flex-col gap-5">
 
-        {/* Intro */}
-        <div className="mb-8">
-          <p className="font-sans text-xs leading-relaxed mb-3" style={{ color: 'var(--fg-40)' }}>
-            A Thermal Imaging-Based Approach for Fire Detection in a Controlled and Open Space Environment with Mobile Alerting System
-          </p>
-          <p className="font-sans text-sm leading-relaxed" style={{ color: 'var(--fg-50)' }}>
+          {/* Intro */}
+          <p className="font-sans text-sm leading-relaxed text-gray-500 px-1">
             A community-level fire detection system using edge computing and thermal imaging,
             built for rural barangays with limited infrastructure. Alerts residents via push
             notifications and mass SMS — no constant cloud dependency required.
           </p>
-        </div>
 
-        {/* Context */}
-        <div
-          className="mb-8 p-6 rounded-[20px]"
-          style={{ background: 'rgba(251,146,60,0.05)', border: '1px solid rgba(251,146,60,0.12)' }}
-        >
-          <p className="font-sans text-[#fb923c]/60 text-xs uppercase tracking-widest mb-3">The Problem</p>
-          <p className="font-sans text-sm leading-relaxed" style={{ color: 'var(--fg-55)' }}>
-            The Philippines recorded 16,426 fire incidents in 2023 — a 24.5% increase year-over-year.
-            Rural barangays are especially vulnerable: fires start unnoticed in unguarded spaces,
-            and existing detection systems depend on cloud infrastructure impractical for
-            resource-limited communities. FireSafe processes data locally on a Raspberry Pi,
-            triggering alerts within seconds through both mobile push and mass SMS.
-          </p>
-        </div>
-
-        {/* Hardware */}
-        <div className="mb-6">
-          <p className="font-sans text-xs uppercase tracking-widest mb-4" style={{ color: 'var(--fg-30)' }}>Hardware</p>
-          <div className="grid grid-cols-2 gap-2">
-            {hardware.map(({ label, category }) => (
-              <div
-                key={label}
-                className="flex items-center justify-between px-4 py-3 rounded-2xl"
-                style={{ background: 'rgba(251,146,60,0.05)', border: '1px solid rgba(251,146,60,0.10)' }}
-              >
-                <span className="font-sans text-sm" style={{ color: 'var(--fg-60)' }}>{label}</span>
-                <span className="font-sans text-xs text-right" style={{ color: 'var(--fg-30)' }}>{category}</span>
+          {/* The Problem */}
+          <div className="bg-white rounded-2xl overflow-hidden">
+            <div className="flex gap-3 p-4">
+              <div className="w-1 rounded-full flex-shrink-0" style={{ background: '#f97316', minHeight: '100%' }} />
+              <div>
+                <p className="font-sans text-xs uppercase tracking-widest text-orange-400 mb-1.5">The Problem</p>
+                <p className="font-sans text-sm leading-relaxed text-gray-600">
+                  The Philippines recorded 16,426 fire incidents in 2023 — a 24.5% increase year-over-year.
+                  Rural barangays are especially vulnerable: fires start unnoticed in unguarded spaces,
+                  and existing detection systems depend on cloud infrastructure impractical for
+                  resource-limited communities.
+                </p>
               </div>
-            ))}
+            </div>
           </div>
-        </div>
 
-        {/* Software */}
-        <div className="mb-8">
-          <p className="font-sans text-xs uppercase tracking-widest mb-4" style={{ color: 'var(--fg-30)' }}>Software</p>
-          <div className="grid grid-cols-2 gap-2">
-            {software.map(({ label, category }) => (
-              <div
-                key={label}
-                className="flex items-center justify-between px-4 py-3 rounded-2xl"
-                style={{ background: 'rgba(251,146,60,0.05)', border: '1px solid rgba(251,146,60,0.10)' }}
-              >
-                <span className="font-sans text-sm" style={{ color: 'var(--fg-60)' }}>{label}</span>
-                <span className="font-sans text-xs text-right" style={{ color: 'var(--fg-30)' }}>{category}</span>
+          {/* Hardware */}
+          <div>
+            <p className="font-sans text-xs uppercase tracking-widest text-gray-400 px-4 mb-2">Hardware</p>
+            <div className="bg-white rounded-2xl overflow-hidden divide-y divide-gray-100">
+              {hardware.map(({ label, category }) => (
+                <div key={label} className="flex items-center justify-between px-4 py-3">
+                  <span className="font-sans text-sm text-gray-900">{label}</span>
+                  <span className="font-sans text-sm text-gray-400">{category}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Software */}
+          <div>
+            <p className="font-sans text-xs uppercase tracking-widest text-gray-400 px-4 mb-2">Software</p>
+            <div className="bg-white rounded-2xl overflow-hidden divide-y divide-gray-100">
+              {software.map(({ label, category }) => (
+                <div key={label} className="flex items-center justify-between px-4 py-3">
+                  <span className="font-sans text-sm text-gray-900">{label}</span>
+                  <span className="font-sans text-sm text-gray-400">{category}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Testing */}
+          <div>
+            <p className="font-sans text-xs uppercase tracking-widest text-gray-400 px-4 mb-2">Testing</p>
+            <div className="bg-white rounded-2xl overflow-hidden divide-y divide-gray-100">
+              {testing.map(({ env, detail }) => (
+                <div key={env} className="flex items-center justify-between px-4 py-3">
+                  <span className="font-sans text-sm text-gray-900">{env}</span>
+                  <span className="font-sans text-sm text-gray-400">{detail}</span>
+                </div>
+              ))}
+              <div className="px-4 py-3">
+                <p className="font-sans text-xs text-gray-400 leading-relaxed">
+                  HIGH ≥35°C / ≤40% RH / 100–200 PPM · CRITICAL ≥38°C / ≤30% RH / &gt;200 PPM
+                </p>
               </div>
-            ))}
+            </div>
           </div>
-        </div>
 
-        {/* Testing */}
-        <div className="mb-8">
-          <p className="font-sans text-xs uppercase tracking-widest mb-4" style={{ color: 'var(--fg-30)' }}>Testing</p>
-          <div className="flex flex-col gap-2">
-            {[
-              { env: 'Controlled Environment', detail: '7 sessions · Kabankalan City indoor' },
-              { env: 'Open Space Outdoor', detail: '7 sessions · Rooftop & open field' },
-              { env: 'Actual Fire Scenario', detail: '7 burn sessions · CentralE open area, Bacolod' },
-            ].map(({ env, detail }) => (
-              <div
-                key={env}
-                className="flex items-center justify-between px-4 py-3 rounded-2xl"
-                style={{ background: 'rgba(251,146,60,0.05)', border: '1px solid rgba(251,146,60,0.10)' }}
-              >
-                <span className="font-sans text-sm" style={{ color: 'var(--fg-60)' }}>{env}</span>
-                <span className="font-sans text-xs text-right" style={{ color: 'var(--fg-30)' }}>{detail}</span>
-              </div>
-            ))}
+          {/* My Roles */}
+          <div>
+            <p className="font-sans text-xs uppercase tracking-widest text-gray-400 px-4 mb-2">My Roles</p>
+            <div className="bg-white rounded-2xl overflow-hidden divide-y divide-gray-100">
+              {roles.map(({ role, desc }) => (
+                <div key={role} className="px-4 py-3">
+                  <p className="font-sans text-sm font-medium text-gray-900 mb-1">{role}</p>
+                  <p className="font-sans text-sm leading-relaxed text-gray-400">{desc}</p>
+                </div>
+              ))}
+            </div>
           </div>
-          <p className="font-sans text-xs mt-3 leading-relaxed" style={{ color: 'var(--fg-30)' }}>
-            Risk thresholds — HIGH: ≥35°C / ≤40% RH / 100–200 PPM · CRITICAL: ≥38°C / ≤30% RH / &gt;200 PPM
-          </p>
-        </div>
 
-        {/* Roles */}
-        <div className="mb-8">
-          <p className="font-sans text-xs uppercase tracking-widest mb-4" style={{ color: 'var(--fg-30)' }}>My Roles</p>
-          <div className="flex flex-col gap-3">
-            {roles.map(({ role, desc }) => (
-              <div
-                key={role}
-                className="p-5 rounded-2xl"
-                style={{ background: 'rgba(251,146,60,0.05)', border: '1px solid rgba(251,146,60,0.10)' }}
-              >
-                <p className="font-sans text-sm font-medium mb-1.5" style={{ color: 'var(--fg-60)' }}>{role}</p>
-                <p className="font-sans text-sm leading-relaxed" style={{ color: 'var(--fg-40)' }}>{desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Team + CTA */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <p className="font-sans text-xs leading-relaxed" style={{ color: 'var(--fg-20)' }}>
-            With Odsey Bandojo &amp; Vhieron Bareza<br />
-            University of St. La Salle · Bacolod City
-          </p>
-          <div className="flex flex-wrap gap-3">
+          {/* Team + CTA */}
+          <div className="bg-white rounded-2xl overflow-hidden divide-y divide-gray-100">
+            <div className="px-4 py-3">
+              <p className="font-sans text-xs text-gray-400 leading-relaxed">
+                With Odsey Bandojo &amp; Vhieron Bareza<br />
+                University of St. La Salle · Bacolod City
+              </p>
+            </div>
             <a
               href="/thesis-for-final.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-spring inline-flex items-center gap-2 font-sans text-sm font-semibold px-5 py-3 rounded-full transition-colors duration-150"
-              style={{
-                background: 'var(--contact-resume-bg)',
-                color: 'var(--fg-55)',
-                border: '1px solid var(--border-strong)',
-              }}
+              className="flex items-center justify-between px-4 py-3"
             >
-              <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M7 1v8M4 6l3 3 3-3M2 10v1.5A1.5 1.5 0 003.5 13h7a1.5 1.5 0 001.5-1.5V10" />
-              </svg>
-              Thesis
+              <span className="font-sans text-sm text-gray-900">Download Thesis</span>
+              <span className="font-sans text-sm text-orange-500">PDF ↓</span>
             </a>
             <a
               href="https://github.com/reymartlouie/Firesafe"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-spring inline-flex items-center gap-2 font-sans text-sm font-semibold px-5 py-3 rounded-full transition-colors duration-150"
-              style={{
-                background: 'rgba(37,99,235,0.12)',
-                color: '#60a5fa',
-                border: '1px solid rgba(37,99,235,0.30)',
-              }}
+              className="flex items-center justify-between px-4 py-3"
             >
-              GitHub ↗
+              <span className="font-sans text-sm text-gray-900">View on GitHub</span>
+              <span className="font-sans text-sm text-orange-500">↗</span>
             </a>
           </div>
-        </div>
 
-        </div>{/* end scrollable body */}
+        </div>
       </div>
     </div>,
     document.body
