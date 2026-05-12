@@ -3,6 +3,7 @@
 import Reveal from '../ui/Reveal'
 import CenturionCard from '../cards/CenturionCard'
 import CallingCard from '../cards/CallingCard'
+import PayPalCard from '../cards/PayPalCard'
 
 export default function Footer() {
   return (
@@ -16,6 +17,11 @@ export default function Footer() {
       {/* ── Calling card ─────────────────────────────────────────────────── */}
       <Reveal className="lg:col-span-4" delay={80}>
         <CallingCard />
+      </Reveal>
+
+      {/* ── Patron support card — below Centurion ────────────────────────── */}
+      <Reveal className="lg:col-span-4" delay={160}>
+        <PayPalCard />
       </Reveal>
 
     </section>
