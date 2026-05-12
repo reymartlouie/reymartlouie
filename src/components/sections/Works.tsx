@@ -120,10 +120,6 @@ export default function Works() {
               {/* Bottom: FireSafe logo on warm tinted bg */}
               <div className="relative overflow-hidden mt-auto" style={{ height: '192px' }}>
                 <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, #ffede0 0%, #ffe4cc 100%)' }} />
-                <div
-                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 rounded-full blur-3xl opacity-25 group-hover:opacity-40 transition-opacity duration-300 pointer-events-none"
-                  style={{ backgroundColor: '#ef4444' }}
-                />
                 <div className="absolute inset-0 flex items-center justify-center pb-10">
                   <img
                     src="/firesafe-logo.webp"
@@ -182,10 +178,6 @@ export default function Works() {
               {/* Bottom: Gracey logo on cool tinted bg */}
               <div className="relative overflow-hidden mt-auto" style={{ height: '192px' }}>
                 <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, #edf4ff 0%, #e0ecff 100%)' }} />
-                <div
-                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 rounded-full blur-3xl opacity-20 group-hover:opacity-35 transition-opacity duration-300 pointer-events-none"
-                  style={{ backgroundColor: '#3b82f6' }}
-                />
                 <div className="absolute inset-0 flex items-center justify-center pb-10">
                   <img
                     src="/gracey-logo.webp"
