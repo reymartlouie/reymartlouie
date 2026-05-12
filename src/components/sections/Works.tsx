@@ -1,7 +1,8 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import ProjectModal from '../ui/ProjectModal'
+import FireSafeModal from '../ui/FireSafeModal'
+import GraceyLogisticsModal from '../ui/GraceyLogisticsModal'
 
 const firesafeTags = ['React Native', 'Raspberry Pi Zero 2 W', 'Supabase', 'TinyML', 'Python', 'Arduino']
 const graceyTags = ['Figma', 'Brand Identity', 'UI Design', 'Logo Design']
@@ -9,7 +10,8 @@ const graceyTags = ['Figma', 'Brand Identity', 'UI Design', 'Logo Design']
 const workCount: number = 2
 
 export default function Works() {
-  const [modalOpen, setModalOpen] = useState(false)
+  const [firesafeOpen, setFiresafeOpen] = useState(false)
+  const [graceyOpen, setGraceyOpen] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -29,7 +31,7 @@ export default function Works() {
   }, [])
 
   useEffect(() => {
-    const handler = () => setModalOpen(true)
+    const handler = () => setFiresafeOpen(true)
     window.addEventListener('open-firesafe', handler)
     return () => window.removeEventListener('open-firesafe', handler)
   }, [])
@@ -101,7 +103,7 @@ export default function Works() {
                 border: '1px solid rgba(239,68,68,0.12)',
                 boxShadow: '0 2px 24px rgba(239,68,68,0.08), inset 0 1px 0 rgba(255,255,255,0.9)',
               }}
-              onClick={() => setModalOpen(true)}
+              onClick={() => setFiresafeOpen(true)}
             >
               <div className="px-6 md:px-8 pt-6 pb-5">
                 <div className="flex items-center gap-2 mb-2">
@@ -147,12 +149,13 @@ export default function Works() {
 
             {/* Gracey Logistics Services card */}
             <div
-              className="rounded-[24px] overflow-hidden flex flex-col group"
+              className="rounded-[24px] overflow-hidden flex flex-col cursor-pointer group"
               style={{
                 background: 'linear-gradient(145deg, #f5f8ff 0%, #edf4ff 100%)',
                 border: '1px solid rgba(59,130,246,0.12)',
                 boxShadow: '0 2px 24px rgba(59,130,246,0.06), inset 0 1px 0 rgba(255,255,255,0.9)',
               }}
+              onClick={() => setGraceyOpen(true)}
             >
               <div className="px-6 md:px-8 pt-6 pb-5">
                 <div className="flex items-center gap-2 mb-2">
@@ -163,16 +166,9 @@ export default function Works() {
                 <p className="font-sans text-sm leading-relaxed mt-2 mb-4 text-stone-500">
                   Brand identity and UI design for a local logistics and trucking services company.
                 </p>
-                <a
-                  href="/gracey-logistics.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 font-sans text-sm font-medium"
-                  style={{ color: 'rgba(30,80,220,0.85)' }}
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  View Case Study →
-                </a>
+                <span className="inline-flex items-center gap-1.5 font-sans text-sm font-medium" style={{ color: 'rgba(30,80,220,0.85)' }}>
+                  View Details →
+                </span>
               </div>
 
               {/* Bottom: Gracey logo on cool tinted bg */}
@@ -207,7 +203,8 @@ export default function Works() {
         </div>
       </div>
 
-      {modalOpen && <ProjectModal onClose={() => setModalOpen(false)} />}
+      {firesafeOpen && <FireSafeModal onClose={() => setFiresafeOpen(false)} />}
+      {graceyOpen && <GraceyLogisticsModal onClose={() => setGraceyOpen(false)} />}
     </section>
   )
 }

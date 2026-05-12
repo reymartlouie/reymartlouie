@@ -3,13 +3,12 @@
 import { useEffect } from 'react'
 import { createPortal } from 'react-dom'
 
-const RESUME_URL = '/Reymart_Louie_Capapas_resume.pdf'
-
 interface Props {
+  view: 'photo' | 'certificate'
   onClose: () => void
 }
 
-export default function ResumeModal({ onClose }: Props) {
+export default function InternshipModal({ view, onClose }: Props) {
   useEffect(() => {
     const handler = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose() }
     window.addEventListener('keydown', handler)
@@ -20,9 +19,11 @@ export default function ResumeModal({ onClose }: Props) {
     }
   }, [onClose])
 
+  const isPhoto = view === 'photo'
+
   return createPortal(
     <div
-      className="fixed inset-0 z-[9000] flex items-center justify-center p-4 md:p-8"
+      className="fixed inset-0 z-[9000] flex items-end md:items-center justify-center p-4 md:p-8"
       style={{
         background: 'rgba(0,0,0,0.75)',
         backdropFilter: 'blur(12px)',
@@ -45,12 +46,14 @@ export default function ResumeModal({ onClose }: Props) {
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4" style={{ borderBottom: '1px solid rgba(0,0,0,0.06)' }}>
           <div>
-            <p className="font-sans text-xs uppercase tracking-widest mb-0.5 text-stone-400">Reymart Louie L. Capapas</p>
-            <h2 className="font-display text-xl text-stone-800">Resume</h2>
+            <p className="font-sans text-xs uppercase tracking-widest mb-0.5 text-stone-400">Ubiquity Global Services</p>
+            <h2 className="font-display text-xl text-stone-800">
+              {isPhoto ? 'Internship Photo' : 'Internship Certificate'}
+            </h2>
           </div>
           <div className="flex items-center gap-3">
             <a
-              href={RESUME_URL}
+              href={isPhoto ? '/ubiquity-photo.webp' : '/ubiquity-internship.pdf'}
               target="_blank"
               rel="noopener noreferrer"
               className="font-sans text-xs px-4 py-2 rounded-full transition-colors duration-150 bg-stone-100 hover:bg-stone-200 text-stone-500"
@@ -68,13 +71,24 @@ export default function ResumeModal({ onClose }: Props) {
           </div>
         </div>
 
-        {/* PDF viewer */}
-        <iframe
-          src={RESUME_URL}
-          className="w-full"
-          style={{ height: '75vh', border: 'none' }}
-          title="Resume"
-        />
+        {/* Content */}
+        {isPhoto ? (
+          <div className="flex justify-center items-center overflow-hidden bg-black">
+            <img
+              src="/ubiquity-photo.webp"
+              alt="Internship Photo"
+              className="max-w-full h-auto"
+              style={{ maxHeight: '75vh' }}
+            />
+          </div>
+        ) : (
+          <iframe
+            src="/ubiquity-internship.pdf"
+            className="w-full"
+            style={{ height: '75vh', border: 'none' }}
+            title="Internship Certificate"
+          />
+        )}
       </div>
     </div>,
     document.body
