@@ -78,32 +78,16 @@ export default function Works() {
         </a>
 
         {/* Selected work */}
-        <div className="rounded-[32px] overflow-hidden relative">
-          {/* Background photo */}
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage: `url('/works-bg.webp')`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-            }}
-          />
-          {/* Frosted glass overlay — light, not overpowering */}
-          <div
-            className="absolute inset-0 backdrop-blur-[2px]"
-            style={{ background: 'rgba(0,0,0,0.28)' }}
-          />
-          {/* Content */}
-          <div className="relative">
+        <div className="rounded-[32px] overflow-hidden" style={{ background: '#f5f5f7' }}>
           <div className="px-6 md:px-8 pt-6 md:pt-8 pb-3 flex items-center justify-between">
             <div>
               <div className="flex items-center gap-2 mb-2">
-                <div className="w-px h-3.5" style={{ background: 'var(--portfolio-label)' }} />
-                <p className="font-sans text-xs uppercase tracking-widest" style={{ color: 'var(--portfolio-label)' }}>Selected Work</p>
+                <div className="w-px h-3.5 bg-amber-700/50" />
+                <p className="font-sans text-xs uppercase tracking-widest text-amber-700/70">Selected Work</p>
               </div>
-              <h2 className="font-display text-5xl" style={{ color: 'var(--portfolio-title)' }}>{workCount === 1 ? 'Work' : 'Works'}</h2>
+              <h2 className="font-display text-5xl text-stone-800">{workCount === 1 ? 'Work' : 'Works'}</h2>
             </div>
-            <span className="font-sans text-sm hidden md:block" style={{ color: 'var(--portfolio-label)' }}>{workCount} {workCount === 1 ? 'work' : 'works'}</span>
+            <span className="font-sans text-sm hidden md:block text-stone-500">{workCount} {workCount === 1 ? 'work' : 'works'}</span>
           </div>
 
           {/* 2-column card grid */}
@@ -233,7 +217,6 @@ export default function Works() {
             </div>
 
           </div>
-          </div>{/* end relative content */}
         </div>
       </div>
 
