@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import FireSafeModal from '../ui/FireSafeModal'
 import GraceyLogisticsModal from '../ui/GraceyLogisticsModal'
 
@@ -12,7 +12,21 @@ const workCount: number = 2
 export default function Works() {
   const [firesafeOpen, setFiresafeOpen] = useState(false)
   const [graceyOpen, setGraceyOpen] = useState(false)
+  const [activeIndex, setActiveIndex] = useState(0)
   const ref = useRef<HTMLDivElement>(null)
+  const scrollRef = useRef<HTMLDivElement>(null)
+
+  const onCarouselScroll = useCallback(() => {
+    const el = scrollRef.current
+    if (!el) return
+    setActiveIndex(Math.round(el.scrollLeft / el.offsetWidth))
+  }, [])
+
+  const scrollTo = useCallback((index: number) => {
+    const el = scrollRef.current
+    if (!el) return
+    el.scrollTo({ left: index * el.offsetWidth, behavior: 'smooth' })
+  }, [])
 
   useEffect(() => {
     const el = ref.current
@@ -92,12 +106,16 @@ export default function Works() {
             <span className="font-sans text-sm hidden md:block text-stone-500">{workCount} {workCount === 1 ? 'work' : 'works'}</span>
           </div>
 
-          {/* 2-column card grid */}
-          <div className="p-4 lg:p-5 grid grid-cols-1 lg:grid-cols-2 gap-4">
+          {/* Cards — mobile: snap carousel / desktop: original grid */}
+          <div
+            ref={scrollRef}
+            onScroll={onCarouselScroll}
+            className="no-scrollbar flex overflow-x-auto snap-x snap-mandatory px-4 gap-4 pb-4 md:grid md:grid-cols-1 md:overflow-visible md:snap-none md:p-4 lg:p-5 lg:grid-cols-2"
+          >
 
             {/* FireSafe card */}
             <div
-              className="rounded-[24px] overflow-hidden flex flex-col cursor-pointer group"
+              className="snap-center flex-shrink-0 w-[calc(100%-2rem)] md:w-auto rounded-[24px] overflow-hidden flex flex-col cursor-pointer group"
               style={{
                 background: 'linear-gradient(145deg, #fff8f5 0%, #ffede0 100%)',
                 border: '1px solid rgba(239,68,68,0.12)',
@@ -149,7 +167,7 @@ export default function Works() {
 
             {/* Gracey Logistics Services card */}
             <div
-              className="rounded-[24px] overflow-hidden flex flex-col cursor-pointer group"
+              className="snap-center flex-shrink-0 w-[calc(100%-2rem)] md:w-auto rounded-[24px] overflow-hidden flex flex-col cursor-pointer group"
               style={{
                 background: 'linear-gradient(145deg, #f5f8ff 0%, #edf4ff 100%)',
                 border: '1px solid rgba(59,130,246,0.12)',
@@ -199,6 +217,22 @@ export default function Works() {
               </div>
             </div>
 
+          </div>
+
+          {/* Mobile: dot indicators */}
+          <div className="flex justify-center items-center gap-2 pb-5 md:hidden">
+            {Array.from({ length: workCount }).map((_, i) => (
+              <button
+                key={i}
+                onClick={() => scrollTo(i)}
+                className="rounded-full transition-all duration-200"
+                style={{
+                  width: activeIndex === i ? '20px' : '6px',
+                  height: '6px',
+                  background: activeIndex === i ? '#292524' : 'rgba(41,37,36,0.25)',
+                }}
+              />
+            ))}
           </div>
         </div>
       </div>
