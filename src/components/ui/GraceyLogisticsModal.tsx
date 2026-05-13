@@ -11,20 +11,21 @@ const deliverables = [
   { label: 'Logo & Visual Identity', category: 'Brand Identity' },
   { label: 'Color System', category: 'Brand Identity' },
   { label: 'Typography', category: 'Brand Identity' },
-  { label: 'Website Design', category: 'Web' },
   { label: 'Business Card', category: 'Print' },
   { label: 'Letterhead', category: 'Print' },
-  { label: 'Mobile App UI', category: 'UI Design' },
-  { label: 'Dashboard UI', category: 'UI Design' },
-  { label: 'Icon Set', category: 'UI Design' },
-  { label: 'Shipment Tracker UI', category: 'UI Design' },
+  { label: 'React Web App', category: 'Development' },
+  { label: 'Shipment Tracker', category: 'Development' },
+  { label: 'Mobile App UI', category: 'UI/UX' },
+  { label: 'Dashboard UI', category: 'UI/UX' },
 ]
 
-const tools = [
+const stack = [
+  { label: 'React 19', category: 'Frontend' },
+  { label: 'TypeScript', category: 'Language' },
+  { label: 'Vite', category: 'Build Tool' },
+  { label: 'Vercel', category: 'Deployment' },
   { label: 'Figma', category: 'Design' },
-  { label: 'FigJam', category: 'Wireframing' },
   { label: 'Adobe Illustrator', category: 'Vector' },
-  { label: 'Adobe Photoshop', category: 'Editing' },
 ]
 
 const roles = [
@@ -33,12 +34,12 @@ const roles = [
     desc: 'Built the full visual identity from scratch — logo, color palette, typography, and brand guidelines that communicate reliability and professionalism for a nationwide freight company.',
   },
   {
-    role: 'Website Design',
-    desc: 'Designed and developed graceylogisticsservices.com — covering the homepage, services, shipment tracking UI, and contact sections tailored for both business clients and individual shippers.',
+    role: 'Frontend Development',
+    desc: 'Coded and deployed graceylogisticsservices.com using React 19, TypeScript, and Vite — covering the homepage, services, shipment tracking UI, and contact sections. Deployed live on Vercel.',
   },
   {
-    role: 'UI Design',
-    desc: 'Designed the logistics management dashboard and mobile app UI, prioritizing operational clarity for dispatchers and drivers handling FTL/LTL routes across Luzon and Visayas.',
+    role: 'UI/UX Design',
+    desc: 'Designed high-fidelity mockups in Figma for the logistics management dashboard and mobile app UI, prioritizing operational clarity for dispatchers and drivers across Luzon and Visayas.',
   },
 ]
 
@@ -78,7 +79,7 @@ export default function GraceyLogisticsModal({ onClose }: Props) {
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 flex-shrink-0" style={{ borderBottom: '1px solid rgba(59,130,246,0.10)' }}>
           <div>
-            <p className="font-sans text-xs uppercase tracking-widest mb-0.5" style={{ color: 'rgba(30,80,200,0.55)' }}>Brand & UI/UX Design · 2024</p>
+            <p className="font-sans text-xs uppercase tracking-widest mb-0.5" style={{ color: 'rgba(30,80,200,0.55)' }}>Web Development & Design · 2024</p>
             <h2 className="font-display text-xl text-stone-900">Gracey Logistics Services</h2>
           </div>
           <div className="flex items-center gap-3">
@@ -111,7 +112,7 @@ export default function GraceyLogisticsModal({ onClose }: Props) {
             graceylogisticsservices.com · Sta. Maria, Bulacan
           </p>
           <p className="font-sans text-sm leading-relaxed text-stone-500">
-            Full brand identity, website, and UI design for a freight transport company
+            Full brand identity, website design, and frontend development for a freight transport company
             serving Metro Manila, North &amp; South Luzon, and inter-island routes across the Philippines —
             offering FTL/LTL shipping, last-mile delivery, and 24/7 GPS-tracked logistics support.
           </p>
@@ -124,9 +125,9 @@ export default function GraceyLogisticsModal({ onClose }: Props) {
         >
           <p className="font-sans text-xs uppercase tracking-widest mb-3" style={{ color: 'rgba(30,80,200,0.60)' }}>The Brief</p>
           <p className="font-sans text-sm leading-relaxed text-stone-500">
-            Gracey Logistics needed a brand presence that communicates nationwide scale with a personal,
-            customer-first approach — plus a live website with a shipment tracker, service pages, and
-            contact flows for both business clients and individual shippers across the Philippines.
+            Gracey Logistics needed a brand presence and a live website — not a template or builder, but a
+            real React application built from scratch. The site covers services, shipment tracking UI,
+            and contact flows for both business clients and individual shippers across the Philippines.
           </p>
         </div>
 
@@ -147,11 +148,11 @@ export default function GraceyLogisticsModal({ onClose }: Props) {
           </div>
         </div>
 
-        {/* Tools */}
+        {/* Stack */}
         <div className="mb-8">
-          <p className="font-sans text-xs uppercase tracking-widest mb-4 text-stone-400">Tools</p>
+          <p className="font-sans text-xs uppercase tracking-widest mb-4 text-stone-400">Stack</p>
           <div className="grid grid-cols-2 gap-2">
-            {tools.map(({ label, category }) => (
+            {stack.map(({ label, category }) => (
               <div
                 key={label}
                 className="flex items-center justify-between px-3 py-2.5 md:px-4 md:py-3 rounded-2xl"

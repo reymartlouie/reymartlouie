@@ -5,7 +5,7 @@ import FireSafeModal from '../ui/FireSafeModal'
 import GraceyLogisticsModal from '../ui/GraceyLogisticsModal'
 
 const firesafeTags = ['React Native', 'Raspberry Pi Zero 2 W', 'Supabase', 'TinyML', 'Python', 'Arduino']
-const graceyTags = ['Figma', 'Brand Identity', 'Web Design', 'UI Design']
+const graceyTags = ['React', 'TypeScript', 'Vite', 'Figma', 'Vercel']
 
 const workCount: number = 2
 
@@ -178,11 +178,11 @@ export default function Works() {
               <div className="px-6 md:px-8 pt-6 pb-5">
                 <div className="flex items-center gap-2 mb-2">
                   <div className="w-px h-3" style={{ background: 'rgba(59,130,246,0.35)' }} />
-                  <span className="font-sans text-xs uppercase tracking-widest" style={{ color: 'rgba(30,80,200,0.55)' }}>02 · UI/UX Design · 2024</span>
+                  <span className="font-sans text-xs uppercase tracking-widest" style={{ color: 'rgba(30,80,200,0.55)' }}>02 · Web Development · 2024</span>
                 </div>
                 <h3 className="font-display text-4xl leading-tight text-stone-900">Gracey Logistics</h3>
                 <p className="font-sans text-sm leading-relaxed mt-2 mb-4 text-stone-500">
-                  Brand identity, website, and UI design for a nationwide freight transport company serving Metro Manila and Luzon.
+                  Built and designed a full freight transport website with React, TypeScript, and Vite — deployed live on Vercel.
                 </p>
                 <span className="inline-flex items-center gap-1.5 font-sans text-sm font-medium" style={{ color: 'rgba(30,80,220,0.85)' }}>
                   View Details →
