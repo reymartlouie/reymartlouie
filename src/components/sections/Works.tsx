@@ -147,7 +147,7 @@ export default function Works() {
                     className="w-36 h-auto drop-shadow-xl group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
-                <div className="absolute bottom-5 left-6 right-6 flex flex-wrap gap-1.5">
+                <div className="absolute bottom-5 left-6 right-6 hidden md:flex flex-wrap gap-1.5">
                   {firesafeTags.map((tag) => (
                     <span
                       key={tag}
@@ -199,7 +199,7 @@ export default function Works() {
                     className="w-40 h-auto drop-shadow-xl group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
-                <div className="absolute bottom-5 left-6 right-6 flex flex-wrap gap-1.5">
+                <div className="absolute bottom-5 left-6 right-6 hidden md:flex flex-wrap gap-1.5">
                   {graceyTags.map((tag) => (
                     <span
                       key={tag}
