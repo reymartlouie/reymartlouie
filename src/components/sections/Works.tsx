@@ -5,7 +5,7 @@ import FireSafeModal from '../ui/FireSafeModal'
 import GraceyLogisticsModal from '../ui/GraceyLogisticsModal'
 
 const firesafeTags = ['React Native', 'Raspberry Pi Zero 2 W', 'Supabase', 'TinyML', 'Python', 'Arduino']
-const graceyTags = ['Figma', 'Brand Identity', 'UI Design', 'Logo Design']
+const graceyTags = ['Figma', 'Brand Identity', 'Web Design', 'UI Design']
 
 const workCount: number = 2
 
@@ -182,7 +182,7 @@ export default function Works() {
                 </div>
                 <h3 className="font-display text-4xl leading-tight text-stone-900">Gracey Logistics</h3>
                 <p className="font-sans text-sm leading-relaxed mt-2 mb-4 text-stone-500">
-                  Brand identity and UI design for a local logistics and trucking services company.
+                  Brand identity, website, and UI design for a nationwide freight transport company serving Metro Manila and Luzon.
                 </p>
                 <span className="inline-flex items-center gap-1.5 font-sans text-sm font-medium" style={{ color: 'rgba(30,80,220,0.85)' }}>
                   View Details →
