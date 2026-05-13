@@ -80,7 +80,7 @@ export default function GraceyLogisticsModal({ onClose }: Props) {
               href="/gracey-logistics.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-sans text-xs px-4 py-2 rounded-full transition-colors duration-150"
+              className="hidden md:inline-flex font-sans text-xs px-4 py-2 rounded-full transition-colors duration-150"
               style={{ background: 'rgba(59,130,246,0.08)', color: 'rgba(30,80,200,0.85)', border: '1px solid rgba(59,130,246,0.18)' }}
             >
               Case Study ↗
@@ -97,7 +97,7 @@ export default function GraceyLogisticsModal({ onClose }: Props) {
         </div>
 
         {/* Scrollable body */}
-        <div className="overflow-y-auto p-8 md:p-10">
+        <div className="overflow-y-auto p-5 md:p-10">
 
         {/* Intro */}
         <div className="mb-8">
@@ -110,7 +110,7 @@ export default function GraceyLogisticsModal({ onClose }: Props) {
 
         {/* Context */}
         <div
-          className="mb-8 p-6 rounded-[20px]"
+          className="mb-8 p-4 md:p-6 rounded-[20px]"
           style={{ background: 'rgba(59,130,246,0.05)', border: '1px solid rgba(59,130,246,0.10)' }}
         >
           <p className="font-sans text-xs uppercase tracking-widest mb-3" style={{ color: 'rgba(30,80,200,0.60)' }}>The Brief</p>
@@ -129,7 +129,7 @@ export default function GraceyLogisticsModal({ onClose }: Props) {
             {deliverables.map(({ label, category }) => (
               <div
                 key={label}
-                className="flex items-center justify-between px-4 py-3 rounded-2xl"
+                className="flex items-center justify-between px-3 py-2.5 md:px-4 md:py-3 rounded-2xl"
                 style={{ background: 'rgba(59,130,246,0.04)', border: '1px solid rgba(59,130,246,0.10)' }}
               >
                 <span className="font-sans text-sm text-stone-700">{label}</span>
@@ -146,7 +146,7 @@ export default function GraceyLogisticsModal({ onClose }: Props) {
             {tools.map(({ label, category }) => (
               <div
                 key={label}
-                className="flex items-center justify-between px-4 py-3 rounded-2xl"
+                className="flex items-center justify-between px-3 py-2.5 md:px-4 md:py-3 rounded-2xl"
                 style={{ background: 'rgba(59,130,246,0.04)', border: '1px solid rgba(59,130,246,0.10)' }}
               >
                 <span className="font-sans text-sm text-stone-700">{label}</span>
@@ -163,7 +163,7 @@ export default function GraceyLogisticsModal({ onClose }: Props) {
             {roles.map(({ role, desc }) => (
               <div
                 key={role}
-                className="p-5 rounded-2xl"
+                className="p-4 md:p-5 rounded-2xl"
                 style={{ background: 'rgba(59,130,246,0.04)', border: '1px solid rgba(59,130,246,0.10)' }}
               >
                 <p className="font-sans text-sm font-medium mb-1.5 text-stone-700">{role}</p>
@@ -174,12 +174,12 @@ export default function GraceyLogisticsModal({ onClose }: Props) {
         </div>
 
         {/* CTA */}
-        <div className="flex justify-end">
+        <div className="flex flex-col md:flex-row md:justify-end gap-3">
           <a
             href="/gracey-logistics.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-spring inline-flex items-center gap-2 font-sans text-sm font-semibold px-5 py-3 rounded-full transition-colors duration-150"
+            className="btn-spring inline-flex items-center justify-center gap-2 font-sans text-sm font-semibold px-5 py-3 rounded-full transition-colors duration-150"
             style={{
               background: 'rgba(59,130,246,0.08)',
               color: 'rgba(30,80,200,0.85)',

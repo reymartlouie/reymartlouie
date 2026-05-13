@@ -86,7 +86,7 @@ export default function FireSafeModal({ onClose }: Props) {
               href="https://reymartlouie.framer.website/work/firesafe"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-sans text-xs px-4 py-2 rounded-full transition-colors duration-150"
+              className="hidden md:inline-flex font-sans text-xs px-4 py-2 rounded-full transition-colors duration-150"
               style={{ background: 'rgba(239,68,68,0.08)', color: 'rgba(200,50,20,0.85)', border: '1px solid rgba(239,68,68,0.18)' }}
             >
               Case Study ↗
@@ -103,7 +103,7 @@ export default function FireSafeModal({ onClose }: Props) {
         </div>
 
         {/* Scrollable body */}
-        <div className="overflow-y-auto p-8 md:p-10">
+        <div className="overflow-y-auto p-5 md:p-10">
 
         {/* Intro */}
         <div className="mb-8">
@@ -119,7 +119,7 @@ export default function FireSafeModal({ onClose }: Props) {
 
         {/* Context */}
         <div
-          className="mb-8 p-6 rounded-[20px]"
+          className="mb-8 p-4 md:p-6 rounded-[20px]"
           style={{ background: 'rgba(239,68,68,0.05)', border: '1px solid rgba(239,68,68,0.10)' }}
         >
           <p className="font-sans text-xs uppercase tracking-widest mb-3" style={{ color: 'rgba(180,40,20,0.60)' }}>The Problem</p>
@@ -135,11 +135,11 @@ export default function FireSafeModal({ onClose }: Props) {
         {/* Hardware */}
         <div className="mb-6">
           <p className="font-sans text-xs uppercase tracking-widest mb-4 text-stone-400">Hardware</p>
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
             {hardware.map(({ label, category }) => (
               <div
                 key={label}
-                className="flex items-center justify-between px-4 py-3 rounded-2xl"
+                className="flex items-center justify-between px-3 py-2.5 md:px-4 md:py-3 rounded-2xl"
                 style={{ background: 'rgba(239,68,68,0.04)', border: '1px solid rgba(239,68,68,0.10)' }}
               >
                 <span className="font-sans text-sm text-stone-700">{label}</span>
@@ -156,7 +156,7 @@ export default function FireSafeModal({ onClose }: Props) {
             {software.map(({ label, category }) => (
               <div
                 key={label}
-                className="flex items-center justify-between px-4 py-3 rounded-2xl"
+                className="flex items-center justify-between px-3 py-2.5 md:px-4 md:py-3 rounded-2xl"
                 style={{ background: 'rgba(239,68,68,0.04)', border: '1px solid rgba(239,68,68,0.10)' }}
               >
                 <span className="font-sans text-sm text-stone-700">{label}</span>
@@ -177,7 +177,7 @@ export default function FireSafeModal({ onClose }: Props) {
             ].map(({ env, detail }) => (
               <div
                 key={env}
-                className="flex items-center justify-between px-4 py-3 rounded-2xl"
+                className="flex items-center justify-between px-3 py-2.5 md:px-4 md:py-3 rounded-2xl"
                 style={{ background: 'rgba(239,68,68,0.04)', border: '1px solid rgba(239,68,68,0.10)' }}
               >
                 <span className="font-sans text-sm text-stone-700">{env}</span>
@@ -197,7 +197,7 @@ export default function FireSafeModal({ onClose }: Props) {
             {roles.map(({ role, desc }) => (
               <div
                 key={role}
-                className="p-5 rounded-2xl"
+                className="p-4 md:p-5 rounded-2xl"
                 style={{ background: 'rgba(239,68,68,0.04)', border: '1px solid rgba(239,68,68,0.10)' }}
               >
                 <p className="font-sans text-sm font-medium mb-1.5 text-stone-700">{role}</p>
@@ -208,17 +208,17 @@ export default function FireSafeModal({ onClose }: Props) {
         </div>
 
         {/* Team + CTA */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="flex flex-col gap-4">
           <p className="font-sans text-xs leading-relaxed text-stone-400">
             With Odsey Bandojo &amp; Vhieron Bareza<br />
             University of St. La Salle · Bacolod City
           </p>
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-col md:flex-row gap-3">
             <a
               href="/thesis-for-final.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-spring inline-flex items-center gap-2 font-sans text-sm font-semibold px-5 py-3 rounded-full transition-colors duration-150 bg-stone-200 hover:bg-stone-300 text-stone-700"
+              className="btn-spring inline-flex items-center justify-center gap-2 font-sans text-sm font-semibold px-5 py-3 rounded-full transition-colors duration-150 bg-stone-200 hover:bg-stone-300 text-stone-700"
             >
               <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M7 1v8M4 6l3 3 3-3M2 10v1.5A1.5 1.5 0 003.5 13h7a1.5 1.5 0 001.5-1.5V10" />
@@ -229,7 +229,7 @@ export default function FireSafeModal({ onClose }: Props) {
               href="https://github.com/reymartlouie/Firesafe"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-spring inline-flex items-center gap-2 font-sans text-sm font-semibold px-5 py-3 rounded-full transition-colors duration-150"
+              className="btn-spring inline-flex items-center justify-center gap-2 font-sans text-sm font-semibold px-5 py-3 rounded-full transition-colors duration-150"
               style={{
                 background: 'rgba(37,99,235,0.08)',
                 color: 'rgba(30,80,200,0.85)',
@@ -237,6 +237,15 @@ export default function FireSafeModal({ onClose }: Props) {
               }}
             >
               GitHub ↗
+            </a>
+            <a
+              href="https://reymartlouie.framer.website/work/firesafe"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-spring inline-flex items-center justify-center gap-2 font-sans text-sm font-semibold px-5 py-3 rounded-full transition-colors duration-150 md:hidden"
+              style={{ background: 'rgba(239,68,68,0.08)', color: 'rgba(200,50,20,0.85)', border: '1px solid rgba(239,68,68,0.18)' }}
+            >
+              Case Study ↗
             </a>
           </div>
         </div>
