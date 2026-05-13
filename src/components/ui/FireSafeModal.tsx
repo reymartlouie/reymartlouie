@@ -213,7 +213,7 @@ export default function FireSafeModal({ onClose }: Props) {
             With Odsey Bandojo &amp; Vhieron Bareza<br />
             University of St. La Salle · Bacolod City
           </p>
-          <div className="flex flex-col md:flex-row gap-3">
+          <div className="flex flex-col md:flex-row md:justify-end gap-3">
             <a
               href="/thesis-for-final.pdf"
               target="_blank"
