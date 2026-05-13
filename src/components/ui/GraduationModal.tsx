@@ -23,7 +23,7 @@ export default function GraduationModal({ view, onClose }: Props) {
 
   return createPortal(
     <div
-      className="fixed inset-0 z-[9000] flex items-end md:items-center justify-center md:p-8"
+      className="fixed inset-0 z-[9000] flex items-center justify-center p-4 md:p-8"
       style={{
         background: 'rgba(0,0,0,0.45)',
         backdropFilter: 'blur(8px)',
@@ -33,7 +33,7 @@ export default function GraduationModal({ view, onClose }: Props) {
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-3xl rounded-t-[32px] md:rounded-[32px] overflow-hidden flex flex-col"
+        className="relative w-full max-w-3xl rounded-[32px] overflow-hidden flex flex-col"
         style={{
           background: '#ffffff',
           border: '1px solid rgba(0,0,0,0.08)',
@@ -43,11 +43,6 @@ export default function GraduationModal({ view, onClose }: Props) {
         }}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Drag handle (mobile) */}
-        <div className="flex justify-center pt-2.5 pb-1 flex-shrink-0 md:hidden">
-          <div className="w-9 h-1 rounded-full bg-black/10" />
-        </div>
-
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4" style={{ borderBottom: '1px solid rgba(0,0,0,0.06)' }}>
           <div>
