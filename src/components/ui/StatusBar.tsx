@@ -102,16 +102,19 @@ function MobileMenu({
   date,
   onClose,
   onResumeOpen,
+  toggleRef,
 }: {
   time: string
   date: string
   onClose: () => void
   onResumeOpen: () => void
+  toggleRef: React.RefObject<HTMLButtonElement>
 }) {
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const handler = (e: MouseEvent | TouchEvent) => {
+      if (toggleRef.current?.contains(e.target as Node)) return
       if (ref.current && !ref.current.contains(e.target as Node)) onClose()
     }
     const keyHandler = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose() }
@@ -225,6 +228,7 @@ function StatusBar() {
   const [resumeOpen,     setResumeOpen]     = useState(false)
   const [isMobile,       setIsMobile]       = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const menuBtnRef = useRef<HTMLButtonElement>(null)
 
   const scrollToCenter = useCallback((href: string) => (e: React.MouseEvent) => {
     if (!href.startsWith('#')) return
@@ -296,6 +300,7 @@ function StatusBar() {
     return (
       <>
         <button
+          ref={menuBtnRef}
           onClick={() => setMobileMenuOpen(v => !v)}
           className="fixed z-50 flex items-center justify-center"
           style={{
@@ -325,6 +330,7 @@ function StatusBar() {
             date={date}
             onClose={() => setMobileMenuOpen(false)}
             onResumeOpen={() => setResumeOpen(true)}
+            toggleRef={menuBtnRef}
           />
         )}
 
