@@ -78,9 +78,36 @@ export const metadata: Metadata = {
   },
 }
 
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Reymart Louie L. Capapas',
+  url: SITE_URL,
+  jobTitle: 'Computer Engineer',
+  description: 'BS Computer Engineering graduate from USLS Bacolod. Specializes in React Native, TypeScript, Supabase, and Next.js.',
+  email: 'reymartlouie.capapas@gmail.com',
+  alumniOf: {
+    '@type': 'CollegeOrUniversity',
+    name: 'University of St. La Salle',
+    address: { '@type': 'PostalAddress', addressLocality: 'Bacolod City', addressCountry: 'PH' },
+  },
+  knowsAbout: ['React Native', 'TypeScript', 'Supabase', 'Next.js', 'Python', 'TinyML', 'Figma', 'Arduino'],
+  sameAs: [
+    'https://github.com/reymartlouie',
+    'https://www.linkedin.com/in/reymart-louie-capapas-b0063718b',
+    'https://reymartlouie.framer.website',
+  ],
+}
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${inter.variable} ${archivoBlack.variable}`}>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body>
         <StartupScreen />
         <div aria-hidden="true" className="layout-overlay">
