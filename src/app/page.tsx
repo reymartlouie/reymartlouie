@@ -9,7 +9,7 @@ function SectionBreak({ label }: { label: string }) {
   return (
     <div className="flex items-center gap-4 py-2">
       <div className="hidden md:block h-px flex-1 bg-white/[0.06]" />
-      <span className="font-sans text-[10px] text-white/[0.35] md:text-white/[0.22] uppercase tracking-[0.22em]">
+      <span className="font-sans text-[11px] text-white/[0.55] md:text-[10px] md:text-white/[0.22] uppercase tracking-[0.18em]">
         {label}
       </span>
       <div className="hidden md:block h-px flex-1 bg-white/[0.06]" />
