@@ -12,6 +12,7 @@ export default function DraggableBento({
   className = '',
   delay = 0,
   cardId,
+  locked = false,
   minW = DEFAULT_MIN_W,
   minH = DEFAULT_MIN_H,
   sizes,
@@ -20,6 +21,7 @@ export default function DraggableBento({
   className?: string
   delay?: number
   cardId?: string
+  locked?: boolean
   minW?: number
   minH?: number
   sizes?: Array<{ w: number; h: number; label: string }>
@@ -304,11 +306,11 @@ export default function DraggableBento({
       }}
     >
       <div
-        onPointerDown={onPointerDown}
+        onPointerDown={locked ? undefined : onPointerDown}
         onContextMenu={(e) => e.preventDefault()}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
-        className={editMode && !dragging && !pressing && revealDone ? 'bento-wiggle' : undefined}
+        className={!locked && editMode && !dragging && !pressing && revealDone ? 'bento-wiggle' : undefined}
         style={{
           width: '100%',
           height: '100%',
@@ -321,10 +323,10 @@ export default function DraggableBento({
             ? '0 28px 72px rgba(0,0,0,0.55), 0 8px 24px rgba(0,0,0,0.35)'
             : pressing
             ? '0 12px 32px rgba(0,0,0,0.3)'
-            : hovered && !editMode
+            : hovered && !editMode && !locked
             ? '0 8px 32px rgba(0,0,0,0.35), 0 2px 8px rgba(0,0,0,0.2)'
             : 'none',
-          cursor: dragging ? 'grabbing' : editMode ? 'grab' : 'default',
+          cursor: dragging ? 'grabbing' : (!locked && editMode) ? 'grab' : 'default',
           transition: dragging || resizing
             ? 'transform 80ms ease'
             : `transform 380ms ${SPRING}`,
@@ -336,7 +338,7 @@ export default function DraggableBento({
           style={{
             position: 'absolute',
             top: 14, right: 14,
-            opacity: (editMode || hovered || pressing) && revealDone && !dragging && !resizing ? 0.4 : 0,
+            opacity: !locked && (editMode || hovered || pressing) && revealDone && !dragging && !resizing ? 0.4 : 0,
             transition: 'opacity 200ms ease',
             pointerEvents: 'none',
             zIndex: 20,
@@ -350,8 +352,8 @@ export default function DraggableBento({
           </svg>
         </div>
 
-        {/* Resize: S/M/L preset buttons (when sizes provided) */}
-        {sizes ? (
+        {/* Resize: S/M/L preset buttons (when sizes provided and not locked) */}
+        {!locked && sizes ? (
           <div
             style={{
               position: 'absolute',
