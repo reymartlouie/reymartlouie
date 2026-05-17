@@ -106,53 +106,23 @@ export default function Hero() {
       <BentoCanvas savedPositions={savedPositions} editMode={editMode}>
 
         {/* ── Static cards ────────────────────────────────────────────────── */}
-        <DraggableBento className="lg:col-span-8" delay={100} minW={320} minH={240}
-          sizes={[
-            { label: 'I',   w: 420, h: 240 },
-            { label: 'II',  w: 580, h: 380 },
-            { label: 'III', w: 780, h: 460 },
-          ]}
-        >
+        <DraggableBento locked className="lg:col-span-8" delay={100} minW={320} minH={240}>
           <HeroIntroCard />
         </DraggableBento>
 
-        <DraggableBento className="lg:col-span-4" delay={180} minW={200} minH={280}
-          sizes={[
-            { label: 'I',   w: 220, h: 320 },
-            { label: 'II',  w: 300, h: 420 },
-            { label: 'III', w: 400, h: 520 },
-          ]}
-        >
+        <DraggableBento locked className="lg:col-span-4" delay={180} minW={200} minH={280}>
           <PhotoCard />
         </DraggableBento>
 
-        <DraggableBento className="lg:col-span-3" delay={240} minW={260} minH={260}
-          sizes={[
-            { label: 'I',   w: 260, h: 260 },
-            { label: 'II',  w: 360, h: 300 },
-            { label: 'III', w: 460, h: 360 },
-          ]}
-        >
+        <DraggableBento locked className="lg:col-span-3" delay={240} minW={260} minH={260}>
           <TechStackCard />
         </DraggableBento>
 
-        <DraggableBento className="lg:col-span-3" delay={290} minW={240} minH={240}
-          sizes={[
-            { label: 'I',   w: 240, h: 240 },
-            { label: 'II',  w: 340, h: 280 },
-            { label: 'III', w: 440, h: 340 },
-          ]}
-        >
+        <DraggableBento locked className="lg:col-span-3" delay={290} minW={240} minH={240}>
           <AboutCard />
         </DraggableBento>
 
-        <DraggableBento className="lg:col-span-6" delay={380} minW={300} minH={220}
-          sizes={[
-            { label: 'I',   w: 300, h: 220 },
-            { label: 'II',  w: 460, h: 260 },
-            { label: 'III', w: 620, h: 320 },
-          ]}
-        >
+        <DraggableBento locked className="lg:col-span-6" delay={380} minW={300} minH={220}>
           <GitHubCard />
         </DraggableBento>
 
