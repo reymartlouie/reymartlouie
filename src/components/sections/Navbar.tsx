@@ -36,27 +36,6 @@ function IconContact() {
   )
 }
 
-function LogoFireSafe() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 20 20" fill="none"
-      stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M10 17c-2.8 0-5-2.2-5-5 0-2.8 1.8-5 3.5-7.5.2 2.2 1.2 3.2 1.5 3.2.3 0 1.3-1 1.5-3C13.2 6.2 15 8.2 15 12c0 2.8-2.2 5-5 5z" />
-      <path d="M10 14.5c-1.1 0-2-1-2-2.2 0-.8.5-1.5 1.2-1.8.1 1 .5 1.5.8 1.5.3 0 .7-.5.8-1.5.7.3 1.2 1 1.2 1.8 0 1.2-.9 2.2-2 2.2z" />
-    </svg>
-  )
-}
-
-function LogoUIUX() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 20 20" fill="none"
-      stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M14.5 2.5l3 3-10 10H4.5v-3l10-10z" />
-      <path d="M12 5l3 3" />
-      <path d="M4.5 15.5L3 17" />
-    </svg>
-  )
-}
-
 // ── Liquid glass icon ────────────────────────────────────────────────────────
 
 function GlassIcon({ Icon, tint, glow, active }: {
@@ -105,23 +84,6 @@ const NAV = [
   { id: 'work',    label: 'Work',    href: '#work',    Icon: IconWork,    tint: 'rgba(192,132,252,0.18)', glow: 'rgba(192,132,252,0.30)'  },
   { id: 'contact', label: 'Contact', href: '#contact', Icon: IconContact, tint: 'rgba(52,211,153,0.18)',  glow: 'rgba(52,211,153,0.30)'   },
 ] as const
-
-const PROJECTS = [
-  {
-    label: 'FireSafe',
-    Icon: LogoFireSafe,
-    tint: '#c2410c',
-    glow: 'rgba(194,65,12,0.55)',
-    href: null as string | null,
-  },
-  {
-    label: 'UI/UX',
-    Icon: LogoUIUX,
-    tint: '#be185d',
-    glow: 'rgba(190,24,93,0.55)',
-    href: 'https://reymartlouie.framer.website',
-  },
-]
 
 // ── Component ────────────────────────────────────────────────────────────────
 
@@ -173,11 +135,6 @@ function Navbar() {
     }
   }, [updateActive])
 
-  const openFireSafe = () => {
-    document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' })
-    setTimeout(() => window.dispatchEvent(new CustomEvent('open-firesafe')), 350)
-  }
-
   if (isMobile) return null
 
   return (
@@ -223,33 +180,6 @@ function Navbar() {
           </a>
         ))}
 
-        {/* Divider */}
-        <div className="w-px h-8 mx-0.5 rounded-full" style={{ background: 'rgba(255,255,255,0.10)' }} />
-
-        {/* Project icons */}
-        {PROJECTS.map(({ label, Icon, tint, glow, href }) =>
-          href ? (
-            <a
-              key={label}
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex flex-col items-center gap-1.5 px-2 py-1 group text-white/60 hover:text-white/95 transition-colors duration-200"
-            >
-              <GlassIcon Icon={Icon} tint={tint} glow={glow} />
-              <span className="font-sans leading-none" style={{ fontSize: 10, letterSpacing: '0.01em' }}>{label}</span>
-            </a>
-          ) : (
-            <button
-              key={label}
-              onClick={openFireSafe}
-              className="flex flex-col items-center gap-1.5 px-2 py-1 group text-white/60 hover:text-white/95 transition-colors duration-200 bg-transparent"
-            >
-              <GlassIcon Icon={Icon} tint={tint} glow={glow} />
-              <span className="font-sans leading-none" style={{ fontSize: 10, letterSpacing: '0.01em' }}>{label}</span>
-            </button>
-          )
-        )}
       </nav>
     </div>
   )
