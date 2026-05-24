@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useRef, useCallback } from 'react'
 import Reveal from '../ui/Reveal'
 import BadgesModal from '../ui/BadgesModal'
 import InternshipModal from '../ui/InternshipModal'
@@ -30,6 +30,20 @@ export default function Certifications() {
   const [badgeModalOpen, setBadgeModalOpen] = useState(false)
   const [internshipView, setInternshipView] = useState<'photo' | 'certificate' | null>(null)
   const [graduationView, setGraduationView] = useState<'photo' | 'diploma' | null>(null)
+  const [activeIndex, setActiveIndex] = useState(0)
+  const scrollRef = useRef<HTMLDivElement>(null)
+
+  const onScroll = useCallback(() => {
+    const el = scrollRef.current
+    if (!el) return
+    setActiveIndex(Math.round(el.scrollLeft / el.offsetWidth))
+  }, [])
+
+  const scrollTo = useCallback((index: number) => {
+    const el = scrollRef.current
+    if (!el) return
+    el.scrollTo({ left: index * el.offsetWidth, behavior: 'smooth' })
+  }, [])
 
 
   return (
@@ -55,7 +69,7 @@ export default function Certifications() {
           </div>
 
           {/* Cards row */}
-          <div className="overflow-x-auto px-6 md:px-8 pb-6 md:pb-8">
+          <div ref={scrollRef} onScroll={onScroll} className="overflow-x-auto px-6 md:px-8 pb-6 md:pb-8">
             <div className="flex gap-6 min-w-max">
 
               {/* Internship card */}
