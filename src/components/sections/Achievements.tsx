@@ -37,23 +37,21 @@ export default function Certifications() {
       <Reveal>
         <div className="rounded-[32px] overflow-hidden" style={{ background: '#f5f5f7' }}>
           {/* Header */}
-          <div className="p-6 md:p-8 flex items-center justify-between">
-            <div>
-              <div className="flex items-center gap-2 mb-2">
-                <div className="w-px h-3.5 bg-amber-700/50" />
-                <p className="font-sans text-xs uppercase tracking-widest text-amber-700/70">Credentials</p>
-              </div>
-              <h2 className="font-display text-5xl text-stone-800">Achievements</h2>
+          <div className="px-6 md:px-8 pt-8 md:pt-10 pb-6 md:pb-8 flex items-end justify-between gap-4">
+            <h2 className="font-display text-[44px] md:text-[56px] leading-[1.05] text-stone-900 font-black">
+              Achievements.
+            </h2>
+            <div className="hidden md:block pb-1">
+              <button
+                onClick={() => setBadgeModalOpen(true)}
+                className="flex items-center gap-2 px-4 py-2 rounded-full bg-stone-200 hover:bg-stone-300 transition-colors duration-150"
+              >
+                <span className="font-sans text-sm text-stone-600">{badges.length} credentials</span>
+                <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-stone-500">
+                  <path d="M2.5 11.5L11.5 2.5M11.5 2.5H5.5M11.5 2.5V8.5" />
+                </svg>
+              </button>
             </div>
-            <button
-              onClick={() => setBadgeModalOpen(true)}
-              className="flex items-center gap-2 px-4 py-2 rounded-full bg-stone-200 hover:bg-stone-300 transition-colors duration-150"
-            >
-              <span className="font-sans text-sm text-stone-600">{badges.length} credentials</span>
-              <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-stone-500">
-                <path d="M2.5 11.5L11.5 2.5M11.5 2.5H5.5M11.5 2.5V8.5" />
-              </svg>
-            </button>
           </div>
 
           {/* Cards row */}
@@ -118,6 +116,37 @@ export default function Certifications() {
 
             </div>
           </div>
+
+          {/* Mobile: dot indicators */}
+          <div className="flex justify-center items-center gap-2 pt-4 pb-2 md:hidden">
+            {certs.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => scrollTo(i)}
+                className="rounded-full transition-all duration-200"
+                style={{
+                  width: activeIndex === i ? '20px' : '6px',
+                  height: '6px',
+                  background: activeIndex === i ? '#292524' : 'rgba(41,37,36,0.25)',
+                }}
+              />
+            ))}
+          </div>
+
+          {/* Mobile: badge button */}
+          <div className="flex justify-center px-6 py-5 md:hidden">
+            <button
+              onClick={() => setBadgeModalOpen(true)}
+              className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-stone-200 hover:bg-stone-300 transition-colors duration-150"
+            >
+              <span className="font-sans text-sm text-stone-600">{badges.length} credentials</span>
+              <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-stone-500">
+                <path d="M2.5 11.5L11.5 2.5M11.5 2.5H5.5M11.5 2.5V8.5" />
+              </svg>
+            </button>
+          </div>
+
+
         </div>
       </Reveal>
 

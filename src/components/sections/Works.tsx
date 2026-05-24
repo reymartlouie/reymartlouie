@@ -81,15 +81,18 @@ export default function Works() {
 
         {/* Selected work */}
         <div className="rounded-[32px] overflow-hidden" style={{ background: '#f5f5f7' }}>
-          <div className="px-6 md:px-8 pt-6 md:pt-8 pb-3 flex items-center justify-between">
-            <div>
-              <div className="flex items-center gap-2 mb-2">
-                <div className="w-px h-3.5 bg-amber-700/50" />
-                <p className="font-sans text-xs uppercase tracking-widest text-amber-700/70">Selected Work</p>
+          <div className="px-6 md:px-8 pt-8 md:pt-10 pb-4 flex items-end justify-between gap-4">
+            <h2 className="font-display text-[44px] md:text-[56px] leading-[1.05] text-stone-900 font-black">
+              Selected<br />Work.
+            </h2>
+            <div className="hidden md:block pb-1">
+              <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-stone-200">
+                <span className="font-sans text-sm text-stone-600">{workCount} {workCount === 1 ? 'project' : 'projects'}</span>
+                <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-stone-500">
+                  <path d="M2.5 11.5L11.5 2.5M11.5 2.5H5.5M11.5 2.5V8.5" />
+                </svg>
               </div>
-              <h2 className="font-display text-5xl text-stone-800">{workCount === 1 ? 'Work' : 'Works'}</h2>
             </div>
-            <span className="font-sans text-sm hidden md:block text-stone-500">{workCount} {workCount === 1 ? 'work' : 'works'}</span>
           </div>
 
           {/* 2-column card grid */}
