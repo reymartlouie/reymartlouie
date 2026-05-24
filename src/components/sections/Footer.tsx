@@ -19,7 +19,7 @@ export default function Footer() {
         <CallingCard />
       </Reveal>
 
-      {/* ── Patron support card — below Centurion ────────────────────────── */}
+      {/* ── PayPal card ──────────────────────────────────────────────────── */}
       <Reveal className="lg:col-span-4" delay={160}>
         <PayPalCard />
       </Reveal>

@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import FireSafeModal from '../ui/FireSafeModal'
 import GraceyLogisticsModal from '../ui/GraceyLogisticsModal'
+import UIUXModal from '../ui/UIUXModal'
 
 const firesafeTags = ['React Native', 'Raspberry Pi Zero 2 W', 'Supabase', 'TinyML', 'Python', 'Arduino']
 const graceyTags = ['React', 'TypeScript', 'Vite', 'Figma', 'Vercel']
@@ -13,6 +14,7 @@ export default function Works() {
   const [firesafeOpen, setFiresafeOpen] = useState(false)
   const [graceyOpen, setGraceyOpen] = useState(false)
   const [activeIndex, setActiveIndex] = useState(0)
+  const [uiuxOpen, setUiuxOpen] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
   const scrollRef = useRef<HTMLDivElement>(null)
 
@@ -54,45 +56,6 @@ export default function Works() {
     <section className="flex flex-col gap-4">
       <div ref={ref} className="reveal-item flex flex-col gap-4">
 
-        {/* UI/UX Portfolio link */}
-        <a
-          href="https://reymartlouie.framer.website"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="bento-lift block rounded-[32px] relative overflow-hidden group"
-        >
-          {/* Background image */}
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage: `url('/portfolio-bg.webp')`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center right',
-            }}
-          />
-          {/* Frosted glass layer */}
-          <div
-            className="absolute inset-0 backdrop-blur-sm"
-            style={{ background: 'radial-gradient(ellipse at 30% 50%, rgba(6,2,12,0.38) 0%, rgba(6,2,12,0.58) 100%)' }}
-          />
-          {/* Content */}
-          <div className="relative p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-            <div>
-              <div className="flex items-center gap-2 mb-2">
-                <div className="w-px h-3.5" style={{ background: 'var(--portfolio-label)' }} />
-                <p className="font-sans text-xs uppercase tracking-widest" style={{ color: 'var(--portfolio-label)' }}>Portfolio</p>
-              </div>
-              <h3 className="font-display text-4xl lg:text-5xl" style={{ color: 'var(--portfolio-title)' }}>UI/UX Portfolio</h3>
-              <p className="font-sans text-sm mt-2 max-w-md" style={{ color: 'var(--portfolio-body)' }}>
-                Explore my design work — case studies, wireframes, and high-fidelity prototypes.
-              </p>
-            </div>
-            <span className="btn-spring inline-flex items-center gap-2 font-sans font-semibold text-sm px-6 py-3 rounded-full transition-colors whitespace-nowrap" style={{ background: 'var(--portfolio-btn-bg)', color: 'var(--portfolio-btn-fg)', border: '1px solid var(--portfolio-btn-border)' }}>
-              View Portfolio ↗
-            </span>
-          </div>
-        </a>
-
         {/* Selected work */}
         <div className="rounded-[32px] overflow-hidden" style={{ background: '#f5f5f7' }}>
           <div className="px-6 md:px-8 pt-8 md:pt-10 pb-4 flex items-end justify-between gap-4">
@@ -100,12 +63,15 @@ export default function Works() {
               Selected<br />Work.
             </h2>
             <div className="hidden md:block pb-1">
-              <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-stone-200">
-                <span className="font-sans text-sm text-stone-600">{workCount} {workCount === 1 ? 'project' : 'projects'}</span>
+              <button
+                onClick={() => setUiuxOpen(true)}
+                className="flex items-center gap-2 px-4 py-2 rounded-full bg-stone-200 hover:bg-stone-300 transition-colors duration-150"
+              >
+                <span className="font-sans text-sm text-stone-600">UI/UX</span>
                 <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-stone-500">
                   <path d="M2.5 11.5L11.5 2.5M11.5 2.5H5.5M11.5 2.5V8.5" />
                 </svg>
-              </div>
+              </button>
             </div>
           </div>
 
@@ -237,11 +203,25 @@ export default function Works() {
               />
             ))}
           </div>
+
+          {/* Mobile: UI/UX button */}
+          <div className="flex justify-center px-6 py-5 md:hidden">
+            <button
+              onClick={() => setUiuxOpen(true)}
+              className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-stone-200 hover:bg-stone-300 transition-colors duration-150"
+            >
+              <span className="font-sans text-sm text-stone-600">UI/UX</span>
+              <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-stone-500">
+                <path d="M2.5 11.5L11.5 2.5M11.5 2.5H5.5M11.5 2.5V8.5" />
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
 
       {firesafeOpen && <FireSafeModal onClose={() => setFiresafeOpen(false)} />}
       {graceyOpen && <GraceyLogisticsModal onClose={() => setGraceyOpen(false)} />}
+      {uiuxOpen && <UIUXModal onClose={() => setUiuxOpen(false)} />}
     </section>
   )
 }
