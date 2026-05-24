@@ -43,10 +43,10 @@ export default function CallingCard() {
       {/* Monogram */}
       <div>
         <p
-          className="font-display"
+          className="font-display font-black"
           style={{
-            fontSize: 64,
-            lineHeight: 1,
+            fontSize: 56,
+            lineHeight: 1.05,
             letterSpacing: '-0.02em',
             marginBottom: '1.5rem',
             color: '#1a1714',
