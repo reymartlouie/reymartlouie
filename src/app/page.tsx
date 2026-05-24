@@ -28,10 +28,10 @@ export default function Home() {
         <SectionBreak label="Canvas" />
         <Hero />
         <div id="work" className="flex flex-col gap-4">
-          <SectionBreak label="Selected Work" />
+          <SectionBreak label="Work" />
           <Works />
         </div>
-        <SectionBreak label="Achievements" />
+        <SectionBreak label="Credentials" />
         <Achievements />
         <SectionBreak label="Contact" />
         <Footer />
