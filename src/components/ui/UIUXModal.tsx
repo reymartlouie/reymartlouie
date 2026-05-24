@@ -20,7 +20,7 @@ export default function UIUXModal({ onClose }: Props) {
 
   return createPortal(
     <div
-      className="fixed inset-0 z-[9000] flex items-end md:items-center justify-center p-4 md:p-8"
+      className="fixed inset-0 z-[9000] flex items-center justify-center p-4 md:p-8"
       style={{
         background: 'rgba(0,0,0,0.75)',
         backdropFilter: 'blur(12px)',
