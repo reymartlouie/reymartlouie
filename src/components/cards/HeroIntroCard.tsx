@@ -22,7 +22,7 @@ export default function HeroIntroCard() {
           <span className="w-1.5 h-1.5 rounded-full bg-fuchsia-400 animate-pulse" />
           Available for work
         </span>
-        <h1 className="font-display text-[44px] @md:text-[58px] @xl:text-[72px] leading-[1.05] mb-3 @xl:mb-4 text-white">
+        <h1 className="font-display font-black text-[44px] @md:text-[58px] @xl:text-[72px] leading-[1.05] mb-3 @xl:mb-4 text-white">
           Computer<br />
           Engineer<br />
           <span className="text-fuchsia-300/80">&amp; Developer.</span>

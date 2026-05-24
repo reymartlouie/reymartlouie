@@ -107,10 +107,10 @@ export default function PayPalCard() {
         {/* ── Monogram ────────────────────────────────────────────────── */}
         <div>
           <p
-            className="font-display"
+            className="font-display font-black"
             style={{
-              fontSize: 52,
-              lineHeight: 1,
+              fontSize: 56,
+              lineHeight: 1.05,
               letterSpacing: '-0.02em',
               marginBottom: '1.35rem',
               color: GOLD,
@@ -122,7 +122,7 @@ export default function PayPalCard() {
             }}
           >
             RL
-</p>
+          </p>
 
           <GrooveRule mb="1rem" />
 
