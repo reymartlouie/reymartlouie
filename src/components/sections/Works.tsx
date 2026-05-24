@@ -205,7 +205,7 @@ export default function Works() {
           </div>
 
           {/* Mobile: UI/UX button */}
-          <div className="flex justify-center px-6 py-5 md:hidden">
+          <div className="flex justify-end px-6 pb-6 md:hidden">
             <button
               onClick={() => setUiuxOpen(true)}
               className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-stone-200 hover:bg-stone-300 transition-colors duration-150"
