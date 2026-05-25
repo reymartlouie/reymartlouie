@@ -243,6 +243,8 @@ export default function BentoCanvas({
         let bottomY = 0
         Object.values(prev).forEach(r => { bottomY = Math.max(bottomY, r.y + r.h) })
         target = { x: 0, y: bottomY + GAP, w: fallback?.w ?? 280, h: fallback?.h ?? 200 }
+      } else if (fallback) {
+        target = { ...target, h: Math.max(target.h, fallback.h) }
       }
       const next = { ...prev, [id]: clampToContainer(target, cw) }
       const resolved = resolveAll(next, cw, GAP)
