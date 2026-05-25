@@ -129,7 +129,7 @@ export default function Hero() {
         {/* ── Testimonial cards ────────────────────────────────────────────── */}
 
         {testimonials.map((card, i) => (
-          <DraggableBento key={card.id} cardId={card.id} delay={(5 + i) * 60} className="lg:col-span-4" minW={280} minH={240}>
+          <DraggableBento key={card.id} cardId={card.id} delay={(5 + i) * 60} className="lg:col-span-4" minW={300} minH={320}>
             <CustomCard
               cardId={card.id}
               card={card}
