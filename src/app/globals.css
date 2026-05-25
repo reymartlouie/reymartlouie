@@ -105,24 +105,23 @@
 /* Layout background */
 .layout-overlay {
   position: fixed;
-  /* Bleed under Safari's status bar and tab bar (liquid glass / notch) */
-  top: calc(-1 * env(safe-area-inset-top, 0px));
-  bottom: calc(-1 * env(safe-area-inset-bottom, 0px));
-  left: 0;
-  right: 0;
+  inset: 0;
   z-index: 0;
   pointer-events: none;
-  overflow: hidden;
-  /* Force own compositor layer — prevents bg recomposite on every scroll */
+  /* No overflow:hidden — image bleeds under safe areas intentionally */
   will-change: transform;
   transform: translateZ(0);
 }
 
 .layout-overlay img {
   position: absolute;
-  inset: 0;
+  /* Bleed the image under Safari's status bar and liquid glass tab bar */
+  top: calc(-1 * env(safe-area-inset-top, 0px));
+  bottom: calc(-1 * env(safe-area-inset-bottom, 0px));
+  left: 0;
+  right: 0;
   width: 100%;
-  height: 100%;
+  height: calc(100% + env(safe-area-inset-top, 0px) + env(safe-area-inset-bottom, 0px));
   object-fit: cover;
   object-position: center center;
 }
