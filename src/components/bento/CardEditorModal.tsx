@@ -3,13 +3,13 @@
 import { useState, useEffect, useRef } from 'react'
 
 const COLORS = [
-  { value: '#1e1e1e', label: 'Charcoal' },
-  { value: '#1e3050', label: 'Navy'     },
-  { value: '#1a2e26', label: 'Forest'   },
-  { value: '#2a1f42', label: 'Violet'   },
-  { value: '#3a1f2c', label: 'Rose'     },
-  { value: '#1c2535', label: 'Slate'    },
-  { value: '#2d1f18', label: 'Amber'    },
+  { value: '#f5f5f7', label: 'Silver' },
+  { value: '#fff8f5', label: 'Cream'  },
+  { value: '#edf4ff', label: 'Mist'   },
+  { value: '#f0fdf4', label: 'Sage'   },
+  { value: '#fef9ee', label: 'Amber'  },
+  { value: '#fdf4ff', label: 'Violet' },
+  { value: '#fff1f2', label: 'Rose'   },
 ]
 
 interface CardEditorModalProps {
@@ -67,16 +67,16 @@ export default function CardEditorModal({ initial, onConfirm, onClose }: CardEdi
           className="rounded-2xl p-5 min-h-[88px] flex flex-col justify-between transition-colors duration-200"
           style={{ backgroundColor: color }}
         >
-          <span className="font-sans text-white/30 text-[10px] uppercase tracking-widest">Note preview</span>
+          <span className="font-sans text-[10px] uppercase tracking-widest" style={{ color: 'rgba(0,0,0,0.35)' }}>Note preview</span>
           <div className="mt-2">
             <p className="font-display text-xl leading-tight">
               {title
-                ? <span className="text-white">{title}</span>
-                : <span className="text-white/25">Your name</span>
+                ? <span style={{ color: 'rgba(0,0,0,0.85)' }}>{title}</span>
+                : <span style={{ color: 'rgba(0,0,0,0.25)' }}>Your name</span>
               }
             </p>
             {body && (
-              <p className="font-sans text-white/55 text-xs mt-1 leading-relaxed line-clamp-2">{body}</p>
+              <p className="font-sans text-xs mt-1 leading-relaxed line-clamp-2" style={{ color: 'rgba(0,0,0,0.50)' }}>{body}</p>
             )}
           </div>
         </div>

@@ -76,7 +76,7 @@ export default function DraggableBento({
       // Reveal immediately — IntersectionObserver won't fire for off-screen cards.
       isDynamicRef.current = true
       setRevealed(true)
-      addCard(id, savedPositions[id])
+      addCard(id, savedPositions[id], { w: minWRef.current, h: minHRef.current })
       return
     }
 

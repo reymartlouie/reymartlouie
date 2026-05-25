@@ -15,7 +15,7 @@ type CtxType = {
   savedPositions: Record<string, Rect>
   registerCard: (id: string, rect: Rect) => void
   dropCard: (id: string, rect: Rect) => void
-  addCard: (id: string, rect?: Rect) => void
+  addCard: (id: string, rect?: Rect, fallback?: { w: number; h: number }) => void
   removeCard: (id: string) => void
 }
 
@@ -235,14 +235,14 @@ export default function BentoCanvas({
 
   /** Add a card after floating mode is already active.
    *  If rect provided → restore saved position. Otherwise → auto-place below all cards. */
-  const addCard = useCallback((id: string, rect?: Rect) => {
+  const addCard = useCallback((id: string, rect?: Rect, fallback?: { w: number; h: number }) => {
     setPositions(prev => {
       const cw = cwRef.current
       let target = rect
       if (!target) {
         let bottomY = 0
         Object.values(prev).forEach(r => { bottomY = Math.max(bottomY, r.y + r.h) })
-        target = { x: 0, y: bottomY + GAP, w: 280, h: 200 }
+        target = { x: 0, y: bottomY + GAP, w: fallback?.w ?? 280, h: fallback?.h ?? 200 }
       }
       const next = { ...prev, [id]: clampToContainer(target, cw) }
       const resolved = resolveAll(next, cw, GAP)
