@@ -249,6 +249,7 @@ export default function BentoCanvas({
       const next = { ...prev, [id]: clampToContainer(target, cw) }
       const resolved = resolveAll(next, cw, GAP)
       setContainerH(computeHeight(resolved))
+      savePositions(resolved)
       return resolved
     })
   }, [])
