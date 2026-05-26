@@ -9,7 +9,7 @@ import GitHubCard from '../cards/GitHubCard'
 import HeroIntroCard from '../cards/HeroIntroCard'
 import PhotoCard from '../cards/PhotoCard'
 import TechStackCard from '../cards/TechStackCard'
-import AboutCard from '../cards/AboutCard'
+import AboutCard from '../cards/Quote'
 import { supabase, type Testimonial } from '@/lib/supabase'
 
 const NOTE_LIMIT  = 3
