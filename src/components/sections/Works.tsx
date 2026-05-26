@@ -66,13 +66,12 @@ export default function Works() {
 
             {/* FireSafe card */}
             <div
-              className="rounded-[24px] overflow-hidden flex flex-col cursor-pointer group"
+              className="rounded-[24px] overflow-hidden flex flex-col group"
               style={{
                 background: 'linear-gradient(145deg, #fff8f5 0%, #ffede0 100%)',
                 border: '1px solid rgba(239,68,68,0.12)',
                 boxShadow: '0 2px 24px rgba(239,68,68,0.08), inset 0 1px 0 rgba(255,255,255,0.9)',
               }}
-              onClick={() => setFiresafeOpen(true)}
             >
               <div className="px-6 md:px-8 pt-6 pb-5">
                 <div className="flex items-center gap-2 mb-2">
@@ -83,7 +82,7 @@ export default function Works() {
                 <p className="font-sans text-sm leading-relaxed mt-2 mb-4 text-stone-500">
                   Thermal imaging wildfire detection with real-time mobile alerting for rural barangays.
                 </p>
-                <span className="inline-flex items-center gap-1.5 font-sans text-sm font-medium" style={{ color: 'rgba(200,50,20,0.85)' }}>
+                <span onClick={() => setFiresafeOpen(true)} className="inline-flex items-center gap-1.5 font-sans text-sm font-medium cursor-pointer" style={{ color: 'rgba(200,50,20,0.85)' }}>
                   View Details →
                 </span>
               </div>
@@ -118,13 +117,12 @@ export default function Works() {
 
             {/* Gracey Logistics Services card */}
             <div
-              className="rounded-[24px] overflow-hidden flex flex-col cursor-pointer group"
+              className="rounded-[24px] overflow-hidden flex flex-col group"
               style={{
                 background: 'linear-gradient(145deg, #f5f8ff 0%, #edf4ff 100%)',
                 border: '1px solid rgba(59,130,246,0.12)',
                 boxShadow: '0 2px 24px rgba(59,130,246,0.06), inset 0 1px 0 rgba(255,255,255,0.9)',
               }}
-              onClick={() => setGraceyOpen(true)}
             >
               <div className="px-6 md:px-8 pt-6 pb-5">
                 <div className="flex items-center gap-2 mb-2">
@@ -135,7 +133,7 @@ export default function Works() {
                 <p className="font-sans text-sm leading-relaxed mt-2 mb-4 text-stone-500">
                   Brand identity and UI design for a local logistics and trucking services company.
                 </p>
-                <span className="inline-flex items-center gap-1.5 font-sans text-sm font-medium" style={{ color: 'rgba(30,80,220,0.85)' }}>
+                <span onClick={() => setGraceyOpen(true)} className="inline-flex items-center gap-1.5 font-sans text-sm font-medium cursor-pointer" style={{ color: 'rgba(30,80,220,0.85)' }}>
                   View Details →
                 </span>
               </div>
