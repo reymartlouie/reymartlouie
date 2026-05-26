@@ -74,35 +74,7 @@ export default function Certifications() {
             onScroll={onScroll}
             className="no-scrollbar flex overflow-x-auto snap-x snap-mandatory px-4 gap-4 md:snap-none md:px-8 md:pb-8 md:gap-6"
           >
-            {/* Internship card */}
-            <div className="snap-center flex-shrink-0 w-[calc(100%-2rem)] md:w-72 flex flex-col items-center pb-2 md:pb-0">
-              <div
-                className="rounded-2xl bg-gradient-to-br from-blue-700 to-blue-900 w-full overflow-hidden flex-shrink-0"
-                style={{ height: '216px' }}
-              >
-                <img
-                  src="/ubiquity-photo.webp"
-                  alt="Internship Certificate"
-                  className="w-full h-full object-cover rounded-2xl cursor-zoom-in"
-                  onClick={() => setInternshipView('photo')}
-                />
-              </div>
-              <div className="flex flex-col items-center text-center mt-4 gap-1.5 w-full">
-                <h3 className="font-display text-xl text-stone-900 leading-snug">{certs[0].title}</h3>
-                <p className="font-sans text-sm text-stone-500 leading-relaxed">{certs[0].issuer}</p>
-                <p className="font-sans text-sm font-semibold text-stone-700">{certs[0].date}</p>
-              </div>
-              <div className="flex items-center gap-3 mt-4">
-                <button
-                  onClick={() => setInternshipView('certificate')}
-                  className="px-5 py-2 rounded-full bg-blue-600 text-white text-sm font-sans font-medium hover:bg-blue-700 transition-colors duration-150"
-                >
-                  View Certificate
-                </button>
-              </div>
-            </div>
-
-            {/* Graduation card */}
+            {/* Graduation card (newest — left) */}
             <div className="snap-center flex-shrink-0 w-[calc(100%-2rem)] md:w-72 flex flex-col items-center pb-2 md:pb-0">
               <div
                 className="rounded-2xl bg-gradient-to-br from-emerald-800 to-emerald-950 w-full overflow-hidden flex-shrink-0"
@@ -126,6 +98,34 @@ export default function Certifications() {
                   className="px-5 py-2 rounded-full bg-emerald-700 text-white text-sm font-sans font-medium hover:bg-emerald-800 transition-colors duration-150"
                 >
                   View Diploma
+                </button>
+              </div>
+            </div>
+
+            {/* Internship card (older — right) */}
+            <div className="snap-center flex-shrink-0 w-[calc(100%-2rem)] md:w-72 flex flex-col items-center pb-2 md:pb-0">
+              <div
+                className="rounded-2xl bg-gradient-to-br from-blue-700 to-blue-900 w-full overflow-hidden flex-shrink-0"
+                style={{ height: '216px' }}
+              >
+                <img
+                  src="/ubiquity-photo.webp"
+                  alt="Internship Certificate"
+                  className="w-full h-full object-cover rounded-2xl cursor-zoom-in"
+                  onClick={() => setInternshipView('photo')}
+                />
+              </div>
+              <div className="flex flex-col items-center text-center mt-4 gap-1.5 w-full">
+                <h3 className="font-display text-xl text-stone-900 leading-snug">{certs[0].title}</h3>
+                <p className="font-sans text-sm text-stone-500 leading-relaxed">{certs[0].issuer}</p>
+                <p className="font-sans text-sm font-semibold text-stone-700">{certs[0].date}</p>
+              </div>
+              <div className="flex items-center gap-3 mt-4">
+                <button
+                  onClick={() => setInternshipView('certificate')}
+                  className="px-5 py-2 rounded-full bg-blue-600 text-white text-sm font-sans font-medium hover:bg-blue-700 transition-colors duration-150"
+                >
+                  View Certificate
                 </button>
               </div>
             </div>
