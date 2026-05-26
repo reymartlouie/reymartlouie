@@ -35,8 +35,7 @@ export default function AboutCard() {
 
         {/* Body */}
         <p className="font-sans text-sm @md:text-base leading-relaxed" style={{ color: BLUE }}>
-          Computer Engineer focused on UI/UX and Full-Stack Development — building polished, production-ready interfaces
-          with a foundation in hardware and networking.
+          asehjöaisheaioshe
         </p>
       </div>
     </div>

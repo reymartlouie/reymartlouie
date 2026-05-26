@@ -4,24 +4,30 @@ import Reveal from '../ui/Reveal'
 import CenturionCard from '../cards/CenturionCard'
 import CallingCard from '../cards/CallingCard'
 import PayPalCard from '../cards/PayPalCard'
+import PricingCard from '../cards/PricingCard'
 
 export default function Footer() {
   return (
     <section id="contact" className="grid grid-cols-1 lg:grid-cols-12 gap-4 pb-6">
 
-      {/* ── Centurion card ───────────────────────────────────────────────── */}
+      {/* ── Pricing card ─────────────────────────────────────────────────── */}
       <Reveal className="lg:col-span-8">
-        <CenturionCard />
-      </Reveal>
-
-      {/* ── Calling card ─────────────────────────────────────────────────── */}
-      <Reveal className="lg:col-span-4" delay={80}>
-        <CallingCard />
+        <PricingCard />
       </Reveal>
 
       {/* ── PayPal card ──────────────────────────────────────────────────── */}
-      <Reveal className="lg:col-span-4" delay={160}>
+      <Reveal className="lg:col-span-4" delay={80}>
         <PayPalCard />
+      </Reveal>
+
+      {/* ── Calling card ─────────────────────────────────────────────────── */}
+      <Reveal className="lg:col-span-4" delay={160}>
+        <CallingCard />
+      </Reveal>
+
+      {/* ── Centurion card ───────────────────────────────────────────────── */}
+      <Reveal className="lg:col-span-8" delay={220}>
+        <CenturionCard />
       </Reveal>
 
     </section>

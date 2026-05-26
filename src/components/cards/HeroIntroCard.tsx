@@ -28,8 +28,8 @@ export default function HeroIntroCard() {
           <span className="text-fuchsia-300/80">&amp; Developer.</span>
         </h1>
         <p className="font-sans text-sm @md:text-base max-w-lg leading-relaxed text-white/60">
-          Full-Stack and UI/UX engineer — designing and shipping production-ready apps across
-          React Native and web, backed by real hardware and networking experience.
+          Computer Engineer focused on UI/UX and Full-Stack Development — building polished, production-ready interfaces
+          with a foundation in hardware and networking.
         </p>
       </div>
       <div className="flex flex-wrap items-center gap-2 mt-2 @md:mt-4 @xl:mt-6 relative">

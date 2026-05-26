@@ -10,17 +10,15 @@ const PLAN_ID   = 'P-4GE25783A47486257NIBUGZQ'
 const CLIENT_ID = 'AcVZ6SWZR7p3g536HW08I_nNE37eShsGnuvDybsP4aRjtM8XWKHpi0wY3urTpzZ4LDgRlh0dP1MlRaa4'
 const SDK_SRC   = `https://www.paypal.com/sdk/js?client-id=${CLIENT_ID}&vault=true&intent=subscription`
 
-// Champagne gold palette
-const GOLD      = '#c9a96e'
-const GOLD_DIM  = 'rgba(201,169,110,0.52)'
-const GOLD_FAINT= 'rgba(201,169,110,0.28)'
+const WHITE      = 'rgba(255,255,255,0.90)'
+const WHITE_DIM  = 'rgba(255,255,255,0.45)'
+const WHITE_FAINT= 'rgba(255,255,255,0.15)'
 
-// Double-line groove rule — same technique as CallingCard but in gold
 function GrooveRule({ mb = '1.25rem', mt = '0' }: { mb?: string; mt?: string }) {
   return (
     <div style={{ marginBottom: mb, marginTop: mt }}>
-      <div style={{ height: '0.5px', background: 'rgba(201,169,110,0.38)' }} />
-      <div style={{ height: '0.5px', background: 'rgba(0,0,0,0.60)' }} />
+      <div style={{ height: '0.5px', background: 'rgba(255,255,255,0.12)' }} />
+      <div style={{ height: '0.5px', background: 'rgba(0,0,0,0.50)' }} />
     </div>
   )
 }
@@ -68,35 +66,20 @@ export default function PayPalCard() {
     <div
       className="h-full rounded-[32px] flex flex-col relative overflow-hidden"
       style={{
-        background: `
-          repeating-linear-gradient(
-            45deg,
-            transparent 0px, transparent 22px,
-            rgba(201,169,110,0.028) 22px, rgba(201,169,110,0.028) 23px
-          ),
-          repeating-linear-gradient(
-            -45deg,
-            transparent 0px, transparent 22px,
-            rgba(201,169,110,0.028) 22px, rgba(201,169,110,0.028) 23px
-          ),
-          linear-gradient(160deg, #110f08 0%, #0a0907 55%, #0d0b07 100%)
-        `,
-        border: '1px solid rgba(201,169,110,0.30)',
+        background: 'linear-gradient(160deg, #111 0%, #0a0a0a 55%, #0d0d0d 100%)',
+        border: '1px solid rgba(255,255,255,0.10)',
         boxShadow: `
-          inset 0  1px 0 rgba(201,169,110,0.22),
+          inset 0  1px 0 rgba(255,255,255,0.08),
           inset 0 -1px 0 rgba(0,0,0,0.60),
-          inset  1px 0 0 rgba(201,169,110,0.12),
-          inset -1px 0 0 rgba(0,0,0,0.35),
           0 32px 80px rgba(0,0,0,0.70),
           0  8px 24px rgba(0,0,0,0.50)
         `,
       }}
     >
 
-      {/* Subtle warm glow at top-centre */}
       <div
         className="absolute -top-14 left-1/2 -translate-x-1/2 w-52 h-28 rounded-full blur-3xl pointer-events-none"
-        style={{ background: 'rgba(201,169,110,0.07)' }}
+        style={{ background: 'rgba(255,255,255,0.04)' }}
       />
 
       <div
@@ -113,12 +96,8 @@ export default function PayPalCard() {
               lineHeight: 1.05,
               letterSpacing: '-0.02em',
               marginBottom: '1.35rem',
-              color: GOLD,
-              textShadow: `
-                0  1px 0 rgba(255,245,220,0.22),
-                0 -1px 0 rgba(0,0,0,0.60),
-                0  0  12px rgba(201,169,110,0.18)
-              `,
+              color: WHITE,
+              textShadow: '0 1px 0 rgba(255,255,255,0.10), 0 -1px 0 rgba(0,0,0,0.60)',
             }}
           >
             RL
@@ -131,8 +110,7 @@ export default function PayPalCard() {
             style={{
               fontSize: 8.5,
               letterSpacing: '0.28em',
-              color: GOLD_DIM,
-              textShadow: '0 0.5px 0 rgba(255,245,220,0.10), 0 -0.5px 0 rgba(0,0,0,0.40)',
+              color: WHITE_DIM,
             }}
           >
             Patron Support
@@ -146,7 +124,7 @@ export default function PayPalCard() {
             fontSize: 11,
             lineHeight: 1.75,
             letterSpacing: '0.04em',
-            color: GOLD_DIM,
+            color: WHITE_DIM,
             marginTop: '1.10rem',
           }}
         >
@@ -160,18 +138,17 @@ export default function PayPalCard() {
           {error ? (
             <p
               className="font-sans uppercase"
-              style={{ fontSize: 8.5, letterSpacing: '0.20em', color: GOLD_FAINT }}
+              style={{ fontSize: 8.5, letterSpacing: '0.20em', color: WHITE_FAINT }}
             >
               Payment unavailable
             </p>
           ) : (
-            /* Gold-framed container for the PayPal iframe */
             <div
               style={{
-                border: `1px solid ${GOLD_FAINT}`,
+                border: `1px solid ${WHITE_FAINT}`,
                 borderRadius: '6px',
                 overflow: 'hidden',
-                boxShadow: 'inset 0 1px 0 rgba(201,169,110,0.10)',
+                boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.06)',
               }}
             >
               <div ref={containerRef} />
@@ -186,7 +163,7 @@ export default function PayPalCard() {
             style={{
               fontSize: 7.5,
               letterSpacing: '0.22em',
-              color: 'rgba(201,169,110,0.28)',
+              color: 'rgba(255,255,255,0.22)',
             }}
           >
             Capapas · Bacolod City · {new Date().getFullYear()}
