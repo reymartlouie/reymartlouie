@@ -84,7 +84,7 @@ export default function Works() {
 
             {/* FireSafe card */}
             <div
-              className="rounded-[24px] overflow-hidden flex flex-col group"
+              className="snap-center flex-shrink-0 w-[calc(100%-2rem)] md:w-auto rounded-[24px] overflow-hidden flex flex-col group"
               style={{
                 background: 'linear-gradient(145deg, #fff8f5 0%, #ffede0 100%)',
                 border: '1px solid rgba(239,68,68,0.12)',
@@ -135,7 +135,7 @@ export default function Works() {
 
             {/* Gracey Logistics Services card */}
             <div
-              className="rounded-[24px] overflow-hidden flex flex-col group"
+              className="snap-center flex-shrink-0 w-[calc(100%-2rem)] md:w-auto rounded-[24px] overflow-hidden flex flex-col group"
               style={{
                 background: 'linear-gradient(145deg, #f5f8ff 0%, #edf4ff 100%)',
                 border: '1px solid rgba(59,130,246,0.12)',
