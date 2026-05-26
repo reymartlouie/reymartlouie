@@ -10,7 +10,7 @@ const PLAN_ID   = 'P-4GE25783A47486257NIBUGZQ'
 const CLIENT_ID = 'AcVZ6SWZR7p3g536HW08I_nNE37eShsGnuvDybsP4aRjtM8XWKHpi0wY3urTpzZ4LDgRlh0dP1MlRaa4'
 const SDK_SRC   = `https://www.paypal.com/sdk/js?client-id=${CLIENT_ID}&vault=true&intent=subscription`
 
-const WHITE      = 'rgba(255,255,255,0.90)'
+const BLUE       = '#009cde'
 const WHITE_DIM  = 'rgba(255,255,255,0.45)'
 const WHITE_FAINT= 'rgba(255,255,255,0.15)'
 
@@ -87,21 +87,60 @@ export default function PayPalCard() {
         style={{ padding: '1.85rem 1.85rem' }}
       >
 
-        {/* ── Monogram ────────────────────────────────────────────────── */}
+        {/* ── Heart ───────────────────────────────────────────────────── */}
         <div>
-          <p
-            className="font-display font-black"
-            style={{
-              fontSize: 56,
-              lineHeight: 1.05,
-              letterSpacing: '-0.02em',
-              marginBottom: '1.35rem',
-              color: WHITE,
-              textShadow: '0 1px 0 rgba(255,255,255,0.10), 0 -1px 0 rgba(0,0,0,0.60)',
-            }}
-          >
-            RL
-          </p>
+          <style>{`
+            @keyframes heartFlip {
+              0%   { transform: rotateY(0deg); }
+              100% { transform: rotateY(360deg); }
+            }
+            @keyframes twinkle {
+              0%, 100% { opacity: 0; transform: scale(0.5); }
+              50%       { opacity: 1; transform: scale(1); }
+            }
+          `}</style>
+
+          <div style={{ perspective: '140px', display: 'inline-block', marginBottom: '1.35rem' }}>
+            <div style={{ animation: 'heartFlip 3.6s linear infinite', transformStyle: 'preserve-3d', display: 'inline-block', position: 'relative' }}>
+              {/* Sparkles */}
+              {[
+                { top: '-6px',  left: '42px',  size: 5,   delay: '0s',   dur: '2.1s' },
+                { top: '4px',   left: '58px',  size: 3.5, delay: '0.6s', dur: '1.8s' },
+                { top: '-10px', left: '22px',  size: 4,   delay: '1.1s', dur: '2.4s' },
+                { top: '18px',  left: '62px',  size: 3,   delay: '0.3s', dur: '1.6s' },
+                { top: '-4px',  left: '6px',   size: 3.5, delay: '1.5s', dur: '2.0s' },
+                { top: '30px',  left: '-4px',  size: 2.5, delay: '0.9s', dur: '2.3s' },
+              ].map((s, i) => (
+                <span
+                  key={i}
+                  style={{
+                    position: 'absolute',
+                    top: s.top,
+                    left: s.left,
+                    width: s.size,
+                    height: s.size,
+                    borderRadius: '50%',
+                    background: BLUE,
+                    boxShadow: '0 0 4px 1px rgba(0,156,222,0.6)',
+                    animation: `twinkle ${s.dur} ${s.delay} ease-in-out infinite`,
+                    opacity: 0,
+                  }}
+                />
+              ))}
+
+              <p
+                className="font-display font-black"
+                style={{
+                  fontSize: 56,
+                  lineHeight: 1.05,
+                  color: BLUE,
+                  textShadow: '0 0 24px rgba(0,156,222,0.35), 0 -1px 0 rgba(0,0,0,0.60)',
+                }}
+              >
+                ♥
+              </p>
+            </div>
+          </div>
 
           <GrooveRule mb="1rem" />
 
