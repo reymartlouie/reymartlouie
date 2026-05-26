@@ -5,14 +5,81 @@ import FireSafeModal from '../ui/FireSafeModal'
 import GraceyLogisticsModal from '../ui/GraceyLogisticsModal'
 import UIUXModal from '../ui/UIUXModal'
 
-const firesafeTags = ['React Native', 'Raspberry Pi Zero 2 W', 'Supabase', 'TinyML', 'Python', 'Arduino']
-const graceyTags = ['React', 'TypeScript', 'Vite', 'Figma', 'Vercel']
+type WorkId = 'firesafe' | 'gracey'
 
-const workCount: number = 2
+type Work = {
+  id: WorkId
+  year: number
+  category: string
+  title: string
+  description: string
+  cardBg: string
+  cardBorder: string
+  cardShadow: string
+  dividerColor: string
+  labelColor: string
+  viewDetailsColor: string
+  bottomBg: string
+  bottomGradient: string
+  image: string
+  imageAlt: string
+  imageClass: string
+  tags: string[]
+  tagColor: string
+  tagBg: string
+  tagBorder: string
+}
+
+// Add new works here — sorted newest-first automatically
+const works: Work[] = [
+  {
+    id: 'firesafe',
+    year: 2025,
+    category: 'Thesis',
+    title: 'FireSafe',
+    description: 'Thermal imaging wildfire detection with real-time mobile alerting for rural barangays.',
+    cardBg: 'linear-gradient(145deg, #fff8f5 0%, #ffede0 100%)',
+    cardBorder: '1px solid rgba(239,68,68,0.12)',
+    cardShadow: '0 2px 24px rgba(239,68,68,0.08), inset 0 1px 0 rgba(255,255,255,0.9)',
+    dividerColor: 'rgba(239,68,68,0.35)',
+    labelColor: 'rgba(180,40,20,0.55)',
+    viewDetailsColor: 'rgba(200,50,20,0.85)',
+    bottomBg: 'linear-gradient(to bottom, #ffede0 0%, #ffe4cc 100%)',
+    bottomGradient: 'linear-gradient(to bottom, #ffede0 0%, #ffe4cc 100%)',
+    image: '/firesafe-logo.webp',
+    imageAlt: 'FireSafe',
+    imageClass: 'w-36 h-auto drop-shadow-xl group-hover:scale-105 transition-transform duration-500',
+    tags: ['React Native', 'Raspberry Pi Zero 2 W', 'Supabase', 'TinyML', 'Python', 'Arduino'],
+    tagColor: 'rgba(180,40,20,0.85)',
+    tagBg: 'rgba(239,68,68,0.08)',
+    tagBorder: '1px solid rgba(239,68,68,0.18)',
+  },
+  {
+    id: 'gracey',
+    year: 2024,
+    category: 'Web Development',
+    title: 'Gracey Logistics',
+    description: 'Built and designed a full freight transport website with React, TypeScript, and Vite — deployed live on Vercel.',
+    cardBg: 'linear-gradient(145deg, #f5f8ff 0%, #edf4ff 100%)',
+    cardBorder: '1px solid rgba(59,130,246,0.12)',
+    cardShadow: '0 2px 24px rgba(59,130,246,0.06), inset 0 1px 0 rgba(255,255,255,0.9)',
+    dividerColor: 'rgba(59,130,246,0.35)',
+    labelColor: 'rgba(30,80,200,0.55)',
+    viewDetailsColor: 'rgba(30,80,220,0.85)',
+    bottomBg: 'linear-gradient(to bottom, #edf4ff 0%, #e0ecff 100%)',
+    bottomGradient: 'linear-gradient(to bottom, #edf4ff 0%, #e0ecff 100%)',
+    image: '/gracey-logo.webp',
+    imageAlt: 'Gracey Logistics Services',
+    imageClass: 'w-40 h-auto drop-shadow-xl group-hover:scale-105 transition-transform duration-500',
+    tags: ['React', 'TypeScript', 'Vite', 'Figma', 'Vercel'],
+    tagColor: 'rgba(30,80,220,0.85)',
+    tagBg: 'rgba(59,130,246,0.08)',
+    tagBorder: '1px solid rgba(59,130,246,0.18)',
+  },
+].sort((a, b) => b.year - a.year)
 
 export default function Works() {
-  const [firesafeOpen, setFiresafeOpen] = useState(false)
-  const [graceyOpen, setGraceyOpen] = useState(false)
+  const [openWorkId, setOpenWorkId] = useState<WorkId | null>(null)
   const [activeIndex, setActiveIndex] = useState(0)
   const [uiuxOpen, setUiuxOpen] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
@@ -47,7 +114,7 @@ export default function Works() {
   }, [])
 
   useEffect(() => {
-    const handler = () => setFiresafeOpen(true)
+    const handler = () => setOpenWorkId('firesafe')
     window.addEventListener('open-firesafe', handler)
     return () => window.removeEventListener('open-firesafe', handler)
   }, [])
@@ -81,114 +148,68 @@ export default function Works() {
             onScroll={onCarouselScroll}
             className="no-scrollbar flex overflow-x-auto snap-x snap-mandatory px-4 gap-4 pb-4 md:grid md:grid-cols-1 md:overflow-visible md:snap-none md:p-4 lg:p-5 lg:grid-cols-2"
           >
-
-            {/* FireSafe card */}
-            <div
-              className="snap-center flex-shrink-0 w-[calc(100%-2rem)] md:w-auto rounded-[24px] overflow-hidden flex flex-col group"
-              style={{
-                background: 'linear-gradient(145deg, #fff8f5 0%, #ffede0 100%)',
-                border: '1px solid rgba(239,68,68,0.12)',
-                boxShadow: '0 2px 24px rgba(239,68,68,0.08), inset 0 1px 0 rgba(255,255,255,0.9)',
-              }}
-            >
-              <div className="px-6 md:px-8 pt-6 pb-5">
-                <div className="flex items-center gap-2 mb-2">
-                  <div className="w-px h-3" style={{ background: 'rgba(239,68,68,0.35)' }} />
-                  <span className="font-sans text-xs uppercase tracking-widest" style={{ color: 'rgba(180,40,20,0.55)' }}>01 · Thesis · 2025</span>
-                </div>
-                <h3 className="font-display text-4xl leading-tight text-stone-900">FireSafe</h3>
-                <p className="font-sans text-sm leading-relaxed mt-2 mb-4 text-stone-500">
-                  Thermal imaging wildfire detection with real-time mobile alerting for rural barangays.
-                </p>
-                <span onClick={() => setFiresafeOpen(true)} className="inline-flex items-center gap-1.5 font-sans text-sm font-medium cursor-pointer" style={{ color: 'rgba(200,50,20,0.85)' }}>
-                  View Details →
-                </span>
-              </div>
-
-              {/* Bottom: FireSafe logo on warm tinted bg */}
-              <div className="relative overflow-hidden mt-auto" style={{ height: '192px' }}>
-                <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, #ffede0 0%, #ffe4cc 100%)' }} />
-                <div className="absolute inset-0 flex items-center justify-center pb-10">
-                  <img
-                    src="/firesafe-logo.webp"
-                    alt="FireSafe"
-                    className="w-36 h-auto drop-shadow-xl group-hover:scale-105 transition-transform duration-500"
-                  />
-                </div>
-                <div className="absolute bottom-5 left-6 right-6 hidden md:flex flex-wrap gap-1.5">
-                  {firesafeTags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="font-sans text-xs px-2.5 py-1 rounded-full"
-                      style={{
-                        color: 'rgba(180,40,20,0.85)',
-                        backgroundColor: 'rgba(239,68,68,0.08)',
-                        border: '1px solid rgba(239,68,68,0.18)',
-                      }}
-                    >
-                      {tag}
+            {works.map((work, index) => (
+              <div
+                key={work.id}
+                className="snap-center flex-shrink-0 w-[calc(100%-2rem)] md:w-auto rounded-[24px] overflow-hidden flex flex-col group"
+                style={{
+                  background: work.cardBg,
+                  border: work.cardBorder,
+                  boxShadow: work.cardShadow,
+                }}
+              >
+                <div className="px-6 md:px-8 pt-6 pb-5">
+                  <div className="flex items-center gap-2 mb-2">
+                    <div className="w-px h-3" style={{ background: work.dividerColor }} />
+                    <span className="font-sans text-xs uppercase tracking-widest" style={{ color: work.labelColor }}>
+                      {String(index + 1).padStart(2, '0')} · {work.category} · {work.year}
                     </span>
-                  ))}
+                  </div>
+                  <h3 className="font-display text-4xl leading-tight text-stone-900">{work.title}</h3>
+                  <p className="font-sans text-sm leading-relaxed mt-2 mb-4 text-stone-500">
+                    {work.description}
+                  </p>
+                  <span
+                    onClick={() => setOpenWorkId(work.id)}
+                    className="inline-flex items-center gap-1.5 font-sans text-sm font-medium cursor-pointer"
+                    style={{ color: work.viewDetailsColor }}
+                  >
+                    View Details →
+                  </span>
+                </div>
+
+                <div className="relative overflow-hidden mt-auto" style={{ height: '192px' }}>
+                  <div className="absolute inset-0" style={{ background: work.bottomGradient }} />
+                  <div className="absolute inset-0 flex items-center justify-center pb-10">
+                    <img
+                      src={work.image}
+                      alt={work.imageAlt}
+                      className={work.imageClass}
+                    />
+                  </div>
+                  <div className="absolute bottom-5 left-6 right-6 hidden md:flex flex-wrap gap-1.5">
+                    {work.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="font-sans text-xs px-2.5 py-1 rounded-full"
+                        style={{
+                          color: work.tagColor,
+                          backgroundColor: work.tagBg,
+                          border: work.tagBorder,
+                        }}
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
-
-            {/* Gracey Logistics Services card */}
-            <div
-              className="snap-center flex-shrink-0 w-[calc(100%-2rem)] md:w-auto rounded-[24px] overflow-hidden flex flex-col group"
-              style={{
-                background: 'linear-gradient(145deg, #f5f8ff 0%, #edf4ff 100%)',
-                border: '1px solid rgba(59,130,246,0.12)',
-                boxShadow: '0 2px 24px rgba(59,130,246,0.06), inset 0 1px 0 rgba(255,255,255,0.9)',
-              }}
-            >
-              <div className="px-6 md:px-8 pt-6 pb-5">
-                <div className="flex items-center gap-2 mb-2">
-                  <div className="w-px h-3" style={{ background: 'rgba(59,130,246,0.35)' }} />
-                  <span className="font-sans text-xs uppercase tracking-widest" style={{ color: 'rgba(30,80,200,0.55)' }}>02 · Web Development · 2024</span>
-                </div>
-                <h3 className="font-display text-4xl leading-tight text-stone-900">Gracey Logistics</h3>
-                <p className="font-sans text-sm leading-relaxed mt-2 mb-4 text-stone-500">
-                  Built and designed a full freight transport website with React, TypeScript, and Vite — deployed live on Vercel.
-                </p>
-                <span onClick={() => setGraceyOpen(true)} className="inline-flex items-center gap-1.5 font-sans text-sm font-medium cursor-pointer" style={{ color: 'rgba(30,80,220,0.85)' }}>
-                  View Details →
-                </span>
-              </div>
-
-              {/* Bottom: Gracey logo on cool tinted bg */}
-              <div className="relative overflow-hidden mt-auto" style={{ height: '192px' }}>
-                <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, #edf4ff 0%, #e0ecff 100%)' }} />
-                <div className="absolute inset-0 flex items-center justify-center pb-10">
-                  <img
-                    src="/gracey-logo.webp"
-                    alt="Gracey Logistics Services"
-                    className="w-40 h-auto drop-shadow-xl group-hover:scale-105 transition-transform duration-500"
-                  />
-                </div>
-                <div className="absolute bottom-5 left-6 right-6 hidden md:flex flex-wrap gap-1.5">
-                  {graceyTags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="font-sans text-xs px-2.5 py-1 rounded-full"
-                      style={{
-                        color: 'rgba(30,80,220,0.85)',
-                        backgroundColor: 'rgba(59,130,246,0.08)',
-                        border: '1px solid rgba(59,130,246,0.18)',
-                      }}
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-
+            ))}
           </div>
 
           {/* Mobile: dot indicators */}
           <div className="flex justify-center items-center gap-2 pb-5 md:hidden">
-            {Array.from({ length: workCount }).map((_, i) => (
+            {works.map((_, i) => (
               <button
                 key={i}
                 onClick={() => scrollTo(i)}
@@ -217,8 +238,8 @@ export default function Works() {
         </div>
       </div>
 
-      {firesafeOpen && <FireSafeModal onClose={() => setFiresafeOpen(false)} />}
-      {graceyOpen && <GraceyLogisticsModal onClose={() => setGraceyOpen(false)} />}
+      {openWorkId === 'firesafe' && <FireSafeModal onClose={() => setOpenWorkId(null)} />}
+      {openWorkId === 'gracey' && <GraceyLogisticsModal onClose={() => setOpenWorkId(null)} />}
       {uiuxOpen && <UIUXModal onClose={() => setUiuxOpen(false)} />}
     </section>
   )
