@@ -135,7 +135,6 @@ export default function Works() {
 
             {/* Gracey Logistics Services card */}
             <div
-<<<<<<< HEAD
               className="rounded-[24px] overflow-hidden flex flex-col group"
               style={{
                 background: 'linear-gradient(145deg, #f5f8ff 0%, #edf4ff 100%)',
