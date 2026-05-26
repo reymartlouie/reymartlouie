@@ -55,7 +55,7 @@ export default function CenturionCard() {
   return (
     <>
     <div
-      className="h-full bento-lift rounded-[32px] relative overflow-hidden flex flex-col justify-between"
+      className="h-full rounded-[32px] relative overflow-hidden flex flex-col justify-between"
       style={{
         background: `
           linear-gradient(118deg,
