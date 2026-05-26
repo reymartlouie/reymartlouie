@@ -31,7 +31,7 @@ type Cert = {
 // Add new achievements here — sorted newest-first automatically
 const certs: Cert[] = [
   {
-    id: 'graduation',
+    id: 'graduation' as const,
     year: 2026,
     title: 'Graduation Diploma',
     issuer: 'University of St. La Salle',
@@ -45,7 +45,7 @@ const certs: Cert[] = [
     documentView: 'diploma',
   },
   {
-    id: 'internship',
+    id: 'internship' as const,
     year: 2024,
     title: 'Internship Certificate',
     issuer: 'Ubiquity Global Services',

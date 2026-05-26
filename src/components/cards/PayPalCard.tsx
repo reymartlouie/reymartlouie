@@ -6,13 +6,15 @@ declare global {
   interface Window { paypal?: any }
 }
 
-const PLAN_ID   = 'P-4GE25783A47486257NIBUGZQ'
-const CLIENT_ID = 'AcVZ6SWZR7p3g536HW08I_nNE37eShsGnuvDybsP4aRjtM8XWKHpi0wY3urTpzZ4LDgRlh0dP1MlRaa4'
-const SDK_SRC   = `https://www.paypal.com/sdk/js?client-id=${CLIENT_ID}&vault=true&intent=subscription`
+import { paypalTheme } from '@/lib/colors'
 
-const BLUE       = '#009cde'
-const WHITE_DIM  = 'rgba(255,255,255,0.45)'
-const WHITE_FAINT= 'rgba(255,255,255,0.15)'
+const PLAN_ID    = 'P-4GE25783A47486257NIBUGZQ'
+const CLIENT_ID  = 'AcVZ6SWZR7p3g536HW08I_nNE37eShsGnuvDybsP4aRjtM8XWKHpi0wY3urTpzZ4LDgRlh0dP1MlRaa4'
+const SDK_SRC    = `https://www.paypal.com/sdk/js?client-id=${CLIENT_ID}&vault=true&intent=subscription`
+
+const BLUE        = paypalTheme.blue
+const WHITE_DIM   = paypalTheme.whiteDim
+const WHITE_FAINT = paypalTheme.whiteFaint
 
 function GrooveRule({ mb = '1.25rem', mt = '0' }: { mb?: string; mt?: string }) {
   return (

@@ -1,13 +1,13 @@
 'use client'
 
-const SKILLS = ['TypeScript', 'React Native', 'Supabase', 'Next.js', 'React', 'Figma', 'Framer', 'Expo']
+import { cardMint } from '@/lib/colors'
 
-// Pulled from the teal-grid facade image
-const MINT       = 'rgba(167,220,195,0.80)'
-const MINT_DIM   = 'rgba(167,220,195,0.45)'
-const MINT_GLOW  = 'rgba(167,220,195,0.18)'
-const TAG_BG     = 'rgba(10,30,22,0.55)'
-const TAG_BORDER = 'rgba(167,220,195,0.22)'
+const SKILLS     = ['TypeScript', 'React Native', 'Supabase', 'Next.js', 'React', 'Figma', 'Framer', 'Expo']
+const MINT       = cardMint.base
+const MINT_DIM   = cardMint.dim
+const MINT_GLOW  = cardMint.glow
+const TAG_BG     = cardMint.tagBg
+const TAG_BORDER = cardMint.tagBorder
 
 export default function TechStackCard() {
   return (

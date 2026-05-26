@@ -33,7 +33,7 @@ type Work = {
 // Add new works here — sorted newest-first automatically
 const works: Work[] = [
   {
-    id: 'firesafe',
+    id: 'firesafe' as const,
     year: 2025,
     category: 'Thesis',
     title: 'FireSafe',
@@ -55,7 +55,7 @@ const works: Work[] = [
     tagBorder: '1px solid rgba(239,68,68,0.18)',
   },
   {
-    id: 'gracey',
+    id: 'gracey' as const,
     year: 2024,
     category: 'Web Development',
     title: 'Gracey Logistics',

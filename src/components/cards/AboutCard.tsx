@@ -1,9 +1,10 @@
 'use client'
 
-// Pulled from the blue-glow image
-const BLUE       = 'rgba(160,210,255,0.80)'
-const BLUE_DIM   = 'rgba(160,210,255,0.45)'
-const BLUE_GLOW  = 'rgba(160,210,255,0.18)'
+import { cardBlue } from '@/lib/colors'
+
+const BLUE      = cardBlue.base
+const BLUE_DIM  = cardBlue.dim
+const BLUE_GLOW = cardBlue.glow
 
 export default function AboutCard() {
   return (

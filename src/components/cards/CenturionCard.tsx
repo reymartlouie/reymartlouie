@@ -2,10 +2,11 @@
 
 import { useState } from 'react'
 import ResumeModal from '../ui/ResumeModal'
+import { cardGold } from '@/lib/colors'
 
-const GOLD      = '#c9a84c'
-const GOLD_DIM  = 'rgba(201,168,76,0.50)'
-const GOLD_HINT = 'rgba(201,168,76,0.12)'
+const GOLD      = cardGold.base
+const GOLD_DIM  = cardGold.dim
+const GOLD_HINT = cardGold.hint
 
 // ── Chip SVG ──────────────────────────────────────────────────────────────────
 function Chip() {
