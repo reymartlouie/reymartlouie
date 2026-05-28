@@ -79,7 +79,7 @@ export default function GraceyLogisticsModal({ onClose }: Props) {
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 flex-shrink-0" style={{ borderBottom: '1px solid rgba(59,130,246,0.10)' }}>
           <div>
-            <p className="font-sans text-xs uppercase tracking-widest mb-0.5" style={{ color: 'rgba(30,80,200,0.55)' }}>Web Development & Design · 2024</p>
+            <p className="font-sans text-xs uppercase tracking-widest mb-0.5" style={{ color: 'rgba(30,80,200,0.55)' }}>Web Development & Design </p>
             <h2 className="font-display text-xl text-stone-900">Gracey Logistics Services</h2>
           </div>
           <div className="flex items-center gap-3">
