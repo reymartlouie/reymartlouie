@@ -56,7 +56,7 @@ const works: Work[] = [
   },
   {
     id: 'gracey' as const,
-    year: 2024,
+    year: 2026,
     category: 'Web Development',
     title: 'Gracey Logistics',
     description: 'Built and designed a full freight transport website with React, TypeScript, and Vite — deployed live on Vercel.',
