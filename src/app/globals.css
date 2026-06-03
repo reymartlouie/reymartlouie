@@ -170,6 +170,14 @@ body {
 /* ───────────────────────────────────────── */
 /* ANIMATIONS */
 /* ───────────────────────────────────────── */
+@keyframes drawerSlideIn {
+  from { transform: translateX(-100%); opacity: 0; }
+  to   { transform: translateX(0);     opacity: 1; }
+}
+.drawer-slide-in {
+  animation: drawerSlideIn 280ms cubic-bezier(0.2, 0, 0, 1) both;
+}
+
 @keyframes revealUp {
   from { opacity: 0; transform: translateY(24px); }
   65%  { opacity: 1; transform: translateY(-5px); }
