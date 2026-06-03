@@ -332,7 +332,7 @@ function StatusBar() {
             left:                 16,
             width:                40,
             height:               40,
-            borderRadius:         12,
+            borderRadius:         '50%',
             background:           'rgba(28,28,30,0.72)',
             backdropFilter:       'blur(20px) saturate(160%)',
             WebkitBackdropFilter: 'blur(20px) saturate(160%)',
