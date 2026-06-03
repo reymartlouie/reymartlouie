@@ -151,7 +151,7 @@ function UserMenu({ onClose }: { onClose: () => void }) {
 
 // ── Mobile drawer ──────────────────────────────────────────────────────────────
 
-function MobileDrawer({ onClose, onResumeOpen }: { onClose: () => void; onResumeOpen: () => void }) {
+function MobileDrawer({ onClose, onResumeOpen, time, date }: { onClose: () => void; onResumeOpen: () => void; time: string; date: string }) {
   const [closing, setClosing] = useState(false)
 
   const handleClose = useCallback(() => {
@@ -233,6 +233,24 @@ function MobileDrawer({ onClose, onResumeOpen }: { onClose: () => void; onResume
             <span style={{ color: 'rgba(255,255,255,0.55)', flexShrink: 0 }}><IconFile /></span>
             <span className="font-sans" style={{ fontSize: 16 }}>Resume</span>
           </button>
+        </div>
+
+        {/* Status footer */}
+        <div
+          className="flex items-center justify-between px-5 py-3"
+          style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}
+        >
+          <div className="flex items-center gap-2.5" style={{ color: 'var(--bar-text)' }}>
+            <IconWifi />
+            <div className="flex items-center gap-1.5">
+              <IconBattery />
+              <span className="font-sans" style={{ fontSize: 11 }}>80%</span>
+            </div>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="font-sans" style={{ fontSize: 11, color: 'var(--bar-text)' }}>{date}</span>
+            <span className="font-sans tabular-nums" style={{ fontSize: 11, color: 'var(--bar-text-active)' }}>{time}</span>
+          </div>
         </div>
 
         {/* User profile */}
@@ -363,6 +381,8 @@ function StatusBar() {
           <MobileDrawer
             onClose={() => setMobileMenuOpen(false)}
             onResumeOpen={() => setResumeOpen(true)}
+            time={time}
+            date={date}
           />
         )}
 
