@@ -152,27 +152,38 @@ function UserMenu({ onClose }: { onClose: () => void }) {
 // ── Mobile drawer ──────────────────────────────────────────────────────────────
 
 function MobileDrawer({ onClose, onResumeOpen }: { onClose: () => void; onResumeOpen: () => void }) {
+  const [closing, setClosing] = useState(false)
+
+  const handleClose = useCallback(() => {
+    setClosing(true)
+    setTimeout(onClose, 260)
+  }, [onClose])
+
   useEffect(() => {
-    const handler = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose() }
+    const handler = (e: KeyboardEvent) => { if (e.key === 'Escape') handleClose() }
     document.addEventListener('keydown', handler)
     return () => document.removeEventListener('keydown', handler)
-  }, [onClose])
+  }, [handleClose])
 
   const scrollTo = (href: string, toTop?: boolean) => (e: React.MouseEvent) => {
     e.preventDefault()
     if (toTop) window.scrollTo({ top: 0, behavior: 'smooth' })
     else document.getElementById(href.slice(1))?.scrollIntoView({ behavior: 'smooth', block: 'center' })
-    onClose()
+    handleClose()
   }
 
   return (
     <>
       {/* Backdrop */}
-      <div className="fixed inset-0 z-40" style={{ background: 'rgba(0,0,0,0.55)' }} onClick={onClose} />
+      <div
+        className={`fixed inset-0 z-40 ${closing ? 'backdrop-fade-out' : 'backdrop-fade-in'}`}
+        style={{ background: 'rgba(0,0,0,0.55)' }}
+        onClick={handleClose}
+      />
 
       {/* Drawer */}
       <div
-        className="drawer-slide-in fixed inset-y-0 left-0 z-50 flex flex-col"
+        className={`${closing ? 'drawer-slide-out' : 'drawer-slide-in'} fixed inset-y-0 left-0 z-50 flex flex-col`}
         style={{
           width: '100%',
           background: '#000000',
@@ -186,7 +197,7 @@ function MobileDrawer({ onClose, onResumeOpen }: { onClose: () => void; onResume
             Reymart Louie
           </span>
           <button
-            onClick={onClose}
+            onClick={handleClose}
             aria-label="Close menu"
             className="flex items-center justify-center btn-spring"
             style={{
@@ -215,7 +226,7 @@ function MobileDrawer({ onClose, onResumeOpen }: { onClose: () => void; onResume
             </a>
           ))}
           <button
-            onClick={() => { onResumeOpen(); onClose() }}
+            onClick={() => { onResumeOpen(); handleClose() }}
             className="w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl active:bg-white/[0.06] transition-colors duration-100 bg-transparent text-left"
             style={{ color: 'rgba(255,255,255,0.85)' }}
           >
