@@ -328,8 +328,16 @@ function StatusBar() {
           aria-label="Open menu"
           className="fixed z-50 flex items-center justify-center"
           style={{
-            top:        'calc(env(safe-area-inset-top, 0px) + 16px)',
-            left:       16,
+            top:                  'calc(env(safe-area-inset-top, 0px) + 12px)',
+            left:                 16,
+            width:                40,
+            height:               40,
+            borderRadius:         12,
+            background:           'rgba(28,28,30,0.72)',
+            backdropFilter:       'blur(20px) saturate(160%)',
+            WebkitBackdropFilter: 'blur(20px) saturate(160%)',
+            border:               '1px solid rgba(255,255,255,0.12)',
+            boxShadow:            '0 4px 16px rgba(0,0,0,0.4), 0 1px 0 rgba(255,255,255,0.08) inset',
             opacity:    ready ? 1 : 0,
             transform:  ready ? 'scale(1)' : 'scale(0.8)',
             transition: ready
