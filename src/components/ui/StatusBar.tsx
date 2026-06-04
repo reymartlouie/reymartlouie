@@ -30,8 +30,62 @@ function Divider() {
 
 function HamburgerIcon() {
   return (
-    <svg width="18" height="12" viewBox="0 0 18 12" fill="none">
-      <path d="M1 1.5h16M1 6h16M1 10.5h16" stroke="rgba(255,255,255,0.85)" strokeWidth="1.6" strokeLinecap="round" />
+    <svg width="20" height="12" viewBox="0 0 20 12" fill="none">
+      <path d="M1 3h18M1 9h18" stroke="rgba(255,255,255,0.85)" strokeWidth="1.8" strokeLinecap="round" />
+    </svg>
+  )
+}
+
+function IconClose() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
+      <path d="M1 1l12 12M13 1L1 13" />
+    </svg>
+  )
+}
+
+function IconHome() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M3 9.5L10 3l7 6.5V17a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z" />
+      <path d="M7 18v-6h6v6" />
+    </svg>
+  )
+}
+
+function IconAward() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="10" cy="8" r="5" />
+      <path d="M6.8 12.8L5 18l5-2 5 2-1.8-5.2" />
+    </svg>
+  )
+}
+
+function IconBriefcase() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="2" y="6" width="16" height="12" rx="2" />
+      <path d="M6 6V4a2 2 0 012-2h4a2 2 0 012 2v2" />
+      <path d="M2 11h16" />
+    </svg>
+  )
+}
+
+function IconMail() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="2" y="4" width="16" height="13" rx="2" />
+      <path d="m2 7 8 5.5L18 7" />
+    </svg>
+  )
+}
+
+function IconFile() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M4 2h8l4 4v12a1 1 0 01-1 1H5a1 1 0 01-1-1V3a1 1 0 011-1z" />
+      <path d="M12 2v4h4M7 9h6M7 12h6M7 15h4" />
     </svg>
   )
 }
@@ -43,10 +97,10 @@ const SECTIONS = [
 ]
 
 const MOBILE_NAV = [
-  { label: 'Canvas',       href: '#about',         toTop: true  },
-  { label: 'Achievements', href: '#certifications', toTop: false },
-  { label: 'Works',        href: '#work',           toTop: false },
-  { label: 'Hire Me',      href: '#contact',        toTop: false },
+  { label: 'Canvas',       href: '#about',         toTop: true,  Icon: IconHome      },
+  { label: 'Achievements', href: '#certifications', toTop: false, Icon: IconAward     },
+  { label: 'Works',        href: '#work',           toTop: false, Icon: IconBriefcase },
+  { label: 'Hire Me',      href: '#contact',        toTop: false, Icon: IconMail      },
 ]
 
 // ── RL user menu ───────────────────────────────────────────────────────────────
@@ -95,125 +149,125 @@ function UserMenu({ onClose }: { onClose: () => void }) {
   )
 }
 
-// ── Mobile dropdown menu ───────────────────────────────────────────────────────
+// ── Mobile drawer ──────────────────────────────────────────────────────────────
 
-function MobileMenu({
-  time,
-  date,
-  onClose,
-  onResumeOpen,
-  toggleRef,
-}: {
-  time: string
-  date: string
-  onClose: () => void
-  onResumeOpen: () => void
-  toggleRef: React.RefObject<HTMLButtonElement>
-}) {
-  const ref = useRef<HTMLDivElement>(null)
+function MobileDrawer({ onClose, onResumeOpen, time, date }: { onClose: () => void; onResumeOpen: () => void; time: string; date: string }) {
+  const [closing, setClosing] = useState(false)
+
+  const handleClose = useCallback(() => {
+    setClosing(true)
+    setTimeout(onClose, 260)
+  }, [onClose])
 
   useEffect(() => {
-    const handler = (e: MouseEvent | TouchEvent) => {
-      if (toggleRef.current?.contains(e.target as Node)) return
-      if (ref.current && !ref.current.contains(e.target as Node)) onClose()
-    }
-    const keyHandler = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose() }
-    document.addEventListener('mousedown', handler)
-    document.addEventListener('touchstart', handler)
-    document.addEventListener('keydown', keyHandler)
-    return () => {
-      document.removeEventListener('mousedown', handler)
-      document.removeEventListener('touchstart', handler)
-      document.removeEventListener('keydown', keyHandler)
-    }
-  }, [onClose])
+    const handler = (e: KeyboardEvent) => { if (e.key === 'Escape') handleClose() }
+    document.addEventListener('keydown', handler)
+    return () => document.removeEventListener('keydown', handler)
+  }, [handleClose])
 
   const scrollTo = (href: string, toTop?: boolean) => (e: React.MouseEvent) => {
     e.preventDefault()
-    if (toTop) {
-      window.scrollTo({ top: 0, behavior: 'smooth' })
-    } else {
-      const el = document.getElementById(href.slice(1))
-      el?.scrollIntoView({ behavior: 'smooth', block: 'center' })
-    }
-    onClose()
+    if (toTop) window.scrollTo({ top: 0, behavior: 'smooth' })
+    else document.getElementById(href.slice(1))?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    handleClose()
   }
 
   return (
-    <div
-      ref={ref}
-      className="fixed z-40 overflow-hidden"
-      style={{
-        top:                  'calc(env(safe-area-inset-top, 0px) + 62px)',
-        right:                16,
-        width:                264,
-        borderRadius:         18,
-        background:           'rgba(28,28,30,0.90)',
-        backdropFilter:       'blur(28px) saturate(160%)',
-        WebkitBackdropFilter: 'blur(28px) saturate(160%)',
-        border:               '1px solid rgba(255,255,255,0.10)',
-        boxShadow:            '0 16px 48px rgba(0,0,0,0.6), 0 1px 0 rgba(255,255,255,0.07) inset',
-      }}
-    >
-      {/* User card */}
+    <>
+      {/* Backdrop */}
       <div
-        className="flex items-center gap-3 px-4 py-4"
-        style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}
-      >
-        <div
-          className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0"
-          style={{ background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.15)' }}
-        >
-          <span className="font-display text-white/90 text-sm">RL</span>
-        </div>
-        <div>
-          <p className="font-display text-white/90 text-sm leading-tight">Reymart Louie L. Capapas</p>
-          <p className="font-sans text-white/35 text-xs mt-0.5">Computer Engineer</p>
-        </div>
-      </div>
+        className={`fixed inset-0 z-40 ${closing ? 'backdrop-fade-out' : 'backdrop-fade-in'}`}
+        style={{ background: 'rgba(0,0,0,0.55)' }}
+        onClick={handleClose}
+      />
 
-      {/* Nav links */}
-      <div className="py-1">
-        {MOBILE_NAV.map(({ label, href, toTop }) => (
-          <a
-            key={label}
-            href={href}
-            onClick={scrollTo(href, toTop)}
-            className="flex items-center justify-between px-4 py-3 active:bg-white/[0.06] transition-colors duration-100"
-            style={{ fontSize: 14, color: 'var(--bar-text-active)', textDecoration: 'none' }}
+      {/* Drawer */}
+      <div
+        className={`${closing ? 'drawer-slide-out' : 'drawer-slide-in'} fixed inset-y-0 left-0 z-50 flex flex-col`}
+        style={{
+          width: '100%',
+          background: '#000000',
+          paddingTop: 'env(safe-area-inset-top, 0px)',
+          paddingBottom: 'env(safe-area-inset-bottom, 16px)',
+        }}
+      >
+        {/* Header */}
+        <div className="flex items-center justify-between px-5 py-4">
+          <span className="font-display text-white" style={{ fontSize: 22, letterSpacing: '-0.02em' }}>
+            SECTIONS
+          </span>
+          <button
+            onClick={handleClose}
+            aria-label="Close menu"
+            className="flex items-center justify-center btn-spring"
+            style={{
+              width: 36, height: 36, borderRadius: '50%',
+              background: 'rgba(255,255,255,0.10)',
+              border: '1px solid rgba(255,255,255,0.12)',
+              color: 'rgba(255,255,255,0.75)',
+            }}
           >
-            <span className="font-sans">{label}</span>
-            <span style={{ color: 'rgba(255,255,255,0.25)', fontSize: 16, lineHeight: 1 }}>›</span>
-          </a>
-        ))}
-        <button
-          onClick={() => { onResumeOpen(); onClose() }}
-          className="w-full flex items-center justify-between px-4 py-3 active:bg-white/[0.06] transition-colors duration-100 bg-transparent"
-          style={{ fontSize: 14, color: 'var(--bar-text-active)' }}
-        >
-          <span className="font-sans">Resume</span>
-          <span style={{ color: 'rgba(255,255,255,0.25)', fontSize: 16, lineHeight: 1 }}>›</span>
-        </button>
-      </div>
+            <IconClose />
+          </button>
+        </div>
 
-      {/* Status footer */}
-      <div
-        className="flex items-center justify-between px-4 py-3"
-        style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}
-      >
-        <div className="flex items-center gap-2.5" style={{ color: 'var(--bar-text)' }}>
-          <IconWifi />
-          <div className="flex items-center gap-1.5">
-            <IconBattery />
-            <span className="font-sans" style={{ fontSize: 11 }}>80%</span>
+        {/* Nav items */}
+        <div className="flex-1 overflow-y-auto px-3 py-2">
+          {MOBILE_NAV.map(({ label, href, toTop, Icon }) => (
+            <a
+              key={label}
+              href={href}
+              onClick={scrollTo(href, toTop)}
+              className="flex items-center gap-4 px-4 py-3.5 rounded-2xl active:bg-white/[0.06] transition-colors duration-100"
+              style={{ color: 'rgba(255,255,255,0.85)', textDecoration: 'none' }}
+            >
+              <span style={{ color: 'rgba(255,255,255,0.55)', flexShrink: 0 }}><Icon /></span>
+              <span className="font-sans" style={{ fontSize: 16 }}>{label}</span>
+            </a>
+          ))}
+          <button
+            onClick={() => { onResumeOpen(); handleClose() }}
+            className="w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl active:bg-white/[0.06] transition-colors duration-100 bg-transparent text-left"
+            style={{ color: 'rgba(255,255,255,0.85)' }}
+          >
+            <span style={{ color: 'rgba(255,255,255,0.55)', flexShrink: 0 }}><IconFile /></span>
+            <span className="font-sans" style={{ fontSize: 16 }}>Resume</span>
+          </button>
+        </div>
+
+        {/* Status footer */}
+        <div
+          className="flex items-center justify-between px-5 py-3"
+          style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}
+        >
+          <div className="flex items-center gap-2.5" style={{ color: 'var(--bar-text)' }}>
+            <IconWifi />
+            <div className="flex items-center gap-1.5">
+              <IconBattery />
+              <span className="font-sans" style={{ fontSize: 11 }}>80%</span>
+            </div>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="font-sans" style={{ fontSize: 11, color: 'var(--bar-text)' }}>{date}</span>
+            <span className="font-sans tabular-nums" style={{ fontSize: 11, color: 'var(--bar-text-active)' }}>{time}</span>
           </div>
         </div>
-        <div className="flex items-center gap-2">
-          <span className="font-sans" style={{ fontSize: 11, color: 'var(--bar-text)' }}>{date}</span>
-          <span className="font-sans tabular-nums" style={{ fontSize: 11, color: 'var(--bar-text-active)' }}>{time}</span>
+
+        {/* User profile */}
+        <div className="flex items-center gap-3 px-5 py-4" style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+          <div
+            className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0"
+            style={{ background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.20)' }}
+          >
+            <span className="font-display text-white/90 text-sm">RL</span>
+          </div>
+          <div className="flex-1 min-w-0">
+            <p className="font-display text-white/90 text-sm leading-tight truncate">Reymart Louie L. Capapas</p>
+            <p className="font-sans text-white/40 text-xs mt-0.5">Computer Engineer</p>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 
@@ -228,7 +282,6 @@ function StatusBar() {
   const [resumeOpen,     setResumeOpen]     = useState(false)
   const [isMobile,       setIsMobile]       = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const menuBtnRef = useRef<HTMLButtonElement>(null)
 
   const scrollToCenter = useCallback((href: string) => (e: React.MouseEvent) => {
     if (!href.startsWith('#')) return
@@ -300,15 +353,15 @@ function StatusBar() {
     return (
       <>
         <button
-          ref={menuBtnRef}
           onClick={() => setMobileMenuOpen(v => !v)}
+          aria-label="Open menu"
           className="fixed z-50 flex items-center justify-center"
           style={{
             top:                  'calc(env(safe-area-inset-top, 0px) + 12px)',
-            right:                16,
+            left:                 16,
             width:                40,
             height:               40,
-            borderRadius:         12,
+            borderRadius:         '50%',
             background:           'rgba(28,28,30,0.72)',
             backdropFilter:       'blur(20px) saturate(160%)',
             WebkitBackdropFilter: 'blur(20px) saturate(160%)',
@@ -325,12 +378,11 @@ function StatusBar() {
         </button>
 
         {mobileMenuOpen && (
-          <MobileMenu
-            time={time}
-            date={date}
+          <MobileDrawer
             onClose={() => setMobileMenuOpen(false)}
             onResumeOpen={() => setResumeOpen(true)}
-            toggleRef={menuBtnRef}
+            time={time}
+            date={date}
           />
         )}
 
