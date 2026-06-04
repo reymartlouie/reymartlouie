@@ -194,7 +194,7 @@ function MobileDrawer({ onClose, onResumeOpen, time, date }: { onClose: () => vo
         {/* Header */}
         <div className="flex items-center justify-between px-5 py-4">
           <span className="font-display text-white" style={{ fontSize: 22, letterSpacing: '-0.02em' }}>
-            Reymart Louie
+            SECTIONS
           </span>
           <button
             onClick={handleClose}
