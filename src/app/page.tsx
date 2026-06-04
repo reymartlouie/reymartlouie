@@ -8,7 +8,7 @@ import StatusBar from '@/components/ui/StatusBar'
 function SectionBreak({ label }: { label: string }) {
   return (
     <div className="flex items-center gap-4 py-2">
-      <div className="hidden md:block h-px flex-1 bg-white/[0.06]" />
+      <div className="h-px flex-1 bg-white/[0.06]" />
       <span className="font-sans text-[13px] font-semibold text-white/[0.55] md:text-[10px] md:font-normal md:text-white/[0.22] uppercase tracking-[0.06em] md:tracking-[0.22em]">
         {label}
       </span>
