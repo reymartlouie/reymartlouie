@@ -142,7 +142,7 @@ export default function Hero() {
       </BentoCanvas>
 
       {/* Action row */}
-      <div className="flex items-center gap-3 flex-wrap">
+      <div className="flex items-center justify-end lg:justify-start gap-3 flex-wrap">
         <button
           onClick={openCreate}
           disabled={rateLimited || submitted}
