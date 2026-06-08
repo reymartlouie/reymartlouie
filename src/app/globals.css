@@ -111,30 +111,10 @@
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  /* No overflow:hidden — image bleeds under safe areas intentionally */
-  will-change: transform;
-  transform: translateZ(0);
-}
-
-.layout-overlay img {
-  position: absolute;
-  /* Bleed the image under Safari's status bar and liquid glass tab bar */
-  top: calc(-1 * env(safe-area-inset-top, 0px));
-  bottom: calc(-1 * env(safe-area-inset-bottom, 0px));
-  left: 0;
-  right: 0;
-  width: 100%;
-  height: calc(100% + env(safe-area-inset-top, 0px) + env(safe-area-inset-bottom, 0px));
-  object-fit: cover;
-  object-position: center center;
-}
-
-@media (max-width: 1023px) {
-  .layout-overlay img {
-    /* Pin the top of the image on portrait phones so the blue-tinted sphere
-       stays anchored regardless of aspect ratio (SE → Pro Max → tall Android) */
-    object-position: center top;
-  }
+  background-image: url('/bg.webp');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
 }
 
 /* ───────────────────────────────────────── */
@@ -146,7 +126,6 @@
   margin: 0;
 }
 
-/* Black fallback prevents white flash on iOS overscroll */
 html {
   height: 100%;
   scroll-behavior: smooth;
