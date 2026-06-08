@@ -151,7 +151,7 @@ export default function Hero() {
                      hover:bg-white/[0.14] transition-colors
                      disabled:opacity-40 disabled:cursor-not-allowed"
         >
-          {submitted ? 'Note submitted · pending approval' : rateLimited ? 'Note limit reached · come back tomorrow' : '+ Leave a note'}
+          {submitted ? 'Note submitted · pending approval' : rateLimited ? 'Note limit reached · come back tomorrow' : 'Leave a note +'}
         </button>
 
         <button
