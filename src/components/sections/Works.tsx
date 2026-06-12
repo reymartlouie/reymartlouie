@@ -166,16 +166,15 @@ export default function Works() {
           </div>
 
           {/* Cards — horizontal scroll carousel */}
-          <div className="overflow-x-hidden mx-4">
           <div
             ref={scrollRef}
             onScroll={onCarouselScroll}
-            className="no-scrollbar flex overflow-x-auto snap-x snap-mandatory gap-3 pb-4"
+            className="no-scrollbar flex overflow-x-auto snap-x snap-mandatory px-4 gap-4 pb-4"
           >
             {works.map((work, index) => (
               <div
                 key={work.id}
-                className="snap-start flex-shrink-0 w-[85%] h-[360px] rounded-[24px] overflow-hidden flex flex-col group"
+                className="snap-center flex-shrink-0 w-[calc(100%-2rem)] h-[360px] rounded-[24px] overflow-hidden flex flex-col group"
                 style={{
                   background: work.cardBg,
                   border: work.cardBorder,
@@ -229,7 +228,6 @@ export default function Works() {
                 </div>
               </div>
             ))}
-          </div>
           </div>
 
           {/* Dot indicators */}
