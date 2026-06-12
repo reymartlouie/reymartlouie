@@ -31,30 +31,8 @@ type Work = {
   tagBorder: string
 }
 
-// Add new works here — sorted newest-first automatically
+// Add new works here — newest first
 const works: Work[] = [
-  {
-    id: 'firesafe' as const,
-    year: 2025,
-    category: 'Thesis',
-    title: 'FireSafe',
-    description: 'Thermal imaging wildfire detection with real-time mobile alerting for rural barangays.',
-    cardBg: 'linear-gradient(145deg, #fff8f5 0%, #ffede0 100%)',
-    cardBorder: '1px solid rgba(239,68,68,0.12)',
-    cardShadow: '0 2px 24px rgba(239,68,68,0.08), inset 0 1px 0 rgba(255,255,255,0.9)',
-    dividerColor: 'rgba(239,68,68,0.35)',
-    labelColor: 'rgba(180,40,20,0.55)',
-    viewDetailsColor: 'rgba(200,50,20,0.85)',
-    bottomBg: 'linear-gradient(to bottom, #ffede0 0%, #ffe4cc 100%)',
-    bottomGradient: 'linear-gradient(to bottom, #ffede0 0%, #ffe4cc 100%)',
-    image: '/firesafe-logo.webp',
-    imageAlt: 'FireSafe',
-    imageClass: 'w-36 h-auto drop-shadow-xl group-hover:scale-105 transition-transform duration-500',
-    tags: ['React Native', 'Raspberry Pi Zero 2 W', 'Supabase', 'TinyML', 'Python', 'Arduino'],
-    tagColor: 'rgba(180,40,20,0.85)',
-    tagBg: 'rgba(239,68,68,0.08)',
-    tagBorder: '1px solid rgba(239,68,68,0.18)',
-  },
   {
     id: 'brewed' as const,
     year: 2025,
@@ -78,6 +56,28 @@ const works: Work[] = [
     tagBorder: '1px solid rgba(180,120,40,0.18)',
   },
   {
+    id: 'firesafe' as const,
+    year: 2025,
+    category: 'Thesis',
+    title: 'FireSafe',
+    description: 'Thermal imaging wildfire detection with real-time mobile alerting for rural barangays.',
+    cardBg: 'linear-gradient(145deg, #fff8f5 0%, #ffede0 100%)',
+    cardBorder: '1px solid rgba(239,68,68,0.12)',
+    cardShadow: '0 2px 24px rgba(239,68,68,0.08), inset 0 1px 0 rgba(255,255,255,0.9)',
+    dividerColor: 'rgba(239,68,68,0.35)',
+    labelColor: 'rgba(180,40,20,0.55)',
+    viewDetailsColor: 'rgba(200,50,20,0.85)',
+    bottomBg: 'linear-gradient(to bottom, #ffede0 0%, #ffe4cc 100%)',
+    bottomGradient: 'linear-gradient(to bottom, #ffede0 0%, #ffe4cc 100%)',
+    image: '/firesafe-logo.webp',
+    imageAlt: 'FireSafe',
+    imageClass: 'w-36 h-auto drop-shadow-xl group-hover:scale-105 transition-transform duration-500',
+    tags: ['React Native', 'Raspberry Pi Zero 2 W', 'Supabase', 'TinyML', 'Python', 'Arduino'],
+    tagColor: 'rgba(180,40,20,0.85)',
+    tagBg: 'rgba(239,68,68,0.08)',
+    tagBorder: '1px solid rgba(239,68,68,0.18)',
+  },
+  {
     id: 'gracey' as const,
     year: 2026,
     category: 'Web Development',
@@ -99,7 +99,7 @@ const works: Work[] = [
     tagBg: 'rgba(59,130,246,0.08)',
     tagBorder: '1px solid rgba(59,130,246,0.18)',
   },
-].sort((a, b) => b.year - a.year)
+]
 
 export default function Works() {
   const [openWorkId, setOpenWorkId] = useState<WorkId | null>(null)
