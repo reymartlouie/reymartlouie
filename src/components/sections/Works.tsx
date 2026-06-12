@@ -3,9 +3,10 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import FireSafeModal from '../ui/FireSafeModal'
 import GraceyLogisticsModal from '../ui/GraceyLogisticsModal'
+import BrewedModal from '../ui/BrewedModal'
 import UIUXModal from '../ui/UIUXModal'
 
-type WorkId = 'firesafe' | 'gracey'
+type WorkId = 'firesafe' | 'gracey' | 'brewed'
 
 type Work = {
   id: WorkId
@@ -53,6 +54,28 @@ const works: Work[] = [
     tagColor: 'rgba(180,40,20,0.85)',
     tagBg: 'rgba(239,68,68,0.08)',
     tagBorder: '1px solid rgba(239,68,68,0.18)',
+  },
+  {
+    id: 'brewed' as const,
+    year: 2025,
+    category: 'Web Development',
+    title: 'Brewed',
+    description: 'Coffee house landing page with an interactive menu, promo modals, and a streamlined order flow.',
+    cardBg: 'linear-gradient(145deg, #fdf8f0 0%, #fdefd8 100%)',
+    cardBorder: '1px solid rgba(180,120,40,0.12)',
+    cardShadow: '0 2px 24px rgba(180,120,40,0.08), inset 0 1px 0 rgba(255,255,255,0.9)',
+    dividerColor: 'rgba(180,120,40,0.35)',
+    labelColor: 'rgba(120,70,20,0.55)',
+    viewDetailsColor: 'rgba(140,80,20,0.85)',
+    bottomBg: 'linear-gradient(to bottom, #fdefd8 0%, #f8e0b8 100%)',
+    bottomGradient: 'linear-gradient(to bottom, #fdefd8 0%, #f8e0b8 100%)',
+    image: '/brewed-logo.svg',
+    imageAlt: 'Brewed',
+    imageClass: 'w-20 h-20 drop-shadow-xl group-hover:scale-105 transition-transform duration-500',
+    tags: ['React', 'TypeScript', 'Tailwind CSS', 'Vite', 'Vercel'],
+    tagColor: 'rgba(120,70,20,0.85)',
+    tagBg: 'rgba(180,120,40,0.08)',
+    tagBorder: '1px solid rgba(180,120,40,0.18)',
   },
   {
     id: 'gracey' as const,
@@ -143,15 +166,16 @@ export default function Works() {
           </div>
 
           {/* Cards — mobile: snap carousel / desktop: original grid */}
+          <div className="overflow-x-hidden mx-4 md:overflow-visible md:mx-0">
           <div
             ref={scrollRef}
             onScroll={onCarouselScroll}
-            className="no-scrollbar flex overflow-x-auto snap-x snap-mandatory px-4 gap-4 pb-4 md:grid md:grid-cols-1 md:overflow-visible md:snap-none md:p-4 lg:p-5 lg:grid-cols-2"
+            className="no-scrollbar flex overflow-x-auto snap-x snap-mandatory gap-3 pb-4 md:grid md:grid-cols-1 md:overflow-visible md:snap-none md:p-4 lg:p-5 lg:grid-cols-2"
           >
             {works.map((work, index) => (
               <div
                 key={work.id}
-                className="snap-center flex-shrink-0 w-[calc(100%-2rem)] md:w-auto rounded-[24px] overflow-hidden flex flex-col group"
+                className="snap-start flex-shrink-0 w-[85%] md:w-auto h-[360px] md:h-auto rounded-[24px] overflow-hidden flex flex-col group"
                 style={{
                   background: work.cardBg,
                   border: work.cardBorder,
@@ -206,6 +230,7 @@ export default function Works() {
               </div>
             ))}
           </div>
+          </div>
 
           {/* Mobile: dot indicators */}
           <div className="flex justify-center items-center gap-2 pb-5 md:hidden">
@@ -240,6 +265,7 @@ export default function Works() {
 
       {openWorkId === 'firesafe' && <FireSafeModal onClose={() => setOpenWorkId(null)} />}
       {openWorkId === 'gracey' && <GraceyLogisticsModal onClose={() => setOpenWorkId(null)} />}
+      {openWorkId === 'brewed' && <BrewedModal onClose={() => setOpenWorkId(null)} />}
       {uiuxOpen && <UIUXModal onClose={() => setUiuxOpen(false)} />}
     </section>
   )
