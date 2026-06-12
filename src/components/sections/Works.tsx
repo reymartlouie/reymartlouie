@@ -246,18 +246,6 @@ export default function Works() {
             ))}
           </div>
 
-          {/* UI/UX button — always visible */}
-          <div className="flex justify-end px-6 pb-6">
-            <button
-              onClick={() => setUiuxOpen(true)}
-              className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-stone-200 hover:bg-stone-300 transition-colors duration-150"
-            >
-              <span className="font-sans text-sm text-stone-600">UI/UX</span>
-              <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-stone-500">
-                <path d="M2.5 11.5L11.5 2.5M11.5 2.5H5.5M11.5 2.5V8.5" />
-              </svg>
-            </button>
-          </div>
         </div>
       </div>
 
