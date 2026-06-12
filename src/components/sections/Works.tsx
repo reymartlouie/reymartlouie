@@ -35,7 +35,7 @@ type Work = {
 const works: Work[] = [
   {
     id: 'brewed' as const,
-    year: 2025,
+    year: 2026,
     category: 'Web Development',
     title: 'Brewed',
     description: 'Coffee house landing page with an interactive menu, promo modals, and a streamlined order flow.',
@@ -54,28 +54,6 @@ const works: Work[] = [
     tagColor: 'rgba(120,70,20,0.85)',
     tagBg: 'rgba(180,120,40,0.08)',
     tagBorder: '1px solid rgba(180,120,40,0.18)',
-  },
-  {
-    id: 'firesafe' as const,
-    year: 2025,
-    category: 'Thesis',
-    title: 'FireSafe',
-    description: 'Thermal imaging wildfire detection with real-time mobile alerting for rural barangays.',
-    cardBg: 'linear-gradient(145deg, #fff8f5 0%, #ffede0 100%)',
-    cardBorder: '1px solid rgba(239,68,68,0.12)',
-    cardShadow: '0 2px 24px rgba(239,68,68,0.08), inset 0 1px 0 rgba(255,255,255,0.9)',
-    dividerColor: 'rgba(239,68,68,0.35)',
-    labelColor: 'rgba(180,40,20,0.55)',
-    viewDetailsColor: 'rgba(200,50,20,0.85)',
-    bottomBg: 'linear-gradient(to bottom, #ffede0 0%, #ffe4cc 100%)',
-    bottomGradient: 'linear-gradient(to bottom, #ffede0 0%, #ffe4cc 100%)',
-    image: '/firesafe-logo.webp',
-    imageAlt: 'FireSafe',
-    imageClass: 'w-36 h-auto drop-shadow-xl group-hover:scale-105 transition-transform duration-500',
-    tags: ['React Native', 'Raspberry Pi Zero 2 W', 'Supabase', 'TinyML', 'Python', 'Arduino'],
-    tagColor: 'rgba(180,40,20,0.85)',
-    tagBg: 'rgba(239,68,68,0.08)',
-    tagBorder: '1px solid rgba(239,68,68,0.18)',
   },
   {
     id: 'gracey' as const,
@@ -98,6 +76,28 @@ const works: Work[] = [
     tagColor: 'rgba(30,80,220,0.85)',
     tagBg: 'rgba(59,130,246,0.08)',
     tagBorder: '1px solid rgba(59,130,246,0.18)',
+  },
+  {
+    id: 'firesafe' as const,
+    year: 2025,
+    category: 'Thesis',
+    title: 'FireSafe',
+    description: 'Thermal imaging wildfire detection with real-time mobile alerting for rural barangays.',
+    cardBg: 'linear-gradient(145deg, #fff8f5 0%, #ffede0 100%)',
+    cardBorder: '1px solid rgba(239,68,68,0.12)',
+    cardShadow: '0 2px 24px rgba(239,68,68,0.08), inset 0 1px 0 rgba(255,255,255,0.9)',
+    dividerColor: 'rgba(239,68,68,0.35)',
+    labelColor: 'rgba(180,40,20,0.55)',
+    viewDetailsColor: 'rgba(200,50,20,0.85)',
+    bottomBg: 'linear-gradient(to bottom, #ffede0 0%, #ffe4cc 100%)',
+    bottomGradient: 'linear-gradient(to bottom, #ffede0 0%, #ffe4cc 100%)',
+    image: '/firesafe-logo.webp',
+    imageAlt: 'FireSafe',
+    imageClass: 'w-36 h-auto drop-shadow-xl group-hover:scale-105 transition-transform duration-500',
+    tags: ['React Native', 'Raspberry Pi Zero 2 W', 'Supabase', 'TinyML', 'Python', 'Arduino'],
+    tagColor: 'rgba(180,40,20,0.85)',
+    tagBg: 'rgba(239,68,68,0.08)',
+    tagBorder: '1px solid rgba(239,68,68,0.18)',
   },
 ]
 
@@ -189,7 +189,7 @@ export default function Works() {
                   <div className="flex items-center gap-2 mb-2">
                     <div className="w-px h-3" style={{ background: work.dividerColor }} />
                     <span className="font-sans text-xs uppercase tracking-widest" style={{ color: work.labelColor }}>
-                      {String(index + 1).padStart(2, '0')} · {work.category} · {work.year}
+                      {String(works.length - index).padStart(2, '0')} · {work.category} · {work.year}
                     </span>
                   </div>
                   <h3 className="font-display text-4xl leading-tight text-stone-900">{work.title}</h3>
