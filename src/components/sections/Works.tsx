@@ -3,16 +3,19 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import FireSafeModal from '../ui/FireSafeModal'
 import GraceyLogisticsModal from '../ui/GraceyLogisticsModal'
+import BrewedModal from '../ui/BrewedModal'
 import UIUXModal from '../ui/UIUXModal'
 
 const firesafeTags = ['React Native', 'Raspberry Pi Zero 2 W', 'Supabase', 'TinyML', 'Python', 'Arduino']
 const graceyTags = ['React', 'TypeScript', 'Vite', 'Figma', 'Vercel']
+const brewedTags = ['React', 'TypeScript', 'Tailwind CSS', 'Vite', 'Vercel']
 
-const workCount: number = 2
+const workCount: number = 3
 
 export default function Works() {
   const [firesafeOpen, setFiresafeOpen] = useState(false)
   const [graceyOpen, setGraceyOpen] = useState(false)
+  const [brewedOpen, setBrewedOpen] = useState(false)
   const [activeIndex, setActiveIndex] = useState(0)
   const [uiuxOpen, setUiuxOpen] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
@@ -76,15 +79,78 @@ export default function Works() {
           </div>
 
           {/* Cards — mobile: snap carousel / desktop: original grid */}
+          <div className="overflow-x-hidden mx-4 md:overflow-visible md:mx-0">
           <div
             ref={scrollRef}
             onScroll={onCarouselScroll}
-            className="no-scrollbar flex overflow-x-auto snap-x snap-mandatory px-4 gap-4 pb-4 md:grid md:grid-cols-1 md:overflow-visible md:snap-none md:p-4 lg:p-5 lg:grid-cols-2"
+            className="no-scrollbar flex overflow-x-auto snap-x snap-mandatory gap-3 pb-4 md:grid md:grid-cols-1 md:overflow-visible md:snap-none md:p-4 lg:p-5 lg:grid-cols-2"
           >
+
+            {/* Brewed card */}
+            <div
+              className="snap-start flex-shrink-0 w-[85%] md:w-auto h-[360px] md:h-auto rounded-[24px] overflow-hidden flex flex-col group"
+              style={{
+                background: 'linear-gradient(145deg, #fdf8f0 0%, #fdefd8 100%)',
+                border: '1px solid rgba(180,120,40,0.12)',
+                boxShadow: '0 2px 24px rgba(180,120,40,0.08), inset 0 1px 0 rgba(255,255,255,0.9)',
+              }}
+            >
+              <div className="px-6 md:px-8 pt-6 pb-5">
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="w-px h-3" style={{ background: 'rgba(180,120,40,0.35)' }} />
+                  <span className="font-sans text-xs uppercase tracking-widest" style={{ color: 'rgba(120,70,20,0.55)' }}>01 · Web Development · 2025</span>
+                </div>
+                <h3 className="font-display text-4xl leading-tight text-stone-900">Brewed</h3>
+                <p className="font-sans text-sm leading-relaxed mt-2 mb-4 text-stone-500">
+                  Coffee house landing page with an interactive menu, promo modals, and a streamlined order flow.
+                </p>
+                <span onClick={() => setBrewedOpen(true)} className="inline-flex items-center gap-1.5 font-sans text-sm font-medium cursor-pointer" style={{ color: 'rgba(140,80,20,0.85)' }}>
+                  View Details →
+                </span>
+              </div>
+
+              {/* Bottom: coffee cup icon on warm tinted bg */}
+              <div className="relative overflow-hidden mt-auto" style={{ height: '192px' }}>
+                <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, #fdefd8 0%, #f8e0b8 100%)' }} />
+                <div className="absolute inset-0 flex items-center justify-center pb-10">
+                  <svg
+                    viewBox="0 0 512 512"
+                    className="w-20 h-20 drop-shadow-xl group-hover:scale-105 transition-transform duration-500"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <rect width="512" height="512" rx="112" fill="#331f11" />
+                    <ellipse cx="256" cy="310" rx="110" ry="16" fill="rgba(0,0,0,0.15)" />
+                    <rect x="146" y="190" width="220" height="140" rx="30" fill="#fef9f2" />
+                    <ellipse cx="256" cy="222" rx="80" ry="22" fill="#bd9c88" />
+                    <path d="M366 240 Q420 240 420 280 Q420 320 366 320" stroke="#fef9f2" strokeWidth="18" strokeLinecap="round" fill="none" />
+                    <rect x="146" y="322" width="220" height="16" rx="8" fill="#fef9f2" />
+                    <path d="M220 178 Q224 158 220 140" stroke="#f6dfc0" strokeWidth="8" strokeLinecap="round" fill="none" />
+                    <path d="M256 172 Q260 148 256 128" stroke="#f6dfc0" strokeWidth="8" strokeLinecap="round" fill="none" />
+                    <path d="M292 178 Q296 158 292 140" stroke="#f6dfc0" strokeWidth="8" strokeLinecap="round" fill="none" />
+                  </svg>
+                </div>
+                <div className="absolute bottom-5 left-6 right-6 hidden md:flex flex-wrap gap-1.5">
+                  {brewedTags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="font-sans text-xs px-2.5 py-1 rounded-full"
+                      style={{
+                        color: 'rgba(120,70,20,0.85)',
+                        backgroundColor: 'rgba(180,120,40,0.08)',
+                        border: '1px solid rgba(180,120,40,0.18)',
+                      }}
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
 
             {/* FireSafe card */}
             <div
-              className="snap-center flex-shrink-0 w-[calc(100%-2rem)] md:w-auto rounded-[24px] overflow-hidden flex flex-col group"
+              className="snap-start flex-shrink-0 w-[85%] md:w-auto h-[360px] md:h-auto rounded-[24px] overflow-hidden flex flex-col group"
               style={{
                 background: 'linear-gradient(145deg, #fff8f5 0%, #ffede0 100%)',
                 border: '1px solid rgba(239,68,68,0.12)',
@@ -94,7 +160,7 @@ export default function Works() {
               <div className="px-6 md:px-8 pt-6 pb-5">
                 <div className="flex items-center gap-2 mb-2">
                   <div className="w-px h-3" style={{ background: 'rgba(239,68,68,0.35)' }} />
-                  <span className="font-sans text-xs uppercase tracking-widest" style={{ color: 'rgba(180,40,20,0.55)' }}>01 · Thesis · 2025</span>
+                  <span className="font-sans text-xs uppercase tracking-widest" style={{ color: 'rgba(180,40,20,0.55)' }}>02 · Thesis · 2025</span>
                 </div>
                 <h3 className="font-display text-4xl leading-tight text-stone-900">FireSafe</h3>
                 <p className="font-sans text-sm leading-relaxed mt-2 mb-4 text-stone-500">
@@ -135,7 +201,7 @@ export default function Works() {
 
             {/* Gracey Logistics Services card */}
             <div
-              className="snap-center flex-shrink-0 w-[calc(100%-2rem)] md:w-auto rounded-[24px] overflow-hidden flex flex-col group"
+              className="snap-start flex-shrink-0 w-[85%] md:w-auto h-[360px] md:h-auto rounded-[24px] overflow-hidden flex flex-col group"
               style={{
                 background: 'linear-gradient(145deg, #f5f8ff 0%, #edf4ff 100%)',
                 border: '1px solid rgba(59,130,246,0.12)',
@@ -145,7 +211,7 @@ export default function Works() {
               <div className="px-6 md:px-8 pt-6 pb-5">
                 <div className="flex items-center gap-2 mb-2">
                   <div className="w-px h-3" style={{ background: 'rgba(59,130,246,0.35)' }} />
-                  <span className="font-sans text-xs uppercase tracking-widest" style={{ color: 'rgba(30,80,200,0.55)' }}>02 · Web Development · 2024</span>
+                  <span className="font-sans text-xs uppercase tracking-widest" style={{ color: 'rgba(30,80,200,0.55)' }}>03 · Web Development · 2024</span>
                 </div>
                 <h3 className="font-display text-4xl leading-tight text-stone-900">Gracey Logistics</h3>
                 <p className="font-sans text-sm leading-relaxed mt-2 mb-4 text-stone-500">
@@ -185,6 +251,7 @@ export default function Works() {
             </div>
 
           </div>
+          </div>
 
           {/* Mobile: dot indicators */}
           <div className="flex justify-center items-center gap-2 pb-5 md:hidden">
@@ -219,6 +286,7 @@ export default function Works() {
 
       {firesafeOpen && <FireSafeModal onClose={() => setFiresafeOpen(false)} />}
       {graceyOpen && <GraceyLogisticsModal onClose={() => setGraceyOpen(false)} />}
+      {brewedOpen && <BrewedModal onClose={() => setBrewedOpen(false)} />}
       {uiuxOpen && <UIUXModal onClose={() => setUiuxOpen(false)} />}
     </section>
   )
