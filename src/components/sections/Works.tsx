@@ -165,17 +165,17 @@ export default function Works() {
             </div>
           </div>
 
-          {/* Cards — mobile: snap carousel / desktop: original grid */}
-          <div className="overflow-x-hidden mx-4 md:overflow-visible md:mx-0">
+          {/* Cards — horizontal scroll carousel */}
+          <div className="overflow-x-hidden mx-4">
           <div
             ref={scrollRef}
             onScroll={onCarouselScroll}
-            className="no-scrollbar flex overflow-x-auto snap-x snap-mandatory gap-3 pb-4 md:grid md:grid-cols-1 md:overflow-visible md:snap-none md:p-4 lg:p-5 lg:grid-cols-2"
+            className="no-scrollbar flex overflow-x-auto snap-x snap-mandatory gap-3 pb-4"
           >
             {works.map((work, index) => (
               <div
                 key={work.id}
-                className="snap-start flex-shrink-0 w-[85%] md:w-auto h-[360px] md:h-auto rounded-[24px] overflow-hidden flex flex-col group"
+                className="snap-start flex-shrink-0 w-[85%] h-[360px] rounded-[24px] overflow-hidden flex flex-col group"
                 style={{
                   background: work.cardBg,
                   border: work.cardBorder,
@@ -211,7 +211,7 @@ export default function Works() {
                       className={work.imageClass}
                     />
                   </div>
-                  <div className="absolute bottom-5 left-6 right-6 hidden md:flex flex-wrap gap-1.5">
+                  <div className="absolute bottom-5 left-6 right-6 flex flex-wrap gap-1.5">
                     {work.tags.map((tag) => (
                       <span
                         key={tag}
@@ -232,8 +232,8 @@ export default function Works() {
           </div>
           </div>
 
-          {/* Mobile: dot indicators */}
-          <div className="flex justify-center items-center gap-2 pb-5 md:hidden">
+          {/* Dot indicators */}
+          <div className="flex justify-center items-center gap-2 pb-5">
             {works.map((_, i) => (
               <button
                 key={i}
@@ -248,8 +248,8 @@ export default function Works() {
             ))}
           </div>
 
-          {/* Mobile: UI/UX button */}
-          <div className="flex justify-end px-6 pb-6 md:hidden">
+          {/* UI/UX button — always visible */}
+          <div className="flex justify-end px-6 pb-6">
             <button
               onClick={() => setUiuxOpen(true)}
               className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-stone-200 hover:bg-stone-300 transition-colors duration-150"
