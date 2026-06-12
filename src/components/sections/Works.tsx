@@ -174,7 +174,7 @@ export default function Works() {
             {works.map((work, index) => (
               <div
                 key={work.id}
-                className="snap-center flex-shrink-0 w-[calc(100%-2rem)] h-[360px] rounded-[24px] overflow-hidden flex flex-col group"
+                className="snap-center flex-shrink-0 w-[85%] h-[360px] rounded-[24px] overflow-hidden flex flex-col group"
                 style={{
                   background: work.cardBg,
                   border: work.cardBorder,
