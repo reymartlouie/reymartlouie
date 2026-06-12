@@ -108,16 +108,19 @@ export default function Works() {
   const ref = useRef<HTMLDivElement>(null)
   const scrollRef = useRef<HTMLDivElement>(null)
 
+  const CARD_WIDTH = 600
+  const CARD_GAP = 16
+
   const onCarouselScroll = useCallback(() => {
     const el = scrollRef.current
     if (!el) return
-    setActiveIndex(Math.round(el.scrollLeft / el.offsetWidth))
+    setActiveIndex(Math.round(el.scrollLeft / (CARD_WIDTH + CARD_GAP)))
   }, [])
 
   const scrollTo = useCallback((index: number) => {
     const el = scrollRef.current
     if (!el) return
-    el.scrollTo({ left: index * el.offsetWidth, behavior: 'smooth' })
+    el.scrollTo({ left: index * (CARD_WIDTH + CARD_GAP), behavior: 'smooth' })
   }, [])
 
   useEffect(() => {
@@ -170,11 +173,12 @@ export default function Works() {
             ref={scrollRef}
             onScroll={onCarouselScroll}
             className="no-scrollbar flex overflow-x-auto snap-x snap-mandatory px-4 gap-4 pb-4"
+            style={{ scrollPaddingLeft: '1rem' }}
           >
             {works.map((work, index) => (
               <div
                 key={work.id}
-                className="snap-center flex-shrink-0 w-[85%] h-[360px] rounded-[24px] overflow-hidden flex flex-col group"
+                className="snap-start flex-shrink-0 w-[600px] h-[400px] rounded-[24px] overflow-hidden flex flex-col group"
                 style={{
                   background: work.cardBg,
                   border: work.cardBorder,
