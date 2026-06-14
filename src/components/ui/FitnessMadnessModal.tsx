@@ -8,34 +8,41 @@ interface Props {
 }
 
 const stack = [
-  { label: 'React 19', category: 'Frontend' },
-  { label: 'TypeScript', category: 'Language' },
-  { label: 'Tailwind CSS', category: 'Styling' },
-  { label: 'Vite', category: 'Build Tool' },
-  { label: 'Vercel', category: 'Deployment' },
+  { label: 'Python', category: 'Language' },
+  { label: 'Flask', category: 'Backend' },
+  { label: 'SQLAlchemy', category: 'ORM' },
+  { label: 'SQLite', category: 'Database' },
+  { label: 'Flask-Login', category: 'Auth' },
+  { label: 'Waitress', category: 'WSGI Server' },
+  { label: 'HTML / CSS / JS', category: 'Frontend' },
+  { label: 'Jinja2', category: 'Templating' },
 ]
 
 const features = [
-  { label: 'Responsive Landing Page', category: 'Web' },
-  { label: 'Interactive Menu', category: 'Feature' },
-  { label: 'Order Flow', category: 'Feature' },
-  { label: 'Promo Modal', category: 'Feature' },
-  { label: 'Congrats Modal', category: 'Feature' },
-  { label: 'About Page', category: 'Web' },
+  { label: 'Member Kiosk', category: 'Check-in / Out' },
+  { label: 'Admin Dashboard', category: 'Management' },
+  { label: 'Attendance Tracking', category: 'Core' },
+  { label: 'Payment Recording', category: 'Finance' },
+  { label: 'CSV Export', category: 'Reporting' },
+  { label: 'Local Backup', category: '7-day Rolling' },
+  { label: 'USB Drive Backup', category: 'Auto-detect' },
+  { label: 'Google Drive Backup', category: 'Optional' },
+  { label: 'Auto-start on Boot', category: 'Windows' },
+  { label: 'Offline-First', category: 'No Internet' },
 ]
 
 const roles = [
   {
-    role: 'Frontend Development',
-    desc: 'Built a full coffee house landing page from scratch using React, TypeScript, and Tailwind CSS — covering the homepage, about page, interactive menu, and streamlined order flow. Deployed live on Vercel.',
+    role: 'Full-Stack Development',
+    desc: 'Built the entire system from scratch — Flask backend, SQLite models for members, attendance, and payments, Jinja2 templates for the kiosk and admin views, and a WSGI server setup with Waitress for stable local deployment.',
   },
   {
-    role: 'UI/UX Design',
-    desc: 'Designed the interface around a warm coffee aesthetic — intuitive order flow, promotional modals, and a clean menu layout that showcases handcrafted beverages and pastries.',
+    role: 'System Design',
+    desc: 'Designed for offline-first operation on a local Windows PC: auto-start on boot via a .bat file, three-layer backup (local rolling, USB auto-detect, Google Drive sync), and a kiosk-optimized touchscreen UI that runs without any internet connection.',
   },
 ]
 
-export default function BrewedModal({ onClose }: Props) {
+export default function FitnessMadnessModal({ onClose }: Props) {
   useEffect(() => {
     const handler = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose() }
     window.addEventListener('keydown', handler)
@@ -61,7 +68,7 @@ export default function BrewedModal({ onClose }: Props) {
         className="relative w-full max-w-2xl rounded-[32px] overflow-hidden flex flex-col"
         style={{
           background: '#ffffff',
-          border: '1px solid rgba(180,120,40,0.12)',
+          border: '1px solid rgba(34,197,94,0.15)',
           boxShadow: '0 40px 120px rgba(0,0,0,0.4), 0 1px 0 rgba(255,255,255,0.9) inset',
           animation: 'modalCardIn 350ms cubic-bezier(0.34,1.2,0.64,1) both',
           maxHeight: '90vh',
@@ -69,20 +76,20 @@ export default function BrewedModal({ onClose }: Props) {
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 flex-shrink-0" style={{ borderBottom: '1px solid rgba(180,120,40,0.10)' }}>
+        <div className="flex items-center justify-between px-6 py-4 flex-shrink-0" style={{ borderBottom: '1px solid rgba(34,197,94,0.10)' }}>
           <div>
-            <p className="font-sans text-xs uppercase tracking-widest mb-0.5" style={{ color: 'rgba(120,70,20,0.55)' }}>Web Development · 2026</p>
-            <h2 className="font-display text-xl text-stone-900">Brewed — Coffee House</h2>
+            <p className="font-sans text-xs uppercase tracking-widest mb-0.5" style={{ color: 'rgba(15,100,45,0.55)' }}>Full-Stack · 2026</p>
+            <h2 className="font-display text-xl text-stone-900">FitnessMadness — Gym Management</h2>
           </div>
           <div className="flex items-center gap-3">
             <a
-              href="https://brewed-puce.vercel.app"
+              href="https://github.com/reymartlouie/fitnessmadness"
               target="_blank"
               rel="noopener noreferrer"
               className="hidden md:inline-flex font-sans text-xs px-4 py-2 rounded-full transition-colors duration-150"
-              style={{ background: 'rgba(180,120,40,0.08)', color: 'rgba(120,70,20,0.85)', border: '1px solid rgba(180,120,40,0.18)' }}
+              style={{ background: 'rgba(34,197,94,0.08)', color: 'rgba(15,100,45,0.85)', border: '1px solid rgba(34,197,94,0.18)' }}
             >
-              Live Site ↗
+              GitHub ↗
             </a>
             <button
               onClick={onClose}
@@ -99,10 +106,10 @@ export default function BrewedModal({ onClose }: Props) {
         <div className="overflow-y-auto p-5 md:p-10">
 
           {/* Preview */}
-          <div className="mb-8 rounded-2xl overflow-hidden" style={{ border: '1px solid rgba(180,120,40,0.12)', boxShadow: '0 4px 20px rgba(0,0,0,0.07)' }}>
+          <div className="mb-8 rounded-2xl overflow-hidden" style={{ border: '1px solid rgba(34,197,94,0.15)', boxShadow: '0 4px 20px rgba(0,0,0,0.07)' }}>
             <img
-              src="/brewed-preview.webp"
-              alt="Brewed landing page"
+              src="/fitnessmadness-preview.webp"
+              alt="FitnessMadness admin dashboard"
               className="w-full h-52 object-cover object-top"
               draggable={false}
             />
@@ -111,21 +118,21 @@ export default function BrewedModal({ onClose }: Props) {
           {/* Intro */}
           <div className="mb-8">
             <p className="font-sans text-xs leading-relaxed mb-3 text-stone-400">
-              brewed-puce.vercel.app
+              Local deployment · Windows PC · No internet required
             </p>
             <p className="font-sans text-sm leading-relaxed text-stone-500">
-              A coffee house landing page with an interactive menu, promotional modals, and a streamlined order flow — built with React, TypeScript, and Tailwind CSS, deployed on Vercel.
+              A lightweight gym attendance management system built for small gyms that need an offline-first, internet-independent setup. Members check in and out on a kiosk screen; the gym owner manages everything through an admin dashboard — no subscription, no cloud dependency.
             </p>
           </div>
 
           {/* Context */}
           <div
             className="mb-8 p-4 md:p-6 rounded-[20px]"
-            style={{ background: 'rgba(180,120,40,0.05)', border: '1px solid rgba(180,120,40,0.10)' }}
+            style={{ background: 'rgba(34,197,94,0.05)', border: '1px solid rgba(34,197,94,0.10)' }}
           >
-            <p className="font-sans text-xs uppercase tracking-widest mb-3" style={{ color: 'rgba(120,70,20,0.60)' }}>The Brief</p>
+            <p className="font-sans text-xs uppercase tracking-widest mb-3" style={{ color: 'rgba(15,100,45,0.60)' }}>The Brief</p>
             <p className="font-sans text-sm leading-relaxed text-stone-500">
-              Brewed needed a modern web presence for a coffee house brand — not a template, but a handcrafted React app with a real ordering experience. The site covers the full customer journey from browsing the menu to placing an order, plus promotional content and an about section.
+              A local gym was still running on manual attendance logbooks and handwritten payment records. The goal was to replace that entirely with a self-contained system that auto-starts on Windows boot, works without internet, and backs up its own data automatically — to a local folder, a USB drive, or Google Drive.
             </p>
           </div>
 
@@ -137,7 +144,7 @@ export default function BrewedModal({ onClose }: Props) {
                 <div
                   key={label}
                   className="flex items-center justify-between px-3 py-2.5 md:px-4 md:py-3 rounded-2xl"
-                  style={{ background: 'rgba(180,120,40,0.04)', border: '1px solid rgba(180,120,40,0.10)' }}
+                  style={{ background: 'rgba(34,197,94,0.04)', border: '1px solid rgba(34,197,94,0.10)' }}
                 >
                   <span className="font-sans text-sm text-stone-700">{label}</span>
                   <span className="font-sans text-xs text-right text-stone-400">{category}</span>
@@ -154,7 +161,7 @@ export default function BrewedModal({ onClose }: Props) {
                 <div
                   key={label}
                   className="flex items-center justify-between px-3 py-2.5 md:px-4 md:py-3 rounded-2xl"
-                  style={{ background: 'rgba(180,120,40,0.04)', border: '1px solid rgba(180,120,40,0.10)' }}
+                  style={{ background: 'rgba(34,197,94,0.04)', border: '1px solid rgba(34,197,94,0.10)' }}
                 >
                   <span className="font-sans text-sm text-stone-700">{label}</span>
                   <span className="font-sans text-xs text-right text-stone-400">{category}</span>
@@ -171,7 +178,7 @@ export default function BrewedModal({ onClose }: Props) {
                 <div
                   key={role}
                   className="p-4 md:p-5 rounded-2xl"
-                  style={{ background: 'rgba(180,120,40,0.04)', border: '1px solid rgba(180,120,40,0.10)' }}
+                  style={{ background: 'rgba(34,197,94,0.04)', border: '1px solid rgba(34,197,94,0.10)' }}
                 >
                   <p className="font-sans text-sm font-medium mb-1.5 text-stone-700">{role}</p>
                   <p className="font-sans text-sm leading-relaxed text-stone-500">{desc}</p>
@@ -183,25 +190,17 @@ export default function BrewedModal({ onClose }: Props) {
           {/* CTA */}
           <div className="flex flex-col md:flex-row md:justify-end gap-3">
             <a
-              href="https://github.com/reymartlouie/brewed"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-spring inline-flex items-center justify-center gap-2 font-sans text-sm font-semibold px-5 py-3 rounded-full transition-colors duration-150 bg-stone-200 hover:bg-stone-300 text-stone-700"
-            >
-              GitHub Repo ↗
-            </a>
-            <a
-              href="https://brewed-puce.vercel.app"
+              href="https://github.com/reymartlouie/fitnessmadness"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-spring inline-flex items-center justify-center gap-2 font-sans text-sm font-semibold px-5 py-3 rounded-full transition-colors duration-150"
               style={{
-                background: 'rgba(180,120,40,0.08)',
-                color: 'rgba(120,70,20,0.85)',
-                border: '1px solid rgba(180,120,40,0.20)',
+                background: 'rgba(34,197,94,0.08)',
+                color: 'rgba(15,100,45,0.85)',
+                border: '1px solid rgba(34,197,94,0.20)',
               }}
             >
-              Visit Live Site ↗
+              GitHub Repo ↗
             </a>
           </div>
 

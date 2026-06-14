@@ -4,9 +4,10 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import FireSafeModal from '../ui/FireSafeModal'
 import GraceyLogisticsModal from '../ui/GraceyLogisticsModal'
 import BrewedModal from '../ui/BrewedModal'
+import FitnessMadnessModal from '../ui/FitnessMadnessModal'
 import UIUXModal from '../ui/UIUXModal'
 
-type WorkId = 'firesafe' | 'gracey' | 'brewed'
+type WorkId = 'fitnessmadness' | 'firesafe' | 'gracey' | 'brewed'
 
 type Work = {
   id: WorkId
@@ -20,8 +21,6 @@ type Work = {
   dividerColor: string
   labelColor: string
   viewDetailsColor: string
-  bottomBg: string
-  bottomGradient: string
   image: string
   imageAlt: string
   imageClass: string
@@ -34,19 +33,37 @@ type Work = {
 // Add new works here — newest first
 const works: Work[] = [
   {
-    id: 'brewed' as const,
+    id: 'fitnessmadness',
+    year: 2026,
+    category: 'Full-Stack',
+    title: 'FitnessMadness',
+    description: 'Gym attendance management system with a member kiosk, admin dashboard, payment tracking, and multi-layer offline backup.',
+    cardBg: 'linear-gradient(145deg, #f0fdf4 0%, #dcfce7 100%)',
+    cardBorder: '1px solid rgba(34,197,94,0.15)',
+    cardShadow: '0 2px 24px rgba(34,197,94,0.08), inset 0 1px 0 rgba(255,255,255,0.9)',
+    dividerColor: 'rgba(34,197,94,0.40)',
+    labelColor: 'rgba(15,100,45,0.55)',
+    viewDetailsColor: 'rgba(15,100,45,0.85)',
+    image: '/fitnessmadness-logo.svg',
+    imageAlt: 'FitnessMadness',
+    imageClass: 'w-28 h-28 drop-shadow-xl group-hover:scale-105 transition-transform duration-500',
+    tags: ['Python', 'Flask', 'SQLAlchemy', 'SQLite', 'Waitress'],
+    tagColor: 'rgba(15,100,45,0.85)',
+    tagBg: 'rgba(34,197,94,0.08)',
+    tagBorder: '1px solid rgba(34,197,94,0.18)',
+  },
+  {
+    id: 'brewed',
     year: 2026,
     category: 'Web Development',
     title: 'Brewed',
-    description: 'Coffee house landing page with an interactive menu, promo modals, and a streamlined order flow.',
+    description: 'Coffee house landing page with an interactive menu, promotional modals, and a streamlined order flow.',
     cardBg: 'linear-gradient(145deg, #fdf8f0 0%, #fdefd8 100%)',
     cardBorder: '1px solid rgba(180,120,40,0.12)',
     cardShadow: '0 2px 24px rgba(180,120,40,0.08), inset 0 1px 0 rgba(255,255,255,0.9)',
     dividerColor: 'rgba(180,120,40,0.35)',
     labelColor: 'rgba(120,70,20,0.55)',
     viewDetailsColor: 'rgba(140,80,20,0.85)',
-    bottomBg: 'linear-gradient(to bottom, #fdefd8 0%, #f8e0b8 100%)',
-    bottomGradient: 'linear-gradient(to bottom, #fdefd8 0%, #f8e0b8 100%)',
     image: '/brewed-logo.svg',
     imageAlt: 'Brewed',
     imageClass: 'w-20 h-20 drop-shadow-xl group-hover:scale-105 transition-transform duration-500',
@@ -56,19 +73,17 @@ const works: Work[] = [
     tagBorder: '1px solid rgba(180,120,40,0.18)',
   },
   {
-    id: 'gracey' as const,
+    id: 'gracey',
     year: 2026,
     category: 'Web Development',
     title: 'Gracey Logistics',
-    description: 'Built and designed a full freight transport website with React, TypeScript, and Vite — deployed live on Vercel.',
+    description: 'Freight transport website designed and built from scratch with React, TypeScript, and Vite — deployed live on Vercel.',
     cardBg: 'linear-gradient(145deg, #f5f8ff 0%, #edf4ff 100%)',
     cardBorder: '1px solid rgba(59,130,246,0.12)',
     cardShadow: '0 2px 24px rgba(59,130,246,0.06), inset 0 1px 0 rgba(255,255,255,0.9)',
     dividerColor: 'rgba(59,130,246,0.35)',
     labelColor: 'rgba(30,80,200,0.55)',
     viewDetailsColor: 'rgba(30,80,220,0.85)',
-    bottomBg: 'linear-gradient(to bottom, #edf4ff 0%, #e0ecff 100%)',
-    bottomGradient: 'linear-gradient(to bottom, #edf4ff 0%, #e0ecff 100%)',
     image: '/gracey-logo.webp',
     imageAlt: 'Gracey Logistics Services',
     imageClass: 'w-40 h-auto drop-shadow-xl group-hover:scale-105 transition-transform duration-500',
@@ -78,7 +93,7 @@ const works: Work[] = [
     tagBorder: '1px solid rgba(59,130,246,0.18)',
   },
   {
-    id: 'firesafe' as const,
+    id: 'firesafe',
     year: 2025,
     category: 'Thesis',
     title: 'FireSafe',
@@ -89,8 +104,6 @@ const works: Work[] = [
     dividerColor: 'rgba(239,68,68,0.35)',
     labelColor: 'rgba(180,40,20,0.55)',
     viewDetailsColor: 'rgba(200,50,20,0.85)',
-    bottomBg: 'linear-gradient(to bottom, #ffede0 0%, #ffe4cc 100%)',
-    bottomGradient: 'linear-gradient(to bottom, #ffede0 0%, #ffe4cc 100%)',
     image: '/firesafe-logo.webp',
     imageAlt: 'FireSafe',
     imageClass: 'w-36 h-auto drop-shadow-xl group-hover:scale-105 transition-transform duration-500',
@@ -108,19 +121,16 @@ export default function Works() {
   const ref = useRef<HTMLDivElement>(null)
   const scrollRef = useRef<HTMLDivElement>(null)
 
-  const CARD_WIDTH = 600
-  const CARD_GAP = 16
-
   const onCarouselScroll = useCallback(() => {
     const el = scrollRef.current
     if (!el) return
-    setActiveIndex(Math.round(el.scrollLeft / (CARD_WIDTH + CARD_GAP)))
+    setActiveIndex(Math.round(el.scrollLeft / (el.clientWidth - 16)))
   }, [])
 
   const scrollTo = useCallback((index: number) => {
     const el = scrollRef.current
     if (!el) return
-    el.scrollTo({ left: index * (CARD_WIDTH + CARD_GAP), behavior: 'smooth' })
+    el.scrollTo({ left: index * (el.clientWidth - 16), behavior: 'smooth' })
   }, [])
 
   useEffect(() => {
@@ -149,7 +159,6 @@ export default function Works() {
     <section className="flex flex-col gap-4">
       <div ref={ref} className="reveal-item flex flex-col gap-4">
 
-        {/* Selected work */}
         <div className="rounded-[32px] overflow-hidden" style={{ background: '#f5f5f7' }}>
           <div className="px-6 md:px-8 pt-8 md:pt-10 pb-4 flex items-end justify-between gap-4">
             <h2 className="font-display text-[44px] md:text-[56px] leading-[1.05] text-stone-900 font-black">
@@ -168,7 +177,6 @@ export default function Works() {
             </div>
           </div>
 
-          {/* Cards — horizontal scroll carousel */}
           <div
             ref={scrollRef}
             onScroll={onCarouselScroll}
@@ -178,52 +186,41 @@ export default function Works() {
             {works.map((work, index) => (
               <div
                 key={work.id}
-                className="snap-start flex-shrink-0 w-[600px] h-[400px] rounded-[24px] overflow-hidden flex flex-col group"
-                style={{
-                  background: work.cardBg,
-                  border: work.cardBorder,
-                  boxShadow: work.cardShadow,
-                }}
+                className="snap-start flex-shrink-0 w-full h-[400px] rounded-[24px] overflow-hidden group flex flex-col justify-between px-6 py-6"
+                style={{ background: work.cardBg, border: work.cardBorder, boxShadow: work.cardShadow }}
               >
-                <div className="px-6 md:px-8 pt-6 pb-5">
-                  <div className="flex items-center gap-2 mb-2">
-                    <div className="w-px h-3" style={{ background: work.dividerColor }} />
-                    <span className="font-sans text-xs uppercase tracking-widest" style={{ color: work.labelColor }}>
-                      {String(works.length - index).padStart(2, '0')} · {work.category} · {work.year}
-                    </span>
-                  </div>
-                  <h3 className="font-display text-4xl leading-tight text-stone-900">{work.title}</h3>
-                  <p className="font-sans text-sm leading-relaxed mt-2 mb-4 text-stone-500">
+                {/* Label */}
+                <div className="flex items-center gap-2">
+                  <div className="w-px h-3.5" style={{ background: work.dividerColor }} />
+                  <p className="font-sans text-xs uppercase tracking-widest" style={{ color: work.labelColor }}>
+                    {String(works.length - index).padStart(2, '0')} · {work.category} · {work.year}
+                  </p>
+                </div>
+
+                {/* Logo */}
+                <div className="flex justify-center items-center">
+                  <img src={work.image} alt={work.imageAlt} className={work.imageClass} />
+                </div>
+
+                {/* Bottom info */}
+                <div>
+                  <h3 className="font-display text-4xl leading-tight mb-2 text-stone-900">{work.title}</h3>
+                  <p className="font-sans text-sm leading-relaxed mb-3 line-clamp-2 text-stone-500">
                     {work.description}
                   </p>
                   <span
                     onClick={() => setOpenWorkId(work.id)}
-                    className="inline-flex items-center gap-1.5 font-sans text-sm font-medium cursor-pointer"
+                    className="font-sans text-sm font-medium cursor-pointer"
                     style={{ color: work.viewDetailsColor }}
                   >
                     View Details →
                   </span>
-                </div>
-
-                <div className="relative overflow-hidden mt-auto" style={{ height: '192px' }}>
-                  <div className="absolute inset-0" style={{ background: work.bottomGradient }} />
-                  <div className="absolute inset-0 flex items-center justify-center pb-10">
-                    <img
-                      src={work.image}
-                      alt={work.imageAlt}
-                      className={work.imageClass}
-                    />
-                  </div>
-                  <div className="absolute bottom-5 left-6 right-6 flex flex-wrap gap-1.5">
-                    {work.tags.map((tag) => (
+                  <div className="flex flex-wrap gap-1.5 mt-3">
+                    {work.tags.slice(0, 4).map(tag => (
                       <span
                         key={tag}
-                        className="font-sans text-xs px-2.5 py-1 rounded-full"
-                        style={{
-                          color: work.tagColor,
-                          backgroundColor: work.tagBg,
-                          border: work.tagBorder,
-                        }}
+                        className="font-sans text-xs px-3 py-1 rounded-full"
+                        style={{ color: work.tagColor, backgroundColor: work.tagBg, border: work.tagBorder }}
                       >
                         {tag}
                       </span>
@@ -249,10 +246,10 @@ export default function Works() {
               />
             ))}
           </div>
-
         </div>
       </div>
 
+      {openWorkId === 'fitnessmadness' && <FitnessMadnessModal onClose={() => setOpenWorkId(null)} />}
       {openWorkId === 'firesafe' && <FireSafeModal onClose={() => setOpenWorkId(null)} />}
       {openWorkId === 'gracey' && <GraceyLogisticsModal onClose={() => setOpenWorkId(null)} />}
       {openWorkId === 'brewed' && <BrewedModal onClose={() => setOpenWorkId(null)} />}
