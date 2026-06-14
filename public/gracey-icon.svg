@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <!-- exhaust pipe -->
+  <rect x="106" y="6" width="8" height="18" rx="4" fill="#6b7280"/>
+  <!-- trailer body -->
+  <rect x="4" y="28" width="62" height="48" rx="6" fill="#9ca3af"/>
+  <!-- cab body: orange -->
+  <rect x="64" y="22" width="50" height="54" rx="6" fill="#ea580c"/>
+  <!-- windshield -->
+  <rect x="72" y="30" width="34" height="24" rx="5" fill="#f3f4f6"/>
+  <!-- chassis -->
+  <rect x="4" y="74" width="112" height="10" rx="3" fill="#374151"/>
+  <!-- left wheel outer -->
+  <rect x="14" y="78" width="26" height="26" rx="13" fill="#1f2937"/>
+  <!-- left wheel inner -->
+  <rect x="20" y="84" width="14" height="14" rx="7" fill="#6b7280"/>
+  <!-- right wheel outer -->
+  <rect x="78" y="78" width="26" height="26" rx="13" fill="#1f2937"/>
+  <!-- right wheel inner -->
+  <rect x="84" y="84" width="14" height="14" rx="7" fill="#ea580c"/>
+</svg>

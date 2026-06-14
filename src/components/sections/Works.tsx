@@ -28,6 +28,8 @@ type Work = {
   tagColor: string
   tagBg: string
   tagBorder: string
+  dateRange: string
+  isDark?: boolean
 }
 
 // Add new works here — newest first
@@ -38,19 +40,20 @@ const works: Work[] = [
     category: 'Full-Stack',
     title: 'FitnessMadness',
     description: 'Gym attendance management system with a member kiosk, admin dashboard, payment tracking, and multi-layer offline backup.',
-    cardBg: 'linear-gradient(145deg, #f0fdf4 0%, #dcfce7 100%)',
-    cardBorder: '1px solid rgba(34,197,94,0.15)',
-    cardShadow: '0 2px 24px rgba(34,197,94,0.08), inset 0 1px 0 rgba(255,255,255,0.9)',
-    dividerColor: 'rgba(34,197,94,0.40)',
-    labelColor: 'rgba(15,100,45,0.55)',
-    viewDetailsColor: 'rgba(15,100,45,0.85)',
+    cardBg: 'linear-gradient(145deg, #fff1f2 0%, #ffe4e6 100%)',
+    cardBorder: '1px solid rgba(239,68,68,0.18)',
+    cardShadow: '0 2px 24px rgba(239,68,68,0.10), inset 0 1px 0 rgba(255,255,255,0.9)',
+    dividerColor: 'rgba(239,68,68,0.45)',
+    labelColor: 'rgba(153,27,27,0.55)',
+    viewDetailsColor: 'rgba(185,28,28,0.85)',
     image: '/fitnessmadness-logo.svg',
     imageAlt: 'FitnessMadness',
     imageClass: 'w-28 h-28 drop-shadow-xl group-hover:scale-105 transition-transform duration-500',
     tags: ['Python', 'Flask', 'SQLAlchemy', 'SQLite', 'Waitress'],
-    tagColor: 'rgba(15,100,45,0.85)',
-    tagBg: 'rgba(34,197,94,0.08)',
-    tagBorder: '1px solid rgba(34,197,94,0.18)',
+    tagColor: 'rgba(153,27,27,0.85)',
+    tagBg: 'rgba(239,68,68,0.08)',
+    tagBorder: '1px solid rgba(239,68,68,0.18)',
+    dateRange: "May 2026 – Crafting",
   },
   {
     id: 'brewed',
@@ -64,13 +67,14 @@ const works: Work[] = [
     dividerColor: 'rgba(180,120,40,0.35)',
     labelColor: 'rgba(120,70,20,0.55)',
     viewDetailsColor: 'rgba(140,80,20,0.85)',
-    image: '/brewed-logo.svg',
+    image: '/brewed-icon.svg',
     imageAlt: 'Brewed',
-    imageClass: 'w-20 h-20 drop-shadow-xl group-hover:scale-105 transition-transform duration-500',
+    imageClass: 'w-28 h-28 drop-shadow-xl group-hover:scale-105 transition-transform duration-500',
     tags: ['React', 'TypeScript', 'Tailwind CSS', 'Vite', 'Vercel'],
     tagColor: 'rgba(120,70,20,0.85)',
     tagBg: 'rgba(180,120,40,0.08)',
     tagBorder: '1px solid rgba(180,120,40,0.18)',
+    dateRange: "May 2026 – Crafting",
   },
   {
     id: 'gracey',
@@ -78,19 +82,20 @@ const works: Work[] = [
     category: 'Web Development',
     title: 'Gracey Logistics',
     description: 'Freight transport website designed and built from scratch with React, TypeScript, and Vite — deployed live on Vercel.',
-    cardBg: 'linear-gradient(145deg, #f5f8ff 0%, #edf4ff 100%)',
-    cardBorder: '1px solid rgba(59,130,246,0.12)',
-    cardShadow: '0 2px 24px rgba(59,130,246,0.06), inset 0 1px 0 rgba(255,255,255,0.9)',
-    dividerColor: 'rgba(59,130,246,0.35)',
-    labelColor: 'rgba(30,80,200,0.55)',
-    viewDetailsColor: 'rgba(30,80,220,0.85)',
-    image: '/gracey-logo.webp',
+    cardBg: 'linear-gradient(145deg, #f9fafb 0%, #f3f4f6 100%)',
+    cardBorder: '1px solid rgba(107,114,128,0.18)',
+    cardShadow: '0 2px 24px rgba(107,114,128,0.10), inset 0 1px 0 rgba(255,255,255,0.9)',
+    dividerColor: 'rgba(234,88,12,0.55)',
+    labelColor: 'rgba(55,65,81,0.55)',
+    viewDetailsColor: 'rgba(194,65,12,0.85)',
+    image: '/gracey-icon.svg',
     imageAlt: 'Gracey Logistics Services',
-    imageClass: 'w-40 h-auto drop-shadow-xl group-hover:scale-105 transition-transform duration-500',
+    imageClass: 'w-28 h-28 drop-shadow-xl group-hover:scale-105 transition-transform duration-500',
     tags: ['React', 'TypeScript', 'Vite', 'Figma', 'Vercel'],
-    tagColor: 'rgba(30,80,220,0.85)',
-    tagBg: 'rgba(59,130,246,0.08)',
-    tagBorder: '1px solid rgba(59,130,246,0.18)',
+    tagColor: 'rgba(55,65,81,0.85)',
+    tagBg: 'rgba(107,114,128,0.08)',
+    tagBorder: '1px solid rgba(107,114,128,0.18)',
+    dateRange: "Dec 2025 – May 2026",
   },
   {
     id: 'firesafe',
@@ -98,19 +103,20 @@ const works: Work[] = [
     category: 'Thesis',
     title: 'FireSafe',
     description: 'Thermal imaging wildfire detection with real-time mobile alerting for rural barangays.',
-    cardBg: 'linear-gradient(145deg, #fff8f5 0%, #ffede0 100%)',
-    cardBorder: '1px solid rgba(239,68,68,0.12)',
-    cardShadow: '0 2px 24px rgba(239,68,68,0.08), inset 0 1px 0 rgba(255,255,255,0.9)',
-    dividerColor: 'rgba(239,68,68,0.35)',
-    labelColor: 'rgba(180,40,20,0.55)',
-    viewDetailsColor: 'rgba(200,50,20,0.85)',
-    image: '/firesafe-logo.webp',
+    cardBg: 'linear-gradient(145deg, #fff7f0 0%, #ffede0 100%)',
+    cardBorder: '1px solid rgba(234,88,12,0.18)',
+    cardShadow: '0 2px 24px rgba(234,88,12,0.10), inset 0 1px 0 rgba(255,255,255,0.9)',
+    dividerColor: 'rgba(220,38,38,0.45)',
+    labelColor: 'rgba(153,27,27,0.55)',
+    viewDetailsColor: 'rgba(194,65,12,0.85)',
+    image: '/firesafe-icon.svg',
     imageAlt: 'FireSafe',
-    imageClass: 'w-36 h-auto drop-shadow-xl group-hover:scale-105 transition-transform duration-500',
+    imageClass: 'w-28 h-28 drop-shadow-xl group-hover:scale-105 transition-transform duration-500',
     tags: ['React Native', 'Raspberry Pi Zero 2 W', 'Supabase', 'TinyML', 'Python', 'Arduino'],
-    tagColor: 'rgba(180,40,20,0.85)',
-    tagBg: 'rgba(239,68,68,0.08)',
-    tagBorder: '1px solid rgba(239,68,68,0.18)',
+    tagColor: 'rgba(153,27,27,0.85)',
+    tagBg: 'rgba(234,88,12,0.08)',
+    tagBorder: '1px solid rgba(234,88,12,0.18)',
+    dateRange: "Sept 2025 – Mar 2026",
   },
 ]
 
@@ -193,7 +199,7 @@ export default function Works() {
                 <div className="flex items-center gap-2">
                   <div className="w-px h-3.5" style={{ background: work.dividerColor }} />
                   <p className="font-sans text-xs uppercase tracking-widest" style={{ color: work.labelColor }}>
-                    {String(works.length - index).padStart(2, '0')} · {work.category} · {work.year}
+                    {String(works.length - index).padStart(2, '0')} · {work.category} · {work.dateRange}
                   </p>
                 </div>
 
@@ -204,8 +210,14 @@ export default function Works() {
 
                 {/* Bottom info */}
                 <div>
-                  <h3 className="font-display text-4xl leading-tight mb-2 text-stone-900">{work.title}</h3>
-                  <p className="font-sans text-sm leading-relaxed mb-3 line-clamp-2 text-stone-500">
+                  <h3
+                    className="font-display text-4xl leading-tight mb-2"
+                    style={{ color: work.isDark ? '#f5f5f4' : '#1c1917' }}
+                  >{work.title}</h3>
+                  <p
+                    className="font-sans text-sm leading-relaxed mb-3 line-clamp-2"
+                    style={{ color: work.isDark ? 'rgba(255,255,255,0.60)' : 'rgb(68,64,60)' }}
+                  >
                     {work.description}
                   </p>
                   <span

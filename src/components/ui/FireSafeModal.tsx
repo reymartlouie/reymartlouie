@@ -68,7 +68,7 @@ export default function FireSafeModal({ onClose }: Props) {
         className="relative w-full max-w-2xl rounded-[32px] overflow-hidden flex flex-col"
         style={{
           background: '#ffffff',
-          border: '1px solid rgba(239,68,68,0.12)',
+          border: '1px solid rgba(234,88,12,0.18)',
           boxShadow: '0 40px 120px rgba(0,0,0,0.4), 0 1px 0 rgba(255,255,255,0.9) inset',
           animation: 'modalCardIn 350ms cubic-bezier(0.34,1.2,0.64,1) both',
           maxHeight: '90vh',
@@ -76,9 +76,9 @@ export default function FireSafeModal({ onClose }: Props) {
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 flex-shrink-0" style={{ borderBottom: '1px solid rgba(239,68,68,0.10)' }}>
+        <div className="flex items-center justify-between px-6 py-4 flex-shrink-0" style={{ borderBottom: '1px solid rgba(234,88,12,0.12)' }}>
           <div>
-            <p className="font-sans text-xs uppercase tracking-widest mb-0.5" style={{ color: 'rgba(180,40,20,0.55)' }}>Thesis · BS Computer Engineering</p>
+            <p className="font-sans text-xs uppercase tracking-widest mb-0.5" style={{ color: 'rgba(153,27,27,0.55)' }}>Thesis · Sept 25, 2025 – Mar 26, 2026</p>
             <h2 className="font-display text-xl text-stone-900">FireSafe</h2>
           </div>
           <div className="flex items-center gap-3">
@@ -87,7 +87,7 @@ export default function FireSafeModal({ onClose }: Props) {
               target="_blank"
               rel="noopener noreferrer"
               className="hidden md:inline-flex font-sans text-xs px-4 py-2 rounded-full transition-colors duration-150"
-              style={{ background: 'rgba(239,68,68,0.08)', color: 'rgba(200,50,20,0.85)', border: '1px solid rgba(239,68,68,0.18)' }}
+              style={{ background: 'rgba(234,88,12,0.08)', color: 'rgba(185,28,28,0.85)', border: '1px solid rgba(234,88,12,0.18)' }}
             >
               Case Study ↗
             </a>
@@ -120,9 +120,9 @@ export default function FireSafeModal({ onClose }: Props) {
         {/* Context */}
         <div
           className="mb-8 p-4 md:p-6 rounded-[20px]"
-          style={{ background: 'rgba(239,68,68,0.05)', border: '1px solid rgba(239,68,68,0.10)' }}
+          style={{ background: 'rgba(234,88,12,0.05)', border: '1px solid rgba(234,88,12,0.12)' }}
         >
-          <p className="font-sans text-xs uppercase tracking-widest mb-3" style={{ color: 'rgba(180,40,20,0.60)' }}>The Problem</p>
+          <p className="font-sans text-xs uppercase tracking-widest mb-3" style={{ color: 'rgba(153,27,27,0.60)' }}>The Problem</p>
           <p className="font-sans text-sm leading-relaxed text-stone-500">
             The Philippines recorded 16,426 fire incidents in 2023 — a 24.5% increase year-over-year.
             Rural barangays are especially vulnerable: fires start unnoticed in unguarded spaces,
@@ -140,7 +140,7 @@ export default function FireSafeModal({ onClose }: Props) {
               <div
                 key={label}
                 className="flex items-center justify-between px-3 py-2.5 md:px-4 md:py-3 rounded-2xl"
-                style={{ background: 'rgba(239,68,68,0.04)', border: '1px solid rgba(239,68,68,0.10)' }}
+                style={{ background: 'rgba(234,88,12,0.04)', border: '1px solid rgba(234,88,12,0.12)' }}
               >
                 <span className="font-sans text-sm text-stone-700">{label}</span>
                 <span className="font-sans text-xs text-right text-stone-400">{category}</span>
@@ -157,7 +157,7 @@ export default function FireSafeModal({ onClose }: Props) {
               <div
                 key={label}
                 className="flex items-center justify-between px-3 py-2.5 md:px-4 md:py-3 rounded-2xl"
-                style={{ background: 'rgba(239,68,68,0.04)', border: '1px solid rgba(239,68,68,0.10)' }}
+                style={{ background: 'rgba(234,88,12,0.04)', border: '1px solid rgba(234,88,12,0.12)' }}
               >
                 <span className="font-sans text-sm text-stone-700">{label}</span>
                 <span className="font-sans text-xs text-right text-stone-400">{category}</span>
@@ -178,7 +178,7 @@ export default function FireSafeModal({ onClose }: Props) {
               <div
                 key={env}
                 className="flex items-center justify-between px-3 py-2.5 md:px-4 md:py-3 rounded-2xl"
-                style={{ background: 'rgba(239,68,68,0.04)', border: '1px solid rgba(239,68,68,0.10)' }}
+                style={{ background: 'rgba(234,88,12,0.04)', border: '1px solid rgba(234,88,12,0.12)' }}
               >
                 <span className="font-sans text-sm text-stone-700">{env}</span>
                 <span className="font-sans text-xs text-right text-stone-400">{detail}</span>
@@ -198,7 +198,7 @@ export default function FireSafeModal({ onClose }: Props) {
               <div
                 key={role}
                 className="p-4 md:p-5 rounded-2xl"
-                style={{ background: 'rgba(239,68,68,0.04)', border: '1px solid rgba(239,68,68,0.10)' }}
+                style={{ background: 'rgba(234,88,12,0.04)', border: '1px solid rgba(234,88,12,0.12)' }}
               >
                 <p className="font-sans text-sm font-medium mb-1.5 text-stone-700">{role}</p>
                 <p className="font-sans text-sm leading-relaxed text-stone-500">{desc}</p>
@@ -243,7 +243,7 @@ export default function FireSafeModal({ onClose }: Props) {
               target="_blank"
               rel="noopener noreferrer"
               className="btn-spring inline-flex items-center justify-center gap-2 font-sans text-sm font-semibold px-5 py-3 rounded-full transition-colors duration-150 md:hidden"
-              style={{ background: 'rgba(239,68,68,0.08)', color: 'rgba(200,50,20,0.85)', border: '1px solid rgba(239,68,68,0.18)' }}
+              style={{ background: 'rgba(234,88,12,0.08)', color: 'rgba(185,28,28,0.85)', border: '1px solid rgba(234,88,12,0.18)' }}
             >
               Case Study ↗
             </a>
