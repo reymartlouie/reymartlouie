@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <!-- outer flame: deep red -->
+  <path d="M60 8 C42 32 16 50 16 74 C16 98 36 114 60 114 C84 114 104 98 104 74 C104 50 78 32 60 8Z" fill="#991b1b"/>
+  <!-- mid flame: orange-red -->
+  <path d="M60 30 C48 48 34 60 34 76 C34 94 46 108 60 108 C74 108 86 94 86 76 C86 60 72 48 60 30Z" fill="#ea580c"/>
+  <!-- inner glow: bright orange -->
+  <path d="M60 56 C54 66 48 72 48 80 C48 92 54 102 60 102 C66 102 72 92 72 80 C72 72 66 66 60 56Z" fill="#fb923c"/>
+</svg>
