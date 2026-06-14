@@ -106,6 +106,16 @@ export default function GraceyLogisticsModal({ onClose }: Props) {
         {/* Scrollable body */}
         <div className="overflow-y-auto p-5 md:p-10">
 
+        {/* Preview */}
+        <div className="mb-8 rounded-2xl overflow-hidden" style={{ border: '1px solid rgba(59,130,246,0.12)', boxShadow: '0 4px 20px rgba(0,0,0,0.07)' }}>
+          <img
+            src="/gracey-preview.webp"
+            alt="Gracey Logistics landing page"
+            className="w-full h-52 object-cover object-top"
+            draggable={false}
+          />
+        </div>
+
         {/* Intro */}
         <div className="mb-8">
           <p className="font-sans text-xs leading-relaxed mb-3 text-stone-400">
