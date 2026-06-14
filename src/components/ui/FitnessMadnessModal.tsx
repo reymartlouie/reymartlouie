@@ -68,7 +68,7 @@ export default function FitnessMadnessModal({ onClose }: Props) {
         className="relative w-full max-w-2xl rounded-[32px] overflow-hidden flex flex-col"
         style={{
           background: '#ffffff',
-          border: '1px solid rgba(34,197,94,0.15)',
+          border: '1px solid rgba(239,68,68,0.18)',
           boxShadow: '0 40px 120px rgba(0,0,0,0.4), 0 1px 0 rgba(255,255,255,0.9) inset',
           animation: 'modalCardIn 350ms cubic-bezier(0.34,1.2,0.64,1) both',
           maxHeight: '90vh',
@@ -76,9 +76,9 @@ export default function FitnessMadnessModal({ onClose }: Props) {
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 flex-shrink-0" style={{ borderBottom: '1px solid rgba(34,197,94,0.10)' }}>
+        <div className="flex items-center justify-between px-6 py-4 flex-shrink-0" style={{ borderBottom: '1px solid rgba(239,68,68,0.12)' }}>
           <div>
-            <p className="font-sans text-xs uppercase tracking-widest mb-0.5" style={{ color: 'rgba(15,100,45,0.55)' }}>Full-Stack · 2026</p>
+            <p className="font-sans text-xs uppercase tracking-widest mb-0.5" style={{ color: 'rgba(185,28,28,0.55)' }}>Full-Stack · May 31, 2026 – Crafting</p>
             <h2 className="font-display text-xl text-stone-900">FitnessMadness — Gym Management</h2>
           </div>
           <div className="flex items-center gap-3">
@@ -87,7 +87,7 @@ export default function FitnessMadnessModal({ onClose }: Props) {
               target="_blank"
               rel="noopener noreferrer"
               className="hidden md:inline-flex font-sans text-xs px-4 py-2 rounded-full transition-colors duration-150"
-              style={{ background: 'rgba(34,197,94,0.08)', color: 'rgba(15,100,45,0.85)', border: '1px solid rgba(34,197,94,0.18)' }}
+              style={{ background: 'rgba(239,68,68,0.08)', color: 'rgba(185,28,28,0.85)', border: '1px solid rgba(239,68,68,0.18)' }}
             >
               GitHub ↗
             </a>
@@ -106,7 +106,7 @@ export default function FitnessMadnessModal({ onClose }: Props) {
         <div className="overflow-y-auto p-5 md:p-10">
 
           {/* Preview */}
-          <div className="mb-8 rounded-2xl overflow-hidden" style={{ border: '1px solid rgba(34,197,94,0.15)', boxShadow: '0 4px 20px rgba(0,0,0,0.07)' }}>
+          <div className="mb-8 rounded-2xl overflow-hidden" style={{ border: '1px solid rgba(239,68,68,0.18)', boxShadow: '0 4px 20px rgba(0,0,0,0.07)' }}>
             <img
               src="/fitnessmadness-preview.webp"
               alt="FitnessMadness admin dashboard"
@@ -128,9 +128,9 @@ export default function FitnessMadnessModal({ onClose }: Props) {
           {/* Context */}
           <div
             className="mb-8 p-4 md:p-6 rounded-[20px]"
-            style={{ background: 'rgba(34,197,94,0.05)', border: '1px solid rgba(34,197,94,0.10)' }}
+            style={{ background: 'rgba(239,68,68,0.05)', border: '1px solid rgba(239,68,68,0.12)' }}
           >
-            <p className="font-sans text-xs uppercase tracking-widest mb-3" style={{ color: 'rgba(15,100,45,0.60)' }}>The Brief</p>
+            <p className="font-sans text-xs uppercase tracking-widest mb-3" style={{ color: 'rgba(185,28,28,0.60)' }}>The Brief</p>
             <p className="font-sans text-sm leading-relaxed text-stone-500">
               A local gym was still running on manual attendance logbooks and handwritten payment records. The goal was to replace that entirely with a self-contained system that auto-starts on Windows boot, works without internet, and backs up its own data automatically — to a local folder, a USB drive, or Google Drive.
             </p>
@@ -144,7 +144,7 @@ export default function FitnessMadnessModal({ onClose }: Props) {
                 <div
                   key={label}
                   className="flex items-center justify-between px-3 py-2.5 md:px-4 md:py-3 rounded-2xl"
-                  style={{ background: 'rgba(34,197,94,0.04)', border: '1px solid rgba(34,197,94,0.10)' }}
+                  style={{ background: 'rgba(239,68,68,0.04)', border: '1px solid rgba(239,68,68,0.12)' }}
                 >
                   <span className="font-sans text-sm text-stone-700">{label}</span>
                   <span className="font-sans text-xs text-right text-stone-400">{category}</span>
@@ -161,7 +161,7 @@ export default function FitnessMadnessModal({ onClose }: Props) {
                 <div
                   key={label}
                   className="flex items-center justify-between px-3 py-2.5 md:px-4 md:py-3 rounded-2xl"
-                  style={{ background: 'rgba(34,197,94,0.04)', border: '1px solid rgba(34,197,94,0.10)' }}
+                  style={{ background: 'rgba(239,68,68,0.04)', border: '1px solid rgba(239,68,68,0.12)' }}
                 >
                   <span className="font-sans text-sm text-stone-700">{label}</span>
                   <span className="font-sans text-xs text-right text-stone-400">{category}</span>
@@ -178,7 +178,7 @@ export default function FitnessMadnessModal({ onClose }: Props) {
                 <div
                   key={role}
                   className="p-4 md:p-5 rounded-2xl"
-                  style={{ background: 'rgba(34,197,94,0.04)', border: '1px solid rgba(34,197,94,0.10)' }}
+                  style={{ background: 'rgba(239,68,68,0.04)', border: '1px solid rgba(239,68,68,0.12)' }}
                 >
                   <p className="font-sans text-sm font-medium mb-1.5 text-stone-700">{role}</p>
                   <p className="font-sans text-sm leading-relaxed text-stone-500">{desc}</p>
@@ -195,9 +195,9 @@ export default function FitnessMadnessModal({ onClose }: Props) {
               rel="noopener noreferrer"
               className="btn-spring inline-flex items-center justify-center gap-2 font-sans text-sm font-semibold px-5 py-3 rounded-full transition-colors duration-150"
               style={{
-                background: 'rgba(34,197,94,0.08)',
-                color: 'rgba(15,100,45,0.85)',
-                border: '1px solid rgba(34,197,94,0.20)',
+                background: 'rgba(239,68,68,0.08)',
+                color: 'rgba(185,28,28,0.85)',
+                border: '1px solid rgba(239,68,68,0.18)',
               }}
             >
               GitHub Repo ↗

@@ -71,7 +71,7 @@ export default function BrewedModal({ onClose }: Props) {
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 flex-shrink-0" style={{ borderBottom: '1px solid rgba(180,120,40,0.10)' }}>
           <div>
-            <p className="font-sans text-xs uppercase tracking-widest mb-0.5" style={{ color: 'rgba(120,70,20,0.55)' }}>Web Development · 2026</p>
+            <p className="font-sans text-xs uppercase tracking-widest mb-0.5" style={{ color: 'rgba(120,70,20,0.55)' }}>Web Development · May 29, 2026 – Crafting</p>
             <h2 className="font-display text-xl text-stone-900">Brewed — Coffee House</h2>
           </div>
           <div className="flex items-center gap-3">

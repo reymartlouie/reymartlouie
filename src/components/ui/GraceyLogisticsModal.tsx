@@ -69,7 +69,7 @@ export default function GraceyLogisticsModal({ onClose }: Props) {
         className="relative w-full max-w-2xl rounded-[32px] overflow-hidden flex flex-col"
         style={{
           background: '#ffffff',
-          border: '1px solid rgba(59,130,246,0.12)',
+          border: '1px solid rgba(107,114,128,0.12)',
           boxShadow: '0 40px 120px rgba(0,0,0,0.4), 0 1px 0 rgba(255,255,255,0.9) inset',
           animation: 'modalCardIn 350ms cubic-bezier(0.34,1.2,0.64,1) both',
           maxHeight: '90vh',
@@ -77,9 +77,9 @@ export default function GraceyLogisticsModal({ onClose }: Props) {
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 flex-shrink-0" style={{ borderBottom: '1px solid rgba(59,130,246,0.10)' }}>
+        <div className="flex items-center justify-between px-6 py-4 flex-shrink-0" style={{ borderBottom: '1px solid rgba(107,114,128,0.10)' }}>
           <div>
-            <p className="font-sans text-xs uppercase tracking-widest mb-0.5" style={{ color: 'rgba(30,80,200,0.55)' }}>Web Development & Design </p>
+            <p className="font-sans text-xs uppercase tracking-widest mb-0.5" style={{ color: 'rgba(55,65,81,0.55)' }}>Web Development & Design · Dec 1, 2025 – May 29, 2026</p>
             <h2 className="font-display text-xl text-stone-900">Gracey Logistics Services</h2>
           </div>
           <div className="flex items-center gap-3">
@@ -88,7 +88,7 @@ export default function GraceyLogisticsModal({ onClose }: Props) {
               target="_blank"
               rel="noopener noreferrer"
               className="hidden md:inline-flex font-sans text-xs px-4 py-2 rounded-full transition-colors duration-150"
-              style={{ background: 'rgba(59,130,246,0.08)', color: 'rgba(30,80,200,0.85)', border: '1px solid rgba(59,130,246,0.18)' }}
+              style={{ background: 'rgba(234,88,12,0.08)', color: 'rgba(194,65,12,0.85)', border: '1px solid rgba(234,88,12,0.18)' }}
             >
               Live Site ↗
             </a>
@@ -107,7 +107,7 @@ export default function GraceyLogisticsModal({ onClose }: Props) {
         <div className="overflow-y-auto p-5 md:p-10">
 
         {/* Preview */}
-        <div className="mb-8 rounded-2xl overflow-hidden" style={{ border: '1px solid rgba(59,130,246,0.12)', boxShadow: '0 4px 20px rgba(0,0,0,0.07)' }}>
+        <div className="mb-8 rounded-2xl overflow-hidden" style={{ border: '1px solid rgba(107,114,128,0.12)', boxShadow: '0 4px 20px rgba(0,0,0,0.07)' }}>
           <img
             src="/gracey-preview.webp"
             alt="Gracey Logistics landing page"
@@ -131,9 +131,9 @@ export default function GraceyLogisticsModal({ onClose }: Props) {
         {/* Context */}
         <div
           className="mb-8 p-4 md:p-6 rounded-[20px]"
-          style={{ background: 'rgba(59,130,246,0.05)', border: '1px solid rgba(59,130,246,0.10)' }}
+          style={{ background: 'rgba(107,114,128,0.05)', border: '1px solid rgba(107,114,128,0.10)' }}
         >
-          <p className="font-sans text-xs uppercase tracking-widest mb-3" style={{ color: 'rgba(30,80,200,0.60)' }}>The Brief</p>
+          <p className="font-sans text-xs uppercase tracking-widest mb-3" style={{ color: 'rgba(55,65,81,0.60)' }}>The Brief</p>
           <p className="font-sans text-sm leading-relaxed text-stone-500">
             Gracey Logistics needed a brand presence and a live website — not a template or builder, but a
             real React application built from scratch. The site covers services, shipment tracking UI,
@@ -149,7 +149,7 @@ export default function GraceyLogisticsModal({ onClose }: Props) {
               <div
                 key={label}
                 className="flex items-center justify-between px-3 py-2.5 md:px-4 md:py-3 rounded-2xl"
-                style={{ background: 'rgba(59,130,246,0.04)', border: '1px solid rgba(59,130,246,0.10)' }}
+                style={{ background: 'rgba(107,114,128,0.04)', border: '1px solid rgba(107,114,128,0.10)' }}
               >
                 <span className="font-sans text-sm text-stone-700">{label}</span>
                 <span className="font-sans text-xs text-right text-stone-400">{category}</span>
@@ -166,7 +166,7 @@ export default function GraceyLogisticsModal({ onClose }: Props) {
               <div
                 key={label}
                 className="flex items-center justify-between px-3 py-2.5 md:px-4 md:py-3 rounded-2xl"
-                style={{ background: 'rgba(59,130,246,0.04)', border: '1px solid rgba(59,130,246,0.10)' }}
+                style={{ background: 'rgba(107,114,128,0.04)', border: '1px solid rgba(107,114,128,0.10)' }}
               >
                 <span className="font-sans text-sm text-stone-700">{label}</span>
                 <span className="font-sans text-xs text-right text-stone-400">{category}</span>
@@ -183,7 +183,7 @@ export default function GraceyLogisticsModal({ onClose }: Props) {
               <div
                 key={role}
                 className="p-4 md:p-5 rounded-2xl"
-                style={{ background: 'rgba(59,130,246,0.04)', border: '1px solid rgba(59,130,246,0.10)' }}
+                style={{ background: 'rgba(107,114,128,0.04)', border: '1px solid rgba(107,114,128,0.10)' }}
               >
                 <p className="font-sans text-sm font-medium mb-1.5 text-stone-700">{role}</p>
                 <p className="font-sans text-sm leading-relaxed text-stone-500">{desc}</p>
@@ -208,9 +208,9 @@ export default function GraceyLogisticsModal({ onClose }: Props) {
             rel="noopener noreferrer"
             className="btn-spring inline-flex items-center justify-center gap-2 font-sans text-sm font-semibold px-5 py-3 rounded-full transition-colors duration-150"
             style={{
-              background: 'rgba(59,130,246,0.08)',
-              color: 'rgba(30,80,200,0.85)',
-              border: '1px solid rgba(59,130,246,0.20)',
+              background: 'rgba(234,88,12,0.08)',
+              color: 'rgba(194,65,12,0.85)',
+              border: '1px solid rgba(234,88,12,0.20)',
             }}
           >
             <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
