@@ -3,33 +3,63 @@ $ whoami
 reymartlouie
 ```
 
-> UI/UX Designer · Computer Engineer · AI-Assisted Full Stack Dev · Freelancer  
-> Passionate about networking & the beauty of the terminal.
+> Computer Engineer · Linux Native
+> Network infrastructure is the career. Building systems and web products is the craft.
 
 ---
 
 ```zsh
 ~ $ cat about.txt
 
-  Crafting interfaces people love to use,
-  engineering systems that actually work,
-  and shipping full-stack apps with a little help from AI.
+  Computer engineer with a networking foundation —
+  routing, protocols, and infrastructure are where I live.
 
-  When I'm not pushing pixels or writing code,
-  I'm deep in network configs or living in the terminal.
+  On the side, I design and build:
+  management systems, internal tools, and landing pages
+  with a sharp eye for UX that makes sense to real users.
+
+  Linux is home. The terminal is the workspace.
+  Every project starts with: understand the network first.
 ```
 
 ---
 
-### `./stack --list`
+### `./career --networking`
+
+| Area | Skills |
+|---|---|
+| **Protocols** | TCP/IP · DNS · DHCP · HTTP/S · ICMP |
+| **Routing & Switching** | VLANs · Subnetting · Static & Dynamic Routing |
+| **Infrastructure** | Linux (daily driver) · SSH · Bash/Zsh · Network Diagnostics |
+| **Hardware** | Raspberry Pi · Embedded Systems · IoT Devices |
+
+---
+
+### `./builds --dev`
 
 | Layer | Tools |
 |---|---|
-| **Frontend** | Next.js 14 (App Router) · TypeScript · Tailwind CSS |
-| **Design** | Figma · UX Research · Component Systems |
-| **Backend** | Supabase · REST APIs · AI integrations |
-| **DevOps** | Vercel · Linux · Bash/Zsh · SSH |
-| **Network** | TCP/IP · DNS · Routing · Network Diagnostics |
+| **Frontend** | React · Next.js · TypeScript · Tailwind CSS · Vite |
+| **UI/UX** | Figma · Component Design · User Flows · Prototyping |
+| **Backend** | Python · Flask · SQLAlchemy · SQLite · Supabase |
+| **Mobile** | React Native |
+| **Deployment** | Vercel · Linux servers |
+
+```bash
+$ ls -1 ~/builds/shipped/
+
+  FitnessMadness/     # gym management system — kiosk, dashboard, payments, offline backup
+                      # Python · Flask · SQLAlchemy · SQLite · Waitress
+
+  FireSafe/           # thesis — thermal wildfire detection + real-time mobile alerting
+                      # React Native · Raspberry Pi · TinyML · Supabase · Arduino
+
+  GraceyLogistics/    # freight transport site — designed and built from scratch
+                      # React · TypeScript · Vite · Figma · Vercel
+
+  Brewed/             # coffee house landing page — menu, promos, order flow
+                      # React · TypeScript · Tailwind CSS · Vite · Vercel
+```
 
 ---
 
@@ -45,5 +75,5 @@ $ curl https://reymartlouie.vercel.app
 ---
 
 <div align="center">
-  <sub>Built with Next.js · Designed with intention · Deployed with obsession</sub>
+  <sub>Networked by training · Built on Linux · Shipped with intention</sub>
 </div>
