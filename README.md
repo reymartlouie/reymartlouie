@@ -1,7 +1,6 @@
-```bash
-$ whoami
-reymartlouie
-```
+<div align="center">
+  <img src="./terminal.svg" alt="reymartlouie terminal" width="100%"/>
+</div>
 
 > Computer Engineer · Linux Native
 > Network infrastructure is the career. Building systems and web products is the craft.
