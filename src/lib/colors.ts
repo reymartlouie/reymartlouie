@@ -17,13 +17,6 @@ export const cardMint = {
   tagBorder: 'rgba(167,220,195,0.22)',
 }
 
-// ── CenturionCard (gold on dark bg) ───────────────────────────────────────────
-export const cardGold = {
-  base: '#c9a84c',
-  dim:  'rgba(201,168,76,0.50)',
-  hint: 'rgba(201,168,76,0.12)',
-}
-
 // ── PayPalCard (PayPal blue + white overlays on black) ────────────────────────
 export const paypalTheme = {
   blue:       '#009cde',

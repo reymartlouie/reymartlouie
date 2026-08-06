@@ -1,8 +1,6 @@
 'use client'
 
 import Reveal from '../ui/Reveal'
-import CenturionCard from '../cards/CenturionCard'
-import CallingCard from '../cards/CallingCard'
 import PayPalCard from '../cards/PayPalCard'
 import PricingCard from '../cards/PricingCard'
 
@@ -18,16 +16,6 @@ export default function Footer() {
       {/* ── PayPal card ──────────────────────────────────────────────────── */}
       <Reveal className="lg:col-span-4" delay={80}>
         <PayPalCard />
-      </Reveal>
-
-      {/* ── Calling card ─────────────────────────────────────────────────── */}
-      <Reveal className="lg:col-span-4" delay={160}>
-        <CallingCard />
-      </Reveal>
-
-      {/* ── Centurion card ───────────────────────────────────────────────── */}
-      <Reveal className="lg:col-span-8" delay={220}>
-        <CenturionCard />
       </Reveal>
 
     </section>
