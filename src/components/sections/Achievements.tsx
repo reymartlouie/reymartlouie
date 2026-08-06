@@ -1,10 +1,11 @@
 'use client'
 
-import { useState, useRef, useCallback } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import Reveal from '../ui/Reveal'
 import BadgesModal from '../ui/BadgesModal'
 import InternshipModal from '../ui/InternshipModal'
 import GraduationModal from '../ui/GraduationModal'
+import ScrollSlider from '../ui/ScrollSlider'
 
 const badges = [
   { id: 'aa88a6dc-5970-484d-9191-665e5657d3da' },
@@ -63,28 +64,31 @@ const certs: Cert[] = [
 export default function Certifications() {
   const [badgeModalOpen, setBadgeModalOpen] = useState(false)
   const [certModal, setCertModal] = useState<{ id: CertId; view: string } | null>(null)
-  const [activeIndex, setActiveIndex] = useState(0)
+  const [progress, setProgress] = useState(0)
+  const [thumbPercent, setThumbPercent] = useState(100)
   const scrollRef = useRef<HTMLDivElement>(null)
 
-  const onScroll = useCallback(() => {
+  const updateSlider = useCallback(() => {
     const el = scrollRef.current
     if (!el) return
-    setActiveIndex(Math.round(el.scrollLeft / el.offsetWidth))
+    const max = el.scrollWidth - el.clientWidth
+    setProgress(max > 0 ? el.scrollLeft / max : 0)
+    setThumbPercent(el.scrollWidth > 0 ? (el.clientWidth / el.scrollWidth) * 100 : 100)
   }, [])
 
-  const scrollTo = useCallback((index: number) => {
-    const el = scrollRef.current
-    if (!el) return
-    el.scrollTo({ left: index * el.offsetWidth, behavior: 'smooth' })
-  }, [])
+  useEffect(() => {
+    updateSlider()
+    window.addEventListener('resize', updateSlider)
+    return () => window.removeEventListener('resize', updateSlider)
+  }, [updateSlider])
 
   return (
     <section id="certifications" className="flex flex-col gap-4">
       <Reveal>
-        <div className="glass rounded-[32px] overflow-hidden">
+        <div className="flex flex-col gap-4">
 
           {/* Header */}
-          <div className="px-6 md:px-8 pt-6 md:pt-7 pb-4 hidden md:flex items-center justify-end gap-4">
+          <div className="hidden md:flex items-center justify-end gap-4">
             <button
               onClick={() => setBadgeModalOpen(true)}
               className="flex items-center gap-2 px-4 py-2 rounded-full bg-stone-200 hover:bg-stone-300 transition-colors duration-150"
@@ -99,14 +103,14 @@ export default function Certifications() {
           {/* Cards — mobile: snap carousel / desktop: horizontal scroll */}
           <div
             ref={scrollRef}
-            onScroll={onScroll}
-            className="no-scrollbar flex overflow-x-auto snap-x snap-mandatory px-4 gap-4 pt-4 md:pt-0 md:snap-none md:px-8 md:pb-8 md:gap-6"
+            onScroll={updateSlider}
+            className="no-scrollbar flex overflow-x-auto snap-x snap-mandatory px-4 md:px-0 gap-4 pb-2 md:snap-none md:gap-6"
           >
             {certs.map((cert) => (
-              <div key={cert.id} className="snap-center flex-shrink-0 w-[calc(100%-2rem)] md:w-72 flex flex-col items-center pb-2 md:pb-0">
+              <div key={cert.id} className="snap-center flex-shrink-0 w-[calc(100%-2rem)] md:w-[340px] flex flex-col items-center pb-2 md:pb-0">
                 <div
                   className={`rounded-2xl bg-gradient-to-br ${cert.bgGradient} w-full overflow-hidden flex-shrink-0`}
-                  style={{ height: '216px' }}
+                  style={{ height: '260px' }}
                 >
                   <img
                     src={cert.image}
@@ -115,15 +119,15 @@ export default function Certifications() {
                     onClick={() => setCertModal({ id: cert.id, view: cert.photoView })}
                   />
                 </div>
-                <div className="flex flex-col items-center text-center mt-4 gap-1.5 w-full">
-                  <h3 className="font-display text-xl text-stone-900 leading-snug">{cert.title}</h3>
-                  <p className="font-sans text-sm text-stone-500 leading-relaxed">{cert.issuer}</p>
-                  <p className="font-sans text-sm font-semibold text-stone-700">{cert.dateLabel}</p>
+                <div className="flex flex-col items-center text-center mt-5 gap-2 w-full">
+                  <h3 className="font-display text-2xl text-stone-900 leading-snug">{cert.title}</h3>
+                  <p className="font-sans text-base text-stone-500 leading-relaxed">{cert.issuer}</p>
+                  <p className="font-sans text-base font-semibold text-stone-700">{cert.dateLabel}</p>
                 </div>
-                <div className="flex items-center gap-3 mt-4">
+                <div className="flex items-center gap-3 mt-5">
                   <button
                     onClick={() => setCertModal({ id: cert.id, view: cert.documentView })}
-                    className={`px-5 py-2 rounded-full text-white text-sm font-sans font-medium transition-colors duration-150 ${cert.buttonClass}`}
+                    className={`px-6 py-2.5 rounded-full text-white text-sm font-sans font-medium transition-colors duration-150 ${cert.buttonClass}`}
                   >
                     {cert.buttonText}
                   </button>
@@ -132,24 +136,11 @@ export default function Certifications() {
             ))}
           </div>
 
-          {/* Mobile: dot indicators */}
-          <div className="flex justify-center items-center gap-2 pt-4 pb-2 md:hidden">
-            {certs.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => scrollTo(i)}
-                className="rounded-full transition-all duration-200"
-                style={{
-                  width: activeIndex === i ? '20px' : '6px',
-                  height: '6px',
-                  background: activeIndex === i ? '#292524' : 'rgba(41,37,36,0.25)',
-                }}
-              />
-            ))}
-          </div>
+          {/* Mobile: scroll position slider */}
+          <ScrollSlider scrollRef={scrollRef} progress={progress} thumbPercent={thumbPercent} className="md:hidden" />
 
           {/* Mobile: badge button */}
-          <div className="flex justify-end px-6 pb-6 md:hidden">
+          <div className="flex justify-end md:hidden">
             <button
               onClick={() => setBadgeModalOpen(true)}
               className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-stone-200 hover:bg-stone-300 transition-colors duration-150"

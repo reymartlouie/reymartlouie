@@ -14,8 +14,8 @@ const NOTE_LIMIT  = 3
 const NOTE_WINDOW = 24 * 60 * 60 * 1000 // 24 h
 
 // Every bento card renders at this exact size — uniform "pills" in the carousel.
-const CARD_W = 320
-const CARD_H = 380
+const CARD_W = 340
+const CARD_H = 400
 
 function readRate(): { count: number; resetAt: number } {
   try {
@@ -127,7 +127,8 @@ export default function Hero() {
         ref={scrollRef}
         onPointerDown={onPointerDown}
         onDragStart={(e) => e.preventDefault()}
-        className="no-scrollbar flex overflow-x-auto snap-x snap-mandatory gap-4 pb-2 cursor-grab select-none"
+        className="no-scrollbar flex overflow-x-auto snap-x snap-mandatory px-4 md:px-0 gap-5 md:gap-6 py-4 cursor-grab select-none"
+        style={{ scrollPaddingLeft: '1rem' }}
       >
         {STATIC_CARDS.map((Card, i) => (
           <div key={i} className="flex-shrink-0 snap-start flex" style={{ width: CARD_W, height: CARD_H }}>
