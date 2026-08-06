@@ -165,28 +165,23 @@ export default function Works() {
     <section className="flex flex-col gap-4">
       <div ref={ref} className="reveal-item flex flex-col gap-4">
 
-        <div className="rounded-[32px] overflow-hidden" style={{ background: '#f5f5f7' }}>
-          <div className="px-6 md:px-8 pt-8 md:pt-10 pb-4 flex items-end justify-between gap-4">
-            <h2 className="font-display text-[44px] md:text-[56px] leading-[1.05] text-stone-900 font-black">
-              Selected<br />Work.
-            </h2>
-            <div className="hidden md:block pb-1">
-              <button
-                onClick={() => setUiuxOpen(true)}
-                className="flex items-center gap-2 px-4 py-2 rounded-full bg-stone-200 hover:bg-stone-300 transition-colors duration-150"
-              >
-                <span className="font-sans text-sm text-stone-600">UI/UX</span>
-                <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-stone-500">
-                  <path d="M2.5 11.5L11.5 2.5M11.5 2.5H5.5M11.5 2.5V8.5" />
-                </svg>
-              </button>
-            </div>
+        <div className="glass rounded-[32px] overflow-hidden">
+          <div className="px-6 md:px-8 pt-6 md:pt-7 pb-4 hidden md:flex items-center justify-end gap-4">
+            <button
+              onClick={() => setUiuxOpen(true)}
+              className="flex items-center gap-2 px-4 py-2 rounded-full bg-stone-200 hover:bg-stone-300 transition-colors duration-150"
+            >
+              <span className="font-sans text-sm text-stone-600">UI/UX</span>
+              <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-stone-500">
+                <path d="M2.5 11.5L11.5 2.5M11.5 2.5H5.5M11.5 2.5V8.5" />
+              </svg>
+            </button>
           </div>
 
           <div
             ref={scrollRef}
             onScroll={onCarouselScroll}
-            className="no-scrollbar flex overflow-x-auto snap-x snap-mandatory px-4 gap-4 pb-4"
+            className="no-scrollbar flex overflow-x-auto snap-x snap-mandatory px-4 gap-4 pt-4 md:pt-0 pb-4"
             style={{ scrollPaddingLeft: '1rem' }}
           >
             {works.map((work, index) => (

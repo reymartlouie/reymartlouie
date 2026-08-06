@@ -57,7 +57,7 @@ export default function FitnessMadnessModal({ onClose }: Props) {
     <div
       className="fixed inset-0 z-[9000] flex items-center justify-center p-4 md:p-8"
       style={{
-        background: 'rgba(0,0,0,0.75)',
+        background: 'rgba(0,0,0,0.55)',
         backdropFilter: 'blur(12px)',
         WebkitBackdropFilter: 'blur(12px)',
         animation: 'modalBackdropIn 200ms ease both',
@@ -67,9 +67,11 @@ export default function FitnessMadnessModal({ onClose }: Props) {
       <div
         className="relative w-full max-w-2xl rounded-[32px] overflow-hidden flex flex-col"
         style={{
-          background: '#ffffff',
+          background: 'rgba(255,255,255,0.78)',
+          backdropFilter: 'blur(28px) saturate(180%)',
+          WebkitBackdropFilter: 'blur(28px) saturate(180%)',
           border: '1px solid rgba(239,68,68,0.18)',
-          boxShadow: '0 40px 120px rgba(0,0,0,0.4), 0 1px 0 rgba(255,255,255,0.9) inset',
+          boxShadow: '0 30px 80px rgba(0,0,0,0.16), 0 1px 0 rgba(255,255,255,0.9) inset',
           animation: 'modalCardIn 350ms cubic-bezier(0.34,1.2,0.64,1) both',
           maxHeight: '90vh',
         }}

@@ -20,6 +20,7 @@ export default function TechStackCard() {
         `,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
+        boxShadow: '0 20px 50px rgba(0,0,0,0.16)',
       }}
     >
       {/* subtle corner glow — complements the teal tiles */}

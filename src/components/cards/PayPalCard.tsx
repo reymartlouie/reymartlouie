@@ -73,8 +73,8 @@ export default function PayPalCard() {
         boxShadow: `
           inset 0  1px 0 rgba(255,255,255,0.08),
           inset 0 -1px 0 rgba(0,0,0,0.60),
-          0 32px 80px rgba(0,0,0,0.70),
-          0  8px 24px rgba(0,0,0,0.50)
+          0 20px 50px rgba(0,0,0,0.22),
+          0  4px 14px rgba(0,0,0,0.14)
         `,
       }}
     >

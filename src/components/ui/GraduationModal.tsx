@@ -35,9 +35,11 @@ export default function GraduationModal({ view, onClose }: Props) {
       <div
         className="relative w-full max-w-3xl rounded-[32px] overflow-hidden flex flex-col"
         style={{
-          background: '#ffffff',
+          background: 'rgba(255,255,255,0.78)',
+          backdropFilter: 'blur(28px) saturate(180%)',
+          WebkitBackdropFilter: 'blur(28px) saturate(180%)',
           border: '1px solid rgba(0,0,0,0.08)',
-          boxShadow: '0 40px 120px rgba(0,0,0,0.5), 0 1px 0 rgba(255,255,255,0.8) inset',
+          boxShadow: '0 30px 80px rgba(0,0,0,0.16), 0 1px 0 rgba(255,255,255,0.8) inset',
           animation: 'modalCardIn 350ms cubic-bezier(0.34,1.2,0.64,1) both',
           maxHeight: '90vh',
         }}

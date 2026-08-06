@@ -82,8 +82,8 @@ export default function CenturionCard() {
           inset 0 -1px 0 rgba(0,0,0,0.70),
           inset  1px 0 0 rgba(255,255,255,0.14),
           inset -1px 0 0 rgba(0,0,0,0.40),
-          0 32px 80px rgba(0,0,0,0.60),
-          0  8px 24px rgba(0,0,0,0.35)
+          0 20px 50px rgba(0,0,0,0.20),
+          0  4px 14px rgba(0,0,0,0.12)
         `,
         padding: '2rem 2.5rem',
         minHeight: 280,

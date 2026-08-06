@@ -23,14 +23,15 @@ const services = [
 
 export default function PricingCard() {
   return (
-    <div className="h-full rounded-[32px] overflow-hidden" style={{ background: '#f5f5f7' }}>
+    <div className="glass h-full rounded-[32px] overflow-hidden">
 
       {/* Header */}
-      <div className="px-6 md:px-8 pt-8 md:pt-10 pb-6 flex items-end justify-between gap-4">
-        <h2 className="font-display text-[44px] md:text-[56px] leading-[1.05] text-stone-900 font-black">
-          Pricing.
-        </h2>
-        <p className="font-sans text-sm text-stone-500 pb-1 hidden md:block">
+      <div className="px-6 md:px-8 pt-6 md:pt-7 pb-4 flex items-center justify-between gap-4">
+        <div className="flex items-center gap-2">
+          <div className="w-px h-3.5 bg-stone-400/50" />
+          <span className="font-sans text-xs uppercase tracking-widest text-stone-500">Pricing</span>
+        </div>
+        <p className="font-sans text-sm text-stone-500 hidden md:block">
           Rates vary by scope
         </p>
       </div>

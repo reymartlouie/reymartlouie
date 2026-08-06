@@ -8,6 +8,7 @@ export default function HeroIntroCard() {
         backgroundImage: 'url(/hero-chip-bg.webp)',
         backgroundSize: '130% auto',
         backgroundPosition: 'left',
+        boxShadow: '0 20px 50px rgba(0,0,0,0.18)',
       }}
     >
       {/* dark overlay so text stays readable */}
@@ -22,11 +23,6 @@ export default function HeroIntroCard() {
           <span className="w-1.5 h-1.5 rounded-full bg-fuchsia-400 animate-pulse" />
           Available for work
         </span>
-        <h1 className="font-display font-black text-[44px] @md:text-[58px] @xl:text-[72px] leading-[1.05] mb-3 @xl:mb-4 text-white">
-          Computer<br />
-          Engineer<br />
-          <span className="text-fuchsia-300/80">&amp; Developer.</span>
-        </h1>
         <p className="font-sans text-sm @md:text-base max-w-lg leading-relaxed text-white/60">
           Computer Engineer focused on UI/UX and Full-Stack Development — building polished, production-ready interfaces
           with a foundation in hardware and networking.

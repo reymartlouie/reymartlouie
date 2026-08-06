@@ -22,7 +22,7 @@ export default function StartupScreen() {
         position:       'fixed',
         inset:          0,
         zIndex:         99999,
-        background:     '#000000',
+        background:     '#f5f5f7',
         display:        'flex',
         alignItems:     'center',
         justifyContent: 'center',
@@ -36,7 +36,7 @@ export default function StartupScreen() {
         style={{
           fontFamily:    'var(--font-archivo-black), sans-serif',
           fontSize:      '1.5rem',
-          color:         'rgba(242,242,242,0.45)',
+          color:         'rgba(29,29,31,0.45)',
           letterSpacing: '-0.01em',
           animation:     'startupIn 500ms cubic-bezier(0.2,0,0,1) both',
         }}

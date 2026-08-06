@@ -78,7 +78,10 @@ export default function GitHubCard() {
     <div
       ref={cardRef}
       className="@container flex-1 rounded-[32px] p-6 relative overflow-hidden min-h-[180px] flex flex-col justify-between"
-      style={{ background: 'linear-gradient(145deg, #0d3318 0%, #071a0c 100%)' }}
+      style={{
+        background: 'linear-gradient(145deg, #0d3318 0%, #071a0c 100%)',
+        boxShadow: '0 20px 50px rgba(0,0,0,0.16)',
+      }}
     >
       {/* ambient glow */}
       <div className="absolute -top-10 -left-10 w-40 h-40 rounded-full blur-3xl pointer-events-none"

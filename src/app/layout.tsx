@@ -73,7 +73,7 @@ export const metadata: Metadata = {
   },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true } },
   other: {
-    'apple-mobile-web-app-status-bar-style': 'black-translucent',
+    'apple-mobile-web-app-status-bar-style': 'default',
     'apple-mobile-web-app-capable': 'yes',
     'apple-mobile-web-app-title': 'Reymart Louie',
   },
