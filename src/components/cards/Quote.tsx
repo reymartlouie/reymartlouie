@@ -1,8 +1,10 @@
 'use client'
 
-const BLUE      = 'rgba(160,210,255,0.80)'
-const BLUE_DIM  = 'rgba(160,210,255,0.45)'
-const BLUE_GLOW = 'rgba(160,210,255,0.18)'
+import { cardBlue } from '@/lib/colors'
+
+const BLUE      = cardBlue.base
+const BLUE_DIM  = cardBlue.dim
+const BLUE_GLOW = cardBlue.glow
 
 export default function Quote() {
   return (
@@ -15,6 +17,7 @@ export default function Quote() {
         `,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
+        boxShadow: '0 20px 50px rgba(0,0,0,0.16)',
       }}
     >
       <div
@@ -23,7 +26,7 @@ export default function Quote() {
       />
 
       <div className="relative p-6 flex flex-col justify-between h-full gap-4">
-        <p className="font-display text-3xl leading-none" style={{ color: BLUE_DIM }}>"</p>
+        <p className="font-display text-3xl leading-none" style={{ color: BLUE_DIM }}>&quot;</p>
 
         <p className="font-sans text-sm leading-relaxed" style={{ color: BLUE }}>
           First, solve the problem. Then, write the code.

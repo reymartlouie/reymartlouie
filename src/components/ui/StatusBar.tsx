@@ -90,6 +90,14 @@ function IconFile() {
   )
 }
 
+// ── Center nav — moved here from the old floating Navbar ───────────────────────
+
+const NAV = [
+  { id: 'about',   label: 'Canvas',  href: '#about'   },
+  { id: 'work',    label: 'Work',    href: '#work'    },
+  { id: 'contact', label: 'Contact', href: '#contact' },
+] as const
+
 const SECTIONS = [
   { id: 'about',   label: 'Canvas'  },
   { id: 'work',    label: 'Work'    },
@@ -396,7 +404,7 @@ function StatusBar() {
   return (
     <>
     <div
-      className="fixed top-0 inset-x-0 z-50 flex items-center justify-between select-none"
+      className="fixed top-0 inset-x-0 z-50 grid grid-cols-[1fr_auto_1fr] items-center select-none"
       style={{
         height:               36,
         paddingLeft:          20,
@@ -473,8 +481,26 @@ function StatusBar() {
         )}
       </div>
 
+      {/* ── Center — section nav, moved here from the old floating Navbar ── */}
+      <div className="hidden md:flex items-center gap-5 justify-self-center">
+        {NAV.map(({ id, label, href }) => {
+          const isActive = section === label
+          return (
+            <a
+              key={id}
+              href={href}
+              onClick={scrollToCenter(href)}
+              className="font-sans"
+              style={{ fontSize: 12, color: isActive ? 'var(--bar-text-active)' : 'var(--bar-text)', transition: 'color 200ms ease' }}
+            >
+              {label}
+            </a>
+          )
+        })}
+      </div>
+
       {/* ── Right ── */}
-      <div className="flex items-center gap-2.5">
+      <div className="flex items-center gap-2.5 justify-self-end">
         <span style={{ color: 'var(--bar-text)', display: 'flex', alignItems: 'center' }}>
           <IconWifi />
         </span>

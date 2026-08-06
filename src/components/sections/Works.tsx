@@ -4,34 +4,149 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import FireSafeModal from '../ui/FireSafeModal'
 import GraceyLogisticsModal from '../ui/GraceyLogisticsModal'
 import BrewedModal from '../ui/BrewedModal'
+import FitnessMadnessModal from '../ui/FitnessMadnessModal'
 import UIUXModal from '../ui/UIUXModal'
+import ScrollSlider from '../ui/ScrollSlider'
 
-const firesafeTags = ['React Native', 'Raspberry Pi Zero 2 W', 'Supabase', 'TinyML', 'Python', 'Arduino']
-const graceyTags = ['React', 'TypeScript', 'Vite', 'Figma', 'Vercel']
-const brewedTags = ['React', 'TypeScript', 'Tailwind CSS', 'Vite', 'Vercel']
+type WorkId = 'fitnessmadness' | 'firesafe' | 'gracey' | 'brewed'
 
-const workCount: number = 3
+type Work = {
+  id: WorkId
+  year: number
+  category: string
+  title: string
+  description: string
+  cardBg: string
+  cardBorder: string
+  cardShadow: string
+  dividerColor: string
+  labelColor: string
+  viewDetailsColor: string
+  image: string
+  imageAlt: string
+  imageClass: string
+  tags: string[]
+  tagColor: string
+  tagBg: string
+  tagBorder: string
+  dateRange: string
+  isDark?: boolean
+}
+
+// Add new works here — newest first
+const works: Work[] = [
+  {
+    id: 'fitnessmadness',
+    year: 2026,
+    category: 'Full-Stack',
+    title: 'FitnessMadness',
+    description: 'Gym attendance management system with a member kiosk, admin dashboard, payment tracking, and multi-layer offline backup.',
+    cardBg: 'linear-gradient(145deg, #fff1f2 0%, #ffe4e6 100%)',
+    cardBorder: '1px solid rgba(239,68,68,0.18)',
+    cardShadow: '0 2px 24px rgba(239,68,68,0.10), inset 0 1px 0 rgba(255,255,255,0.9)',
+    dividerColor: 'rgba(239,68,68,0.45)',
+    labelColor: 'rgba(153,27,27,0.55)',
+    viewDetailsColor: 'rgba(185,28,28,0.85)',
+    image: '/fitnessmadness-logo.svg',
+    imageAlt: 'FitnessMadness',
+    imageClass: 'w-40 h-40 drop-shadow-xl group-hover:scale-105 transition-transform duration-500',
+    tags: ['Python', 'Flask', 'SQLAlchemy', 'SQLite', 'Waitress'],
+    tagColor: 'rgba(153,27,27,0.85)',
+    tagBg: 'rgba(239,68,68,0.08)',
+    tagBorder: '1px solid rgba(239,68,68,0.18)',
+    dateRange: "May 2026 – Crafting",
+  },
+  {
+    id: 'brewed',
+    year: 2026,
+    category: 'Web Development',
+    title: 'Brewed',
+    description: 'Coffee house landing page with an interactive menu, promotional modals, and a streamlined order flow.',
+    cardBg: 'linear-gradient(145deg, #fdf8f0 0%, #fdefd8 100%)',
+    cardBorder: '1px solid rgba(180,120,40,0.12)',
+    cardShadow: '0 2px 24px rgba(180,120,40,0.08), inset 0 1px 0 rgba(255,255,255,0.9)',
+    dividerColor: 'rgba(180,120,40,0.35)',
+    labelColor: 'rgba(120,70,20,0.55)',
+    viewDetailsColor: 'rgba(140,80,20,0.85)',
+    image: '/brewed-icon.svg',
+    imageAlt: 'Brewed',
+    imageClass: 'w-40 h-40 drop-shadow-xl group-hover:scale-105 transition-transform duration-500',
+    tags: ['React', 'TypeScript', 'Tailwind CSS', 'Vite', 'Vercel'],
+    tagColor: 'rgba(120,70,20,0.85)',
+    tagBg: 'rgba(180,120,40,0.08)',
+    tagBorder: '1px solid rgba(180,120,40,0.18)',
+    dateRange: "May 2026 – Crafting",
+  },
+  {
+    id: 'gracey',
+    year: 2026,
+    category: 'Web Development',
+    title: 'Gracey Logistics',
+    description: 'Freight transport website designed and built from scratch with React, TypeScript, and Vite — deployed live on Vercel.',
+    cardBg: 'linear-gradient(145deg, #f9fafb 0%, #f3f4f6 100%)',
+    cardBorder: '1px solid rgba(107,114,128,0.18)',
+    cardShadow: '0 2px 24px rgba(107,114,128,0.10), inset 0 1px 0 rgba(255,255,255,0.9)',
+    dividerColor: 'rgba(234,88,12,0.55)',
+    labelColor: 'rgba(55,65,81,0.55)',
+    viewDetailsColor: 'rgba(194,65,12,0.85)',
+    image: '/gracey-icon.svg',
+    imageAlt: 'Gracey Logistics Services',
+    imageClass: 'w-40 h-40 drop-shadow-xl group-hover:scale-105 transition-transform duration-500',
+    tags: ['React', 'TypeScript', 'Vite', 'Figma', 'Vercel'],
+    tagColor: 'rgba(55,65,81,0.85)',
+    tagBg: 'rgba(107,114,128,0.08)',
+    tagBorder: '1px solid rgba(107,114,128,0.18)',
+    dateRange: "Dec 2025 – May 2026",
+  },
+  {
+    id: 'firesafe',
+    year: 2025,
+    category: 'Thesis',
+    title: 'FireSafe',
+    description: 'Thermal imaging wildfire detection with real-time mobile alerting for rural barangays.',
+    cardBg: 'linear-gradient(145deg, #fff7f0 0%, #ffede0 100%)',
+    cardBorder: '1px solid rgba(234,88,12,0.18)',
+    cardShadow: '0 2px 24px rgba(234,88,12,0.10), inset 0 1px 0 rgba(255,255,255,0.9)',
+    dividerColor: 'rgba(220,38,38,0.45)',
+    labelColor: 'rgba(153,27,27,0.55)',
+    viewDetailsColor: 'rgba(194,65,12,0.85)',
+    image: '/firesafe-icon.svg',
+    imageAlt: 'FireSafe',
+    imageClass: 'w-40 h-40 drop-shadow-xl group-hover:scale-105 transition-transform duration-500',
+    tags: ['React Native', 'Raspberry Pi Zero 2 W', 'Supabase', 'TinyML', 'Python', 'Arduino'],
+    tagColor: 'rgba(153,27,27,0.85)',
+    tagBg: 'rgba(234,88,12,0.08)',
+    tagBorder: '1px solid rgba(234,88,12,0.18)',
+    dateRange: "Sept 2025 – Mar 2026",
+  },
+]
+
+// Tall portrait cards, apple.com/iphone "Get to know" style — fixed size, several visible at once.
+const CARD_W = 320
+const CARD_H = 600
+const CARD_GAP = 20
 
 export default function Works() {
-  const [firesafeOpen, setFiresafeOpen] = useState(false)
-  const [graceyOpen, setGraceyOpen] = useState(false)
-  const [brewedOpen, setBrewedOpen] = useState(false)
-  const [activeIndex, setActiveIndex] = useState(0)
+  const [openWorkId, setOpenWorkId] = useState<WorkId | null>(null)
   const [uiuxOpen, setUiuxOpen] = useState(false)
+  const [progress, setProgress] = useState(0)
+  const [thumbPercent, setThumbPercent] = useState(100)
   const ref = useRef<HTMLDivElement>(null)
   const scrollRef = useRef<HTMLDivElement>(null)
 
-  const onCarouselScroll = useCallback(() => {
+  const updateSlider = useCallback(() => {
     const el = scrollRef.current
     if (!el) return
-    setActiveIndex(Math.round(el.scrollLeft / el.offsetWidth))
+    const max = el.scrollWidth - el.clientWidth
+    setProgress(max > 0 ? el.scrollLeft / max : 0)
+    setThumbPercent(el.scrollWidth > 0 ? (el.clientWidth / el.scrollWidth) * 100 : 100)
   }, [])
 
-  const scrollTo = useCallback((index: number) => {
-    const el = scrollRef.current
-    if (!el) return
-    el.scrollTo({ left: index * el.offsetWidth, behavior: 'smooth' })
-  }, [])
+  useEffect(() => {
+    updateSlider()
+    window.addEventListener('resize', updateSlider)
+    return () => window.removeEventListener('resize', updateSlider)
+  }, [updateSlider])
 
   useEffect(() => {
     const el = ref.current
@@ -50,7 +165,7 @@ export default function Works() {
   }, [])
 
   useEffect(() => {
-    const handler = () => setFiresafeOpen(true)
+    const handler = () => setOpenWorkId('firesafe')
     window.addEventListener('open-firesafe', handler)
     return () => window.removeEventListener('open-firesafe', handler)
   }, [])
@@ -59,234 +174,86 @@ export default function Works() {
     <section className="flex flex-col gap-4">
       <div ref={ref} className="reveal-item flex flex-col gap-4">
 
-        {/* Selected work */}
-        <div className="rounded-[32px] overflow-hidden" style={{ background: '#f5f5f7' }}>
-          <div className="px-6 md:px-8 pt-8 md:pt-10 pb-4 flex items-end justify-between gap-4">
-            <h2 className="font-display text-[44px] md:text-[56px] leading-[1.05] text-stone-900 font-black">
-              Selected<br />Work.
-            </h2>
-            <div className="hidden md:block pb-1">
-              <button
-                onClick={() => setUiuxOpen(true)}
-                className="flex items-center gap-2 px-4 py-2 rounded-full bg-stone-200 hover:bg-stone-300 transition-colors duration-150"
-              >
-                <span className="font-sans text-sm text-stone-600">UI/UX</span>
-                <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-stone-500">
-                  <path d="M2.5 11.5L11.5 2.5M11.5 2.5H5.5M11.5 2.5V8.5" />
-                </svg>
-              </button>
-            </div>
-          </div>
-
-          {/* Cards — mobile: snap carousel / desktop: original grid */}
-          <div className="overflow-x-hidden mx-4 md:overflow-visible md:mx-0">
-          <div
-            ref={scrollRef}
-            onScroll={onCarouselScroll}
-            className="no-scrollbar flex overflow-x-auto snap-x snap-mandatory gap-3 pb-4 md:grid md:grid-cols-1 md:overflow-visible md:snap-none md:p-4 lg:p-5 lg:grid-cols-2"
+        <div className="hidden md:flex items-center justify-end gap-4">
+          <button
+            onClick={() => setUiuxOpen(true)}
+            className="flex items-center gap-2 px-4 py-2 rounded-full bg-stone-200 hover:bg-stone-300 transition-colors duration-150"
           >
-
-            {/* Brewed card */}
-            <div
-              className="snap-start flex-shrink-0 w-[85%] md:w-auto h-[360px] md:h-auto rounded-[24px] overflow-hidden flex flex-col group"
-              style={{
-                background: 'linear-gradient(145deg, #fdf8f0 0%, #fdefd8 100%)',
-                border: '1px solid rgba(180,120,40,0.12)',
-                boxShadow: '0 2px 24px rgba(180,120,40,0.08), inset 0 1px 0 rgba(255,255,255,0.9)',
-              }}
-            >
-              <div className="px-6 md:px-8 pt-6 pb-5">
-                <div className="flex items-center gap-2 mb-2">
-                  <div className="w-px h-3" style={{ background: 'rgba(180,120,40,0.35)' }} />
-                  <span className="font-sans text-xs uppercase tracking-widest" style={{ color: 'rgba(120,70,20,0.55)' }}>01 · Web Development · 2025</span>
-                </div>
-                <h3 className="font-display text-4xl leading-tight text-stone-900">Brewed</h3>
-                <p className="font-sans text-sm leading-relaxed mt-2 mb-4 text-stone-500">
-                  Coffee house landing page with an interactive menu, promo modals, and a streamlined order flow.
-                </p>
-                <span onClick={() => setBrewedOpen(true)} className="inline-flex items-center gap-1.5 font-sans text-sm font-medium cursor-pointer" style={{ color: 'rgba(140,80,20,0.85)' }}>
-                  View Details →
-                </span>
-              </div>
-
-              {/* Bottom: coffee cup icon on warm tinted bg */}
-              <div className="relative overflow-hidden mt-auto" style={{ height: '192px' }}>
-                <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, #fdefd8 0%, #f8e0b8 100%)' }} />
-                <div className="absolute inset-0 flex items-center justify-center pb-10">
-                  <svg
-                    viewBox="0 0 512 512"
-                    className="w-20 h-20 drop-shadow-xl group-hover:scale-105 transition-transform duration-500"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <rect width="512" height="512" rx="112" fill="#331f11" />
-                    <ellipse cx="256" cy="310" rx="110" ry="16" fill="rgba(0,0,0,0.15)" />
-                    <rect x="146" y="190" width="220" height="140" rx="30" fill="#fef9f2" />
-                    <ellipse cx="256" cy="222" rx="80" ry="22" fill="#bd9c88" />
-                    <path d="M366 240 Q420 240 420 280 Q420 320 366 320" stroke="#fef9f2" strokeWidth="18" strokeLinecap="round" fill="none" />
-                    <rect x="146" y="322" width="220" height="16" rx="8" fill="#fef9f2" />
-                    <path d="M220 178 Q224 158 220 140" stroke="#f6dfc0" strokeWidth="8" strokeLinecap="round" fill="none" />
-                    <path d="M256 172 Q260 148 256 128" stroke="#f6dfc0" strokeWidth="8" strokeLinecap="round" fill="none" />
-                    <path d="M292 178 Q296 158 292 140" stroke="#f6dfc0" strokeWidth="8" strokeLinecap="round" fill="none" />
-                  </svg>
-                </div>
-                <div className="absolute bottom-5 left-6 right-6 hidden md:flex flex-wrap gap-1.5">
-                  {brewedTags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="font-sans text-xs px-2.5 py-1 rounded-full"
-                      style={{
-                        color: 'rgba(120,70,20,0.85)',
-                        backgroundColor: 'rgba(180,120,40,0.08)',
-                        border: '1px solid rgba(180,120,40,0.18)',
-                      }}
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* FireSafe card */}
-            <div
-              className="snap-start flex-shrink-0 w-[85%] md:w-auto h-[360px] md:h-auto rounded-[24px] overflow-hidden flex flex-col group"
-              style={{
-                background: 'linear-gradient(145deg, #fff8f5 0%, #ffede0 100%)',
-                border: '1px solid rgba(239,68,68,0.12)',
-                boxShadow: '0 2px 24px rgba(239,68,68,0.08), inset 0 1px 0 rgba(255,255,255,0.9)',
-              }}
-            >
-              <div className="px-6 md:px-8 pt-6 pb-5">
-                <div className="flex items-center gap-2 mb-2">
-                  <div className="w-px h-3" style={{ background: 'rgba(239,68,68,0.35)' }} />
-                  <span className="font-sans text-xs uppercase tracking-widest" style={{ color: 'rgba(180,40,20,0.55)' }}>02 · Thesis · 2025</span>
-                </div>
-                <h3 className="font-display text-4xl leading-tight text-stone-900">FireSafe</h3>
-                <p className="font-sans text-sm leading-relaxed mt-2 mb-4 text-stone-500">
-                  Thermal imaging wildfire detection with real-time mobile alerting for rural barangays.
-                </p>
-                <span onClick={() => setFiresafeOpen(true)} className="inline-flex items-center gap-1.5 font-sans text-sm font-medium cursor-pointer" style={{ color: 'rgba(200,50,20,0.85)' }}>
-                  View Details →
-                </span>
-              </div>
-
-              {/* Bottom: FireSafe logo on warm tinted bg */}
-              <div className="relative overflow-hidden mt-auto" style={{ height: '192px' }}>
-                <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, #ffede0 0%, #ffe4cc 100%)' }} />
-                <div className="absolute inset-0 flex items-center justify-center pb-10">
-                  <img
-                    src="/firesafe-logo.webp"
-                    alt="FireSafe"
-                    className="w-36 h-auto drop-shadow-xl group-hover:scale-105 transition-transform duration-500"
-                  />
-                </div>
-                <div className="absolute bottom-5 left-6 right-6 hidden md:flex flex-wrap gap-1.5">
-                  {firesafeTags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="font-sans text-xs px-2.5 py-1 rounded-full"
-                      style={{
-                        color: 'rgba(180,40,20,0.85)',
-                        backgroundColor: 'rgba(239,68,68,0.08)',
-                        border: '1px solid rgba(239,68,68,0.18)',
-                      }}
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Gracey Logistics Services card */}
-            <div
-              className="snap-start flex-shrink-0 w-[85%] md:w-auto h-[360px] md:h-auto rounded-[24px] overflow-hidden flex flex-col group"
-              style={{
-                background: 'linear-gradient(145deg, #f5f8ff 0%, #edf4ff 100%)',
-                border: '1px solid rgba(59,130,246,0.12)',
-                boxShadow: '0 2px 24px rgba(59,130,246,0.06), inset 0 1px 0 rgba(255,255,255,0.9)',
-              }}
-            >
-              <div className="px-6 md:px-8 pt-6 pb-5">
-                <div className="flex items-center gap-2 mb-2">
-                  <div className="w-px h-3" style={{ background: 'rgba(59,130,246,0.35)' }} />
-                  <span className="font-sans text-xs uppercase tracking-widest" style={{ color: 'rgba(30,80,200,0.55)' }}>03 · Web Development · 2024</span>
-                </div>
-                <h3 className="font-display text-4xl leading-tight text-stone-900">Gracey Logistics</h3>
-                <p className="font-sans text-sm leading-relaxed mt-2 mb-4 text-stone-500">
-                  Built and designed a full freight transport website with React, TypeScript, and Vite — deployed live on Vercel.
-                </p>
-                <span onClick={() => setGraceyOpen(true)} className="inline-flex items-center gap-1.5 font-sans text-sm font-medium cursor-pointer" style={{ color: 'rgba(30,80,220,0.85)' }}>
-                  View Details →
-                </span>
-              </div>
-
-              {/* Bottom: Gracey logo on cool tinted bg */}
-              <div className="relative overflow-hidden mt-auto" style={{ height: '192px' }}>
-                <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, #edf4ff 0%, #e0ecff 100%)' }} />
-                <div className="absolute inset-0 flex items-center justify-center pb-10">
-                  <img
-                    src="/gracey-logo.webp"
-                    alt="Gracey Logistics Services"
-                    className="w-40 h-auto drop-shadow-xl group-hover:scale-105 transition-transform duration-500"
-                  />
-                </div>
-                <div className="absolute bottom-5 left-6 right-6 hidden md:flex flex-wrap gap-1.5">
-                  {graceyTags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="font-sans text-xs px-2.5 py-1 rounded-full"
-                      style={{
-                        color: 'rgba(30,80,220,0.85)',
-                        backgroundColor: 'rgba(59,130,246,0.08)',
-                        border: '1px solid rgba(59,130,246,0.18)',
-                      }}
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-          </div>
-          </div>
-
-          {/* Mobile: dot indicators */}
-          <div className="flex justify-center items-center gap-2 pb-5 md:hidden">
-            {Array.from({ length: workCount }).map((_, i) => (
-              <button
-                key={i}
-                onClick={() => scrollTo(i)}
-                className="rounded-full transition-all duration-200"
-                style={{
-                  width: activeIndex === i ? '20px' : '6px',
-                  height: '6px',
-                  background: activeIndex === i ? '#292524' : 'rgba(41,37,36,0.25)',
-                }}
-              />
-            ))}
-          </div>
-
-          {/* Mobile: UI/UX button */}
-          <div className="flex justify-end px-6 pb-6 md:hidden">
-            <button
-              onClick={() => setUiuxOpen(true)}
-              className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-stone-200 hover:bg-stone-300 transition-colors duration-150"
-            >
-              <span className="font-sans text-sm text-stone-600">UI/UX</span>
-              <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-stone-500">
-                <path d="M2.5 11.5L11.5 2.5M11.5 2.5H5.5M11.5 2.5V8.5" />
-              </svg>
-            </button>
-          </div>
+            <span className="font-sans text-sm text-[#1e1e1e]">UI/UX</span>
+            <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#1e1e1e]">
+              <path d="M2.5 11.5L11.5 2.5M11.5 2.5H5.5M11.5 2.5V8.5" />
+            </svg>
+          </button>
         </div>
+
+        <div
+          ref={scrollRef}
+          onScroll={updateSlider}
+          className="no-scrollbar flex overflow-x-auto snap-x snap-mandatory px-4 md:px-0 pb-2"
+          style={{ scrollPaddingLeft: '1rem', gap: CARD_GAP }}
+        >
+          {works.map((work, index) => (
+            <div
+              key={work.id}
+              onClick={() => setOpenWorkId(work.id)}
+              className="snap-start flex-shrink-0 rounded-[24px] overflow-hidden group flex flex-col justify-between px-6 py-6 cursor-pointer"
+              style={{ width: CARD_W, height: CARD_H, background: work.cardBg, border: work.cardBorder, boxShadow: work.cardShadow }}
+            >
+              {/* Label */}
+              <div className="flex items-center gap-2">
+                <div className="w-px h-3.5" style={{ background: work.dividerColor }} />
+                <p className="font-sans text-xs uppercase tracking-widest" style={{ color: work.labelColor }}>
+                  {String(works.length - index).padStart(2, '0')} · {work.category} · {work.dateRange}
+                </p>
+              </div>
+
+              {/* Logo */}
+              <div className="flex justify-center items-center">
+                <img src={work.image} alt={work.imageAlt} className={work.imageClass} />
+              </div>
+
+              {/* Bottom info */}
+              <div>
+                <h3
+                  className="font-display text-4xl leading-tight mb-2"
+                  style={{ color: work.isDark ? '#f5f5f4' : '#1e1e1e' }}
+                >{work.title}</h3>
+                <p
+                  className="font-sans text-sm leading-relaxed mb-3 line-clamp-2"
+                  style={{ color: work.isDark ? 'rgba(255,255,255,0.60)' : '#1e1e1e' }}
+                >
+                  {work.description}
+                </p>
+                <span
+                  className="font-sans text-sm font-medium"
+                  style={{ color: work.viewDetailsColor }}
+                >
+                  View Details →
+                </span>
+                <div className="flex flex-wrap gap-1.5 mt-3">
+                  {work.tags.slice(0, 4).map(tag => (
+                    <span
+                      key={tag}
+                      className="font-sans text-xs px-3 py-1 rounded-full"
+                      style={{ color: work.tagColor, backgroundColor: work.tagBg, border: work.tagBorder }}
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Scroll position slider */}
+        <ScrollSlider scrollRef={scrollRef} progress={progress} thumbPercent={thumbPercent} />
       </div>
 
-      {firesafeOpen && <FireSafeModal onClose={() => setFiresafeOpen(false)} />}
-      {graceyOpen && <GraceyLogisticsModal onClose={() => setGraceyOpen(false)} />}
-      {brewedOpen && <BrewedModal onClose={() => setBrewedOpen(false)} />}
+      {openWorkId === 'fitnessmadness' && <FitnessMadnessModal onClose={() => setOpenWorkId(null)} />}
+      {openWorkId === 'firesafe' && <FireSafeModal onClose={() => setOpenWorkId(null)} />}
+      {openWorkId === 'gracey' && <GraceyLogisticsModal onClose={() => setOpenWorkId(null)} />}
+      {openWorkId === 'brewed' && <BrewedModal onClose={() => setOpenWorkId(null)} />}
       {uiuxOpen && <UIUXModal onClose={() => setUiuxOpen(false)} />}
     </section>
   )

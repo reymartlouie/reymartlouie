@@ -37,78 +37,78 @@ export default function CardEditorModal({ initial, onConfirm, onClose }: CardEdi
 
   return (
     <div
-      className="modal-backdrop fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-[200] p-4"
+      className="modal-backdrop fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-[200] p-4"
       style={{ animation: 'modalBackdropIn 200ms ease both' }}
       onClick={onClose}
     >
       <div
-        className="modal-card bg-[#1c1c1c] border border-white/[0.08] rounded-[28px] p-6 w-full sm:w-[440px] flex flex-col gap-5 max-h-[90dvh] overflow-y-auto"
+        className="glass-strong modal-card rounded-[28px] p-6 w-full sm:w-[440px] flex flex-col gap-5 max-h-[90dvh] overflow-y-auto"
         style={{ animation: 'modalCardIn 350ms cubic-bezier(0.34,1.2,0.64,1) both' }}
         onClick={(e) => e.stopPropagation()}
       >
 
         {/* Header */}
         <div className="flex items-center justify-between">
-          <h2 className="font-display text-white/90 text-2xl">
+          <h2 className="font-display text-[#1e1e1e] text-2xl">
             {isEdit ? 'Edit Note' : 'Leave a Note'}
           </h2>
           <button
             onClick={onClose}
-            className="w-8 h-8 flex items-center justify-center rounded-full bg-white/8 text-white/40 hover:bg-white/12 hover:text-white/70 transition-colors text-sm"
+            className="w-8 h-8 flex items-center justify-center rounded-full bg-black/[0.05] text-[#1e1e1e] hover:bg-black/[0.08] hover:text-[#1e1e1e] transition-colors text-sm"
           >
             ✕
           </button>
         </div>
 
-        <div className="h-px bg-white/[0.06]" />
+        <div className="h-px bg-black/[0.06]" />
 
         {/* Live preview */}
         <div
           className="rounded-2xl p-5 min-h-[88px] flex flex-col justify-between transition-colors duration-200"
           style={{ backgroundColor: color }}
         >
-          <span className="font-sans text-[10px] uppercase tracking-widest" style={{ color: 'rgba(0,0,0,0.35)' }}>Note preview</span>
+          <span className="font-sans text-[10px] uppercase tracking-widest" style={{ color: '#1e1e1e' }}>Note preview</span>
           <div className="mt-2">
             <p className="font-display text-xl leading-tight">
               {title
-                ? <span style={{ color: 'rgba(0,0,0,0.85)' }}>{title}</span>
+                ? <span style={{ color: '#1e1e1e' }}>{title}</span>
                 : <span style={{ color: 'rgba(0,0,0,0.25)' }}>Your name</span>
               }
             </p>
             {body && (
-              <p className="font-sans text-xs mt-1 leading-relaxed line-clamp-2" style={{ color: 'rgba(0,0,0,0.50)' }}>{body}</p>
+              <p className="font-sans text-xs mt-1 leading-relaxed line-clamp-2" style={{ color: '#1e1e1e' }}>{body}</p>
             )}
           </div>
         </div>
 
         {/* Name */}
         <div className="flex flex-col gap-1.5">
-          <label className="font-sans text-white/40 text-[10px] uppercase tracking-widest">Name</label>
+          <label className="font-sans text-[#1e1e1e] text-[10px] uppercase tracking-widest">Name</label>
           <input
             ref={inputRef}
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="Your name"
-            className="font-display bg-[#111111] text-white/90 border border-white/10 rounded-2xl px-4 py-3 text-lg placeholder:text-white/20 outline-none focus:border-white/25 transition-colors"
+            className="font-display bg-black/[0.03] text-[#1e1e1e] border border-black/10 rounded-2xl px-4 py-3 text-lg placeholder:text-stone-300 outline-none focus:border-black/25 transition-colors"
           />
         </div>
 
         {/* Body */}
         <div className="flex flex-col gap-1.5">
-          <label className="font-sans text-white/40 text-[10px] uppercase tracking-widest">Body</label>
+          <label className="font-sans text-[#1e1e1e] text-[10px] uppercase tracking-widest">Body</label>
           <textarea
             value={body}
             onChange={(e) => setBody(e.target.value)}
             placeholder="Card content"
             rows={3}
-            className="font-sans bg-[#111111] text-white/90 border border-white/10 rounded-2xl px-4 py-3 text-sm placeholder:text-white/20 outline-none focus:border-white/25 transition-colors resize-none leading-relaxed"
+            className="font-sans bg-black/[0.03] text-[#1e1e1e] border border-black/10 rounded-2xl px-4 py-3 text-sm placeholder:text-stone-300 outline-none focus:border-black/25 transition-colors resize-none leading-relaxed"
           />
         </div>
 
         {/* Color swatches */}
         <div className="flex flex-col gap-2">
-          <label className="font-sans text-white/40 text-[10px] uppercase tracking-widest">Background</label>
+          <label className="font-sans text-[#1e1e1e] text-[10px] uppercase tracking-widest">Background</label>
           <div className="flex gap-2.5">
             {COLORS.map((c) => (
               <button
@@ -117,7 +117,7 @@ export default function CardEditorModal({ initial, onConfirm, onClose }: CardEdi
                 aria-label={c.label}
                 style={{
                   background:     c.value,
-                  border:         `2px solid ${color === c.value ? 'rgba(255,255,255,0.60)' : 'rgba(255,255,255,0.10)'}`,
+                  border:         `2px solid ${color === c.value ? 'rgba(29,29,31,0.55)' : 'rgba(29,29,31,0.12)'}`,
                   width:          34,
                   height:         34,
                   borderRadius:   '50%',
@@ -131,27 +131,27 @@ export default function CardEditorModal({ initial, onConfirm, onClose }: CardEdi
                 }}
               >
                 {color === c.value && (
-                  <span style={{ color: 'rgba(255,255,255,0.85)', fontSize: 11, lineHeight: 1 }}>✓</span>
+                  <span style={{ color: 'rgba(29,29,31,0.75)', fontSize: 11, lineHeight: 1 }}>✓</span>
                 )}
               </button>
             ))}
           </div>
         </div>
 
-        <div className="h-px bg-white/[0.06]" />
+        <div className="h-px bg-black/[0.06]" />
 
         {/* Action buttons */}
         <div className="flex gap-3">
           <button
             onClick={onClose}
-            className="btn-spring flex-1 font-sans text-white/50 bg-[#111111] border border-white/10 px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-white/10 transition-colors"
+            className="btn-spring flex-1 font-sans text-[#1e1e1e] bg-black/[0.04] border border-black/10 px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-black/[0.07] transition-colors"
           >
             Cancel
           </button>
           <button
             onClick={() => canSubmit && onConfirm({ title, body, color })}
             disabled={!canSubmit}
-            className="btn-spring flex-1 font-sans text-[#111] bg-[#f0f0f0] font-semibold px-5 py-2.5 rounded-full text-sm hover:bg-white transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+            className="btn-spring flex-1 font-sans text-white bg-stone-900 font-semibold px-5 py-2.5 rounded-full text-sm hover:bg-stone-800 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
           >
             {isEdit ? 'Save Changes' : 'Leave Note'}
           </button>

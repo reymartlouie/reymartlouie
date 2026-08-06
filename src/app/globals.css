@@ -6,135 +6,72 @@
 .no-scrollbar::-webkit-scrollbar { display: none; }
 
 /* ───────────────────────────────────────── */
-/* ROOT TOKENS */
+/* ROOT TOKENS — light / frosted-glass system */
 /* ───────────────────────────────────────── */
 :root {
   --font-inter: 'Inter', system-ui, sans-serif;
   --font-archivo-black: 'Archivo Black', sans-serif;
 
-  /* fallback-safe gradients */
-  --bg-card: #161618;
-  --bg-card: linear-gradient(145deg, #1c1c1e 0%, #161618 100%);
+  /* Page */
+  --page-bg: #f5f5f7;
 
-  --bg-card-2: #091d3e;
-  --bg-card-2: linear-gradient(160deg, #0d2952 0%, #091d3e 55%, #06111f 100%);
+  /* Ink — dark text on light surfaces (Apple system near-black) */
+  --ink:    #1d1d1f;
+  --ink-85: rgba(29,29,31,0.85);
+  --ink-70: rgba(29,29,31,0.70);
+  --ink-55: rgba(29,29,31,0.55);
+  --ink-40: rgba(29,29,31,0.40);
+  --ink-25: rgba(29,29,31,0.25);
 
-  --bg-card-3: #130628;
-  --bg-card-3: linear-gradient(145deg, #1e0b40 0%, #130628 100%);
+  /* back-compat alias used by body { color } */
+  --fg: var(--ink);
 
-  --fg: #f2f2f2;
+  /* Glass surfaces */
+  --glass-bg:            rgba(255,255,255,0.62);
+  --glass-bg-strong:     rgba(255,255,255,0.78);
+  --glass-border:        rgba(0,0,0,0.07);
+  --glass-border-strong: rgba(0,0,0,0.10);
+  --glass-shadow:        0 20px 60px rgba(0,0,0,0.10);
+
+  /* Bars / nav — black frosted glass for contrast against the light page */
+  --bar-bg:          rgba(10,10,12,0.78);
+  --nav-bg:          rgba(12,12,14,0.85);
+  --bar-border:      rgba(255,255,255,0.10);
+  --bar-text:        rgba(255,255,255,0.45);
+  --bar-text-active: rgba(255,255,255,0.94);
 }
 
-/* ── Theme tokens ─────────────────────────────────────────────────── */
-:root {
-  /* Card backgrounds — jewel tones: clearly colored, not primary-bright */
-  --bg-card:           linear-gradient(145deg, #1c1c1e 0%, #161618 100%);              /* Apple system grouped — structural */
-  --bg-card-2:         linear-gradient(160deg, #0d2952 0%, #091d3e 55%, #06111f 100%); /* sapphire — hero */
-  --bg-card-3:         linear-gradient(145deg, #1e0b40 0%, #130628 100%);              /* amethyst — about */
-
-  /* Themed card backgrounds */
-  --bg-tech:           linear-gradient(145deg, #0e1660 0%, #080e3a 100%);              /* deep indigo — tech stack */
-  --bg-exp:            linear-gradient(145deg, #0a1f5c 0%, #060f30 100%);              /* navy */
-  --bg-portfolio:      linear-gradient(145deg, #4a0a28 0%, #280514 100%);              /* ruby — UI/UX */
-  --bg-firesafe:       linear-gradient(145deg, #4a1800 0%, #280c00 100%);              /* deep ember — FireSafe */
-  --bg-footer-contact: linear-gradient(145deg, #0a3828 0%, #041c14 100%);              /* deep emerald — contact */
-
-  /* Text */
-  --fg:    #f2f2f2;
-  --fg-60: rgba(242,242,242,0.60);
-  --fg-55: rgba(242,242,242,0.55);
-  --fg-50: rgba(242,242,242,0.50);
-  --fg-40: rgba(242,242,242,0.40);
-  --fg-30: rgba(242,242,242,0.30);
-  --fg-20: rgba(242,242,242,0.20);
-
-  /* Borders */
-  --border:        rgba(255,255,255,0.08);
-  --border-strong: rgba(255,255,255,0.13);
-
-  /* Hero badge */
-  --badge-bg:   #1e3320;
-  --badge-text: #86efac;
-  --badge-dot:  #4ade80;
-  --hero-heading: #f2f2f2;
-  --hero-muted:   rgba(242,242,242,0.55);
-
-  /* Tech card */
-  --tech-label:       rgba(147,197,253,0.70);
-  --tech-tag-fg:      rgba(255,255,255,0.85);
-  --tech-tag-bg:      rgba(255,255,255,0.12);
-  --tech-tag-border:  rgba(255,255,255,0.20);
-
-  /* Exp card */
-  --exp-label: rgba(147,197,253,0.50);
-  --exp-num:   #bfdbfe;
-  --exp-body:  rgba(147,197,253,0.70);
-
-  /* Portfolio card */
-  --portfolio-label:  rgba(255,255,255,0.60);
-  --portfolio-title:  #ffffff;
-  --portfolio-body:   rgba(255,255,255,0.72);
-  --portfolio-btn-fg: #ffffff;
-  --portfolio-btn-bg: rgba(255,255,255,0.18);
-  --portfolio-btn-border: rgba(255,255,255,0.30);
-
-  /* Contact card */
-  --contact-label:         rgba(255,255,255,0.60);
-  --contact-title:         #ffffff;
-  --contact-input-bg:      rgba(255,255,255,0.10);
-  --contact-input-border:  rgba(255,255,255,0.20);
-  --contact-btn-fg:        #ffffff;
-  --contact-btn-bg:        rgba(255,255,255,0.18);
-  --contact-btn-border:    rgba(255,255,255,0.28);
-  --contact-resume-fg:     rgba(255,255,255,0.60);
-  --contact-resume-bg:     rgba(255,255,255,0.10);
-  --contact-resume-border: rgba(255,255,255,0.18);
-
-  /* Hero buttons */
-  --hero-btn1-bg: #f0f0f0;
-  --hero-btn1-fg: #111111;
-  --hero-btn2-bg:     rgba(255,255,255,0.10);
-  --hero-btn2-fg:     rgba(255,255,255,0.70);
-  --hero-btn2-border: rgba(255,255,255,0.15);
-
-  /* Bars */
-  --bar-bg: rgba(10,10,12,0.45);
-  --nav-bg: rgba(18,18,20,0.55);
-  --bar-border: rgba(255,255,255,0.07);
-  --bar-text: rgba(255,255,255,0.38);
-  --bar-text-active: rgba(255,255,255,0.90);
+/* Generic frosted-glass surface — standard bento/section cards */
+.glass {
+  background:            var(--glass-bg);
+  backdrop-filter:       blur(28px) saturate(160%);
+  -webkit-backdrop-filter: blur(28px) saturate(160%);
+  border:                1px solid var(--glass-border);
+  box-shadow:            0 1px 0 rgba(255,255,255,0.7) inset, var(--glass-shadow);
 }
 
-/* Layout background */
+/* Stronger frosted-glass surface — nav chrome, modals, popovers */
+.glass-strong {
+  background:            var(--glass-bg-strong);
+  backdrop-filter:       blur(32px) saturate(180%);
+  -webkit-backdrop-filter: blur(32px) saturate(180%);
+  border:                1px solid var(--glass-border-strong);
+  box-shadow:            0 1px 0 rgba(255,255,255,0.8) inset, 0 24px 70px rgba(0,0,0,0.14);
+}
+
+/* Layout background — soft off-white mesh, gives glass panels something to blur */
 .layout-overlay {
   position: fixed;
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  /* No overflow:hidden — image bleeds under safe areas intentionally */
-  will-change: transform;
-  transform: translateZ(0);
-}
-
-.layout-overlay img {
-  position: absolute;
-  /* Bleed the image under Safari's status bar and liquid glass tab bar */
-  top: calc(-1 * env(safe-area-inset-top, 0px));
-  bottom: calc(-1 * env(safe-area-inset-bottom, 0px));
-  left: 0;
-  right: 0;
-  width: 100%;
-  height: calc(100% + env(safe-area-inset-top, 0px) + env(safe-area-inset-bottom, 0px));
-  object-fit: cover;
-  object-position: center center;
-}
-
-@media (max-width: 1023px) {
-  .layout-overlay img {
-    /* Pin the top of the image on portrait phones so the blue-tinted sphere
-       stays anchored regardless of aspect ratio (SE → Pro Max → tall Android) */
-    object-position: center top;
-  }
+  background-color: var(--page-bg);
+  background-image:
+    radial-gradient(ellipse 900px 600px at 8% -5%,  rgba(217,70,160,0.10) 0%, transparent 60%),
+    radial-gradient(ellipse 800px 600px at 100% 10%, rgba(96,165,250,0.10) 0%, transparent 60%),
+    radial-gradient(ellipse 700px 500px at 15% 55%,  rgba(52,211,153,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 900px 700px at 90% 90%,  rgba(201,168,76,0.08) 0%, transparent 60%);
+  background-repeat: no-repeat;
 }
 
 /* ───────────────────────────────────────── */
@@ -146,11 +83,10 @@
   margin: 0;
 }
 
-/* Black fallback prevents white flash on iOS overscroll */
 html {
   height: 100%;
   scroll-behavior: smooth;
-  background-color: #000000;
+  background-color: var(--page-bg);
 }
 
 body {
@@ -220,42 +156,6 @@ body {
 /* ───────────────────────────────────────── */
 /* INTERACTIONS */
 /* ───────────────────────────────────────── */
-.bento-lift {
-  position: relative;
-  transition: transform 300ms cubic-bezier(0.2, 0, 0, 1);
-}
-
-/* Shadow lives on a pseudo-element so only opacity is animated (GPU composited) */
-.bento-lift::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  box-shadow: 0 24px 56px rgba(0,0,0,0.45);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 300ms cubic-bezier(0.2, 0, 0, 1);
-}
-
-.bento-lift:hover {
-  transform: translateY(-6px);
-}
-
-.bento-lift:hover::after {
-  opacity: 1;
-}
-
-/* Edit-mode jiggle */
-@keyframes bento-wiggle {
-  0%,  100% { transform: rotate(0deg);    }
-  20%        { transform: rotate(-1.2deg); }
-  60%        { transform: rotate(1.2deg);  }
-  80%        { transform: rotate(-0.6deg); }
-}
-.bento-wiggle {
-  animation: bento-wiggle 0.45s ease-in-out infinite;
-  transform-origin: center;
-}
 
 /* Tech stack tag hover */
 .tech-tag:hover {
@@ -284,10 +184,6 @@ body {
     animation: none;
   }
 
-  .bento-lift,
-  .bento-lift:hover,
-  .bento-lift::after,
-  .bento-lift:hover::after,
   .btn-spring,
   .btn-spring:active {
     transform: none;

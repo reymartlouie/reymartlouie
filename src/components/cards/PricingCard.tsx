@@ -23,20 +23,21 @@ const services = [
 
 export default function PricingCard() {
   return (
-    <div className="h-full rounded-[32px] overflow-hidden" style={{ background: '#f5f5f7' }}>
+    <div className="glass h-full rounded-[32px] overflow-hidden">
 
       {/* Header */}
-      <div className="px-6 md:px-8 pt-8 md:pt-10 pb-6 flex items-end justify-between gap-4">
-        <h2 className="font-display text-[44px] md:text-[56px] leading-[1.05] text-stone-900 font-black">
-          Pricing.
-        </h2>
-        <p className="font-sans text-sm text-stone-500 pb-1 hidden md:block">
+      <div className="px-6 md:px-8 pt-7 md:pt-9 pb-5 flex items-center justify-between gap-4">
+        <div className="flex items-center gap-2">
+          <div className="w-px h-3.5 bg-stone-400/50" />
+          <span className="font-sans text-xs uppercase tracking-widest text-[#1e1e1e]">Pricing</span>
+        </div>
+        <p className="font-sans text-sm text-[#1e1e1e] hidden md:block">
           Rates vary by scope
         </p>
       </div>
 
       {/* Service cards */}
-      <div className="px-4 md:px-5 pb-6 md:pb-8 grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+      <div className="px-4 md:px-8 pb-6 md:pb-8 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
         {services.map((svc) => (
           <div
             key={svc.category}
@@ -61,10 +62,10 @@ export default function PricingCard() {
 
               {/* Price */}
               <div className="flex items-baseline gap-1.5">
-                <span className="font-display text-3xl font-black text-stone-900 leading-none">
+                <span className="font-display text-3xl font-black text-[#1e1e1e] leading-none">
                   {svc.starting}
                 </span>
-                <span className="font-sans text-sm text-stone-400">starting</span>
+                <span className="font-sans text-sm text-[#1e1e1e]">starting</span>
               </div>
 
               {/* Items */}
@@ -75,7 +76,7 @@ export default function PricingCard() {
                       className="w-1.5 h-1.5 rounded-full flex-shrink-0"
                       style={{ background: svc.accentBorder }}
                     />
-                    <span className="font-sans text-sm text-stone-500">{item}</span>
+                    <span className="font-sans text-sm text-[#1e1e1e]">{item}</span>
                   </li>
                 ))}
               </ul>
@@ -86,7 +87,7 @@ export default function PricingCard() {
 
       {/* Footer note */}
       <div className="px-6 md:px-8 pb-6 md:pb-8">
-        <p className="font-sans text-xs text-stone-400">
+        <p className="font-sans text-xs text-[#1e1e1e]">
           Rush jobs +30% · Maintenance plans available · Contact for custom quotes
         </p>
       </div>

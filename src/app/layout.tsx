@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Inter, Archivo_Black } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/react'
 import StartupScreen from '@/components/ui/StartupScreen'
+import BgOverlay from '@/components/ui/BgOverlay'
 import './globals.css'
 
 const inter = Inter({
@@ -72,7 +73,7 @@ export const metadata: Metadata = {
   },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true } },
   other: {
-    'apple-mobile-web-app-status-bar-style': 'black-translucent',
+    'apple-mobile-web-app-status-bar-style': 'default',
     'apple-mobile-web-app-capable': 'yes',
     'apple-mobile-web-app-title': 'Reymart Louie',
   },
@@ -110,9 +111,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <StartupScreen />
-        <div aria-hidden="true" className="layout-overlay">
-          <img src="/bg.webp" alt="" fetchPriority="high" decoding="async" />
-        </div>
+        <BgOverlay />
         <div style={{ position: 'relative', zIndex: 1 }}>
           {children}
         </div>

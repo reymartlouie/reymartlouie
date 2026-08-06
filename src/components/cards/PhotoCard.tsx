@@ -4,7 +4,11 @@ export default function PhotoCard() {
   return (
     <div
       className="@container flex-1 rounded-[32px] relative overflow-hidden min-h-[340px] @md:min-h-[380px]"
-      style={{ background: 'linear-gradient(160deg, #0d2952 0%, #081a36 50%, #040e1c 100%)' }}
+      style={{
+        background: 'linear-gradient(160deg, #0d2952 0%, #081a36 50%, #040e1c 100%)',
+        border: '1px solid rgba(0,0,0,0.06)',
+        boxShadow: '0 20px 50px rgba(0,0,0,0.12)',
+      }}
     >
       <img
         src="/photo.webp"
