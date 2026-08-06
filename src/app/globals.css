@@ -59,19 +59,13 @@
   box-shadow:            0 1px 0 rgba(255,255,255,0.8) inset, 0 24px 70px rgba(0,0,0,0.14);
 }
 
-/* Layout background — soft off-white mesh, gives glass panels something to blur */
+/* Layout background — flat Apple-style white, no gradient at any breakpoint */
 .layout-overlay {
   position: fixed;
   inset: 0;
   z-index: 0;
   pointer-events: none;
   background-color: var(--page-bg);
-  background-image:
-    radial-gradient(ellipse 900px 600px at 8% -5%,  rgba(217,70,160,0.10) 0%, transparent 60%),
-    radial-gradient(ellipse 800px 600px at 100% 10%, rgba(96,165,250,0.10) 0%, transparent 60%),
-    radial-gradient(ellipse 700px 500px at 15% 55%,  rgba(52,211,153,0.08) 0%, transparent 60%),
-    radial-gradient(ellipse 900px 700px at 90% 90%,  rgba(201,168,76,0.08) 0%, transparent 60%);
-  background-repeat: no-repeat;
 }
 
 /* ───────────────────────────────────────── */
