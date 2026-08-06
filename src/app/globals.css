@@ -156,42 +156,6 @@ body {
 /* ───────────────────────────────────────── */
 /* INTERACTIONS */
 /* ───────────────────────────────────────── */
-.bento-lift {
-  position: relative;
-  transition: transform 300ms cubic-bezier(0.2, 0, 0, 1);
-}
-
-/* Shadow lives on a pseudo-element so only opacity is animated (GPU composited) */
-.bento-lift::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  box-shadow: 0 24px 56px rgba(0,0,0,0.45);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 300ms cubic-bezier(0.2, 0, 0, 1);
-}
-
-.bento-lift:hover {
-  transform: translateY(-6px);
-}
-
-.bento-lift:hover::after {
-  opacity: 1;
-}
-
-/* Edit-mode jiggle */
-@keyframes bento-wiggle {
-  0%,  100% { transform: rotate(0deg);    }
-  20%        { transform: rotate(-1.2deg); }
-  60%        { transform: rotate(1.2deg);  }
-  80%        { transform: rotate(-0.6deg); }
-}
-.bento-wiggle {
-  animation: bento-wiggle 0.45s ease-in-out infinite;
-  transform-origin: center;
-}
 
 /* Tech stack tag hover */
 .tech-tag:hover {
@@ -220,10 +184,6 @@ body {
     animation: none;
   }
 
-  .bento-lift,
-  .bento-lift:hover,
-  .bento-lift::after,
-  .bento-lift:hover::after,
   .btn-spring,
   .btn-spring:active {
     transform: none;

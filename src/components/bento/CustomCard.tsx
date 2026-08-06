@@ -1,10 +1,8 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { useBentoCanvas } from './BentoCanvas'
+import { useState } from 'react'
 
 export default function CustomCard({
-  cardId,
   card,
   onEdit,
   onDelete,
@@ -14,13 +12,8 @@ export default function CustomCard({
   onEdit: () => void
   onDelete: () => void
 }) {
-  const { removeCard, editMode } = useBentoCanvas()
   const [hovered, setHovered] = useState(false)
-  const visible = hovered || editMode
-
-  // Sync canvas positions when this card unmounts (user deleted it)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => () => removeCard(cardId), [])
+  const visible = hovered
 
   return (
     <div
