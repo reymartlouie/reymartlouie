@@ -61,10 +61,10 @@ export default function FireSafeModal({ onClose }: Props) {
     >
       {/* Intro */}
       <div className="mb-8">
-        <p className="font-sans text-xs leading-relaxed mb-3 text-stone-400">
+        <p className="font-sans text-xs leading-relaxed mb-3 text-[#1e1e1e]">
           A Thermal Imaging-Based Approach for Fire Detection in a Controlled and Open Space Environment with Mobile Alerting System
         </p>
-        <p className="font-sans text-base leading-relaxed text-stone-600">
+        <p className="font-sans text-base leading-relaxed text-[#1e1e1e]">
           A community-level fire detection system using edge computing and thermal imaging,
           built for rural barangays with limited infrastructure. Alerts residents via push
           notifications and mass SMS — no constant cloud dependency required.
@@ -77,7 +77,7 @@ export default function FireSafeModal({ onClose }: Props) {
         style={{ background: 'rgba(234,88,12,0.05)', border: '1px solid rgba(234,88,12,0.12)' }}
       >
         <p className="font-sans text-xs uppercase tracking-widest mb-3" style={{ color: 'rgba(153,27,27,0.60)' }}>The Problem</p>
-        <p className="font-sans text-base leading-relaxed text-stone-600">
+        <p className="font-sans text-base leading-relaxed text-[#1e1e1e]">
           The Philippines recorded 16,426 fire incidents in 2023 — a 24.5% increase year-over-year.
           Rural barangays are especially vulnerable: fires start unnoticed in unguarded spaces,
           and existing detection systems depend on cloud infrastructure impractical for
@@ -88,7 +88,7 @@ export default function FireSafeModal({ onClose }: Props) {
 
       {/* Hardware */}
       <div className="mb-6">
-        <p className="font-sans text-xs uppercase tracking-widest mb-4 text-stone-400">Hardware</p>
+        <p className="font-sans text-xs uppercase tracking-widest mb-4 text-[#1e1e1e]">Hardware</p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
           {hardware.map(({ label, category }) => (
             <div
@@ -96,8 +96,8 @@ export default function FireSafeModal({ onClose }: Props) {
               className="flex items-center justify-between px-4 py-3 rounded-2xl"
               style={{ background: 'rgba(234,88,12,0.04)', border: '1px solid rgba(234,88,12,0.12)' }}
             >
-              <span className="font-sans text-sm text-stone-700">{label}</span>
-              <span className="font-sans text-xs text-right text-stone-400">{category}</span>
+              <span className="font-sans text-sm text-[#1e1e1e]">{label}</span>
+              <span className="font-sans text-xs text-right text-[#1e1e1e]">{category}</span>
             </div>
           ))}
         </div>
@@ -105,7 +105,7 @@ export default function FireSafeModal({ onClose }: Props) {
 
       {/* Software */}
       <div className="mb-8">
-        <p className="font-sans text-xs uppercase tracking-widest mb-4 text-stone-400">Software</p>
+        <p className="font-sans text-xs uppercase tracking-widest mb-4 text-[#1e1e1e]">Software</p>
         <div className="grid grid-cols-2 gap-2">
           {software.map(({ label, category }) => (
             <div
@@ -113,8 +113,8 @@ export default function FireSafeModal({ onClose }: Props) {
               className="flex items-center justify-between px-4 py-3 rounded-2xl"
               style={{ background: 'rgba(234,88,12,0.04)', border: '1px solid rgba(234,88,12,0.12)' }}
             >
-              <span className="font-sans text-sm text-stone-700">{label}</span>
-              <span className="font-sans text-xs text-right text-stone-400">{category}</span>
+              <span className="font-sans text-sm text-[#1e1e1e]">{label}</span>
+              <span className="font-sans text-xs text-right text-[#1e1e1e]">{category}</span>
             </div>
           ))}
         </div>
@@ -122,7 +122,7 @@ export default function FireSafeModal({ onClose }: Props) {
 
       {/* Testing */}
       <div className="mb-8">
-        <p className="font-sans text-xs uppercase tracking-widest mb-4 text-stone-400">Testing</p>
+        <p className="font-sans text-xs uppercase tracking-widest mb-4 text-[#1e1e1e]">Testing</p>
         <div className="flex flex-col gap-2">
           {[
             { env: 'Controlled Environment', detail: '7 sessions · Kabankalan City indoor' },
@@ -134,19 +134,19 @@ export default function FireSafeModal({ onClose }: Props) {
               className="flex items-center justify-between px-4 py-3 rounded-2xl"
               style={{ background: 'rgba(234,88,12,0.04)', border: '1px solid rgba(234,88,12,0.12)' }}
             >
-              <span className="font-sans text-sm text-stone-700">{env}</span>
-              <span className="font-sans text-xs text-right text-stone-400">{detail}</span>
+              <span className="font-sans text-sm text-[#1e1e1e]">{env}</span>
+              <span className="font-sans text-xs text-right text-[#1e1e1e]">{detail}</span>
             </div>
           ))}
         </div>
-        <p className="font-sans text-xs mt-3 leading-relaxed text-stone-400">
+        <p className="font-sans text-xs mt-3 leading-relaxed text-[#1e1e1e]">
           Risk thresholds — HIGH: ≥35°C / ≤40% RH / 100–200 PPM · CRITICAL: ≥38°C / ≤30% RH / &gt;200 PPM
         </p>
       </div>
 
       {/* Roles */}
       <div className="mb-8">
-        <p className="font-sans text-xs uppercase tracking-widest mb-4 text-stone-400">My Roles</p>
+        <p className="font-sans text-xs uppercase tracking-widest mb-4 text-[#1e1e1e]">My Roles</p>
         <div className="flex flex-col gap-3">
           {roles.map(({ role, desc }) => (
             <div
@@ -154,8 +154,8 @@ export default function FireSafeModal({ onClose }: Props) {
               className="p-5 rounded-2xl"
               style={{ background: 'rgba(234,88,12,0.04)', border: '1px solid rgba(234,88,12,0.12)' }}
             >
-              <p className="font-sans text-sm font-medium mb-1.5 text-stone-700">{role}</p>
-              <p className="font-sans text-sm leading-relaxed text-stone-500">{desc}</p>
+              <p className="font-sans text-sm font-medium mb-1.5 text-[#1e1e1e]">{role}</p>
+              <p className="font-sans text-sm leading-relaxed text-[#1e1e1e]">{desc}</p>
             </div>
           ))}
         </div>
@@ -163,7 +163,7 @@ export default function FireSafeModal({ onClose }: Props) {
 
       {/* Team + CTA */}
       <div className="flex flex-col gap-4">
-        <p className="font-sans text-xs leading-relaxed text-stone-400">
+        <p className="font-sans text-xs leading-relaxed text-[#1e1e1e]">
           With Odsey Bandojo &amp; Vhieron Bareza<br />
           University of St. La Salle · Bacolod City
         </p>
@@ -172,7 +172,7 @@ export default function FireSafeModal({ onClose }: Props) {
             href="/thesis-for-final.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-spring inline-flex items-center justify-center gap-2 font-sans text-sm font-semibold px-5 py-3 rounded-full transition-colors duration-150 bg-stone-200 hover:bg-stone-300 text-stone-700"
+            className="btn-spring inline-flex items-center justify-center gap-2 font-sans text-sm font-semibold px-5 py-3 rounded-full transition-colors duration-150 bg-stone-200 hover:bg-stone-300 text-[#1e1e1e]"
           >
             <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
               <path d="M7 1v8M4 6l3 3 3-3M2 10v1.5A1.5 1.5 0 003.5 13h7a1.5 1.5 0 001.5-1.5V10" />

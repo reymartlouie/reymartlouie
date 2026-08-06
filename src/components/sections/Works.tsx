@@ -179,8 +179,8 @@ export default function Works() {
             onClick={() => setUiuxOpen(true)}
             className="flex items-center gap-2 px-4 py-2 rounded-full bg-stone-200 hover:bg-stone-300 transition-colors duration-150"
           >
-            <span className="font-sans text-sm text-stone-600">UI/UX</span>
-            <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-stone-500">
+            <span className="font-sans text-sm text-[#1e1e1e]">UI/UX</span>
+            <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#1e1e1e]">
               <path d="M2.5 11.5L11.5 2.5M11.5 2.5H5.5M11.5 2.5V8.5" />
             </svg>
           </button>
@@ -195,7 +195,8 @@ export default function Works() {
           {works.map((work, index) => (
             <div
               key={work.id}
-              className="snap-start flex-shrink-0 rounded-[24px] overflow-hidden group flex flex-col justify-between px-6 py-6"
+              onClick={() => setOpenWorkId(work.id)}
+              className="snap-start flex-shrink-0 rounded-[24px] overflow-hidden group flex flex-col justify-between px-6 py-6 cursor-pointer"
               style={{ width: CARD_W, height: CARD_H, background: work.cardBg, border: work.cardBorder, boxShadow: work.cardShadow }}
             >
               {/* Label */}
@@ -215,17 +216,16 @@ export default function Works() {
               <div>
                 <h3
                   className="font-display text-4xl leading-tight mb-2"
-                  style={{ color: work.isDark ? '#f5f5f4' : '#1c1917' }}
+                  style={{ color: work.isDark ? '#f5f5f4' : '#1e1e1e' }}
                 >{work.title}</h3>
                 <p
                   className="font-sans text-sm leading-relaxed mb-3 line-clamp-2"
-                  style={{ color: work.isDark ? 'rgba(255,255,255,0.60)' : 'rgb(68,64,60)' }}
+                  style={{ color: work.isDark ? 'rgba(255,255,255,0.60)' : '#1e1e1e' }}
                 >
                   {work.description}
                 </p>
                 <span
-                  onClick={() => setOpenWorkId(work.id)}
-                  className="font-sans text-sm font-medium cursor-pointer"
+                  className="font-sans text-sm font-medium"
                   style={{ color: work.viewDetailsColor }}
                 >
                   View Details →

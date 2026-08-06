@@ -64,10 +64,10 @@ export default function BrewedModal({ onClose }: Props) {
 
       {/* Intro */}
       <div className="mb-8">
-        <p className="font-sans text-xs leading-relaxed mb-3 text-stone-400">
+        <p className="font-sans text-xs leading-relaxed mb-3 text-[#1e1e1e]">
           brewed-puce.vercel.app
         </p>
-        <p className="font-sans text-base leading-relaxed text-stone-600">
+        <p className="font-sans text-base leading-relaxed text-[#1e1e1e]">
           A coffee house landing page with an interactive menu, promotional modals, and a streamlined order flow — built with React, TypeScript, and Tailwind CSS, deployed on Vercel.
         </p>
       </div>
@@ -78,14 +78,14 @@ export default function BrewedModal({ onClose }: Props) {
         style={{ background: 'rgba(180,120,40,0.05)', border: '1px solid rgba(180,120,40,0.10)' }}
       >
         <p className="font-sans text-xs uppercase tracking-widest mb-3" style={{ color: 'rgba(120,70,20,0.60)' }}>The Brief</p>
-        <p className="font-sans text-base leading-relaxed text-stone-600">
+        <p className="font-sans text-base leading-relaxed text-[#1e1e1e]">
           Brewed needed a modern web presence for a coffee house brand — not a template, but a handcrafted React app with a real ordering experience. The site covers the full customer journey from browsing the menu to placing an order, plus promotional content and an about section.
         </p>
       </div>
 
       {/* Features */}
       <div className="mb-6">
-        <p className="font-sans text-xs uppercase tracking-widest mb-4 text-stone-400">Features</p>
+        <p className="font-sans text-xs uppercase tracking-widest mb-4 text-[#1e1e1e]">Features</p>
         <div className="grid grid-cols-2 gap-2">
           {features.map(({ label, category }) => (
             <div
@@ -93,8 +93,8 @@ export default function BrewedModal({ onClose }: Props) {
               className="flex items-center justify-between px-4 py-3 rounded-2xl"
               style={{ background: 'rgba(180,120,40,0.04)', border: '1px solid rgba(180,120,40,0.10)' }}
             >
-              <span className="font-sans text-sm text-stone-700">{label}</span>
-              <span className="font-sans text-xs text-right text-stone-400">{category}</span>
+              <span className="font-sans text-sm text-[#1e1e1e]">{label}</span>
+              <span className="font-sans text-xs text-right text-[#1e1e1e]">{category}</span>
             </div>
           ))}
         </div>
@@ -102,7 +102,7 @@ export default function BrewedModal({ onClose }: Props) {
 
       {/* Stack */}
       <div className="mb-8">
-        <p className="font-sans text-xs uppercase tracking-widest mb-4 text-stone-400">Stack</p>
+        <p className="font-sans text-xs uppercase tracking-widest mb-4 text-[#1e1e1e]">Stack</p>
         <div className="grid grid-cols-2 gap-2">
           {stack.map(({ label, category }) => (
             <div
@@ -110,8 +110,8 @@ export default function BrewedModal({ onClose }: Props) {
               className="flex items-center justify-between px-4 py-3 rounded-2xl"
               style={{ background: 'rgba(180,120,40,0.04)', border: '1px solid rgba(180,120,40,0.10)' }}
             >
-              <span className="font-sans text-sm text-stone-700">{label}</span>
-              <span className="font-sans text-xs text-right text-stone-400">{category}</span>
+              <span className="font-sans text-sm text-[#1e1e1e]">{label}</span>
+              <span className="font-sans text-xs text-right text-[#1e1e1e]">{category}</span>
             </div>
           ))}
         </div>
@@ -119,7 +119,7 @@ export default function BrewedModal({ onClose }: Props) {
 
       {/* Roles */}
       <div className="mb-8">
-        <p className="font-sans text-xs uppercase tracking-widest mb-4 text-stone-400">My Role</p>
+        <p className="font-sans text-xs uppercase tracking-widest mb-4 text-[#1e1e1e]">My Role</p>
         <div className="flex flex-col gap-3">
           {roles.map(({ role, desc }) => (
             <div
@@ -127,8 +127,8 @@ export default function BrewedModal({ onClose }: Props) {
               className="p-5 rounded-2xl"
               style={{ background: 'rgba(180,120,40,0.04)', border: '1px solid rgba(180,120,40,0.10)' }}
             >
-              <p className="font-sans text-sm font-medium mb-1.5 text-stone-700">{role}</p>
-              <p className="font-sans text-sm leading-relaxed text-stone-500">{desc}</p>
+              <p className="font-sans text-sm font-medium mb-1.5 text-[#1e1e1e]">{role}</p>
+              <p className="font-sans text-sm leading-relaxed text-[#1e1e1e]">{desc}</p>
             </div>
           ))}
         </div>
@@ -140,7 +140,7 @@ export default function BrewedModal({ onClose }: Props) {
           href="https://github.com/reymartlouie/brewed"
           target="_blank"
           rel="noopener noreferrer"
-          className="btn-spring inline-flex items-center justify-center gap-2 font-sans text-sm font-semibold px-5 py-3 rounded-full transition-colors duration-150 bg-stone-200 hover:bg-stone-300 text-stone-700"
+          className="btn-spring inline-flex items-center justify-center gap-2 font-sans text-sm font-semibold px-5 py-3 rounded-full transition-colors duration-150 bg-stone-200 hover:bg-stone-300 text-[#1e1e1e]"
         >
           GitHub Repo ↗
         </a>

@@ -35,7 +35,7 @@ export default function BadgesModal({ badges, onClose }: Props) {
               href={`https://www.credly.com/badges/${id}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-5 py-2 rounded-full text-stone-700 text-sm font-sans font-medium transition-colors duration-150 bg-stone-100 hover:bg-stone-200"
+              className="px-5 py-2 rounded-full text-[#1e1e1e] text-sm font-sans font-medium transition-colors duration-150 bg-stone-100 hover:bg-stone-200"
             >
               Verify on Credly ↗
             </a>

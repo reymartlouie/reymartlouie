@@ -72,10 +72,10 @@ export default function GraceyLogisticsModal({ onClose }: Props) {
 
       {/* Intro */}
       <div className="mb-8">
-        <p className="font-sans text-xs leading-relaxed mb-3 text-stone-400">
+        <p className="font-sans text-xs leading-relaxed mb-3 text-[#1e1e1e]">
           graceylogisticsservices.com · Sta. Maria, Bulacan
         </p>
-        <p className="font-sans text-base leading-relaxed text-stone-600">
+        <p className="font-sans text-base leading-relaxed text-[#1e1e1e]">
           Full brand identity, website design, and frontend development for a freight transport company
           serving Metro Manila, North &amp; South Luzon, and inter-island routes across the Philippines —
           offering FTL/LTL shipping, last-mile delivery, and 24/7 GPS-tracked logistics support.
@@ -88,7 +88,7 @@ export default function GraceyLogisticsModal({ onClose }: Props) {
         style={{ background: 'rgba(107,114,128,0.05)', border: '1px solid rgba(107,114,128,0.10)' }}
       >
         <p className="font-sans text-xs uppercase tracking-widest mb-3" style={{ color: 'rgba(55,65,81,0.60)' }}>The Brief</p>
-        <p className="font-sans text-base leading-relaxed text-stone-600">
+        <p className="font-sans text-base leading-relaxed text-[#1e1e1e]">
           Gracey Logistics needed a brand presence and a live website — not a template or builder, but a
           real React application built from scratch. The site covers services, shipment tracking UI,
           and contact flows for both business clients and individual shippers across the Philippines.
@@ -97,7 +97,7 @@ export default function GraceyLogisticsModal({ onClose }: Props) {
 
       {/* Deliverables */}
       <div className="mb-6">
-        <p className="font-sans text-xs uppercase tracking-widest mb-4 text-stone-400">Deliverables</p>
+        <p className="font-sans text-xs uppercase tracking-widest mb-4 text-[#1e1e1e]">Deliverables</p>
         <div className="grid grid-cols-2 gap-2">
           {deliverables.map(({ label, category }) => (
             <div
@@ -105,8 +105,8 @@ export default function GraceyLogisticsModal({ onClose }: Props) {
               className="flex items-center justify-between px-4 py-3 rounded-2xl"
               style={{ background: 'rgba(107,114,128,0.04)', border: '1px solid rgba(107,114,128,0.10)' }}
             >
-              <span className="font-sans text-sm text-stone-700">{label}</span>
-              <span className="font-sans text-xs text-right text-stone-400">{category}</span>
+              <span className="font-sans text-sm text-[#1e1e1e]">{label}</span>
+              <span className="font-sans text-xs text-right text-[#1e1e1e]">{category}</span>
             </div>
           ))}
         </div>
@@ -114,7 +114,7 @@ export default function GraceyLogisticsModal({ onClose }: Props) {
 
       {/* Stack */}
       <div className="mb-8">
-        <p className="font-sans text-xs uppercase tracking-widest mb-4 text-stone-400">Stack</p>
+        <p className="font-sans text-xs uppercase tracking-widest mb-4 text-[#1e1e1e]">Stack</p>
         <div className="grid grid-cols-2 gap-2">
           {stack.map(({ label, category }) => (
             <div
@@ -122,8 +122,8 @@ export default function GraceyLogisticsModal({ onClose }: Props) {
               className="flex items-center justify-between px-4 py-3 rounded-2xl"
               style={{ background: 'rgba(107,114,128,0.04)', border: '1px solid rgba(107,114,128,0.10)' }}
             >
-              <span className="font-sans text-sm text-stone-700">{label}</span>
-              <span className="font-sans text-xs text-right text-stone-400">{category}</span>
+              <span className="font-sans text-sm text-[#1e1e1e]">{label}</span>
+              <span className="font-sans text-xs text-right text-[#1e1e1e]">{category}</span>
             </div>
           ))}
         </div>
@@ -131,7 +131,7 @@ export default function GraceyLogisticsModal({ onClose }: Props) {
 
       {/* Roles */}
       <div className="mb-8">
-        <p className="font-sans text-xs uppercase tracking-widest mb-4 text-stone-400">My Roles</p>
+        <p className="font-sans text-xs uppercase tracking-widest mb-4 text-[#1e1e1e]">My Roles</p>
         <div className="flex flex-col gap-3">
           {roles.map(({ role, desc }) => (
             <div
@@ -139,8 +139,8 @@ export default function GraceyLogisticsModal({ onClose }: Props) {
               className="p-5 rounded-2xl"
               style={{ background: 'rgba(107,114,128,0.04)', border: '1px solid rgba(107,114,128,0.10)' }}
             >
-              <p className="font-sans text-sm font-medium mb-1.5 text-stone-700">{role}</p>
-              <p className="font-sans text-sm leading-relaxed text-stone-500">{desc}</p>
+              <p className="font-sans text-sm font-medium mb-1.5 text-[#1e1e1e]">{role}</p>
+              <p className="font-sans text-sm leading-relaxed text-[#1e1e1e]">{desc}</p>
             </div>
           ))}
         </div>
@@ -152,7 +152,7 @@ export default function GraceyLogisticsModal({ onClose }: Props) {
           href="https://www.graceylogisticsservices.com"
           target="_blank"
           rel="noopener noreferrer"
-          className="btn-spring inline-flex items-center justify-center gap-2 font-sans text-sm font-semibold px-5 py-3 rounded-full transition-colors duration-150 bg-stone-200 hover:bg-stone-300 text-stone-700"
+          className="btn-spring inline-flex items-center justify-center gap-2 font-sans text-sm font-semibold px-5 py-3 rounded-full transition-colors duration-150 bg-stone-200 hover:bg-stone-300 text-[#1e1e1e]"
         >
           Visit Live Site ↗
         </a>

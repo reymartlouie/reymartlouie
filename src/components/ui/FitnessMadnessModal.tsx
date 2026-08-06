@@ -71,10 +71,10 @@ export default function FitnessMadnessModal({ onClose }: Props) {
 
       {/* Intro */}
       <div className="mb-8">
-        <p className="font-sans text-xs leading-relaxed mb-3 text-stone-400">
+        <p className="font-sans text-xs leading-relaxed mb-3 text-[#1e1e1e]">
           Local deployment · Windows PC · No internet required
         </p>
-        <p className="font-sans text-base leading-relaxed text-stone-600">
+        <p className="font-sans text-base leading-relaxed text-[#1e1e1e]">
           A lightweight gym attendance management system built for small gyms that need an offline-first, internet-independent setup. Members check in and out on a kiosk screen; the gym owner manages everything through an admin dashboard — no subscription, no cloud dependency.
         </p>
       </div>
@@ -85,14 +85,14 @@ export default function FitnessMadnessModal({ onClose }: Props) {
         style={{ background: 'rgba(239,68,68,0.05)', border: '1px solid rgba(239,68,68,0.12)' }}
       >
         <p className="font-sans text-xs uppercase tracking-widest mb-3" style={{ color: 'rgba(185,28,28,0.60)' }}>The Brief</p>
-        <p className="font-sans text-base leading-relaxed text-stone-600">
+        <p className="font-sans text-base leading-relaxed text-[#1e1e1e]">
           A local gym was still running on manual attendance logbooks and handwritten payment records. The goal was to replace that entirely with a self-contained system that auto-starts on Windows boot, works without internet, and backs up its own data automatically — to a local folder, a USB drive, or Google Drive.
         </p>
       </div>
 
       {/* Features */}
       <div className="mb-6">
-        <p className="font-sans text-xs uppercase tracking-widest mb-4 text-stone-400">Features</p>
+        <p className="font-sans text-xs uppercase tracking-widest mb-4 text-[#1e1e1e]">Features</p>
         <div className="grid grid-cols-2 gap-2">
           {features.map(({ label, category }) => (
             <div
@@ -100,8 +100,8 @@ export default function FitnessMadnessModal({ onClose }: Props) {
               className="flex items-center justify-between px-4 py-3 rounded-2xl"
               style={{ background: 'rgba(239,68,68,0.04)', border: '1px solid rgba(239,68,68,0.12)' }}
             >
-              <span className="font-sans text-sm text-stone-700">{label}</span>
-              <span className="font-sans text-xs text-right text-stone-400">{category}</span>
+              <span className="font-sans text-sm text-[#1e1e1e]">{label}</span>
+              <span className="font-sans text-xs text-right text-[#1e1e1e]">{category}</span>
             </div>
           ))}
         </div>
@@ -109,7 +109,7 @@ export default function FitnessMadnessModal({ onClose }: Props) {
 
       {/* Stack */}
       <div className="mb-8">
-        <p className="font-sans text-xs uppercase tracking-widest mb-4 text-stone-400">Stack</p>
+        <p className="font-sans text-xs uppercase tracking-widest mb-4 text-[#1e1e1e]">Stack</p>
         <div className="grid grid-cols-2 gap-2">
           {stack.map(({ label, category }) => (
             <div
@@ -117,8 +117,8 @@ export default function FitnessMadnessModal({ onClose }: Props) {
               className="flex items-center justify-between px-4 py-3 rounded-2xl"
               style={{ background: 'rgba(239,68,68,0.04)', border: '1px solid rgba(239,68,68,0.12)' }}
             >
-              <span className="font-sans text-sm text-stone-700">{label}</span>
-              <span className="font-sans text-xs text-right text-stone-400">{category}</span>
+              <span className="font-sans text-sm text-[#1e1e1e]">{label}</span>
+              <span className="font-sans text-xs text-right text-[#1e1e1e]">{category}</span>
             </div>
           ))}
         </div>
@@ -126,7 +126,7 @@ export default function FitnessMadnessModal({ onClose }: Props) {
 
       {/* Roles */}
       <div className="mb-8">
-        <p className="font-sans text-xs uppercase tracking-widest mb-4 text-stone-400">My Role</p>
+        <p className="font-sans text-xs uppercase tracking-widest mb-4 text-[#1e1e1e]">My Role</p>
         <div className="flex flex-col gap-3">
           {roles.map(({ role, desc }) => (
             <div
@@ -134,8 +134,8 @@ export default function FitnessMadnessModal({ onClose }: Props) {
               className="p-5 rounded-2xl"
               style={{ background: 'rgba(239,68,68,0.04)', border: '1px solid rgba(239,68,68,0.12)' }}
             >
-              <p className="font-sans text-sm font-medium mb-1.5 text-stone-700">{role}</p>
-              <p className="font-sans text-sm leading-relaxed text-stone-500">{desc}</p>
+              <p className="font-sans text-sm font-medium mb-1.5 text-[#1e1e1e]">{role}</p>
+              <p className="font-sans text-sm leading-relaxed text-[#1e1e1e]">{desc}</p>
             </div>
           ))}
         </div>

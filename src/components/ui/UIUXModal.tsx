@@ -23,8 +23,8 @@ export default function UIUXModal({ onClose }: Props) {
         </div>
 
         <div className="flex flex-col gap-2 max-w-sm">
-          <h3 className="font-display text-2xl text-stone-900">Design work on the way.</h3>
-          <p className="font-sans text-base leading-relaxed text-stone-500">
+          <h3 className="font-display text-2xl text-[#1e1e1e]">Design work on the way.</h3>
+          <p className="font-sans text-base leading-relaxed text-[#1e1e1e]">
             Case studies, wireframes, and high-fidelity prototypes will live here soon. In the meantime, explore the existing portfolio.
           </p>
         </div>

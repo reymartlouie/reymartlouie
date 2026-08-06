@@ -49,12 +49,12 @@ export default function CardEditorModal({ initial, onConfirm, onClose }: CardEdi
 
         {/* Header */}
         <div className="flex items-center justify-between">
-          <h2 className="font-display text-stone-800 text-2xl">
+          <h2 className="font-display text-[#1e1e1e] text-2xl">
             {isEdit ? 'Edit Note' : 'Leave a Note'}
           </h2>
           <button
             onClick={onClose}
-            className="w-8 h-8 flex items-center justify-center rounded-full bg-black/[0.05] text-stone-400 hover:bg-black/[0.08] hover:text-stone-600 transition-colors text-sm"
+            className="w-8 h-8 flex items-center justify-center rounded-full bg-black/[0.05] text-[#1e1e1e] hover:bg-black/[0.08] hover:text-[#1e1e1e] transition-colors text-sm"
           >
             ✕
           </button>
@@ -67,48 +67,48 @@ export default function CardEditorModal({ initial, onConfirm, onClose }: CardEdi
           className="rounded-2xl p-5 min-h-[88px] flex flex-col justify-between transition-colors duration-200"
           style={{ backgroundColor: color }}
         >
-          <span className="font-sans text-[10px] uppercase tracking-widest" style={{ color: 'rgba(0,0,0,0.35)' }}>Note preview</span>
+          <span className="font-sans text-[10px] uppercase tracking-widest" style={{ color: '#1e1e1e' }}>Note preview</span>
           <div className="mt-2">
             <p className="font-display text-xl leading-tight">
               {title
-                ? <span style={{ color: 'rgba(0,0,0,0.85)' }}>{title}</span>
+                ? <span style={{ color: '#1e1e1e' }}>{title}</span>
                 : <span style={{ color: 'rgba(0,0,0,0.25)' }}>Your name</span>
               }
             </p>
             {body && (
-              <p className="font-sans text-xs mt-1 leading-relaxed line-clamp-2" style={{ color: 'rgba(0,0,0,0.50)' }}>{body}</p>
+              <p className="font-sans text-xs mt-1 leading-relaxed line-clamp-2" style={{ color: '#1e1e1e' }}>{body}</p>
             )}
           </div>
         </div>
 
         {/* Name */}
         <div className="flex flex-col gap-1.5">
-          <label className="font-sans text-stone-400 text-[10px] uppercase tracking-widest">Name</label>
+          <label className="font-sans text-[#1e1e1e] text-[10px] uppercase tracking-widest">Name</label>
           <input
             ref={inputRef}
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="Your name"
-            className="font-display bg-black/[0.03] text-stone-800 border border-black/10 rounded-2xl px-4 py-3 text-lg placeholder:text-stone-300 outline-none focus:border-black/25 transition-colors"
+            className="font-display bg-black/[0.03] text-[#1e1e1e] border border-black/10 rounded-2xl px-4 py-3 text-lg placeholder:text-stone-300 outline-none focus:border-black/25 transition-colors"
           />
         </div>
 
         {/* Body */}
         <div className="flex flex-col gap-1.5">
-          <label className="font-sans text-stone-400 text-[10px] uppercase tracking-widest">Body</label>
+          <label className="font-sans text-[#1e1e1e] text-[10px] uppercase tracking-widest">Body</label>
           <textarea
             value={body}
             onChange={(e) => setBody(e.target.value)}
             placeholder="Card content"
             rows={3}
-            className="font-sans bg-black/[0.03] text-stone-800 border border-black/10 rounded-2xl px-4 py-3 text-sm placeholder:text-stone-300 outline-none focus:border-black/25 transition-colors resize-none leading-relaxed"
+            className="font-sans bg-black/[0.03] text-[#1e1e1e] border border-black/10 rounded-2xl px-4 py-3 text-sm placeholder:text-stone-300 outline-none focus:border-black/25 transition-colors resize-none leading-relaxed"
           />
         </div>
 
         {/* Color swatches */}
         <div className="flex flex-col gap-2">
-          <label className="font-sans text-stone-400 text-[10px] uppercase tracking-widest">Background</label>
+          <label className="font-sans text-[#1e1e1e] text-[10px] uppercase tracking-widest">Background</label>
           <div className="flex gap-2.5">
             {COLORS.map((c) => (
               <button
@@ -144,7 +144,7 @@ export default function CardEditorModal({ initial, onConfirm, onClose }: CardEdi
         <div className="flex gap-3">
           <button
             onClick={onClose}
-            className="btn-spring flex-1 font-sans text-stone-500 bg-black/[0.04] border border-black/10 px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-black/[0.07] transition-colors"
+            className="btn-spring flex-1 font-sans text-[#1e1e1e] bg-black/[0.04] border border-black/10 px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-black/[0.07] transition-colors"
           >
             Cancel
           </button>

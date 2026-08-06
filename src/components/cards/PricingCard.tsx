@@ -29,9 +29,9 @@ export default function PricingCard() {
       <div className="px-6 md:px-8 pt-7 md:pt-9 pb-5 flex items-center justify-between gap-4">
         <div className="flex items-center gap-2">
           <div className="w-px h-3.5 bg-stone-400/50" />
-          <span className="font-sans text-xs uppercase tracking-widest text-stone-500">Pricing</span>
+          <span className="font-sans text-xs uppercase tracking-widest text-[#1e1e1e]">Pricing</span>
         </div>
-        <p className="font-sans text-sm text-stone-500 hidden md:block">
+        <p className="font-sans text-sm text-[#1e1e1e] hidden md:block">
           Rates vary by scope
         </p>
       </div>
@@ -62,10 +62,10 @@ export default function PricingCard() {
 
               {/* Price */}
               <div className="flex items-baseline gap-1.5">
-                <span className="font-display text-3xl font-black text-stone-900 leading-none">
+                <span className="font-display text-3xl font-black text-[#1e1e1e] leading-none">
                   {svc.starting}
                 </span>
-                <span className="font-sans text-sm text-stone-400">starting</span>
+                <span className="font-sans text-sm text-[#1e1e1e]">starting</span>
               </div>
 
               {/* Items */}
@@ -76,7 +76,7 @@ export default function PricingCard() {
                       className="w-1.5 h-1.5 rounded-full flex-shrink-0"
                       style={{ background: svc.accentBorder }}
                     />
-                    <span className="font-sans text-sm text-stone-500">{item}</span>
+                    <span className="font-sans text-sm text-[#1e1e1e]">{item}</span>
                   </li>
                 ))}
               </ul>
@@ -87,7 +87,7 @@ export default function PricingCard() {
 
       {/* Footer note */}
       <div className="px-6 md:px-8 pb-6 md:pb-8">
-        <p className="font-sans text-xs text-stone-400">
+        <p className="font-sans text-xs text-[#1e1e1e]">
           Rush jobs +30% · Maintenance plans available · Contact for custom quotes
         </p>
       </div>

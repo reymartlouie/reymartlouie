@@ -20,7 +20,7 @@ export default function GraduationModal({ view, onClose }: Props) {
           href={isPhoto ? '/graduation.webp' : '/diploma.webp'}
           target="_blank"
           rel="noopener noreferrer"
-          className="btn-spring inline-flex items-center gap-2 font-sans text-sm font-semibold px-5 py-2.5 rounded-full transition-colors duration-150 bg-stone-100 hover:bg-stone-200 text-stone-600"
+          className="btn-spring inline-flex items-center gap-2 font-sans text-sm font-semibold px-5 py-2.5 rounded-full transition-colors duration-150 bg-stone-100 hover:bg-stone-200 text-[#1e1e1e]"
         >
           Open ↗
         </a>

@@ -26,7 +26,7 @@ export default function Quote() {
       />
 
       <div className="relative p-6 flex flex-col justify-between h-full gap-4">
-        <p className="font-display text-3xl leading-none" style={{ color: BLUE_DIM }}>"</p>
+        <p className="font-display text-3xl leading-none" style={{ color: BLUE_DIM }}>&quot;</p>
 
         <p className="font-sans text-sm leading-relaxed" style={{ color: BLUE }}>
           First, solve the problem. Then, write the code.
