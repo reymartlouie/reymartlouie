@@ -27,9 +27,9 @@ export default function Home() {
     <main className="min-h-screen">
       <StatusBar />
       <div
-        className="max-w-[1280px] mx-auto px-4 pt-4 lg:pt-14 md:px-6 flex flex-col gap-4 pb-8 lg:pb-[180px]"
+        className="max-w-[1280px] mx-auto px-4 pt-6 lg:pt-20 md:px-6 flex flex-col gap-14 md:gap-20 pb-8 lg:pb-[180px]"
       >
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-5 md:gap-6">
           <SectionBreak label="Canvas" />
           <SectionHeadline>
             Computer Engineer<br />
@@ -37,17 +37,17 @@ export default function Home() {
           </SectionHeadline>
           <Hero />
         </div>
-        <div id="work" className="flex flex-col gap-4">
+        <div id="work" className="flex flex-col gap-5 md:gap-6">
           <SectionBreak label="Work" />
-          <SectionHeadline>Selected<br />Work.</SectionHeadline>
+          <SectionHeadline>Selected Work.</SectionHeadline>
           <Works />
         </div>
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-5 md:gap-6">
           <SectionBreak label="Credentials" />
           <SectionHeadline>Achievements.</SectionHeadline>
           <Achievements />
         </div>
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-5 md:gap-6">
           <SectionBreak label="Contact" />
           <SectionHeadline>Let&apos;s build<br />something.</SectionHeadline>
           <Footer />

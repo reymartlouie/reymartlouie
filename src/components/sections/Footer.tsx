@@ -8,7 +8,7 @@ import PricingCard from '../cards/PricingCard'
 
 export default function Footer() {
   return (
-    <section id="contact" className="grid grid-cols-1 lg:grid-cols-12 gap-4 pb-6">
+    <section id="contact" className="grid grid-cols-1 lg:grid-cols-12 gap-5 md:gap-6 pb-6">
 
       {/* ── Pricing card ─────────────────────────────────────────────────── */}
       <Reveal className="lg:col-span-8">

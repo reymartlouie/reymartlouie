@@ -26,7 +26,7 @@ export default function PricingCard() {
     <div className="glass h-full rounded-[32px] overflow-hidden">
 
       {/* Header */}
-      <div className="px-6 md:px-8 pt-6 md:pt-7 pb-4 flex items-center justify-between gap-4">
+      <div className="px-6 md:px-8 pt-7 md:pt-9 pb-5 flex items-center justify-between gap-4">
         <div className="flex items-center gap-2">
           <div className="w-px h-3.5 bg-stone-400/50" />
           <span className="font-sans text-xs uppercase tracking-widest text-stone-500">Pricing</span>
@@ -37,7 +37,7 @@ export default function PricingCard() {
       </div>
 
       {/* Service cards */}
-      <div className="px-4 md:px-5 pb-6 md:pb-8 grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+      <div className="px-4 md:px-8 pb-6 md:pb-8 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
         {services.map((svc) => (
           <div
             key={svc.category}
