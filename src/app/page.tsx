@@ -32,7 +32,7 @@ export default function Home() {
         <div className="flex flex-col gap-4">
           <SectionBreak label="Canvas" />
           <SectionHeadline>
-            Computer<br />Engineer<br />
+            Computer Engineer<br />
             <span className="text-fuchsia-600">&amp; Developer.</span>
           </SectionHeadline>
           <Hero />
