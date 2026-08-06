@@ -90,6 +90,85 @@ function IconFile() {
   )
 }
 
+// ── Center nav icons (moved here from the old floating Navbar) ─────────────────
+
+function IconNavCanvas() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 20 20" fill="none"
+      stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="4" y="4" width="12" height="12" rx="1.5" />
+      <path d="M2 4h2M16 4h2M2 16h2M16 16h2M4 2v2M16 2v2M4 16v2M16 16v2" />
+    </svg>
+  )
+}
+
+function IconNavWork() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 20 20" fill="none"
+      stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="2"  y="2"  width="7" height="7" rx="2" />
+      <rect x="11" y="2"  width="7" height="7" rx="2" />
+      <rect x="2"  y="11" width="7" height="7" rx="2" />
+      <rect x="11" y="11" width="7" height="7" rx="2" />
+    </svg>
+  )
+}
+
+function IconNavContact() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 20 20" fill="none"
+      stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="2" y="4" width="16" height="13" rx="2" />
+      <path d="m2 7 8 5.5L18 7" />
+    </svg>
+  )
+}
+
+function GlassIcon({ Icon, tint, glow, active }: {
+  Icon: React.ComponentType
+  tint: string
+  glow: string
+  active?: boolean
+}) {
+  return (
+    <div
+      className="relative flex items-center justify-center overflow-hidden group-hover:scale-110 group-active:scale-95"
+      style={{
+        width: 22, height: 22,
+        borderRadius: 7,
+        background: tint,
+        border: '1px solid rgba(255,255,255,0.14)',
+        boxShadow: [
+          `0 2px 8px ${glow}`,
+          '0 1px 0 rgba(255,255,255,0.20) inset',
+        ].join(', '),
+        opacity: active === false ? 0.55 : 1,
+        transition: 'opacity 200ms ease, box-shadow 200ms ease, transform 200ms ease',
+      }}
+    >
+      {/* Subtle top sheen */}
+      <div
+        className="absolute inset-x-0 top-0 pointer-events-none"
+        style={{
+          height: '45%',
+          background: 'linear-gradient(180deg, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0) 100%)',
+          borderRadius: '7px 7px 0 0',
+        }}
+      />
+      {/* Icon — scaled down to fit the compact status-bar chip */}
+      <div className="relative" style={{ color: '#fff', transform: 'scale(0.62)' }}>
+        <Icon />
+      </div>
+    </div>
+  )
+}
+
+const NAV = [
+  { id: 'about',   label: 'Canvas',  href: '#about',   Icon: IconNavCanvas,  tint: 'rgba(96,165,250,0.18)',  glow: 'rgba(96,165,250,0.30)'   },
+  { id: 'work',    label: 'Work',    href: '#work',    Icon: IconNavWork,    tint: 'rgba(192,132,252,0.18)', glow: 'rgba(192,132,252,0.30)'  },
+  { id: 'contact', label: 'Contact', href: '#contact', Icon: IconNavContact, tint: 'rgba(52,211,153,0.18)',  glow: 'rgba(52,211,153,0.30)'   },
+] as const
+
 const SECTIONS = [
   { id: 'about',   label: 'Canvas'  },
   { id: 'work',    label: 'Work'    },
@@ -396,7 +475,7 @@ function StatusBar() {
   return (
     <>
     <div
-      className="fixed top-0 inset-x-0 z-50 flex items-center justify-between select-none"
+      className="fixed top-0 inset-x-0 z-50 grid grid-cols-[1fr_auto_1fr] items-center select-none"
       style={{
         height:               36,
         paddingLeft:          20,
@@ -473,8 +552,27 @@ function StatusBar() {
         )}
       </div>
 
+      {/* ── Center — section nav, moved here from the old floating Navbar ── */}
+      <div className="hidden md:flex items-center gap-4 justify-self-center">
+        {NAV.map(({ id, label, href, Icon, tint, glow }) => {
+          const isActive = section === label
+          return (
+            <a
+              key={id}
+              href={href}
+              onClick={scrollToCenter(href)}
+              className="flex items-center gap-1.5 group"
+              style={{ color: isActive ? 'var(--bar-text-active)' : 'var(--bar-text)', transition: 'color 200ms ease' }}
+            >
+              <GlassIcon Icon={Icon} tint={tint} glow={glow} active={isActive} />
+              <span className="font-sans" style={{ fontSize: 12 }}>{label}</span>
+            </a>
+          )
+        })}
+      </div>
+
       {/* ── Right ── */}
-      <div className="flex items-center gap-2.5">
+      <div className="flex items-center gap-2.5 justify-self-end">
         <span style={{ color: 'var(--bar-text)', display: 'flex', alignItems: 'center' }}>
           <IconWifi />
         </span>
