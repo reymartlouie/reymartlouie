@@ -38,7 +38,7 @@ export default function InternshipModal({ view, onClose }: Props) {
       ) : (
         <div className="rounded-2xl overflow-hidden" style={{ border: '1px solid rgba(0,0,0,0.08)' }}>
           <iframe
-            src="/ubiquity-internship.pdf"
+            src="/ubiquity-internship.pdf#toolbar=0"
             className="w-full block"
             style={{ height: '80vh', border: 'none' }}
             title="Internship Certificate"

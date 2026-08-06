@@ -19,7 +19,7 @@ export default function ResumeModal({ onClose }: Props) {
           href={RESUME_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="btn-spring inline-flex items-center gap-2 font-sans text-sm font-semibold px-5 py-2.5 rounded-full transition-colors duration-150 bg-stone-100 hover:bg-stone-200 text-stone-600"
+          className="btn-spring inline-flex items-center gap-2 font-sans text-sm font-semibold px-5 py-2.5 rounded-full transition-colors duration-150 bg-stone-100 hover:bg-stone-200 text-[#1e1e1e]"
         >
           Open ↗
         </a>
@@ -27,7 +27,7 @@ export default function ResumeModal({ onClose }: Props) {
     >
       <div className="rounded-2xl overflow-hidden" style={{ border: '1px solid rgba(0,0,0,0.08)' }}>
         <iframe
-          src={RESUME_URL}
+          src={`${RESUME_URL}#toolbar=0`}
           className="w-full block"
           style={{ height: '80vh', border: 'none' }}
           title="Resume"
