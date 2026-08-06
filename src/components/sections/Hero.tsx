@@ -8,6 +8,7 @@ import HeroIntroCard from '../cards/HeroIntroCard'
 import PhotoCard from '../cards/PhotoCard'
 import TechStackCard from '../cards/TechStackCard'
 import AboutCard from '../cards/Quote'
+import ScrollSlider from '../ui/ScrollSlider'
 import { supabase, type Testimonial } from '@/lib/supabase'
 
 const NOTE_LIMIT  = 3
@@ -16,6 +17,7 @@ const NOTE_WINDOW = 24 * 60 * 60 * 1000 // 24 h
 // Every bento card renders at this exact size — uniform "pills" in the carousel.
 const CARD_W = 340
 const CARD_H = 400
+const CARD_GAP = 20
 
 function readRate(): { count: number; resetAt: number } {
   try {
@@ -33,8 +35,23 @@ export default function Hero() {
   const [modalOpen,   setModalOpen]   = useState(false)
   const [submitted,   setSubmitted]   = useState(false)
 
+  const [progress, setProgress] = useState(0)
+  const [thumbPercent, setThumbPercent] = useState(100)
   const scrollRef = useRef<HTMLDivElement>(null)
-  const dragRef = useRef<{ startX: number; startScroll: number; dragging: boolean } | null>(null)
+
+  const updateSlider = useCallback(() => {
+    const el = scrollRef.current
+    if (!el) return
+    const max = el.scrollWidth - el.clientWidth
+    setProgress(max > 0 ? el.scrollLeft / max : 0)
+    setThumbPercent(el.scrollWidth > 0 ? (el.clientWidth / el.scrollWidth) * 100 : 100)
+  }, [])
+
+  useEffect(() => {
+    updateSlider()
+    window.addEventListener('resize', updateSlider)
+    return () => window.removeEventListener('resize', updateSlider)
+  }, [updateSlider])
 
   const fetchTestimonials = () =>
     supabase
@@ -90,45 +107,14 @@ export default function Hero() {
   const openCreate = () => { setModalOpen(true) }
   const closeModal = () => { setModalOpen(false) }
 
-  // ── Click-and-drag horizontal scroll ────────────────────────────────────────
-  const onPointerDown = useCallback((e: React.PointerEvent<HTMLDivElement>) => {
-    if (e.button !== 0) return
-    const el = scrollRef.current
-    if (!el) return
-    dragRef.current = { startX: e.clientX, startScroll: el.scrollLeft, dragging: false }
-
-    const onMove = (ev: PointerEvent) => {
-      const st = dragRef.current
-      if (!st || !el) return
-      const dx = ev.clientX - st.startX
-      if (!st.dragging && Math.abs(dx) > 6) {
-        st.dragging = true
-        el.style.cursor = 'grabbing'
-      }
-      if (st.dragging) {
-        ev.preventDefault()
-        el.scrollLeft = st.startScroll - dx
-      }
-    }
-    const onUp = () => {
-      document.removeEventListener('pointermove', onMove)
-      document.removeEventListener('pointerup', onUp)
-      if (el) el.style.cursor = 'grab'
-      dragRef.current = null
-    }
-    document.addEventListener('pointermove', onMove)
-    document.addEventListener('pointerup', onUp)
-  }, [])
-
   return (
     <section id="about" className="flex flex-col gap-4">
 
       <div
         ref={scrollRef}
-        onPointerDown={onPointerDown}
-        onDragStart={(e) => e.preventDefault()}
-        className="no-scrollbar flex overflow-x-auto snap-x snap-mandatory px-4 md:px-0 gap-5 md:gap-6 py-4 cursor-grab select-none"
-        style={{ scrollPaddingLeft: '1rem' }}
+        onScroll={updateSlider}
+        className="no-scrollbar flex overflow-x-auto snap-x snap-mandatory px-4 md:px-0 pb-2"
+        style={{ scrollPaddingLeft: '1rem', gap: CARD_GAP }}
       >
         {STATIC_CARDS.map((Card, i) => (
           <div key={i} className="flex-shrink-0 snap-start flex" style={{ width: CARD_W, height: CARD_H }}>
@@ -148,12 +134,15 @@ export default function Hero() {
         ))}
       </div>
 
+      {/* Scroll position slider */}
+      <ScrollSlider scrollRef={scrollRef} progress={progress} thumbPercent={thumbPercent} />
+
       {/* Action row */}
       <div className="flex items-center justify-end lg:justify-start gap-3 flex-wrap">
         <button
           onClick={openCreate}
           disabled={rateLimited || submitted}
-          className="btn-spring glass inline-flex items-center gap-3 text-stone-600
+          className="btn-spring glass inline-flex items-center gap-3 text-[#1e1e1e]
                      font-sans text-sm font-semibold px-5 py-3 rounded-full
                      hover:bg-white/80 transition-colors
                      disabled:opacity-40 disabled:cursor-not-allowed"
