@@ -60,6 +60,37 @@ PayPal, Calling) got a defined resting `box-shadow` (`rgba(0,0,0,0.10–0.22)`)
 so they read as tiles floating over the page instead of a heavy black halo
 tuned for a black canvas.
 
+`TechStackCard` keeps its `/tech-bg.webp` tile-facade photo (the texture is
+part of its identity) but the dark overlay was lightened (`0.72→0.60` /
+`0.52→0.42` / `0.70→0.62`) so it reads through more, and the card grew a
+two-line header block — small-caps label, then a `font-display` headline
+("Tools I build with.") — above its tags, so content fills the fixed card
+height instead of leaving dead space below a thin top block.
+
+`GitHubCard` now mirrors that same header pattern (label row + `font-display`
+headline, "Consistency, committed.") for visual consistency between the two
+dark-green cards. Its contribution grid briefly moved to sit left-aligned
+inside the card's own `p-6` (matching `TechStackCard`'s tag inset), but that
+was reverted — it's back to breaking out of the `p-6` via `mx-[-24px]
+px-[15px]`, running edge-to-edge with the card at its own tighter 15px
+gutter, right-aligned (`justify-end`) so the most recent week sits flush
+against that gutter. Grid width is measured directly off the grid row
+(`gridRef` + `ResizeObserver`) to compute how many week-columns fit, sized
+dynamically (no fixed week cap). Dots are `11px` with `3px` gaps
+(GitHub's own proportions — a prior pass at `16px` spanning the full card
+width read as one solid green block), and the level-0 color is
+`rgba(255,255,255,0.04)` so empty days nearly vanish into the card bg and
+only actual activity reads as texture. Vertically the grid sits at the
+golden-ratio point of the space between header and footer (~62% down, not
+dead-center) via two `aria-hidden` spacer divs above/below it grown
+`1.618`:`1`. The whole card is a link to the GitHub profile (small mark
+icon, top-right of the header row, nudges on hover). `Quote`
+(AboutCard) swapped its static `/about-bg.webp`
+for a muted/looped `<video>` background (`/quote-bg.mp4`, `about-bg.webp`
+kept as `poster` fallback); playback is gated behind an `IntersectionObserver`
+(pauses off-screen in the carousel) and skipped entirely under
+`prefers-reduced-motion`.
+
 ### Hero Carousel
 
 The old free-drag `BentoCanvas`/`DraggableBento` system (2D positioning, resize
@@ -352,4 +383,4 @@ type Work = {
 
 ---
 
-*Last updated: August 2026 — frosted-glass / light-theme redesign, derived from design sessions in Claude Code*
+*Last updated: August 2026 — TechStack/GitHub/Quote hero-card redesign (video bg, layout rebalance), derived from design sessions in Claude Code*
