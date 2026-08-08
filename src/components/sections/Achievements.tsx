@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { useState, useEffect, useRef, useCallback } from 'react'
 import Reveal from '../ui/Reveal'
 import BadgesModal from '../ui/BadgesModal'
@@ -117,14 +118,16 @@ export default function Certifications({
             {certs.map((cert) => (
               <div key={cert.id} className="snap-center flex-shrink-0 w-[calc(100%-2rem)] md:w-[340px] flex flex-col items-center pb-2 md:pb-0">
                 <div
-                  className={`rounded-2xl bg-gradient-to-br ${cert.bgGradient} w-full overflow-hidden flex-shrink-0`}
+                  className={`relative rounded-2xl bg-gradient-to-br ${cert.bgGradient} w-full overflow-hidden flex-shrink-0`}
                   style={{ height: '260px' }}
                 >
                   {cert.image && (
-                    <img
+                    <Image
                       src={cert.image}
-                      alt={cert.imageAlt}
-                      className="w-full h-full object-cover rounded-2xl cursor-zoom-in"
+                      alt={cert.imageAlt ?? ''}
+                      fill
+                      sizes="(min-width: 768px) 340px, 100vw"
+                      className="object-cover rounded-2xl cursor-zoom-in"
                       onClick={() => setCertModal({ id: cert.id, view: cert.photoView! })}
                     />
                   )}

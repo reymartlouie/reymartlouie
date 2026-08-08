@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import Modal from './Modal'
 
 interface Props {
@@ -53,11 +54,13 @@ export default function BrewedModal({ onClose }: Props) {
       }
     >
       {/* Preview */}
-      <div className="mb-8 rounded-2xl overflow-hidden" style={{ border: '1px solid rgba(180,120,40,0.12)', boxShadow: '0 4px 20px rgba(0,0,0,0.07)' }}>
-        <img
+      <div className="relative mb-8 h-64 md:h-80 rounded-2xl overflow-hidden" style={{ border: '1px solid rgba(180,120,40,0.12)', boxShadow: '0 4px 20px rgba(0,0,0,0.07)' }}>
+        <Image
           src="/brewed-preview.webp"
           alt="Brewed landing page"
-          className="w-full h-64 md:h-80 object-cover object-top"
+          fill
+          sizes="(min-width: 768px) 672px, 100vw"
+          className="object-cover object-top"
           draggable={false}
         />
       </div>

@@ -200,8 +200,10 @@ export default function Works({
                 </p>
               </div>
 
-              {/* Logo */}
+              {/* Logo — hand-authored SVG icon, already vector/tiny; next/image
+                  buys nothing here and would need dangerouslyAllowSVG */}
               <div className="flex justify-center items-center">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={work.image} alt={work.imageAlt} className={work.imageClass} />
               </div>
 
