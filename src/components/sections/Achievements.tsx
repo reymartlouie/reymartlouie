@@ -14,7 +14,7 @@ const badges = [
 
 export const badgesCount = badges.length
 
-type CertId = 'graduation' | 'internship'
+type CertId = 'graduation' | 'internship' | 'itofficer'
 
 type Cert = {
   id: CertId
@@ -22,17 +22,31 @@ type Cert = {
   title: string
   issuer: string
   dateLabel: string
-  image: string
-  imageAlt: string
+  image?: string
+  imageAlt?: string
+  issuerHref?: string
   bgGradient: string
-  buttonClass: string
-  buttonText: string
-  photoView: string
-  documentView: string
+  buttonClass?: string
+  buttonText?: string
+  buttonHref?: string
+  photoView?: string
+  documentView?: string
 }
 
 // Add new achievements here — sorted newest-first automatically
 const certs: Cert[] = [
+  {
+    id: 'itofficer' as const,
+    year: 2026,
+    title: 'IT Officer',
+    issuer: 'Ubiquity Global Services',
+    dateLabel: 'Since June 1, 2026 · Iloilo City',
+    issuerHref: 'https://www.ubiquity.com/',
+    bgGradient: 'from-fuchsia-800 to-fuchsia-950',
+    buttonClass: 'bg-fuchsia-700 hover:bg-fuchsia-800',
+    buttonText: 'Verify on LinkedIn',
+    buttonHref: 'https://www.linkedin.com/in/reymart-louie-capapas-b0063718b',
+  },
   {
     id: 'graduation' as const,
     year: 2026,
@@ -106,26 +120,52 @@ export default function Certifications({
                   className={`rounded-2xl bg-gradient-to-br ${cert.bgGradient} w-full overflow-hidden flex-shrink-0`}
                   style={{ height: '260px' }}
                 >
-                  <img
-                    src={cert.image}
-                    alt={cert.imageAlt}
-                    className="w-full h-full object-cover rounded-2xl cursor-zoom-in"
-                    onClick={() => setCertModal({ id: cert.id, view: cert.photoView })}
-                  />
+                  {cert.image && (
+                    <img
+                      src={cert.image}
+                      alt={cert.imageAlt}
+                      className="w-full h-full object-cover rounded-2xl cursor-zoom-in"
+                      onClick={() => setCertModal({ id: cert.id, view: cert.photoView! })}
+                    />
+                  )}
                 </div>
                 <div className="flex flex-col items-center text-center mt-5 gap-2 w-full">
                   <h3 className="font-display text-2xl text-[#1e1e1e] leading-snug">{cert.title}</h3>
-                  <p className="font-sans text-base text-[#1e1e1e] leading-relaxed">{cert.issuer}</p>
+                  {cert.issuerHref ? (
+                    <a
+                      href={cert.issuerHref}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-sans text-base text-[#1e1e1e] leading-relaxed underline decoration-[#1e1e1e]/25 underline-offset-2 hover:decoration-[#1e1e1e]/60 transition-colors"
+                    >
+                      {cert.issuer}
+                    </a>
+                  ) : (
+                    <p className="font-sans text-base text-[#1e1e1e] leading-relaxed">{cert.issuer}</p>
+                  )}
                   <p className="font-sans text-base font-semibold text-[#1e1e1e]">{cert.dateLabel}</p>
                 </div>
-                <div className="flex items-center gap-3 mt-5">
-                  <button
-                    onClick={() => setCertModal({ id: cert.id, view: cert.documentView })}
-                    className={`px-6 py-2.5 rounded-full text-white text-sm font-sans font-medium transition-colors duration-150 ${cert.buttonClass}`}
-                  >
-                    {cert.buttonText}
-                  </button>
-                </div>
+                {cert.buttonText && (
+                  <div className="flex items-center gap-3 mt-5">
+                    {cert.buttonHref ? (
+                      <a
+                        href={cert.buttonHref}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`px-6 py-2.5 rounded-full text-white text-sm font-sans font-medium transition-colors duration-150 ${cert.buttonClass}`}
+                      >
+                        {cert.buttonText}
+                      </a>
+                    ) : (
+                      <button
+                        onClick={() => setCertModal({ id: cert.id, view: cert.documentView! })}
+                        className={`px-6 py-2.5 rounded-full text-white text-sm font-sans font-medium transition-colors duration-150 ${cert.buttonClass}`}
+                      >
+                        {cert.buttonText}
+                      </button>
+                    )}
+                  </div>
+                )}
               </div>
             ))}
           </div>

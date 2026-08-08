@@ -150,7 +150,7 @@ function UserMenu({ onClose }: { onClose: () => void }) {
         </div>
         <div>
           <p className="font-display text-white/90 text-sm leading-tight">Reymart Louie L. Capapas</p>
-          <p className="font-sans text-white/35 text-xs mt-0.5">Computer Engineer</p>
+          <p className="font-sans text-white/35 text-xs mt-0.5">IT Officer @ Ubiquity</p>
         </div>
       </div>
     </div>
@@ -271,7 +271,7 @@ function MobileDrawer({ onClose, onResumeOpen, time, date }: { onClose: () => vo
           </div>
           <div className="flex-1 min-w-0">
             <p className="font-display text-white/90 text-sm leading-tight truncate">Reymart Louie L. Capapas</p>
-            <p className="font-sans text-white/40 text-xs mt-0.5">Computer Engineer</p>
+            <p className="font-sans text-white/40 text-xs mt-0.5">IT Officer @ Ubiquity</p>
           </div>
         </div>
       </div>

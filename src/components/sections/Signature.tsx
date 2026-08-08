@@ -8,7 +8,7 @@ const socialLinks = [
   { label: 'LinkedIn',  href: 'https://www.linkedin.com/in/reymart-louie-capapas-b0063718b' },
   { label: 'Instagram', href: 'https://www.instagram.com/reymartlouie/' },
   { label: 'Email',     href: 'mailto:reymartlouie.capapas@gmail.com' },
-  { label: '+63 962 603 2929', href: 'tel:+639626032929' },
+  { label: '+63 949 321 4934', href: 'tel:+639493214934' },
 ]
 
 export default function Signature() {
@@ -57,7 +57,7 @@ export default function Signature() {
 
       {/* Meta — education, location, tenure */}
       <p className="font-sans text-xs uppercase tracking-widest text-[#1e1e1e]/35 pb-4 md:pb-8">
-        University of St. La Salle · Bacolod City · Building since 2022
+        University of St. La Salle · IT Officer @ Ubiquity Global Services · Building since 2022
       </p>
 
       {resumeOpen && <ResumeModal onClose={() => setResumeOpen(false)} />}
