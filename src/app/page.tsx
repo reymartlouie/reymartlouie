@@ -1,9 +1,13 @@
+'use client'
+
+import { useState } from 'react'
 import Hero from '@/components/sections/Hero'
 import Works from '@/components/sections/Works'
-import Achievements from '@/components/sections/Achievements'
+import Achievements, { badgesCount } from '@/components/sections/Achievements'
 import Footer from '@/components/sections/Footer'
 import Signature from '@/components/sections/Signature'
 import StatusBar from '@/components/ui/StatusBar'
+import SectionActionButton from '@/components/ui/SectionActionButton'
 
 function SectionBreak({ label }: { label: string }) {
   return (
@@ -23,7 +27,30 @@ function SectionHeadline({ children }: { children: React.ReactNode }) {
   )
 }
 
+function SectionHeader({
+  label,
+  action,
+  children,
+}: {
+  label: string
+  action?: React.ReactNode
+  children: React.ReactNode
+}) {
+  return (
+    <div className="flex flex-col gap-5 md:gap-6">
+      <SectionBreak label={label} />
+      <div className="flex items-center justify-between gap-4">
+        <SectionHeadline>{children}</SectionHeadline>
+        {action}
+      </div>
+    </div>
+  )
+}
+
 export default function Home() {
+  const [uiuxOpen, setUiuxOpen] = useState(false)
+  const [badgeModalOpen, setBadgeModalOpen] = useState(false)
+
   return (
     <main className="min-h-screen">
       <StatusBar />
@@ -39,14 +66,22 @@ export default function Home() {
           <Hero />
         </div>
         <div id="work" className="flex flex-col gap-5 md:gap-6">
-          <SectionBreak label="Work" />
-          <SectionHeadline>Selected Work.</SectionHeadline>
-          <Works />
+          <SectionHeader
+            label="Work"
+            action={<SectionActionButton label="UI/UX" onClick={() => setUiuxOpen(true)} />}
+          >
+            Selected Work.
+          </SectionHeader>
+          <Works uiuxOpen={uiuxOpen} setUiuxOpen={setUiuxOpen} />
         </div>
         <div className="flex flex-col gap-5 md:gap-6">
-          <SectionBreak label="Credentials" />
-          <SectionHeadline>Achievements.</SectionHeadline>
-          <Achievements />
+          <SectionHeader
+            label="Credentials"
+            action={<SectionActionButton label={`${badgesCount} credentials`} onClick={() => setBadgeModalOpen(true)} />}
+          >
+            Achievements.
+          </SectionHeader>
+          <Achievements badgeModalOpen={badgeModalOpen} setBadgeModalOpen={setBadgeModalOpen} />
         </div>
         <div className="flex flex-col gap-5 md:gap-6">
           <SectionBreak label="Contact" />

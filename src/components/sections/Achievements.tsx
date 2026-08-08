@@ -12,6 +12,8 @@ const badges = [
   { id: 'b60e4e5a-af99-4c92-a9de-8c6fc16ace20' },
 ]
 
+export const badgesCount = badges.length
+
 type CertId = 'graduation' | 'internship'
 
 type Cert = {
@@ -61,8 +63,13 @@ const certs: Cert[] = [
   },
 ].sort((a, b) => b.year - a.year)
 
-export default function Certifications() {
-  const [badgeModalOpen, setBadgeModalOpen] = useState(false)
+export default function Certifications({
+  badgeModalOpen,
+  setBadgeModalOpen,
+}: {
+  badgeModalOpen: boolean
+  setBadgeModalOpen: (open: boolean) => void
+}) {
   const [certModal, setCertModal] = useState<{ id: CertId; view: string } | null>(null)
   const [progress, setProgress] = useState(0)
   const [thumbPercent, setThumbPercent] = useState(100)
@@ -86,19 +93,6 @@ export default function Certifications() {
     <section id="certifications" className="flex flex-col gap-4">
       <Reveal>
         <div className="flex flex-col gap-4">
-
-          {/* Header */}
-          <div className="hidden md:flex items-center justify-end gap-4">
-            <button
-              onClick={() => setBadgeModalOpen(true)}
-              className="flex items-center gap-2 px-4 py-2 rounded-full bg-stone-200 hover:bg-stone-300 transition-colors duration-150"
-            >
-              <span className="font-sans text-sm text-[#1e1e1e]">{badges.length} credentials</span>
-              <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#1e1e1e]">
-                <path d="M2.5 11.5L11.5 2.5M11.5 2.5H5.5M11.5 2.5V8.5" />
-              </svg>
-            </button>
-          </div>
 
           {/* Cards — mobile: snap carousel / desktop: horizontal scroll */}
           <div
