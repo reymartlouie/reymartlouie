@@ -15,9 +15,9 @@ export default function Signature() {
   const [resumeOpen, setResumeOpen] = useState(false)
 
   return (
-    <div className="flex flex-col items-center gap-7 md:gap-9 pt-12 md:pt-20">
+    <div className="flex flex-col items-start gap-7 md:gap-9 pt-12 md:pt-20 px-1">
       {/* Name + title */}
-      <div className="text-center">
+      <div>
         <p className="font-display text-3xl md:text-4xl text-[#1e1e1e]">Reymart Louie L. Capapas</p>
         <p className="font-sans text-sm text-[#1e1e1e]/50 mt-3">Computer Engineer &amp; Developer</p>
       </div>
@@ -39,7 +39,7 @@ export default function Signature() {
       </div>
 
       {/* Social links — plain text, crawlable, not buried in a styled card */}
-      <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
+      <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
         {socialLinks.map((link, i) => (
           <span key={link.label} className="flex items-center gap-3">
             <a
