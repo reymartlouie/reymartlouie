@@ -14,12 +14,12 @@ function IconWifi() {
   )
 }
 
-function IconBattery() {
+function IconBattery({ outline = 'rgba(255,255,255,0.35)' }: { outline?: string }) {
   return (
     <svg width="22" height="11" viewBox="0 0 22 11" fill="none">
-      <rect x="0.75" y="0.75" width="18.5" height="9.5" rx="2.25" stroke="rgba(255,255,255,0.35)" strokeWidth="1" />
+      <rect x="0.75" y="0.75" width="18.5" height="9.5" rx="2.25" stroke={outline} strokeWidth="1" />
       <rect x="2.5"  y="2.5"  width="12"   height="6"   rx="1"    fill="#4ade80" fillOpacity="0.8" />
-      <path d="M20.25 3.8v3.4" stroke="rgba(255,255,255,0.35)" strokeWidth="1.4" strokeLinecap="round" />
+      <path d="M20.25 3.8v3.4" stroke={outline} strokeWidth="1.4" strokeLinecap="round" />
     </svg>
   )
 }
@@ -31,7 +31,7 @@ function Divider() {
 function HamburgerIcon() {
   return (
     <svg width="20" height="12" viewBox="0 0 20 12" fill="none">
-      <path d="M1 3h18M1 9h18" stroke="rgba(255,255,255,0.85)" strokeWidth="1.8" strokeLinecap="round" />
+      <path d="M1 3h18M1 9h18" stroke="var(--ink-70)" strokeWidth="1.8" strokeLinecap="round" />
     </svg>
   )
 }
@@ -157,7 +157,7 @@ function UserMenu({ onClose }: { onClose: () => void }) {
   )
 }
 
-// ── Mobile drawer ──────────────────────────────────────────────────────────────
+// ── Mobile menu panel — light frosted glass, iOS Control Center-style ───────────
 
 function MobileDrawer({ onClose, onResumeOpen, time, date }: { onClose: () => void; onResumeOpen: () => void; time: string; date: string }) {
   const [closing, setClosing] = useState(false)
@@ -185,93 +185,100 @@ function MobileDrawer({ onClose, onResumeOpen, time, date }: { onClose: () => vo
       {/* Backdrop */}
       <div
         className={`fixed inset-0 z-40 ${closing ? 'backdrop-fade-out' : 'backdrop-fade-in'}`}
-        style={{ background: 'rgba(0,0,0,0.55)' }}
+        style={{ background: 'rgba(17,17,19,0.22)' }}
         onClick={handleClose}
       />
 
-      {/* Drawer */}
+      {/* Panel */}
       <div
-        className={`${closing ? 'drawer-slide-out' : 'drawer-slide-in'} fixed inset-y-0 left-0 z-50 flex flex-col`}
+        className={`${closing ? 'panel-pop-out' : 'panel-pop-in'} fixed z-50 flex flex-col overflow-hidden`}
         style={{
-          width: '100%',
-          background: '#000000',
-          paddingTop: 'env(safe-area-inset-top, 0px)',
-          paddingBottom: 'env(safe-area-inset-bottom, 16px)',
+          top:                  'calc(env(safe-area-inset-top, 0px) + 12px)',
+          right:                16,
+          width:                'min(85vw, 336px)',
+          maxHeight:            'calc(100vh - env(safe-area-inset-top, 0px) - 32px)',
+          borderRadius:         28,
+          transformOrigin:      'top right',
+          background:           'var(--glass-bg-strong)',
+          backdropFilter:       'blur(32px) saturate(180%)',
+          WebkitBackdropFilter: 'blur(32px) saturate(180%)',
+          border:               '1px solid var(--glass-border-strong)',
+          boxShadow:            '0 1px 0 rgba(255,255,255,0.8) inset, 0 24px 70px rgba(0,0,0,0.18)',
         }}
       >
-        {/* Header */}
-        <div className="flex items-center justify-between px-5 py-4">
-          <span className="font-display text-white" style={{ fontSize: 22, letterSpacing: '-0.02em' }}>
-            SECTIONS
-          </span>
+        {/* Header — identity, promoted from the old footer block */}
+        <div className="flex items-center justify-between gap-3 px-4 pt-4 pb-3.5">
+          <div className="flex items-center gap-3 min-w-0">
+            <div
+              className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0"
+              style={{ background: 'rgba(29,29,31,0.06)', border: '1px solid rgba(29,29,31,0.10)' }}
+            >
+              <span className="font-display text-sm" style={{ color: 'var(--ink-85)' }}>RL</span>
+            </div>
+            <div className="min-w-0">
+              <p className="font-display text-[14px] leading-tight truncate" style={{ color: 'var(--ink)' }}>
+                Reymart Louie L. Capapas
+              </p>
+              <p className="font-sans text-[11.5px] mt-0.5 truncate" style={{ color: 'var(--ink-40)' }}>
+                IT Officer @ Ubiquity
+              </p>
+            </div>
+          </div>
           <button
             onClick={handleClose}
             aria-label="Close menu"
-            className="flex items-center justify-center btn-spring"
+            className="flex items-center justify-center btn-spring flex-shrink-0"
             style={{
-              width: 36, height: 36, borderRadius: '50%',
-              background: 'rgba(255,255,255,0.10)',
-              border: '1px solid rgba(255,255,255,0.12)',
-              color: 'rgba(255,255,255,0.75)',
+              width: 32, height: 32, borderRadius: '50%',
+              background: 'rgba(29,29,31,0.06)',
+              border: '1px solid rgba(29,29,31,0.10)',
+              color: 'var(--ink-55)',
             }}
           >
             <IconClose />
           </button>
         </div>
 
+        <div style={{ height: 1, background: 'var(--glass-border)' }} />
+
         {/* Nav items */}
-        <div className="flex-1 overflow-y-auto px-3 py-2">
-          {MOBILE_NAV.map(({ label, href, toTop, Icon }) => (
+        <div className="flex-1 overflow-y-auto px-2.5 py-2">
+          {MOBILE_NAV.map(({ label, href, toTop, Icon }, i) => (
             <a
               key={label}
               href={href}
               onClick={scrollTo(href, toTop)}
-              className="flex items-center gap-4 px-4 py-3.5 rounded-2xl active:bg-white/[0.06] transition-colors duration-100"
-              style={{ color: 'rgba(255,255,255,0.85)', textDecoration: 'none' }}
+              className="nav-item-in flex items-center gap-3.5 px-3.5 py-3 rounded-2xl active:bg-black/[0.05] transition-colors duration-100"
+              style={{ color: 'var(--ink-85)', textDecoration: 'none', animationDelay: `${70 + i * 45}ms` }}
             >
-              <span style={{ color: 'rgba(255,255,255,0.55)', flexShrink: 0 }}><Icon /></span>
-              <span className="font-sans" style={{ fontSize: 16 }}>{label}</span>
+              <span style={{ color: 'var(--ink-40)', flexShrink: 0 }}><Icon /></span>
+              <span className="font-sans" style={{ fontSize: 15 }}>{label}</span>
             </a>
           ))}
           <button
             onClick={() => { onResumeOpen(); handleClose() }}
-            className="w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl active:bg-white/[0.06] transition-colors duration-100 bg-transparent text-left"
-            style={{ color: 'rgba(255,255,255,0.85)' }}
+            className="nav-item-in w-full flex items-center gap-3.5 px-3.5 py-3 rounded-2xl active:bg-black/[0.05] transition-colors duration-100 bg-transparent text-left"
+            style={{ color: 'var(--ink-85)', animationDelay: `${70 + MOBILE_NAV.length * 45}ms` }}
           >
-            <span style={{ color: 'rgba(255,255,255,0.55)', flexShrink: 0 }}><IconFile /></span>
-            <span className="font-sans" style={{ fontSize: 16 }}>Resume</span>
+            <span style={{ color: 'var(--ink-40)', flexShrink: 0 }}><IconFile /></span>
+            <span className="font-sans" style={{ fontSize: 15 }}>Resume</span>
           </button>
         </div>
 
+        <div style={{ height: 1, background: 'var(--glass-border)' }} />
+
         {/* Status footer */}
-        <div
-          className="flex items-center justify-between px-5 py-3"
-          style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}
-        >
-          <div className="flex items-center gap-2.5" style={{ color: 'var(--bar-text)' }}>
+        <div className="flex items-center justify-between px-4 py-3">
+          <div className="flex items-center gap-2.5" style={{ color: 'var(--ink-40)' }}>
             <IconWifi />
             <div className="flex items-center gap-1.5">
-              <IconBattery />
+              <IconBattery outline="rgba(29,29,31,0.30)" />
               <span className="font-sans" style={{ fontSize: 11 }}>80%</span>
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <span className="font-sans" style={{ fontSize: 11, color: 'var(--bar-text)' }}>{date}</span>
-            <span className="font-sans tabular-nums" style={{ fontSize: 11, color: 'var(--bar-text-active)' }}>{time}</span>
-          </div>
-        </div>
-
-        {/* User profile */}
-        <div className="flex items-center gap-3 px-5 py-4" style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}>
-          <div
-            className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0"
-            style={{ background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.20)' }}
-          >
-            <span className="font-display text-white/90 text-sm">RL</span>
-          </div>
-          <div className="flex-1 min-w-0">
-            <p className="font-display text-white/90 text-sm leading-tight truncate">Reymart Louie L. Capapas</p>
-            <p className="font-sans text-white/40 text-xs mt-0.5">IT Officer @ Ubiquity</p>
+            <span className="font-sans" style={{ fontSize: 11, color: 'var(--ink-40)' }}>{date}</span>
+            <span className="font-sans tabular-nums" style={{ fontSize: 11, color: 'var(--ink-70)' }}>{time}</span>
           </div>
         </div>
       </div>
@@ -363,23 +370,24 @@ function StatusBar() {
         <button
           onClick={() => setMobileMenuOpen(v => !v)}
           aria-label="Open menu"
-          className="fixed z-50 flex items-center justify-center"
+          className="fixed z-50 flex items-center justify-center btn-spring"
           style={{
             top:                  'calc(env(safe-area-inset-top, 0px) + 12px)',
-            left:                 16,
+            right:                16,
             width:                40,
             height:               40,
             borderRadius:         '50%',
-            background:           'rgba(28,28,30,0.72)',
-            backdropFilter:       'blur(20px) saturate(160%)',
-            WebkitBackdropFilter: 'blur(20px) saturate(160%)',
-            border:               '1px solid rgba(255,255,255,0.12)',
-            boxShadow:            '0 4px 16px rgba(0,0,0,0.4), 0 1px 0 rgba(255,255,255,0.08) inset',
-            opacity:    ready ? 1 : 0,
-            transform:  ready ? 'scale(1)' : 'scale(0.8)',
-            transition: ready
-              ? 'opacity 400ms ease 200ms, transform 400ms cubic-bezier(0.34,1.2,0.64,1) 200ms'
-              : 'none',
+            background:           'var(--glass-bg-strong)',
+            backdropFilter:       'blur(24px) saturate(180%)',
+            WebkitBackdropFilter: 'blur(24px) saturate(180%)',
+            border:               '1px solid var(--glass-border-strong)',
+            boxShadow:            '0 1px 0 rgba(255,255,255,0.8) inset, 0 4px 16px rgba(0,0,0,0.10)',
+            opacity:       !ready ? 0 : mobileMenuOpen ? 0 : 1,
+            transform:     !ready ? 'scale(0.8)' : mobileMenuOpen ? 'scale(0.85)' : 'scale(1)',
+            pointerEvents: mobileMenuOpen ? 'none' : 'auto',
+            transition: !ready
+              ? 'none'
+              : 'opacity 220ms ease, transform 220ms cubic-bezier(0.34,1.2,0.64,1)',
           }}
         >
           <HamburgerIcon />

@@ -15,9 +15,12 @@ Portfolio design reference for `reymartlouie.vercel.app`. Derived from build ses
   (jewel-tone gradients, per-project accents, novelty-card black/gold/ivory)
   is untouched; cards contrast against the light page, they don't get
   reskinned to match it
-- **Black nav for contrast** — `StatusBar` chrome is dark frosted glass,
-  deliberately the inverse of the light page behind it. There is no separate
-  floating nav pill anymore — section nav lives in the center of `StatusBar`
+- **Black nav for contrast (desktop)** — `StatusBar`'s desktop chrome is dark
+  frosted glass, deliberately the inverse of the light page behind it. There
+  is no separate floating nav pill anymore — section nav lives in the center
+  of `StatusBar`. The **mobile** menu (trigger + panel) is the deliberate
+  exception — light `.glass-strong`, not black, styled as a floating
+  Control Center-style panel rather than a full-bleed drawer
 - **Hero cards are a draggable carousel, not a free-drag canvas** — all bento
   cards render at one fixed size and sit in a horizontal snap-scroll strip you
   can drag with the mouse or swipe on touch, like `Works`/`Achievements`
@@ -40,12 +43,29 @@ individual bento cards, which keep their original per-project backgrounds:
 | `.glass` | Section wrapper surface (Works, Achievements, Pricing) | `rgba(255,255,255,0.62)` bg, `blur(28px) saturate(160%)`, `1px solid rgba(0,0,0,0.07)` border, soft diffused shadow |
 | `.glass-strong` | Modals, popovers | `rgba(255,255,255,0.78)` bg, `blur(32px) saturate(180%)`, stronger border/shadow |
 
-`StatusBar` uses its own dark frosted-glass tokens (`--bar-bg`, `--nav-bg` ≈
-80% opacity near-black + blur) — kept black on purpose so it reads clearly
-against the light page. The desktop bar is a 3-column grid (`grid-cols-[1fr_auto_1fr]`):
-left = RL menu + text links, **center = the Canvas/Work/Contact icon nav**
-(moved here from the old standalone floating `Navbar` pill, which no longer
-exists), right = wifi/battery/clock.
+`StatusBar`'s **desktop** bar uses its own dark frosted-glass tokens
+(`--bar-bg`, `--nav-bg` ≈ 80% opacity near-black + blur) — kept black on
+purpose so it reads clearly against the light page. The desktop bar is a
+3-column grid (`grid-cols-[1fr_auto_1fr]`): left = RL menu + text links,
+**center = the Canvas/Work/Contact icon nav** (moved here from the old
+standalone floating `Navbar` pill, which no longer exists), right =
+wifi/battery/clock.
+
+`StatusBar`'s **mobile** menu is the one exception to "black nav for
+contrast": the trigger button and the menu panel use `.glass-strong` (light,
+not dark) instead of the desktop bar's black tokens. The trigger sits
+top-right (`right: 16`, mirroring where a menu affordance sits in iOS) and
+opens a floating rounded panel anchored under it — not a full-bleed
+edge-to-edge drawer — closer to iOS Control Center than a classic slide-out
+nav: `border-radius: 28px`, `width: min(85vw, 336px)`, `transform-origin:
+top right`, pop-in via `scale(0.92)→scale(1)` + slight `translateY` on
+`cubic-bezier(0.34,1.3,0.64,1)` (a spring-like ease matching the button's own
+entrance curve). The panel's identity block (avatar + name + role) was
+promoted from the old footer to the header — first thing you see, same
+content as the desktop `UserMenu` dropdown. Nav rows use ink text (`--ink-85`
+labels, `--ink-40` icons) and stagger in with `.nav-item-in`
+(opacity/translateY, ~45ms delay per row) once the panel has popped in,
+rather than appearing all at once.
 
 Text on light structural surfaces uses the `--ink*` scale (`--ink` `#1d1d1f`
 down to `--ink-25`). Text inside individual bento cards keeps whatever
@@ -397,4 +417,4 @@ type Work = {
 
 ---
 
-*Last updated: August 2026 — removed clipped resting shadows from Hero/Works carousel cards; PayPalCard background swapped to `/paypal-bg.webp` tap-to-pay photo, derived from design sessions in Claude Code*
+*Last updated: August 2026 — mobile StatusBar menu moved to a light `.glass-strong` Control Center-style panel (trigger on the right, identity promoted to header, staggered nav entrance); removed clipped resting shadows from Hero/Works carousel cards; PayPalCard background swapped to `/paypal-bg.webp` tap-to-pay photo, derived from design sessions in Claude Code*
