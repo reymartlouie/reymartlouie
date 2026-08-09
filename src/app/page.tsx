@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Hero from '@/components/sections/Hero'
 import Works from '@/components/sections/Works'
 import Achievements, { badgesCount } from '@/components/sections/Achievements'
@@ -51,6 +51,14 @@ export default function Home() {
   const [uiuxOpen, setUiuxOpen] = useState(false)
   const [badgeModalOpen, setBadgeModalOpen] = useState(false)
 
+  // The site is installable as a standalone web app (apple-mobile-web-app-capable),
+  // and iOS restores the last scroll position on relaunch — without this, reopening
+  // the app can land mid-page (e.g. on Work) instead of the Canvas section at top.
+  useEffect(() => {
+    if ('scrollRestoration' in window.history) window.history.scrollRestoration = 'manual'
+    window.scrollTo(0, 0)
+  }, [])
+
   return (
     <main className="min-h-screen">
       <StatusBar />
@@ -74,7 +82,7 @@ export default function Home() {
           </SectionHeader>
           <Works uiuxOpen={uiuxOpen} setUiuxOpen={setUiuxOpen} />
         </div>
-        <div className="flex flex-col gap-5 md:gap-6">
+        <div id="certifications" className="flex flex-col gap-5 md:gap-6">
           <SectionHeader
             label="Credentials"
             action={<SectionActionButton label={`${badgesCount} credentials`} onClick={() => setBadgeModalOpen(true)} />}
@@ -83,7 +91,7 @@ export default function Home() {
           </SectionHeader>
           <Achievements badgeModalOpen={badgeModalOpen} setBadgeModalOpen={setBadgeModalOpen} />
         </div>
-        <div className="flex flex-col gap-5 md:gap-6">
+        <div id="contact" className="flex flex-col gap-5 md:gap-6">
           <SectionBreak label="Contact" />
           <SectionHeadline>Let&apos;s build<br />something.</SectionHeadline>
           <div
