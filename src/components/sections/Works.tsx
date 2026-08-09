@@ -43,7 +43,7 @@ const works: Work[] = [
     description: 'Gym attendance management system with a member kiosk, admin dashboard, payment tracking, and multi-layer offline backup.',
     cardBg: 'linear-gradient(145deg, #fff1f2 0%, #ffe4e6 100%)',
     cardBorder: '1px solid rgba(239,68,68,0.18)',
-    cardShadow: '0 2px 24px rgba(239,68,68,0.10), inset 0 1px 0 rgba(255,255,255,0.9)',
+    cardShadow: 'inset 0 1px 0 rgba(255,255,255,0.9)',
     dividerColor: 'rgba(239,68,68,0.45)',
     labelColor: 'rgba(153,27,27,0.55)',
     viewDetailsColor: 'rgba(185,28,28,0.85)',
@@ -64,7 +64,7 @@ const works: Work[] = [
     description: 'Coffee house landing page with an interactive menu, promotional modals, and a streamlined order flow.',
     cardBg: 'linear-gradient(145deg, #fdf8f0 0%, #fdefd8 100%)',
     cardBorder: '1px solid rgba(180,120,40,0.12)',
-    cardShadow: '0 2px 24px rgba(180,120,40,0.08), inset 0 1px 0 rgba(255,255,255,0.9)',
+    cardShadow: 'inset 0 1px 0 rgba(255,255,255,0.9)',
     dividerColor: 'rgba(180,120,40,0.35)',
     labelColor: 'rgba(120,70,20,0.55)',
     viewDetailsColor: 'rgba(140,80,20,0.85)',
@@ -85,7 +85,7 @@ const works: Work[] = [
     description: 'Freight transport website designed and built from scratch with React, TypeScript, and Vite — deployed live on Vercel.',
     cardBg: 'linear-gradient(145deg, #f9fafb 0%, #f3f4f6 100%)',
     cardBorder: '1px solid rgba(107,114,128,0.18)',
-    cardShadow: '0 2px 24px rgba(107,114,128,0.10), inset 0 1px 0 rgba(255,255,255,0.9)',
+    cardShadow: 'inset 0 1px 0 rgba(255,255,255,0.9)',
     dividerColor: 'rgba(234,88,12,0.55)',
     labelColor: 'rgba(55,65,81,0.55)',
     viewDetailsColor: 'rgba(194,65,12,0.85)',
@@ -106,7 +106,7 @@ const works: Work[] = [
     description: 'Thermal imaging wildfire detection with real-time mobile alerting for rural barangays.',
     cardBg: 'linear-gradient(145deg, #fff7f0 0%, #ffede0 100%)',
     cardBorder: '1px solid rgba(234,88,12,0.18)',
-    cardShadow: '0 2px 24px rgba(234,88,12,0.10), inset 0 1px 0 rgba(255,255,255,0.9)',
+    cardShadow: 'inset 0 1px 0 rgba(255,255,255,0.9)',
     dividerColor: 'rgba(220,38,38,0.45)',
     labelColor: 'rgba(153,27,27,0.55)',
     viewDetailsColor: 'rgba(194,65,12,0.85)',
@@ -182,7 +182,7 @@ export default function Works({
         <div
           ref={scrollRef}
           onScroll={updateSlider}
-          className="no-scrollbar flex overflow-x-auto snap-x snap-mandatory px-4 md:px-0 pb-12"
+          className="no-scrollbar flex overflow-x-auto snap-x snap-mandatory px-4 md:px-0 pb-2"
           style={{ scrollPaddingLeft: '1rem', gap: CARD_GAP }}
         >
           {works.map((work, index) => (
