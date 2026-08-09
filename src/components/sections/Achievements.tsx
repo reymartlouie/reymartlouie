@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { useState, useEffect, useRef, useCallback } from 'react'
 import Reveal from '../ui/Reveal'
 import BadgesModal from '../ui/BadgesModal'
@@ -12,7 +13,9 @@ const badges = [
   { id: 'b60e4e5a-af99-4c92-a9de-8c6fc16ace20' },
 ]
 
-type CertId = 'graduation' | 'internship'
+export const badgesCount = badges.length
+
+type CertId = 'graduation' | 'internship' | 'itofficer'
 
 type Cert = {
   id: CertId
@@ -20,17 +23,31 @@ type Cert = {
   title: string
   issuer: string
   dateLabel: string
-  image: string
-  imageAlt: string
+  image?: string
+  imageAlt?: string
+  issuerHref?: string
   bgGradient: string
-  buttonClass: string
-  buttonText: string
-  photoView: string
-  documentView: string
+  buttonClass?: string
+  buttonText?: string
+  buttonHref?: string
+  photoView?: string
+  documentView?: string
 }
 
 // Add new achievements here — sorted newest-first automatically
 const certs: Cert[] = [
+  {
+    id: 'itofficer' as const,
+    year: 2026,
+    title: 'IT Officer',
+    issuer: 'Ubiquity Global Services',
+    dateLabel: 'Since June 1, 2026 · Iloilo City',
+    issuerHref: 'https://www.ubiquity.com/',
+    bgGradient: 'from-fuchsia-800 to-fuchsia-950',
+    buttonClass: 'bg-fuchsia-700 hover:bg-fuchsia-800',
+    buttonText: 'Verify on LinkedIn',
+    buttonHref: 'https://www.linkedin.com/in/reymart-louie-capapas-b0063718b',
+  },
   {
     id: 'graduation' as const,
     year: 2026,
@@ -61,8 +78,13 @@ const certs: Cert[] = [
   },
 ].sort((a, b) => b.year - a.year)
 
-export default function Certifications() {
-  const [badgeModalOpen, setBadgeModalOpen] = useState(false)
+export default function Certifications({
+  badgeModalOpen,
+  setBadgeModalOpen,
+}: {
+  badgeModalOpen: boolean
+  setBadgeModalOpen: (open: boolean) => void
+}) {
   const [certModal, setCertModal] = useState<{ id: CertId; view: string } | null>(null)
   const [progress, setProgress] = useState(0)
   const [thumbPercent, setThumbPercent] = useState(100)
@@ -87,19 +109,6 @@ export default function Certifications() {
       <Reveal>
         <div className="flex flex-col gap-4">
 
-          {/* Header */}
-          <div className="hidden md:flex items-center justify-end gap-4">
-            <button
-              onClick={() => setBadgeModalOpen(true)}
-              className="flex items-center gap-2 px-4 py-2 rounded-full bg-stone-200 hover:bg-stone-300 transition-colors duration-150"
-            >
-              <span className="font-sans text-sm text-[#1e1e1e]">{badges.length} credentials</span>
-              <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#1e1e1e]">
-                <path d="M2.5 11.5L11.5 2.5M11.5 2.5H5.5M11.5 2.5V8.5" />
-              </svg>
-            </button>
-          </div>
-
           {/* Cards — mobile: snap carousel / desktop: horizontal scroll */}
           <div
             ref={scrollRef}
@@ -109,29 +118,57 @@ export default function Certifications() {
             {certs.map((cert) => (
               <div key={cert.id} className="snap-center flex-shrink-0 w-[calc(100%-2rem)] md:w-[340px] flex flex-col items-center pb-2 md:pb-0">
                 <div
-                  className={`rounded-2xl bg-gradient-to-br ${cert.bgGradient} w-full overflow-hidden flex-shrink-0`}
+                  className={`relative rounded-2xl bg-gradient-to-br ${cert.bgGradient} w-full overflow-hidden flex-shrink-0`}
                   style={{ height: '260px' }}
                 >
-                  <img
-                    src={cert.image}
-                    alt={cert.imageAlt}
-                    className="w-full h-full object-cover rounded-2xl cursor-zoom-in"
-                    onClick={() => setCertModal({ id: cert.id, view: cert.photoView })}
-                  />
+                  {cert.image && (
+                    <Image
+                      src={cert.image}
+                      alt={cert.imageAlt ?? ''}
+                      fill
+                      sizes="(min-width: 768px) 340px, 100vw"
+                      className="object-cover rounded-2xl cursor-zoom-in"
+                      onClick={() => setCertModal({ id: cert.id, view: cert.photoView! })}
+                    />
+                  )}
                 </div>
                 <div className="flex flex-col items-center text-center mt-5 gap-2 w-full">
                   <h3 className="font-display text-2xl text-[#1e1e1e] leading-snug">{cert.title}</h3>
-                  <p className="font-sans text-base text-[#1e1e1e] leading-relaxed">{cert.issuer}</p>
+                  {cert.issuerHref ? (
+                    <a
+                      href={cert.issuerHref}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-sans text-base text-[#1e1e1e] leading-relaxed underline decoration-[#1e1e1e]/25 underline-offset-2 hover:decoration-[#1e1e1e]/60 transition-colors"
+                    >
+                      {cert.issuer}
+                    </a>
+                  ) : (
+                    <p className="font-sans text-base text-[#1e1e1e] leading-relaxed">{cert.issuer}</p>
+                  )}
                   <p className="font-sans text-base font-semibold text-[#1e1e1e]">{cert.dateLabel}</p>
                 </div>
-                <div className="flex items-center gap-3 mt-5">
-                  <button
-                    onClick={() => setCertModal({ id: cert.id, view: cert.documentView })}
-                    className={`px-6 py-2.5 rounded-full text-white text-sm font-sans font-medium transition-colors duration-150 ${cert.buttonClass}`}
-                  >
-                    {cert.buttonText}
-                  </button>
-                </div>
+                {cert.buttonText && (
+                  <div className="flex items-center gap-3 mt-5">
+                    {cert.buttonHref ? (
+                      <a
+                        href={cert.buttonHref}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`px-6 py-2.5 rounded-full text-white text-sm font-sans font-medium transition-colors duration-150 ${cert.buttonClass}`}
+                      >
+                        {cert.buttonText}
+                      </a>
+                    ) : (
+                      <button
+                        onClick={() => setCertModal({ id: cert.id, view: cert.documentView! })}
+                        className={`px-6 py-2.5 rounded-full text-white text-sm font-sans font-medium transition-colors duration-150 ${cert.buttonClass}`}
+                      >
+                        {cert.buttonText}
+                      </button>
+                    )}
+                  </div>
+                )}
               </div>
             ))}
           </div>

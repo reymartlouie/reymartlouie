@@ -68,7 +68,9 @@ export default function PayPalCard() {
     <div
       className="h-full rounded-[32px] flex flex-col relative overflow-hidden"
       style={{
-        background: 'linear-gradient(160deg, #111 0%, #0a0a0a 55%, #0d0d0d 100%)',
+        backgroundImage: 'url(/paypal-bg.webp)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center 30%',
         border: '1px solid rgba(255,255,255,0.10)',
         boxShadow: `
           inset 0  1px 0 rgba(255,255,255,0.08),
@@ -78,10 +80,15 @@ export default function PayPalCard() {
         `,
       }}
     >
+      {/* dark wash so content stays readable over the tap-to-pay photo, deepening toward the footer */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{ background: 'linear-gradient(185deg, rgba(6,8,14,0.42) 0%, rgba(4,6,10,0.62) 45%, rgba(2,3,6,0.86) 100%)' }}
+      />
 
       <div
         className="absolute -top-14 left-1/2 -translate-x-1/2 w-52 h-28 rounded-full blur-3xl pointer-events-none"
-        style={{ background: 'rgba(255,255,255,0.04)' }}
+        style={{ background: 'rgba(0,156,222,0.10)' }}
       />
 
       <div

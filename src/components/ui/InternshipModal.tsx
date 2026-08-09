@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import Modal from './Modal'
 
 interface Props {
@@ -28,9 +29,12 @@ export default function InternshipModal({ view, onClose }: Props) {
     >
       {isPhoto ? (
         <div className="rounded-2xl overflow-hidden flex justify-center bg-black" style={{ border: '1px solid rgba(0,0,0,0.08)' }}>
-          <img
+          <Image
             src="/ubiquity-photo.webp"
             alt="Internship Photo"
+            width={2928}
+            height={2912}
+            sizes="(min-width: 768px) 672px, 100vw"
             className="max-w-full h-auto"
             style={{ maxHeight: '80vh' }}
           />

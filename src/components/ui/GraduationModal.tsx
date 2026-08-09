@@ -1,10 +1,18 @@
 'use client'
 
+import Image from 'next/image'
 import Modal from './Modal'
 
 interface Props {
   view: 'photo' | 'diploma'
   onClose: () => void
+}
+
+// Intrinsic pixel dimensions — required by next/image, drives the responsive
+// srcset independent of the max-w-full/h-auto display size
+const DIMS = {
+  photo:   { width: 1536, height: 2048 },
+  diploma: { width: 2499, height: 1997 },
 }
 
 export default function GraduationModal({ view, onClose }: Props) {
@@ -27,9 +35,11 @@ export default function GraduationModal({ view, onClose }: Props) {
       }
     >
       <div className="rounded-2xl overflow-hidden flex justify-center bg-black" style={{ border: '1px solid rgba(0,0,0,0.08)' }}>
-        <img
+        <Image
           src={isPhoto ? '/graduation.webp' : '/diploma.webp'}
           alt={isPhoto ? 'Graduation Photo' : 'Graduation Diploma'}
+          {...(isPhoto ? DIMS.photo : DIMS.diploma)}
+          sizes="(min-width: 768px) 672px, 100vw"
           className="max-w-full h-auto"
           style={{ maxHeight: '80vh' }}
         />

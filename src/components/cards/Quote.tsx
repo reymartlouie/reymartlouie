@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect, useRef } from 'react'
 import { cardBlue } from '@/lib/colors'
 
 const BLUE      = cardBlue.base
@@ -7,19 +8,48 @@ const BLUE_DIM  = cardBlue.dim
 const BLUE_GLOW = cardBlue.glow
 
 export default function Quote() {
+  const videoRef = useRef<HTMLVideoElement>(null)
+
+  // Only play while the card is actually visible in the carousel, and never
+  // autoplay for users who've asked for reduced motion — falls back to the
+  // poster frame in both cases.
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+    const io = new IntersectionObserver(
+      ([entry]) => { entry.isIntersecting ? video.play().catch(() => {}) : video.pause() },
+      { threshold: 0.3 }
+    )
+    io.observe(video)
+    return () => io.disconnect()
+  }, [])
+
   return (
     <div
       className="flex-1 rounded-[32px] relative overflow-hidden min-h-[180px] flex flex-col justify-between"
-      style={{
-        backgroundImage: `
-          linear-gradient(160deg, rgba(4,10,22,0.72) 0%, rgba(4,10,22,0.52) 60%, rgba(4,10,22,0.70) 100%),
-          url('/about-bg.webp')
-        `,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        boxShadow: '0 20px 50px rgba(0,0,0,0.16)',
-      }}
     >
+      <video
+        ref={videoRef}
+        className="absolute inset-0 w-full h-full object-cover"
+        src="/quote-bg.mp4"
+        poster="/about-bg.webp"
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        aria-hidden="true"
+      />
+
+      {/* readability scrim over the video */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: 'linear-gradient(160deg, rgba(4,10,22,0.74) 0%, rgba(4,10,22,0.50) 55%, rgba(4,10,22,0.76) 100%)',
+        }}
+      />
+
       <div
         className="absolute -top-8 -right-8 w-36 h-36 rounded-full blur-3xl pointer-events-none"
         style={{ background: BLUE_GLOW }}

@@ -32,10 +32,12 @@ export const metadata: Metadata = {
     template: '%s | Reymart Louie',
   },
   description:
-    'BS Computer Engineering graduate (USLS · Bacolod, PH). I design, build, and ship production-ready mobile and web apps — React Native, TypeScript, Supabase, Next.js. Open to full-time opportunities.',
+    'BS Computer Engineering graduate (USLS · Bacolod, PH), now IT Officer at Ubiquity Global Services in Iloilo City. I design, build, and ship production-ready mobile and web apps — React Native, TypeScript, Supabase, Next.js.',
   keywords: [
     'Reymart Louie Capapas',
     'Computer Engineer Philippines',
+    'IT Officer',
+    'Ubiquity Global Services',
     'React Native Developer',
     'TypeScript Developer',
     'Next.js Developer',
@@ -44,6 +46,7 @@ export const metadata: Metadata = {
     'Supabase',
     'USLS',
     'Bacolod City',
+    'Iloilo City',
     'Philippines',
     'FireSafe',
     'Gracey Logistics',
@@ -59,7 +62,7 @@ export const metadata: Metadata = {
     url: SITE_URL,
     title: 'Reymart Louie — Computer Engineer & Developer',
     description:
-      'BS Computer Engineering graduate (USLS · Bacolod, PH). Building production-ready mobile and web apps — React Native, TypeScript, Supabase, Next.js. Open to full-time opportunities.',
+      'BS Computer Engineering graduate (USLS · Bacolod, PH), now IT Officer at Ubiquity Global Services · Iloilo City. Building production-ready mobile and web apps — React Native, TypeScript, Supabase, Next.js.',
     siteName: 'Reymart Louie',
     locale: 'en_PH',
     images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: 'Reymart Louie — Computer Engineer & Developer' }],
@@ -68,7 +71,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Reymart Louie — Computer Engineer & Developer',
     description:
-      'BS Computer Engineering graduate (USLS · Bacolod). React Native · TypeScript · Supabase · Next.js. Open to opportunities.',
+      'BS Computer Engineering graduate (USLS · Bacolod) · IT Officer at Ubiquity Global Services, Iloilo City. React Native · TypeScript · Supabase · Next.js.',
     images: ['/opengraph-image'],
   },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true } },
@@ -84,9 +87,19 @@ const jsonLd = {
   '@type': 'Person',
   name: 'Reymart Louie L. Capapas',
   url: SITE_URL,
-  jobTitle: 'Computer Engineer',
-  description: 'BS Computer Engineering graduate from USLS Bacolod. Specializes in React Native, TypeScript, Supabase, and Next.js.',
+  jobTitle: 'IT Officer',
+  description: 'BS Computer Engineering graduate from USLS Bacolod, now working as IT Officer at Ubiquity Global Services in Iloilo City since June 2026. Specializes in React Native, TypeScript, Supabase, and Next.js.',
   email: 'reymartlouie.capapas@gmail.com',
+  worksFor: {
+    '@type': 'Organization',
+    name: 'Ubiquity Global Services',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: '4th Floor, One Global Center, Megaworld Blvd, Iloilo Business Park',
+      addressLocality: 'Mandurriao, Iloilo City',
+      addressCountry: 'PH',
+    },
+  },
   alumniOf: {
     '@type': 'CollegeOrUniversity',
     name: 'University of St. La Salle',

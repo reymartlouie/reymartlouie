@@ -8,7 +8,6 @@ export default function HeroIntroCard() {
         backgroundImage: 'url(/hero-chip-bg.webp)',
         backgroundSize: '130% auto',
         backgroundPosition: 'left',
-        boxShadow: '0 20px 50px rgba(0,0,0,0.18)',
       }}
     >
       {/* dark overlay so text stays readable */}
@@ -21,7 +20,7 @@ export default function HeroIntroCard() {
       <div className="relative">
         <span className="inline-flex items-center gap-2 text-xs font-sans px-3 py-1 rounded-full mb-4 @xl:mb-5 w-fit bg-fuchsia-500/20 border border-fuchsia-400/30 text-fuchsia-300">
           <span className="w-1.5 h-1.5 rounded-full bg-fuchsia-400 animate-pulse" />
-          Available for work
+          IT Officer @ Ubiquity Global Services
         </span>
         <p className="font-sans text-sm @md:text-base max-w-lg leading-relaxed text-white/60">
           Computer Engineer focused on UI/UX and Full-Stack Development — building polished, production-ready interfaces

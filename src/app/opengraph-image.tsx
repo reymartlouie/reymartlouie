@@ -24,21 +24,21 @@ export default function OGImage() {
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <div style={{ width: 8, height: 8, borderRadius: '50%', backgroundColor: '#34c759' }} />
           <span style={{ color: '#86868b', fontSize: 16, letterSpacing: '0.12em', textTransform: 'uppercase' }}>
-            Available for work
+            IT Officer @ Ubiquity Global Services
           </span>
         </div>
 
         {/* Middle — name + title */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-          <div style={{ fontSize: 72, fontWeight: 900, color: '#f2f2f2', lineHeight: 0.9 }}>
-            Computer<br />
-            Engineer<br />
+          <div style={{ display: 'flex', flexDirection: 'column', fontSize: 72, fontWeight: 900, color: '#f2f2f2', lineHeight: 0.9 }}>
+            <span>Computer</span>
+            <span>Engineer</span>
             <span style={{ color: '#555' }}>& Developer.</span>
           </div>
-          <p style={{ fontSize: 22, color: '#6e6e73', margin: 0, maxWidth: 560, lineHeight: 1.5 }}>
-            React Native · TypeScript · Supabase · Next.js<br />
-            University of St. La Salle – Bacolod
-          </p>
+          <div style={{ display: 'flex', flexDirection: 'column', fontSize: 22, color: '#6e6e73', maxWidth: 660, lineHeight: 1.5 }}>
+            <span>React Native · TypeScript · Supabase · Next.js</span>
+            <span>BS Computer Engineering, USLS Bacolod · Iloilo City, PH</span>
+          </div>
         </div>
 
         {/* Bottom — url */}

@@ -43,7 +43,7 @@ const works: Work[] = [
     description: 'Gym attendance management system with a member kiosk, admin dashboard, payment tracking, and multi-layer offline backup.',
     cardBg: 'linear-gradient(145deg, #fff1f2 0%, #ffe4e6 100%)',
     cardBorder: '1px solid rgba(239,68,68,0.18)',
-    cardShadow: '0 2px 24px rgba(239,68,68,0.10), inset 0 1px 0 rgba(255,255,255,0.9)',
+    cardShadow: 'inset 0 1px 0 rgba(255,255,255,0.9)',
     dividerColor: 'rgba(239,68,68,0.45)',
     labelColor: 'rgba(153,27,27,0.55)',
     viewDetailsColor: 'rgba(185,28,28,0.85)',
@@ -64,7 +64,7 @@ const works: Work[] = [
     description: 'Coffee house landing page with an interactive menu, promotional modals, and a streamlined order flow.',
     cardBg: 'linear-gradient(145deg, #fdf8f0 0%, #fdefd8 100%)',
     cardBorder: '1px solid rgba(180,120,40,0.12)',
-    cardShadow: '0 2px 24px rgba(180,120,40,0.08), inset 0 1px 0 rgba(255,255,255,0.9)',
+    cardShadow: 'inset 0 1px 0 rgba(255,255,255,0.9)',
     dividerColor: 'rgba(180,120,40,0.35)',
     labelColor: 'rgba(120,70,20,0.55)',
     viewDetailsColor: 'rgba(140,80,20,0.85)',
@@ -85,7 +85,7 @@ const works: Work[] = [
     description: 'Freight transport website designed and built from scratch with React, TypeScript, and Vite — deployed live on Vercel.',
     cardBg: 'linear-gradient(145deg, #f9fafb 0%, #f3f4f6 100%)',
     cardBorder: '1px solid rgba(107,114,128,0.18)',
-    cardShadow: '0 2px 24px rgba(107,114,128,0.10), inset 0 1px 0 rgba(255,255,255,0.9)',
+    cardShadow: 'inset 0 1px 0 rgba(255,255,255,0.9)',
     dividerColor: 'rgba(234,88,12,0.55)',
     labelColor: 'rgba(55,65,81,0.55)',
     viewDetailsColor: 'rgba(194,65,12,0.85)',
@@ -106,7 +106,7 @@ const works: Work[] = [
     description: 'Thermal imaging wildfire detection with real-time mobile alerting for rural barangays.',
     cardBg: 'linear-gradient(145deg, #fff7f0 0%, #ffede0 100%)',
     cardBorder: '1px solid rgba(234,88,12,0.18)',
-    cardShadow: '0 2px 24px rgba(234,88,12,0.10), inset 0 1px 0 rgba(255,255,255,0.9)',
+    cardShadow: 'inset 0 1px 0 rgba(255,255,255,0.9)',
     dividerColor: 'rgba(220,38,38,0.45)',
     labelColor: 'rgba(153,27,27,0.55)',
     viewDetailsColor: 'rgba(194,65,12,0.85)',
@@ -126,9 +126,14 @@ const CARD_W = 320
 const CARD_H = 600
 const CARD_GAP = 20
 
-export default function Works() {
+export default function Works({
+  uiuxOpen,
+  setUiuxOpen,
+}: {
+  uiuxOpen: boolean
+  setUiuxOpen: (open: boolean) => void
+}) {
   const [openWorkId, setOpenWorkId] = useState<WorkId | null>(null)
-  const [uiuxOpen, setUiuxOpen] = useState(false)
   const [progress, setProgress] = useState(0)
   const [thumbPercent, setThumbPercent] = useState(100)
   const ref = useRef<HTMLDivElement>(null)
@@ -174,18 +179,6 @@ export default function Works() {
     <section className="flex flex-col gap-4">
       <div ref={ref} className="reveal-item flex flex-col gap-4">
 
-        <div className="hidden md:flex items-center justify-end gap-4">
-          <button
-            onClick={() => setUiuxOpen(true)}
-            className="flex items-center gap-2 px-4 py-2 rounded-full bg-stone-200 hover:bg-stone-300 transition-colors duration-150"
-          >
-            <span className="font-sans text-sm text-[#1e1e1e]">UI/UX</span>
-            <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#1e1e1e]">
-              <path d="M2.5 11.5L11.5 2.5M11.5 2.5H5.5M11.5 2.5V8.5" />
-            </svg>
-          </button>
-        </div>
-
         <div
           ref={scrollRef}
           onScroll={updateSlider}
@@ -207,8 +200,10 @@ export default function Works() {
                 </p>
               </div>
 
-              {/* Logo */}
+              {/* Logo — hand-authored SVG icon, already vector/tiny; next/image
+                  buys nothing here and would need dangerouslyAllowSVG */}
               <div className="flex justify-center items-center">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={work.image} alt={work.imageAlt} className={work.imageClass} />
               </div>
 
