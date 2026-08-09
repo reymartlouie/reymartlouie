@@ -176,7 +176,7 @@ function MobileDrawer({ onClose, onResumeOpen, time, date }: { onClose: () => vo
   const scrollTo = (href: string, toTop?: boolean) => (e: React.MouseEvent) => {
     e.preventDefault()
     if (toTop) window.scrollTo({ top: 0, behavior: 'smooth' })
-    else document.getElementById(href.slice(1))?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    else document.getElementById(href.slice(1))?.scrollIntoView({ behavior: 'smooth', block: 'start' })
     handleClose()
   }
 
