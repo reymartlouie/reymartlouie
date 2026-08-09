@@ -142,9 +142,9 @@ export default function Hero() {
         <button
           onClick={openCreate}
           disabled={rateLimited || submitted}
-          className="btn-spring glass inline-flex items-center gap-3 text-[#1e1e1e]
+          className="btn-spring inline-flex items-center gap-3 text-[#1e1e1e]
                      font-sans text-sm font-semibold px-5 py-3 rounded-full
-                     hover:bg-white/80 transition-colors
+                     bg-stone-200 hover:bg-stone-300 transition-colors duration-150
                      disabled:opacity-40 disabled:cursor-not-allowed"
         >
           {submitted ? 'Note submitted · pending approval' : rateLimited ? 'Note limit reached · come back tomorrow' : 'Leave a note +'}
