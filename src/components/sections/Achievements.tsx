@@ -105,7 +105,7 @@ export default function Certifications({
   }, [updateSlider])
 
   return (
-    <section id="certifications" className="flex flex-col gap-4">
+    <section className="flex flex-col gap-4">
       <Reveal>
         <div className="flex flex-col gap-4">
 
