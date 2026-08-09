@@ -29,7 +29,6 @@ export default function Quote() {
   return (
     <div
       className="flex-1 rounded-[32px] relative overflow-hidden min-h-[180px] flex flex-col justify-between"
-      style={{ boxShadow: '0 20px 50px rgba(0,0,0,0.16)' }}
     >
       <video
         ref={videoRef}

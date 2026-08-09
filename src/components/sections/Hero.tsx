@@ -113,7 +113,7 @@ export default function Hero() {
       <div
         ref={scrollRef}
         onScroll={updateSlider}
-        className="no-scrollbar flex overflow-x-auto snap-x snap-mandatory px-4 md:px-0 pb-12"
+        className="no-scrollbar flex overflow-x-auto snap-x snap-mandatory px-4 md:px-0 pb-2"
         style={{ scrollPaddingLeft: '1rem', gap: CARD_GAP }}
       >
         {STATIC_CARDS.map((Card, i) => (

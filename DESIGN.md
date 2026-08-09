@@ -54,11 +54,15 @@ GitHub, project-accent colors for Works/Achievements cards, gold/ivory for
 the novelty cards) — only shadows were re-tuned for the light bg, never the
 card's own palette.
 
-Shadows across the site were re-tuned for a light bg: every dark bento card
-(Hero, TechStack, Quote, GitHub, and the three "novelty" cards — Centurion,
-PayPal, Calling) got a defined resting `box-shadow` (`rgba(0,0,0,0.10–0.22)`)
-so they read as tiles floating over the page instead of a heavy black halo
-tuned for a black canvas.
+Resting `box-shadow` on the Hero carousel cards (Hero, TechStack, Quote,
+GitHub) and the Works project cards was tried as a "floating tile" effect
+for the light bg, but the horizontal `overflow-x-auto` scroll strips force
+`overflow-y` to `auto` too, which hard-clips any shadow past the strip's
+bottom padding into a flat grey band instead of a soft fade — it read as a
+rendering bug, not depth. Those shadows were removed; cards now rely on
+their `border`/`background` alone for definition inside the carousels.
+`PayPalCard` sits outside the scroll strips and keeps its own resting
+shadow.
 
 `TechStackCard` keeps its `/tech-bg.webp` tile-facade photo (the texture is
 part of its identity) but the dark overlay was lightened (`0.72→0.60` /
@@ -66,6 +70,16 @@ part of its identity) but the dark overlay was lightened (`0.72→0.60` /
 two-line header block — small-caps label, then a `font-display` headline
 ("Tools I build with.") — above its tags, so content fills the fixed card
 height instead of leaving dead space below a thin top block.
+
+`PayPalCard` uses `/paypal-bg.webp` — a tap-to-pay contactless photo (electric
+blue NFC wave + "pay" glyphs on black) — as its background in place of the
+old flat `#111→#0a0a0a` gradient; the blue in the photo already matches
+`paypalTheme.blue` (`#009cde`), so the heart glyph and glow read as part of
+the same palette rather than a color clash. A top-to-bottom dark gradient
+wash (`rgba(6,8,14,0.42)→rgba(2,3,6,0.86)`) sits between the photo and the
+content layer — lighter near the heart so the photo's texture still shows
+through, darker toward the footer/PayPal button where legibility matters
+most.
 
 `GitHubCard` now mirrors that same header pattern (label row + `font-display`
 headline, "Consistency, committed.") for visual consistency between the two
@@ -383,4 +397,4 @@ type Work = {
 
 ---
 
-*Last updated: August 2026 — TechStack/GitHub/Quote hero-card redesign (video bg, layout rebalance), derived from design sessions in Claude Code*
+*Last updated: August 2026 — removed clipped resting shadows from Hero/Works carousel cards; PayPalCard background swapped to `/paypal-bg.webp` tap-to-pay photo, derived from design sessions in Claude Code*

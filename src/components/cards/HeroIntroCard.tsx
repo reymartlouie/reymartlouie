@@ -8,7 +8,6 @@ export default function HeroIntroCard() {
         backgroundImage: 'url(/hero-chip-bg.webp)',
         backgroundSize: '130% auto',
         backgroundPosition: 'left',
-        boxShadow: '0 20px 50px rgba(0,0,0,0.18)',
       }}
     >
       {/* dark overlay so text stays readable */}

@@ -20,7 +20,6 @@ export default function TechStackCard() {
         `,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        boxShadow: '0 20px 50px rgba(0,0,0,0.16)',
       }}
     >
       {/* ambient glow — echoes GitHubCard's green so the two read as a pair */}
