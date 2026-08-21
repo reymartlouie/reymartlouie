@@ -26,7 +26,7 @@ export default function PricingCard() {
     <div className="glass h-full rounded-[32px] overflow-hidden">
 
       {/* Header */}
-      <div className="px-6 md:px-8 pt-7 md:pt-9 pb-5 flex items-center justify-center md:justify-between gap-4">
+      <div className="px-6 md:px-8 pt-7 md:pt-9 pb-5 flex items-center justify-center gap-4">
         <div className="flex items-center gap-2">
           <div className="w-px h-3.5 bg-stone-400/50" />
           <span className="font-sans text-xs uppercase tracking-widest text-[#1e1e1e]">Pricing</span>
@@ -48,7 +48,7 @@ export default function PricingCard() {
               boxShadow: `0 2px 24px ${svc.accentBg}, inset 0 1px 0 rgba(255,255,255,0.9)`,
             }}
           >
-            <div className="px-6 pt-6 pb-5 flex flex-col items-center md:items-start gap-3">
+            <div className="px-6 pt-6 pb-5 flex flex-col items-center gap-3">
               {/* Label row */}
               <div className="flex items-center gap-2">
                 <div className="w-px h-3" style={{ background: svc.divider }} />
@@ -69,7 +69,7 @@ export default function PricingCard() {
               </div>
 
               {/* Items */}
-              <ul className="flex flex-col items-center md:items-start gap-2 pt-1">
+              <ul className="flex flex-col items-center gap-2 pt-1">
                 {svc.items.map((item) => (
                   <li key={item} className="flex items-center gap-2.5">
                     <span
@@ -87,7 +87,7 @@ export default function PricingCard() {
 
       {/* Footer note */}
       <div className="px-6 md:px-8 pb-6 md:pb-8">
-        <p className="font-sans text-xs text-[#1e1e1e] text-center md:text-left">
+        <p className="font-sans text-xs text-[#1e1e1e] text-center">
           Rush jobs +30% · Maintenance plans available · Contact for custom quotes
         </p>
       </div>

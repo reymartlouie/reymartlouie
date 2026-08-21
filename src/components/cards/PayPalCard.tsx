@@ -92,7 +92,7 @@ export default function PayPalCard() {
       />
 
       <div
-        className="relative flex flex-col h-full text-center md:text-left"
+        className="relative flex flex-col h-full text-center"
         style={{ padding: '1.85rem 1.85rem' }}
       >
 

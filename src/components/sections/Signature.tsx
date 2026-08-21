@@ -18,7 +18,7 @@ export default function Signature() {
   const [resumeOpen, setResumeOpen] = useState(false);
 
   return (
-    <div className="flex flex-col items-center md:items-start text-center md:text-left gap-7 md:gap-9 pt-12 md:pt-20 px-1">
+    <div className="flex flex-col items-center text-center gap-7 md:gap-9 pt-12 md:pt-20 px-1">
       {/* Name + title */}
       <div>
         <p className="font-display text-3xl md:text-4xl text-[#1e1e1e]">
@@ -30,7 +30,7 @@ export default function Signature() {
       </div>
 
       {/* CTAs */}
-      <div className="flex items-center justify-center md:justify-start gap-4">
+      <div className="flex items-center justify-center gap-4">
         <a
           href="mailto:reymartlouie.capapas@gmail.com"
           className="btn-spring inline-flex items-center gap-2 bg-fuchsia-500 text-white font-sans font-semibold text-sm px-6 py-3 rounded-full hover:bg-fuchsia-600 transition-colors"
@@ -46,7 +46,7 @@ export default function Signature() {
       </div>
 
       {/* Social links — plain text, crawlable, not buried in a styled card */}
-      <div className="flex flex-wrap items-center justify-center md:justify-start gap-x-3 gap-y-1">
+      <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
         {socialLinks.map((link, i) => (
           <span key={link.label} className="flex items-center gap-3">
             <a
