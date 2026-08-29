@@ -6,7 +6,7 @@ import Reveal from '../ui/Reveal'
 import BadgesModal from '../ui/BadgesModal'
 import InternshipModal from '../ui/InternshipModal'
 import GraduationModal from '../ui/GraduationModal'
-import ScrollSlider from '../ui/ScrollSlider'
+import CarouselNav from '../ui/CarouselNav'
 
 const badges = [
   { id: 'aa88a6dc-5970-484d-9191-665e5657d3da' },
@@ -173,8 +173,8 @@ export default function Certifications({
             ))}
           </div>
 
-          {/* Mobile: scroll position slider */}
-          <ScrollSlider scrollRef={scrollRef} progress={progress} thumbPercent={thumbPercent} className="md:hidden" />
+          {/* Prev / next buttons (all breakpoints) + mobile scroll slider */}
+          <CarouselNav scrollRef={scrollRef} progress={progress} thumbPercent={thumbPercent} sliderClassName="md:hidden" />
 
           {/* Mobile: badge button */}
           <div className="flex justify-end md:hidden">
