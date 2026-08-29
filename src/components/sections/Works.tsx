@@ -6,7 +6,7 @@ import GraceyLogisticsModal from '../ui/GraceyLogisticsModal'
 import BrewedModal from '../ui/BrewedModal'
 import FitnessMadnessModal from '../ui/FitnessMadnessModal'
 import UIUXModal from '../ui/UIUXModal'
-import ScrollSlider from '../ui/ScrollSlider'
+import CarouselNav from '../ui/CarouselNav'
 
 type WorkId = 'fitnessmadness' | 'firesafe' | 'gracey' | 'brewed'
 
@@ -241,8 +241,8 @@ export default function Works({
           ))}
         </div>
 
-        {/* Scroll position slider */}
-        <ScrollSlider scrollRef={scrollRef} progress={progress} thumbPercent={thumbPercent} />
+        {/* Prev / next + scroll position slider */}
+        <CarouselNav scrollRef={scrollRef} progress={progress} thumbPercent={thumbPercent} />
 
         {/* Mobile: UI/UX button — SectionActionButton in the header is desktop-only */}
         <div className="flex justify-end md:hidden">

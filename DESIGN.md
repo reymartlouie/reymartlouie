@@ -161,6 +161,21 @@ Outer container: .glass rounded-[32px]
   Dot indicators: bottom-center, active = 20px wide pill
 ```
 
+### Carousel Nav (prev / next)
+
+Every horizontal carousel (`Hero`, `Works`, `Achievements`) shares one control:
+`CarouselNav` (`components/ui/CarouselNav.tsx`) — a centered row of
+`[prev] · ScrollSlider · [next]` sitting directly under the scroll strip.
+Buttons are `44×44px` (`h-11 w-11`) `rounded-full` `.glass-strong` surfaces
+with a chevron SVG in `--ink-70` (→ `--ink` on hover), `btn-spring` press.
+They advance `scrollLeft` by exactly one card (`first child width + column-gap`,
+measured live so each section's own card size just works), `behavior: 'smooth'`
+(→ `'auto'` under `prefers-reduced-motion`). Ends disable (`opacity-30`,
+`cursor-not-allowed`) off `progress`; the whole control unmounts when nothing
+overflows (`thumbPercent ≥ 99.5`). On `Achievements` the slider stays
+mobile-only (`sliderClassName="md:hidden"`) but the buttons show at every
+breakpoint. `ScrollSlider` is now only consumed through `CarouselNav`.
+
 ---
 
 ## Typography
@@ -359,7 +374,8 @@ interactive text:     rgba(dark, 0.85)
 | Icon hover scale | `group-hover:scale-105 transition-transform duration-500` |
 | Button | `btn-spring` (custom spring class in globals.css) |
 | Dot indicator | `transition-all duration-200` |
-| Carousel scroll | `behavior: 'smooth'` |
+| Carousel scroll | `behavior: 'smooth'` (`'auto'` under reduced-motion) |
+| Carousel nav button | `btn-spring` press, `transition-opacity 200ms` |
 
 ---
 
@@ -371,6 +387,8 @@ src/
     sections/
       Works.tsx          — carousel, card render, modal triggers
     ui/
+      CarouselNav.tsx    — shared prev/next + slider for all carousels
+      ScrollSlider.tsx   — draggable scroll-position track (used via CarouselNav)
       BrewedModal.tsx
       FitnessMadnessModal.tsx
       GraceyLogisticsModal.tsx
@@ -417,4 +435,4 @@ type Work = {
 
 ---
 
-*Last updated: August 2026 — mobile StatusBar menu moved to a light `.glass-strong` Control Center-style panel (trigger on the right, identity promoted to header, staggered nav entrance); removed clipped resting shadows from Hero/Works carousel cards; PayPalCard background swapped to `/paypal-bg.webp` tap-to-pay photo, derived from design sessions in Claude Code*
+*Last updated: August 2026 — added shared `CarouselNav` (frosted-glass prev/next buttons + ScrollSlider) to the Hero, Works, and Achievements carousels; mobile StatusBar menu moved to a light `.glass-strong` Control Center-style panel (trigger on the right, identity promoted to header, staggered nav entrance); removed clipped resting shadows from Hero/Works carousel cards; PayPalCard background swapped to `/paypal-bg.webp` tap-to-pay photo, derived from design sessions in Claude Code*

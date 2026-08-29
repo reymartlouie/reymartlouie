@@ -8,7 +8,7 @@ import HeroIntroCard from '../cards/HeroIntroCard'
 import PhotoCard from '../cards/PhotoCard'
 import TechStackCard from '../cards/TechStackCard'
 import AboutCard from '../cards/Quote'
-import ScrollSlider from '../ui/ScrollSlider'
+import CarouselNav from '../ui/CarouselNav'
 import { supabase, type Testimonial } from '@/lib/supabase'
 
 const NOTE_LIMIT  = 3
@@ -134,8 +134,8 @@ export default function Hero() {
         ))}
       </div>
 
-      {/* Scroll position slider */}
-      <ScrollSlider scrollRef={scrollRef} progress={progress} thumbPercent={thumbPercent} />
+      {/* Prev / next + scroll position slider */}
+      <CarouselNav scrollRef={scrollRef} progress={progress} thumbPercent={thumbPercent} />
 
       {/* Action row */}
       <div className="flex items-center justify-end lg:justify-start gap-3 flex-wrap">
